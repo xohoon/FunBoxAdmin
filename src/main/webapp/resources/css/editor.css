@@ -1,0 +1,128 @@
+@charset "utf-8";
+
+@font-face{
+  font-family:FontL;
+  src:url(../font/HangeulNuriR.ttf);
+}
+@font-face{
+  font-family:NotoSansKR;
+  src:url(../font/NotoSansKR-Regular.otf);
+}
+@font-face{
+  font-family:xeicon;
+  src:url(../font/xeicon.woff2);
+}
+
+body{
+  font-family:FontL;
+  font-weight:400;
+  font-size:16px;
+  min-height:100vh;
+  background:#f7f7f7;
+}
+
+#Editor{
+  width:100%;
+  color:#222;
+  padding:0 0 80px;
+}
+
+.cf{}
+.cf:after{
+  content:'';
+  display:block;
+  clear:both;
+}
+
+input{
+  text-align:center;
+  border:0;
+  border-right:1px solid #ddd;
+  outline:0;
+  cursor:pointer;
+  background:#fff; 
+}
+
+#Editor h1{
+  padding:16px;
+  background:#fff;
+  color:#999;
+}
+.HTML{
+  background:#ff9;
+}
+.editBtn{
+  height:32px;
+  padding:0 16px;
+  background:#fff;
+  border-bottom:1px solid #ddd;
+  border-top:1px solid #ddd;
+  box-shadow:2px 2px 2px rgba(0,0,0,0.1);
+  font-size:0;
+  position:sticky;
+  top:0;
+  left:0;
+  z-index:1;
+}
+.editBtn input{
+  font-family:xeicon;
+  height:30px;
+  width:28px;
+  font-size:16px;
+  line-height:30px;
+}
+select{
+  padding:0 32px 0 16px;
+  border:0;
+  border-right:1px solid #ddd;
+  height:30px;
+}
+.Bold{
+  font-weight:600;
+}
+.Italic{
+  font-style:italic;
+}
+.Under{
+  text-decoration:underline;
+}
+.editPlace{
+  position:relative;
+  width:100%;
+  max-width:940px;
+  margin:0 auto;
+  background:#fff;
+  border:1px solid #ddd;
+  min-height:100vh;
+  cursor:text;
+}
+.editPlace > div{
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  outline:0;
+  padding:20px;
+  line-height:1.6em;
+}
+.editTab{
+  width:100%;
+  max-width:940px;
+  margin:0 auto;
+  font-size:0;
+  text-align:right;
+}
+.editTab input{
+  height:32px;
+  padding:0 16px;
+  margin-left:8px;
+  border:1px solid #ddd;
+  background:#ddd;
+  border-bottom-left-radius:4px;
+  border-bottom-right-radius:4px;
+}
+.editTab input.on{
+  background:#fff;
+  border-top:0;
+}
