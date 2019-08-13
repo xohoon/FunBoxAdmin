@@ -7,14 +7,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>FUNBOX ADMIN</title>
-	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="../js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
-	<link href="css/common.css" rel="stylesheet">
-	<link href="css/admin.css" rel="stylesheet">
+	<link href="../css/common.css" rel="stylesheet">
+	<link href="../css/admin.css" rel="stylesheet">
 	<script>
 	  $(function() {
-		  $('footer').load('./footer.jsp')
-		});	
+		  $('footer').load('../template/footer.jsp');
+		});
 	</script>
 </head>
 
