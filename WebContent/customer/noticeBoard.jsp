@@ -13,9 +13,9 @@
 	<link href="css/admin.css" rel="stylesheet">
 	<script>
 	  $(function() {
-		  $('header').load('./header.html')
-		  $('#gnb').load('./gnb.html')
-		  $('footer').load('./footer.html')
+		  $('header').load('./header.jsp')
+		  $('#gnb').load('./gnb.jsp')
+		  $('footer').load('./footer.jsp')
 		});	
 	</script>
 </head>
@@ -27,7 +27,7 @@
 		<section id="sec15">
 			<h2>공지게시판</h2>
 			<div class="con">
-			<button class="write" onclick="window.open('./sec15_new.html','게시물등록','width=840,height=640,top=0,left=0,scrollbars=yes');">게시물등록</button>
+			<button class="write" onclick="window.open('./sec15_new.jsp','게시물등록','width=840,height=640,top=0,left=0,scrollbars=yes');">게시물등록</button>
 			<button>비활성화</button>
 			<button>활성화</button>
 				<table>
@@ -42,7 +42,7 @@
 					<tr>
             <td><input type="checkbox"></td>
 					  <td>1</td>
-					  <td onclick="window.open('./sec15_view.html','공지','width=800,height=720,top=0,left=0,scrollbars=yes');">공지1</td>
+					  <td onclick="window.open('./sec15_view.jsp','공지','width=800,height=720,top=0,left=0,scrollbars=yes');">공지1</td>
 					  <td>아이오</td>
 					  <td>2019.07.25<br>12:10:55</td>
 					  <td>Yes</td>
@@ -50,7 +50,7 @@
 					<tr>
             <td><input type="checkbox"></td>
 					  <td>1</td>
-					  <td onclick="window.open('./sec15_view.html','공지','width=800,height=720,top=0,left=0,scrollbars=yes');">공지1</td>
+					  <td onclick="window.open('./sec15_view.jsp','공지','width=800,height=720,top=0,left=0,scrollbars=yes');">공지1</td>
 					  <td>아이오</td>
 					  <td>2019.07.25<br>12:10:55</td>
 					  <td></td>
@@ -58,7 +58,7 @@
 					<tr>
             <td><input type="checkbox"></td>
 					  <td>1</td>
-					  <td onclick="window.open('./sec15_view.html','공지','width=800,height=720,top=0,left=0,scrollbars=yes');">공지1</td>
+					  <td onclick="window.open('./sec15_view.jsp','공지','width=800,height=720,top=0,left=0,scrollbars=yes');">공지1</td>
 					  <td>아이오</td>
 					  <td>2019.07.25<br>12:10:55</td>
 					  <td></td>

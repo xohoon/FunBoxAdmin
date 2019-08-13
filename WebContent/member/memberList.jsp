@@ -13,9 +13,9 @@
 	<link href="css/admin.css" rel="stylesheet">
 	<script>
 	  $(function() {
-		  $('header').load('./header.html')
-		  $('#gnb').load('./gnb.html')
-		  $('footer').load('./footer.html')
+		  $('header').load('./header.jsp')
+		  $('#gnb').load('./gnb.jsp')
+		  $('footer').load('./footer.jsp')
 		});	
 	</script>
 </head>
@@ -49,7 +49,7 @@
 					</tr>
 					<tr>
 						<td>1</td>
-						<td onclick="window.open('./sec01_1.html','이름(아이디)','width=640,height=720,top=0,left=0,scrollbars=yes');">dkdlel</td>
+						<td onclick="window.open('./sec01_1.jsp','이름(아이디)','width=640,height=720,top=0,left=0,scrollbars=yes');">dkdlel</td>
 						<td>asdfggg@iolab.kr</td>
 						<td>아이오</td>
 						<td>010-1234-5678</td>
@@ -57,7 +57,7 @@
 					</tr>
 					<tr>
 						<td>1</td>
-						<td onclick="window.open('./sec01_1.html','이름(아이디)','width=640,height=720,top=0,left=0,scrollbars=yes');">dkdlel</td>
+						<td onclick="window.open('./sec01_1.jsp','이름(아이디)','width=640,height=720,top=0,left=0,scrollbars=yes');">dkdlel</td>
 						<td>asdfggg@iolab.kr</td>
 						<td>아이오</td>
 						<td>010-1234-5678</td>

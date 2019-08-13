@@ -13,9 +13,9 @@
 	<link href="css/admin.css" rel="stylesheet">
 	<script>
 	  $(function() {
-		  $('header').load('./header.html')
-		  $('#gnb').load('./gnb.html')
-		  $('footer').load('./footer.html')
+		  $('header').load('./header.jsp')
+		  $('#gnb').load('./gnb.jsp')
+		  $('footer').load('./footer.jsp')
 		});	
 	</script>
 </head>
@@ -49,7 +49,7 @@
 						<th>삭제</th>
 					</tr>
 					<tr>
-						<td onclick="window.open('./sec05_1.html','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
+						<td onclick="window.open('./sec05_1.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
 						<td>dkdlel</td>
 						<td>아이오</td>
 						<td>010-1234-5678</td>
@@ -59,7 +59,7 @@
 						<td><button><i class="fas fa-times"></i></button></td>
 					</tr>
 					<tr>
-						<td onclick="window.open('./sec05_1.html','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
+						<td onclick="window.open('./sec05_1.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
 						<td>dkdlel</td>
 						<td>아이오</td>
 						<td>010-1234-5678</td>

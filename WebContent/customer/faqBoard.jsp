@@ -13,9 +13,9 @@
 	<link href="css/admin.css" rel="stylesheet">
 	<script>
 	  $(function() {
-		  $('header').load('./header.html')
-		  $('#gnb').load('./gnb.html')
-		  $('footer').load('./footer.html')
+		  $('header').load('./header.jsp')
+		  $('#gnb').load('./gnb.jsp')
+		  $('footer').load('./footer.jsp')
 		});	
 	</script>
 </head>
@@ -33,7 +33,7 @@
 			  <option>투자 관련</option>
 			  <option>기타</option>
 			</select>
-			<button class="write" onclick="window.open('./sec13_new.html','게시물등록','width=840,height=640,top=0,left=0,scrollbars=yes');">게시물등록</button>
+			<button class="write" onclick="window.open('./sec13_new.jsp','게시물등록','width=840,height=640,top=0,left=0,scrollbars=yes');">게시물등록</button>
 			<button>비활성화</button>
 			<button>활성화</button>
 				<table>
@@ -50,7 +50,7 @@
             <td><input type="checkbox"></td>
 					  <td>1</td>
 					  <td>투자</td>
-					  <td onclick="window.open('./sec13_view.html','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">자주묻는질문1</td>
+					  <td onclick="window.open('./sec13_view.jsp','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">자주묻는질문1</td>
 					  <td>아이오</td>
 					  <td>2019.07.25<br>12:10:55</td>
 					  <td>Yes</td>
@@ -59,7 +59,7 @@
             <td><input type="checkbox"></td>
 					  <td>2</td>
 					  <td>입출금</td>
-					  <td onclick="window.open('./sec13_view.html','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">자주묻는질문2</td>
+					  <td onclick="window.open('./sec13_view.jsp','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">자주묻는질문2</td>
 					  <td>아이오</td>
 					  <td>2019.07.25<br>12:10:55</td>
 					  <td></td>
@@ -68,7 +68,7 @@
             <td><input type="checkbox"></td>
 					  <td>3</td>
 					  <td>기타</td>
-					  <td  onclick="window.open('./sec13_view.html','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">자주묻는질문3</td>
+					  <td  onclick="window.open('./sec13_view.jsp','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">자주묻는질문3</td>
 					  <td>아이오</td>
 					  <td>2019.07.25<br>12:10:55</td>
 					  <td>Yes</td>

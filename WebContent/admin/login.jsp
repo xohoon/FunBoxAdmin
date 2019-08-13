@@ -13,7 +13,7 @@
 	<link href="css/admin.css" rel="stylesheet">
 	<script>
 	  $(function() {
-		  $('footer').load('./footer.html')
+		  $('footer').load('./footer.jsp')
 		});	
 	</script>
 </head>
@@ -37,7 +37,7 @@
           <input type="password">
         </div>
         <!--pw-->
-        <input type="button" class="login" value="LOGIN" onclick="location.href='./index.html'">
+        <input type="button" class="login" value="LOGIN" onclick="location.href='./index.jsp'">
 		  </div>
 		</section>
 		<footer></footer>

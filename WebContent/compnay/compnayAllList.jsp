@@ -22,91 +22,91 @@
     </tr>
     <tr>
      <td><button class="allBtn">선택</button></td>
-      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.html','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
+      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
       <td>아이디</td>
       <td>아이오</td>
     </tr>
     <tr>
      <td><button class="allBtn">선택</button></td>
-      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.html','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
+      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
       <td>아이디</td>
       <td>아이오</td>
     </tr>
     <tr>
      <td><button class="allBtn">선택</button></td>
-      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.html','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
+      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
       <td>아이디</td>
       <td>아이오</td>
     </tr>
     <tr>
      <td><button class="allBtn">선택</button></td>
-      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.html','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
+      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
       <td>아이디</td>
       <td>아이오</td>
     </tr>
   <tr>
      <td><button class="allBtn">선택</button></td>
-      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.html','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
+      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
       <td>아이디</td>
       <td>아이오</td>
     </tr>
     <tr>
      <td><button class="allBtn">선택</button></td>
-      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.html','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
+      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
       <td>아이디</td>
       <td>아이오</td>
     </tr>
     <tr>
      <td><button class="allBtn">선택</button></td>
-      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.html','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
+      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
       <td>아이디</td>
       <td>아이오</td>
     </tr>
     <tr>
      <td><button class="allBtn">선택</button></td>
-      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.html','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
+      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
       <td>아이디</td>
       <td>아이오</td>
     </tr>
     <tr>
      <td><button class="allBtn">선택</button></td>
-      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.html','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
+      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
       <td>아이디</td>
       <td>아이오</td>
     </tr>
     <tr>
      <td><button class="allBtn">선택</button></td>
-      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.html','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
+      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
       <td>아이디</td>
       <td>아이오</td>
     </tr>
     <tr>
      <td><button class="allBtn">선택</button></td>
-      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.html','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
+      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
       <td>아이디</td>
       <td>아이오</td>
     </tr>
     <tr>
      <td><button class="allBtn">선택</button></td>
-      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.html','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
+      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
       <td>아이디</td>
       <td>아이오</td>
     </tr>
     <tr>
      <td><button class="allBtn">선택</button></td>
-      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.html','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
+      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
       <td>아이디</td>
       <td>아이오</td>
     </tr>
     <tr>
      <td><button class="allBtn">선택</button></td>
-      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.html','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
+      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
       <td>아이디</td>
       <td>아이오</td>
     </tr>
     <tr>
      <td><button class="allBtn">선택</button></td>
-      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.html','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">검색왕</td>
+      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">검색왕</td>
       <td>아이디</td>
       <td>아이오</td>
     </tr>
