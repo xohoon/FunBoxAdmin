@@ -10,15 +10,6 @@
     <url-pattern>*.mb</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>BoardController</servlet-name>
-    <servlet-class>
-        net.board.controller.BoardController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>BoardController</servlet-name>
-    <url-pattern>*.bd</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <servlet-name>CompanyController</servlet-name>
     <servlet-class>
         net.company.controller.CompanyController</servlet-class>
@@ -28,45 +19,33 @@
     <url-pattern>*.cp</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>FindSms</servlet-name>
-    <servlet-class>net.member.ajax.FindSms</servlet-class>
+    <servlet-name>FinanceController</servlet-name>
+    <servlet-class>
+        net.finance.controller.FinanceController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>FindSms</servlet-name>
-    <url-pattern>/FindSms</url-pattern>
+    <servlet-name>FinanceController</servlet-name>
+    <url-pattern>*.fn</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>FindIdView</servlet-name>
-    <servlet-class>net.member.ajax.FindIdView</servlet-class>
+    <servlet-name>CustomerController</servlet-name>
+    <servlet-class>
+        net.customer.controller.CustomerController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>FindIdView</servlet-name>
-    <url-pattern>/FindIdView</url-pattern>
+    <servlet-name>CustomerController</servlet-name>
+    <url-pattern>*.cu</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>NewPwSms</servlet-name>
-    <servlet-class>net.member.ajax.NewPwSms</servlet-class>
+    <servlet-name>SettingController</servlet-name>
+    <servlet-class>
+        net.setting.controller.SettingController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>NewPwSms</servlet-name>
-    <url-pattern>/NewPwSms</url-pattern>
+    <servlet-name>SettingController</servlet-name>
+    <url-pattern>*.st</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>NewTxSms</servlet-name>
-    <servlet-class>net.member.ajax.NewTxSms</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>NewTxSms</servlet-name>
-    <url-pattern>/NewTxSms</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>CompanyFileDownload</servlet-name>
-    <url-pattern>/CompanyFileDownload</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>CompanyFileDownload</servlet-name>
-    <servlet-class>net.filedownload.CompanyFileDownload</servlet-class>
-  </servlet>
+  
   <resource-ref>
     <description>DB Connection</description>
     <res-ref-name>jdbc/mysql</res-ref-name>
@@ -74,9 +53,9 @@
     <res-auth>Container</res-auth>
   </resource-ref>
   <welcome-file-list>
-    <welcome-file>main.html</welcome-file>
-    <welcome-file>main.htm</welcome-file>
-    <welcome-file>main.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
