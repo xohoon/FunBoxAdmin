@@ -7,15 +7,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>FUNBOX ADMIN</title>
-	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="../js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
-	<link href="css/common.css" rel="stylesheet">
-	<link href="css/admin.css" rel="stylesheet">
+	<link href="../css/common.css" rel="stylesheet">
+	<link href="../css/admin.css" rel="stylesheet">
 	<script>
-	  $(function() {
-		  $('header').load('./header.html')
-		  $('#gnb').load('./gnb.html')
-		  $('footer').load('./footer.html')
+		$(function() {
+		  $('header').load('../template/header.jsp');
+		  $('#gnb').load('../template/categoryTemplate.jsp');
+		  $('footer').load('../template/footer.jsp');
 		});	
 	</script>
 </head>
@@ -49,7 +49,7 @@
 					</tr>
 					<tr>
 						<td>1</td>
-						<td onclick="window.open('./sec01_1.html','이름(아이디)','width=640,height=720,top=0,left=0,scrollbars=yes');">dkdlel</td>
+						<td onclick="window.open('./sec01_1.jsp','이름(아이디)','width=640,height=720,top=0,left=0,scrollbars=yes');">dkdlel</td>
 						<td>asdfggg@iolab.kr</td>
 						<td>아이오</td>
 						<td>010-1234-5678</td>
@@ -57,7 +57,7 @@
 					</tr>
 					<tr>
 						<td>1</td>
-						<td onclick="window.open('./sec01_1.html','이름(아이디)','width=640,height=720,top=0,left=0,scrollbars=yes');">dkdlel</td>
+						<td onclick="window.open('./sec01_1.jsp','이름(아이디)','width=640,height=720,top=0,left=0,scrollbars=yes');">dkdlel</td>
 						<td>asdfggg@iolab.kr</td>
 						<td>아이오</td>
 						<td>010-1234-5678</td>

@@ -7,16 +7,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>FUNBOX ADMIN</title>
-	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="../js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
-	<link href="css/common.css" rel="stylesheet">
-	<link href="css/admin.css" rel="stylesheet">
+	<link href="../css/common.css" rel="stylesheet">
+	<link href="../css/admin.css" rel="stylesheet">
 	<script>
 	  $(function() {
-		  $('header').load('./header.html')
-		  $('#gnb').load('./gnb.html')
-		  $('footer').load('./footer.html')
-      $('.allList').load('./all_group.html');
+		  $('header').load('../template/header.jsp');
+		  $('#gnb').load('../template/categoryTemplate.jsp');
+		  $('footer').load('../template/footer.jsp');
+      	  $('.allList').load('../company/compnayAllList.jsp');
 		});
 	</script>
 </head>

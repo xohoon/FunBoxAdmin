@@ -7,16 +7,16 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>FUNBOX ADMIN</title>
-	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="../js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
-	<link href="css/common.css" rel="stylesheet">
-	<link href="css/admin.css" rel="stylesheet">
+	<link href="../css/common.css" rel="stylesheet">
+	<link href="../css/admin.css" rel="stylesheet">
 	<script>
-	  $(function() {
-		  $('header').load('./header.html')
-		  $('#gnb').load('./gnb.html')
-		  $('footer').load('./footer.html')
-		});	
+		$(function() {
+		  $('header').load('../template/header.jsp');
+		  $('#gnb').load('../template/categoryTemplate.jsp');
+		  $('footer').load('../template/footer.jsp');
+		});
 	</script>
 </head>
 
@@ -51,21 +51,21 @@
 					</tr>
 					<tr>
 					  <td>1</td>
-					  <td onclick="window.open('./sec14_view.html','자주묻는질문','width=820,height=760,top=0,left=0,scrollbars=yes');">일대일 문의입니다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ</td>
+					  <td onclick="window.open('./sec14_view.jsp','자주묻는질문','width=820,height=760,top=0,left=0,scrollbars=yes');">일대일 문의입니다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ</td>
 					  <td>아이오<br>(아이디)</td>
 					  <td>2019.07.25<br>12:10:55</td>
 					  <td>Yes</td>
 					</tr>
 					<tr>
 					  <td>2</td>
-					  <td onclick="window.open('./sec14_view.html','자주묻는질문','width=820,height=760,top=0,left=0,scrollbars=yes');">일대일 문의입니다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ</td>
+					  <td onclick="window.open('./sec14_view.jsp','자주묻는질문','width=820,height=760,top=0,left=0,scrollbars=yes');">일대일 문의입니다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ</td>
 					  <td>아이오<br>(아이디)</td>
 					  <td>2019.07.25<br>12:10:55</td>
 					  <td></td>
 					</tr>
 					<tr>
 					  <td>3</td>
-					  <td onclick="window.open('./sec14_view.html','자주묻는질문','width=820,height=760,top=0,left=0,scrollbars=yes');">일대일 문의입니다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ</td>
+					  <td onclick="window.open('./sec14_view.jsp','자주묻는질문','width=820,height=760,top=0,left=0,scrollbars=yes');">일대일 문의입니다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ</td>
 					  <td>아이오<br>(아이디)</td>
 					  <td>2019.07.25<br>12:10:55</td>
 					  <td>Yes</td>

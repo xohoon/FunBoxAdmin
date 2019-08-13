@@ -7,8 +7,8 @@
   <title>done_Group</title>
     <link href="css/common.css" rel="stylesheet">
 <link href="css/admin.css" rel="stylesheet">
+<script src="../js/jquery-3.1.1.min.js"></script>
 <script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
-<script src="js/jquery-3.1.1.min.js"></script>    
 </head>
 <body>
 
@@ -24,7 +24,7 @@
           <th>잔여구좌</th>
         </tr>
         <tr>
-          <td onclick="window.open('./sec07_2.html','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
+          <td onclick="window.open('./sec07_2.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
           <td>dkdlel</td>
           <td>아이오</td>
           <td>010-1234-5678</td>
@@ -33,7 +33,7 @@
           <td>5</td>
         </tr>
         <tr>
-          <td onclick="window.open('./sec07_2.html','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
+          <td onclick="window.open('./sec07_2.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
           <td>dkdlel</td>
           <td>아이오</td>
           <td>010-1234-5678</td>
@@ -42,7 +42,7 @@
           <td>5</td>
         </tr>
         <tr>
-          <td onclick="window.open('./sec07_2.html','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
+          <td onclick="window.open('./sec07_2.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
           <td>dkdlel</td>
           <td>아이오</td>
           <td>010-1234-5678</td>
@@ -51,7 +51,7 @@
           <td>5</td>
         </tr>
         <tr>
-          <td onclick="window.open('./sec07_2.html','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
+          <td onclick="window.open('./sec07_2.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
           <td>dkdlel</td>
           <td>아이오</td>
           <td>010-1234-5678</td>
@@ -60,7 +60,7 @@
           <td>5</td>
         </tr>
         <tr>
-          <td onclick="window.open('./sec07_2.html','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
+          <td onclick="window.open('./sec07_2.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
           <td>dkdlel</td>
           <td>아이오</td>
           <td>010-1234-5678</td>
@@ -69,7 +69,7 @@
           <td>5</td>
         </tr>
         <tr>
-          <td onclick="window.open('./sec07_2.html','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
+          <td onclick="window.open('./sec07_2.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
           <td>dkdlel</td>
           <td>아이오</td>
           <td>010-1234-5678</td>
@@ -78,7 +78,7 @@
           <td>5</td>
         </tr>
         <tr>
-          <td onclick="window.open('./sec07_2.html','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
+          <td onclick="window.open('./sec07_2.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
           <td>dkdlel</td>
           <td>아이오</td>
           <td>010-1234-5678</td>
@@ -87,7 +87,7 @@
           <td>5</td>
         </tr>
         <tr>
-          <td onclick="window.open('./sec07_2.html','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
+          <td onclick="window.open('./sec07_2.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
           <td>dkdlel</td>
           <td>아이오</td>
           <td>010-1234-5678</td>
@@ -96,7 +96,7 @@
           <td>5</td>
         </tr>
         <tr>
-          <td onclick="window.open('./sec07_2.html','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
+          <td onclick="window.open('./sec07_2.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
           <td>dkdlel</td>
           <td>아이오</td>
           <td>010-1234-5678</td>
@@ -105,7 +105,7 @@
           <td>5</td>
         </tr>
         <tr>
-          <td onclick="window.open('./sec07_2.html','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
+          <td onclick="window.open('./sec07_2.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
           <td>dkdlel</td>
           <td>아이오</td>
           <td>010-1234-5678</td>
@@ -114,7 +114,7 @@
           <td>5</td>
         </tr>
         <tr>
-          <td onclick="window.open('./sec07_2.html','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
+          <td onclick="window.open('./sec07_2.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
           <td>dkdlel</td>
           <td>아이오</td>
           <td>010-1234-5678</td>
@@ -123,7 +123,7 @@
           <td>5</td>
         </tr>
         <tr>
-          <td onclick="window.open('./sec07_2.html','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
+          <td onclick="window.open('./sec07_2.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
           <td>dkdlel</td>
           <td>아이오</td>
           <td>010-1234-5678</td>
@@ -132,7 +132,7 @@
           <td>5</td>
         </tr>
         <tr>
-          <td onclick="window.open('./sec07_2.html','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
+          <td onclick="window.open('./sec07_2.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
           <td>dkdlel</td>
           <td>아이오</td>
           <td>010-1234-5678</td>
@@ -141,7 +141,7 @@
           <td>5</td>
         </tr>
         <tr>
-          <td onclick="window.open('./sec07_2.html','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
+          <td onclick="window.open('./sec07_2.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
           <td>dkdlel</td>
           <td>아이오</td>
           <td>010-1234-5678</td>
@@ -150,7 +150,7 @@
           <td>5</td>
         </tr>
         <tr>
-          <td onclick="window.open('./sec07_2.html','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
+          <td onclick="window.open('./sec07_2.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
           <td>dkdlel</td>
           <td>아이오</td>
           <td>010-1234-5678</td>
