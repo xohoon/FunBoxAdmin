@@ -36,35 +36,35 @@ public class CustomerController extends HttpServlet implements Servlet{
 		
 		try {
 			switch (command) {
-			case "FaqBoard.cu":
+			case "/FaqBoard.cu":
 				action = new FaqBoardAction();
 				forward = action.execute(request, response);
 				break;
-			case "FaqModifyForm.cu":
+			case "/FaqModifyForm.cu":
 				action = new FaqModifyFormAction();
 				forward = action.execute(request, response);
 				break;
-			case "FaqRegisterForm.cu":
+			case "/FaqRegisterForm.cu":
 				action = new FaqRegisterFormAction();
 				forward = action.execute(request, response);
 				break;
-			case "InquiryAnswerForm.cu":
+			case "/InquiryAnswerForm.cu":
 				action = new InquiryAnswerFormAction();
 				forward = action.execute(request, response);
 				break;
-			case "InquiryBoard.cu":
+			case "/InquiryBoard.cu":
 				action = new InquiryBoardAction();
 				forward = action.execute(request, response);
 				break;
-			case "NoticeBoard.cu":
+			case "/NoticeBoard.cu":
 				action = new NoticeBoardAction();
 				forward = action.execute(request, response);
 				break;
-			case "NoticeModifyForm.cu":
+			case "/NoticeModifyForm.cu":
 				action = new NoticeModifyFormAction();
 				forward = action.execute(request, response);
 				break;
-			case "NoticeRegisterForm.cu":
+			case "/NoticeRegisterForm.cu":
 				action = new NoticeRegisterFormAction();
 				forward = action.execute(request, response);
 				break;

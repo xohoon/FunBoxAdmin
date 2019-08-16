@@ -31,11 +31,11 @@ public class FinanceController extends HttpServlet implements Servlet{
 		
 		try {
 			switch (command) {
-			case "TokenExchangeList.fn":
+			case "/TokenExchangeList.fn":
 				action = new TokenExchangeListAction();
 				forward = action.execute(request, response);
 				break;
-			case "TokenWithdrawalList.fn":
+			case "/TokenWithdrawalList.fn":
 				action = new TokenWithdrawalListAction();
 				forward = action.execute(request, response);
 				break;

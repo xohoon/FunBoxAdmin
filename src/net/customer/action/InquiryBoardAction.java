@@ -10,7 +10,11 @@ public class InquiryBoardAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return null;
+		ActionForward forward = new ActionForward();
+
+		forward.setRedirect(false);
+		forward.setPath("./customer/inquiryBoard.jsp");
+		return forward;
 	}
 
 }
