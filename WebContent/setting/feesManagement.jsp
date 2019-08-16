@@ -18,8 +18,13 @@
 		  $('footer').load('../template/footer.jsp');
 		});
 	</script>
+	<script>
+		function feemodify(){
+			location.href = './SettingController/feesManagement.st';
+		}
+	</script>
 </head>
-
+	
 <body>
 	<div id="wrap">
 		<header></header>
@@ -37,7 +42,7 @@
             <label>변경</label>
             <input type="text"><span>%</span>
           </p>
-          <input type="button" value="수정하기">
+          <input type="button" value="수정하기" onclick = "feemodify()">
 			  </div>
 			</div>
 		</section>
