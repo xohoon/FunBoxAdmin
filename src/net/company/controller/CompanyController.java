@@ -59,8 +59,8 @@ public class CompanyController extends HttpServlet {
 				action = new CompanyRecomnandManagementAction();
 				forward = action.execute(request, response);
 				break;
-			case "/companyRegister.cp":
-				action = new CompanyRegisterAction();
+			case "/companyRegisterForm.cp":
+				action = new CompanyRegisterFormAction();
 				forward = action.execute(request, response);
 				break;
 			case "/compnayAllList.cp":

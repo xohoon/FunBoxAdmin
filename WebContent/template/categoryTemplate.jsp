@@ -15,7 +15,7 @@
 			<a href="#" class="nav3"><i class="fas fa-building"></i>&nbsp;&nbsp;투자기업관리<span>+</span></a>
 			<ul class="nav31">
 			  <li class="nav32" onclick="location.href='./companyInvestApplyList.cp'">투자 기업 신청 리스트</li>
-				<li class="nav33" onclick="location.href='./companyRegister.cp'">기업 등록</li>
+				<li class="nav33" onclick="location.href='./companyRegisterForm.cp'">기업 등록</li>
 				<li class="nav34" onclick="location.href='./companyInvestedList.cp'">투자 기업 리스트</li>
 				<li class="nav35" onclick="location.href='./companyPopularityManagement.cp'">실시간 인기순위 관리</li>
 				<li class="nav36" onclick="location.href='./companyRecomnandManagement.cp'">추천 기업 관리</li>
