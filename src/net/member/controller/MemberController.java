@@ -12,6 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.common.action.Action;
 import net.common.action.ActionForward;
+import net.member.action.MemberDetailAction;
+import net.member.action.MemberInvestedListAction;
+import net.member.action.MemberListAction;
+import net.member.action.MemberRegisterAction;
 
 @WebServlet("/MemberController")
 public class MemberController extends HttpServlet implements Servlet {
@@ -29,19 +33,19 @@ public class MemberController extends HttpServlet implements Servlet {
 		try {
 			switch (command) {
 			case "memberList.mb":
-		//		action = new MemberListAction(); // 회원리스트
+				action = new MemberListAction(); // 회원리스트
 				forward = action.execute(request, response);
 				break;
 			case "memberDetail.mb":
-		//		action = new MemberDetailAction(); // 회원정보 상세보기 및 수정
+				action = new MemberDetailAction(); // 회원정보 상세보기 및 수정
 				forward = action.execute(request, response);
 				break;
 			case "memberInvestedList.mb": // 투자내역
-		//		action = new MemberInvestedListAction();
+				action = new MemberInvestedListAction();
 				forward = action.execute(request, response);
 				break;			
 			case "memberRegister.mb": // 회원등록
-		//		action = new MemberRegisterAction(); 
+				action = new MemberRegisterAction(); 
 				forward = action.execute(request, response);
 				break;			
 			default:
