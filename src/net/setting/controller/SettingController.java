@@ -27,14 +27,17 @@ public class SettingController extends HttpServlet {
 		ActionForward forward = null;
 		Action action = null;
 	
-		///////////////////////윤식 추가 start///////////////////////
-		if (command.equals("/feesManagement.st")) { // 공지 게시판 목록 - 윤식 추가
-			action = new feesManagementAciton();
-			try {
+		try {
+			switch (command) {
+			case "/feesManagement.st":
+				action = new feesManagementAciton(); // 수수료 윤식 추가
 				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}			
+				break;
+			default:
+				break;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		///////////////////////윤식 추가 end///////////////////////
 		
