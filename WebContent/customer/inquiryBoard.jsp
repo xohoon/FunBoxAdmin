@@ -51,21 +51,21 @@
 					</tr>
 					<tr>
 					  <td>1</td>
-					  <td onclick="window.open('./sec14_view.jsp','자주묻는질문','width=820,height=760,top=0,left=0,scrollbars=yes');">일대일 문의입니다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ</td>
+					  <td onclick="window.open('./InquiryAnswerForm.cu','자주묻는질문','width=820,height=760,top=0,left=0,scrollbars=yes');">일대일 문의입니다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ</td>
 					  <td>아이오<br>(아이디)</td>
 					  <td>2019.07.25<br>12:10:55</td>
 					  <td>Yes</td>
 					</tr>
 					<tr>
 					  <td>2</td>
-					  <td onclick="window.open('./sec14_view.jsp','자주묻는질문','width=820,height=760,top=0,left=0,scrollbars=yes');">일대일 문의입니다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ</td>
+					  <td onclick="window.open('./InquiryAnswerForm.cu','자주묻는질문','width=820,height=760,top=0,left=0,scrollbars=yes');">일대일 문의입니다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ</td>
 					  <td>아이오<br>(아이디)</td>
 					  <td>2019.07.25<br>12:10:55</td>
 					  <td></td>
 					</tr>
 					<tr>
 					  <td>3</td>
-					  <td onclick="window.open('./sec14_view.jsp','자주묻는질문','width=820,height=760,top=0,left=0,scrollbars=yes');">일대일 문의입니다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ</td>
+					  <td onclick="window.open('./InquiryAnswerForm.cu','자주묻는질문','width=820,height=760,top=0,left=0,scrollbars=yes');">일대일 문의입니다ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ</td>
 					  <td>아이오<br>(아이디)</td>
 					  <td>2019.07.25<br>12:10:55</td>
 					  <td>Yes</td>

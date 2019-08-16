@@ -10,7 +10,11 @@ public class TokenWithdrawalListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return null;
+		ActionForward forward = new ActionForward();
+
+		forward.setRedirect(false);
+		forward.setPath("./finance/tokenWithdrawalList.jsp");
+		return forward;
 	}
 
 }
