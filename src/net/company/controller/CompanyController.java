@@ -47,6 +47,14 @@ public class CompanyController extends HttpServlet {
 				action = new CompanyInvestedDetailAction();
 				forward = action.execute(request, response);
 				break;
+			case "/companyInvestedDoneList.cp":
+				action = new CompanyInvestedDoneListAction();
+				forward = action.execute(request, response);
+				break;
+			case "/companyInvestedList.cp":
+				action = new CompanyInvestedListAction();
+				forward = action.execute(request, response);
+				break;
 			case "/companyMainSlideManagement.cp":
 				action = new CompanyMainSlideManagementAction();
 				forward = action.execute(request, response);

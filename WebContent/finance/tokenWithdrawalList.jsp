@@ -17,7 +17,7 @@
 	<link href="./css/admin.css" rel="stylesheet">
 	<link href="./css/txaddress.css" rel="stylesheet">
 	<script>
-	$(function() {
+		$(function() {
 		  $('header').load('./template/header.jsp');
 		  $('#gnb').load('./template/categoryTemplate.jsp');
 		  $('footer').load('./template/footer.jsp');

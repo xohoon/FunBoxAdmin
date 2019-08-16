@@ -16,7 +16,7 @@
 		  $('header').load('./template/header.jsp');
 		  $('#gnb').load('./template/categoryTemplate.jsp');
 		  $('footer').load('./template/footer.jsp');
-		});	
+		});
 	</script>
 </head>
 
