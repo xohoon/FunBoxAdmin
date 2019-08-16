@@ -26,43 +26,43 @@ public class CompanyController extends HttpServlet {
 
 		try {
 			switch (command) {
-			case "companyBannerManagement.cp":
+			case "/companyBannerManagement.cp":
 				action = new CompanyBannerManagementAction();
 				forward = action.execute(request, response);
 				break;
-			case "companyDeadLineManagement.cp":
+			case "/companyDeadLineManagement.cp":
 				action = new CompanyBannerManagementAction();
 				forward = action.execute(request, response);
 				break;
-			case "companyInvestApplyDetail.cp":
+			case "/companyInvestApplyDetail.cp":
 				action = new CompanyBannerManagementAction();
 				forward = action.execute(request, response);
 				break;
-			case "companyInvestApplyList.cp":
+			case "/companyInvestApplyList.cp":
 				action = new CompanyBannerManagementAction();
 				forward = action.execute(request, response);
 				break;
-			case "companyInvestedDetail.cp":
+			case "/companyInvestedDetail.cp":
 				action = new CompanyBannerManagementAction();
 				forward = action.execute(request, response);
 				break;
-			case "companyMainSlideManagement.cp":
+			case "/companyMainSlideManagement.cp":
 				action = new CompanyBannerManagementAction();
 				forward = action.execute(request, response);
 				break;
-			case "companyPopularityManagement.cp":
+			case "/companyPopularityManagement.cp":
 				action = new CompanyBannerManagementAction();
 				forward = action.execute(request, response);
 				break;
-			case "companyRecomnandManagement.cp":
+			case "/companyRecomnandManagement.cp":
 				action = new CompanyBannerManagementAction();
 				forward = action.execute(request, response);
 				break;
-			case "companyRegister.cp":
+			case "/companyRegister.cp":
 				action = new CompanyBannerManagementAction();
 				forward = action.execute(request, response);
 				break;
-			case "compnayAllList.cp":
+			case "/compnayAllList.cp":
 				action = new CompanyBannerManagementAction();
 				forward = action.execute(request, response);
 				break;

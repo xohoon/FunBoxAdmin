@@ -26,7 +26,7 @@ public class AdminController extends HttpServlet {
 
 		try {
 			switch (command) {
-			case "loginForm.ad":
+			case "/loginForm.ad":
 				action = new CompanyBannerManagementAction();
 				forward = action.execute(request, response);
 				break;
