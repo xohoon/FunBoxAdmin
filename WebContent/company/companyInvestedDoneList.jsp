@@ -7,7 +7,7 @@
   <title>done_Group</title>
     <link href="css/common.css" rel="stylesheet">
 <link href="css/admin.css" rel="stylesheet">
-<script src="../js/jquery-3.1.1.min.js"></script>
+<script src="./js/jquery-3.1.1.min.js"></script>
 <script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
 </head>
 <body>
