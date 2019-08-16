@@ -132,4 +132,44 @@ public class CustomerDAO {
 
 		return null;
 	}
+	
+	// faq 상세 불러오기
+	public FaqBoard faqDetail(int idx) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from faq where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				FaqBoard faqBoard = new FaqBoard();
+				faqBoard.setIdx(rs.getInt("idx"));
+				faqBoard.setCategory(rs.getInt("category"));
+				faqBoard.setTitle(rs.getString("title"));
+				faqBoard.setContent(rs.getString("content"));
+				faqBoard.setReg_date_time(rs.getDate("reg_date_time"));
+				
+				return faqBoard;
+			}
+
+		} catch (Exception ex) {
+			System.out.println("faqDetail 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("연결 해제 실패: " + e.getMessage());
+			}
+		}
+
+		return null;
+	}
 }

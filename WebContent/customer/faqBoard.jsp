@@ -62,7 +62,7 @@
 					  <td>기타</td>
 					  </c:otherwise>
 					  </c:choose>
-					  <td onclick="window.open('./faqModifyForm.cu','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">${faq_list.title}</td>
+					  <td onclick="window.open('./faqModifyForm.cu?idx=${faq_list.idx}','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">${faq_list.title}</td>
 					  <td>관리자</td>
 					  <td>${faq_list.reg_date_time}</td>
 					  <td>Yes</td>
@@ -141,26 +141,6 @@
 					</tr>
 					</c:forEach>
 					</c:if>
-					<!-- 
-					<tr>
-            <td><input type="checkbox"></td>
-					  <td>2</td>
-					  <td>입출금</td>
-					  <td onclick="window.open('./faqModifyForm.cu','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">자주묻는질문2</td>
-					  <td>아이오</td>
-					  <td>2019.07.25<br>12:10:55</td>
-					  <td></td>
-					</tr>
-					<tr>
-            <td><input type="checkbox"></td>
-					  <td>3</td>
-					  <td>기타</td>
-					  <td  onclick="window.open('./faqModifyForm.cu','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">자주묻는질문3</td>
-					  <td>아이오</td>
-					  <td>2019.07.25<br>12:10:55</td>
-					  <td>Yes</td>
-					</tr>
-					 -->
 				</table>
 			<ul class="pager">
 				<c:if test="${count > 0}">
