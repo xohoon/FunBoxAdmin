@@ -16,7 +16,8 @@
 		  $('header').load('../template/header.jsp');
 		  $('#gnb').load('../template/categoryTemplate.jsp');
 		  $('footer').load('../template/footer.jsp');
-		  $('.doneGroup').load('../company/companyInvestedDoneList.jsp');
+		  //$('.doneGroup').load('../company/companyInvestedDoneList.jsp');
+		  $('.doneGroup').load('./companyInvestedDoneList.cp');
 		});
 	</script>
 </head>
