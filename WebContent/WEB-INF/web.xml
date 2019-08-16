@@ -10,6 +10,15 @@
     <url-pattern>*.mb</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>AdminController</servlet-name>
+    <servlet-class>
+        net.admin.controller.AdminController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminController</servlet-name>
+    <url-pattern>*.ad</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>CompanyController</servlet-name>
     <servlet-class>
         net.company.controller.CompanyController</servlet-class>

@@ -2,6 +2,7 @@ package net.member.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,11 +26,41 @@ public class MemberController extends HttpServlet implements Servlet {
 		ActionForward forward = null;
 		Action action = null;
 		
-		///////////////////////유정 추가 start///////////////////////
-		if (command.equals("/Index.mb")) {
-			forward = new ActionForward();
-			forward.setRedirect(false);
-			forward.setPath("./index.jsp");
+		try {
+			switch (command) {
+			case "memberList.mb":
+		//		action = new MemberListAction(); // 회원리스트
+				forward = action.execute(request, response);
+				break;
+			case "memberDetail.mb":
+		//		action = new MemberDetailAction(); // 회원정보 상세보기 및 수정
+				forward = action.execute(request, response);
+				break;
+			case "memberInvestedList.mb": // 투자내역
+		//		action = new MemberInvestedListAction();
+				forward = action.execute(request, response);
+				break;			
+			case "memberRegister.mb": // 회원등록
+		//		action = new MemberRegisterAction(); 
+				forward = action.execute(request, response);
+				break;			
+			default:
+				break;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+
+		///////////////////////윤식 추가 end///////////////////////
+		
+		if (forward != null) {
+			if (forward.isRedirect()) {
+				response.sendRedirect(forward.getPath());
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
+				dispatcher.forward(request, response);
+			}
 		}
 	}
 	

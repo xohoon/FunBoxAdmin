@@ -7,10 +7,17 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>기업명</title>
+<<<<<<< HEAD
 	<script src="js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
 	<link href="css/common.css" rel="stylesheet">
 	<link href="css/admin.css" rel="stylesheet">
+=======
+	<script src="../js/jquery-3.1.1.min.js"></script>
+	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
+	<link href="../css/common.css" rel="stylesheet">
+	<link href="../css/admin.css" rel="stylesheet">
+>>>>>>> branch 'master' of https://github.com/xohoon/FunBoxAdmin.git
 </head>
 
 <body>

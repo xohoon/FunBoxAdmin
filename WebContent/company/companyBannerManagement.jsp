@@ -13,10 +13,10 @@
 	<link href="css/admin.css" rel="stylesheet">
 	<script>
 	  $(function() {
-		  $('header').load('./header.html')
-		  $('#gnb').load('./gnb.html')
-		  $('footer').load('./footer.html')
-          $('.allList').load('./all_group.html');
+		  $('header').load('../template/header.jsp');
+		  $('#gnb').load('../template/categoryTemplate.jsp');
+		  $('footer').load('../template/footer.jsp');
+      	  $('.allList').load('../company/compnayAllList.jsp');
 		});
 	</script>
 </head>
