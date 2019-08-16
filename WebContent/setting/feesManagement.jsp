@@ -20,7 +20,7 @@
 	</script>
 	<script>
 		function feemodify(){
-			location.href = './SettingController/feesManagement.st';
+			location.href = './feesManagement.st';
 		}
 	</script>
 </head>
