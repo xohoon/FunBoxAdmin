@@ -32,19 +32,19 @@ public class MemberController extends HttpServlet implements Servlet {
 		
 		try {
 			switch (command) {
-			case "memberList.mb":
+			case "/memberList.mb":
 				action = new MemberListAction(); // 회원리스트
 				forward = action.execute(request, response);
 				break;
-			case "memberDetail.mb":
+			case "/memberDetail.mb":
 				action = new MemberDetailAction(); // 회원정보 상세보기 및 수정
 				forward = action.execute(request, response);
 				break;
-			case "memberInvestedList.mb": // 투자내역
+			case "/memberInvestedList.mb": // 투자내역
 				action = new MemberInvestedListAction();
 				forward = action.execute(request, response);
 				break;			
-			case "memberRegister.mb": // 회원등록
+			case "/memberRegister.mb": // 회원등록
 				action = new MemberRegisterAction(); 
 				forward = action.execute(request, response);
 				break;			
