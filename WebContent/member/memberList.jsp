@@ -49,7 +49,7 @@
 					</tr>
 					<tr>
 						<td>1</td>
-						<td onclick="window.open('./sec01_1.jsp','이름(아이디)','width=640,height=720,top=0,left=0,scrollbars=yes');">dkdlel</td>
+						<td onclick="window.open('./MemberController/memberDetail.mb','이름(아이디)','width=640,height=720,top=0,left=0,scrollbars=yes');">dkdlel</td>
 						<td>asdfggg@iolab.kr</td>
 						<td>아이오</td>
 						<td>010-1234-5678</td>
@@ -57,7 +57,7 @@
 					</tr>
 					<tr>
 						<td>1</td>
-						<td onclick="window.open('./sec01_1.jsp','이름(아이디)','width=640,height=720,top=0,left=0,scrollbars=yes');">dkdlel</td>
+						<td onclick="window.open('./MemberController/memberDetail.mb','이름(아이디)','width=640,height=720,top=0,left=0,scrollbars=yes');">dkdlel</td>
 						<td>asdfggg@iolab.kr</td>
 						<td>아이오</td>
 						<td>010-1234-5678</td>
