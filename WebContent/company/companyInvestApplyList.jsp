@@ -7,61 +7,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>FUNBOX ADMIN</title>
-<<<<<<< HEAD
-	<script src="js/jquery-3.1.1.min.js"></script>
-	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
-	<link href="css/common.css" rel="stylesheet">
-	<link href="css/admin.css" rel="stylesheet">
-	<script>
-	  $(function() {
-		  $('header').load('./header.html')
-		  $('#gnb').load('./gnb.html')
-		  $('footer').load('./footer.html')
-		});	
-	</script>
-</head>
-
-<body>
-	<div id="wrap">
-		<header></header>
-		<div id="gnb"></div>
-		<section id="sec05">
-			<h2>투자 기업 신청 리스트</h2>
-			<div class="sch">
-				<select>
-					<option>- 선택 -</option>
-					<option>아이디</option>
-					<option>기업명</option>
-					<option>담당자</option>
-				</select>
-				<input type="text">
-				<button><i class="fas fa-search"></i></button>
-			</div>
-			<div class="con">
-				<table>
-					<tr>
-						<th>상호명</th>
-						<th>아이디</th>
-						<th>담당자</th>
-						<th>연락처</th>
-						<th>소재지</th>
-						<th>업종</th>
-						<th>오픈상태</th>
-						<th>삭제</th>
-					</tr>
-					<tr>
-						<td onclick="window.open('./sec05_1.html','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
-						<td>dkdlel</td>
-						<td>아이오</td>
-						<td>010-1234-5678</td>
-						<td>부산시금정구어쩌고</td>
-						<td>일반음식점</td>
-						<td>운영중(2019.07.24)</td>
-						<td><button><i class="fas fa-times"></i></button></td>
-					</tr>
-					<tr>
-						<td onclick="window.open('./sec05_1.html','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
-=======
 	<script src="../js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
 	<link href="../css/common.css" rel="stylesheet">
@@ -115,7 +60,6 @@
 					</tr>
 					<tr>
 						<td onclick="window.open('./sec05_1.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
->>>>>>> branch 'master' of https://github.com/xohoon/FunBoxAdmin.git
 						<td>dkdlel</td>
 						<td>아이오</td>
 						<td>010-1234-5678</td>

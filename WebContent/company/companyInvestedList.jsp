@@ -7,127 +7,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>FUNBOX ADMIN</title>
-<<<<<<< HEAD
-	<script src="js/jquery-3.1.1.min.js"></script>
-	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
-	<link href="css/common.css" rel="stylesheet">
-	<link href="css/admin.css" rel="stylesheet">
-	<script>
-	  $(function() {
-		  $('header').load('./header.html')
-		  $('#gnb').load('./gnb.html')
-		  $('footer').load('./footer.html')
-      $('.doneGroup').load('./done_group.html')
-		});
-	</script>
-</head>
-
-<body>
-	<div id="wrap">
-		<header></header>
-		<div id="gnb"></div>
-		<section id="sec07">
-			<h2>투자기업목록</h2>
-			<div class="con">
-        <ul class="tab">
-          <li class="on">펀딩진행</li>
-          <li>펀딩완료</li>
-        </ul>
-			  <div class="ingGroup">
-          <table>
-            <tr>
-              <th>상호명</th>
-              <th>아이디</th>
-              <th>담당자</th>
-              <th>연락처</th>
-              <th>수익률</th>
-              <th>마감</th>
-              <th>잔여구좌</th>
-            </tr>
-            <tr>
-              <td onclick="window.open('./sec07_1.html','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
-              <td>dkdlel</td>
-              <td>아이오</td>
-              <td>010-1234-5678</td>
-              <td>11%</td>
-              <td>D-27</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <td onclick="window.open('./sec07_1.html','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
-              <td>dkdlel</td>
-              <td>아이오</td>
-              <td>010-1234-5678</td>
-              <td>11%</td>
-              <td>D-27</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <td onclick="window.open('./sec07_1.html','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
-              <td>dkdlel</td>
-              <td>아이오</td>
-              <td>010-1234-5678</td>
-              <td>11%</td>
-              <td>D-27</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <td onclick="window.open('./sec07_1.html','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
-              <td>dkdlel</td>
-              <td>아이오</td>
-              <td>010-1234-5678</td>
-              <td>11%</td>
-              <td>D-27</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <td onclick="window.open('./sec07_1.html','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
-              <td>dkdlel</td>
-              <td>아이오</td>
-              <td>010-1234-5678</td>
-              <td>11%</td>
-              <td>D-27</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <td onclick="window.open('./sec07_1.html','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
-              <td>dkdlel</td>
-              <td>아이오</td>
-              <td>010-1234-5678</td>
-              <td>11%</td>
-              <td>D-27</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <td onclick="window.open('./sec07_1.html','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
-              <td>dkdlel</td>
-              <td>아이오</td>
-              <td>010-1234-5678</td>
-              <td>11%</td>
-              <td>D-27</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <td onclick="window.open('./sec07_1.html','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
-              <td>dkdlel</td>
-              <td>아이오</td>
-              <td>010-1234-5678</td>
-              <td>11%</td>
-              <td>D-27</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <td onclick="window.open('./sec07_1.html','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
-              <td>dkdlel</td>
-              <td>아이오</td>
-              <td>010-1234-5678</td>
-              <td>11%</td>
-              <td>D-27</td>
-              <td>5</td>
-            </tr>
-            <tr>
-              <td onclick="window.open('./sec07_1.html','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
-=======
 	<script src="../js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
 	<link href="../css/common.css" rel="stylesheet">
@@ -247,7 +126,6 @@
             </tr>
             <tr>
               <td onclick="window.open('./sec07_1.jsp','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
->>>>>>> branch 'master' of https://github.com/xohoon/FunBoxAdmin.git
               <td>dkdlel</td>
               <td>아이오</td>
               <td>010-1234-5678</td>
