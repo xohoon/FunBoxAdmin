@@ -13,7 +13,7 @@ public class MemberRegisterAction implements Action {
 		request.setCharacterEncoding("utf-8"); 
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("./member/memberRegister.jsp");
+		forward.setPath("./member/memberRegisterForm.jsp");
 		return forward;
 	}
 

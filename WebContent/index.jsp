@@ -48,7 +48,7 @@
 		        <p><span>1</span> / 100</p>
 		        <i class="far fa-hand-pointer"> Click</i>
 		      </li>
-		      <li onclick="location.href='./companyRegister.cp'">
+		      <li onclick="location.href='./companyRegisterForm.cp'">
 		      <h4>기업 등록하기</h4>
           <p>NEW</p>
 		        <i class="far fa-hand-pointer"> 등록하기</i>
