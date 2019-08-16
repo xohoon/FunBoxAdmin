@@ -55,7 +55,6 @@ public class MemberController extends HttpServlet implements Servlet {
 			e.printStackTrace();
 		}
 
-
 		///////////////////////윤식 추가 end///////////////////////
 		
 		if (forward != null) {
