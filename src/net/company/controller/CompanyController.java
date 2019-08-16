@@ -3,14 +3,15 @@ package net.company.controller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.common.action.Action;
-import net.common.action.ActionForward;
-import net.company.action.CompanyBannerManagementAction;
+import net.common.action.*;
+import net.company.action.*;
+
 
 public class CompanyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,48 +32,56 @@ public class CompanyController extends HttpServlet {
 				forward = action.execute(request, response);
 				break;
 			case "/companyDeadLineManagement.cp":
-				action = new CompanyBannerManagementAction();
+				action = new CompanyDeadLineManagementAction();
 				forward = action.execute(request, response);
 				break;
 			case "/companyInvestApplyDetail.cp":
-				action = new CompanyBannerManagementAction();
+				action = new CompanyInvestApplyDetailAction();
 				forward = action.execute(request, response);
 				break;
 			case "/companyInvestApplyList.cp":
-				action = new CompanyBannerManagementAction();
+				action = new CompanyInvestApplyListAction();
 				forward = action.execute(request, response);
 				break;
 			case "/companyInvestedDetail.cp":
-				action = new CompanyBannerManagementAction();
+				action = new CompanyInvestedDetailAction();
 				forward = action.execute(request, response);
 				break;
 			case "/companyMainSlideManagement.cp":
-				action = new CompanyBannerManagementAction();
+				action = new CompanyMainSlideManagementAction();
 				forward = action.execute(request, response);
 				break;
 			case "/companyPopularityManagement.cp":
-				action = new CompanyBannerManagementAction();
+				action = new CompanyPopularityManagementAction();
 				forward = action.execute(request, response);
 				break;
 			case "/companyRecomnandManagement.cp":
-				action = new CompanyBannerManagementAction();
+				action = new CompanyRecomnandManagementAction();
 				forward = action.execute(request, response);
 				break;
 			case "/companyRegister.cp":
-				action = new CompanyBannerManagementAction();
+				action = new CompanyRegisterAction();
 				forward = action.execute(request, response);
 				break;
 			case "/compnayAllList.cp":
-				action = new CompanyBannerManagementAction();
+				action = new CompanyAllListAction();
 				forward = action.execute(request, response);
 				break;
 			default:
 				break;
 			}
+			if (forward != null) {
+				if (forward.isRedirect()) {
+					response.sendRedirect(forward.getPath());
+				} else {
+					RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
+					dispatcher.forward(request, response);
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
