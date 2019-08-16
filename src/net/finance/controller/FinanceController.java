@@ -15,7 +15,6 @@ import net.common.action.ActionForward;
 import net.finance.action.TokenExchangeListAction;
 import net.finance.action.TokenWithdrawalListAction;
 
-
 @WebServlet("/FinanceController")
 public class FinanceController extends HttpServlet implements Servlet{
 	private static final long serialVersionUID = 1L;
@@ -31,11 +30,11 @@ public class FinanceController extends HttpServlet implements Servlet{
 		
 		try {
 			switch (command) {
-			case "/TokenExchangeList.fn":
+			case "/tokenExchangeList.fn":
 				action = new TokenExchangeListAction();
 				forward = action.execute(request, response);
 				break;
-			case "/TokenWithdrawalList.fn":
+			case "/tokenWithdrawalList.fn":
 				action = new TokenWithdrawalListAction();
 				forward = action.execute(request, response);
 				break;

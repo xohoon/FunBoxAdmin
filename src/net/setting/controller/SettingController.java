@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.common.action.Action;
 import net.common.action.ActionForward;
+import net.setting.action.feesManagementAciton;
 
 
 @WebServlet("/SettingController")
@@ -28,7 +29,7 @@ public class SettingController extends HttpServlet {
 	
 		///////////////////////윤식 추가 start///////////////////////
 		if (command.equals("/feesManagement.st")) { // 공지 게시판 목록 - 윤식 추가
-			//action = new feesManagementAciton();
+			action = new feesManagementAciton();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
