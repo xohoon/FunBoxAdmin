@@ -13,14 +13,14 @@
 	<link href="../css/admin.css" rel="stylesheet">
 	<script>
 		$(function() {
-		  $('header').load('../template/header.jsp');
-		  $('#gnb').load('../template/categoryTemplate.jsp');
-		  $('footer').load('../template/footer.jsp');
+		  $('header').load('./template/header.jsp');
+		  $('#gnb').load('./template/categoryTemplate.jsp');
+		  $('footer').load('./template/footer.jsp');
 		});
 	</script>
 	<script>
 		function feemodify(){
-			location.href = './SettingController/feesManagement.st';
+			location.href = './feesManagement.st';
 		}
 	</script>
 </head>
