@@ -63,3 +63,4 @@
 		$('nav > ul').removeClass('on');
 		$(this).next('ul').addClass('on');
 	});
+</script>
