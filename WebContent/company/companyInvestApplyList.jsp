@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,34 +49,39 @@
 						<th>오픈상태</th>
 						<th>삭제</th>
 					</tr>
-					<tr>
-						<!-- <td onclick="window.open('./sec05_1.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td> -->
-						<td onclick="window.open('./companyInvestApplyDetail.cp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
-						<td>dkdlel</td>
-						<td>아이오</td>
-						<td>010-1234-5678</td>
-						<td>부산시금정구어쩌고</td>
-						<td>일반음식점</td>
-						<td>운영중(2019.07.24)</td>
-						<td><button><i class="fas fa-times"></i></button></td>
-					</tr>
-					<tr>
-						<!-- <td onclick="window.open('./sec05_1.jsp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td> -->
-						<td onclick="window.open('./companyInvestApplyDetail.cp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">바른생선회</td>
-						<td>dkdlel</td>
-						<td>아이오</td>
-						<td>010-1234-5678</td>
-						<td>부산시금정구어쩌고</td>
-						<td>일반음식점</td>
-						<td>오픈예정(2019.07.24)</td>
-						<td><button><i class="fas fa-times"></i></button></td>
-					</tr>
+					<c:forEach var="companyApplication" items="${companyApplicationList }">
+						<tr>
+							<td onclick="window.open('./companyInvestApplyDetail.cp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">${companyApplication.app_cp_name }</td>
+							<td>${companyApplication.mb_id }</td>
+							<td>${companyApplication.app_cp_manager }</td>
+							<td>${companyApplication.app_cp_hp }</td>
+							<td>${companyApplication.app_cp_ch }</td>
+							<td>${companyApplication. app_cp_sector}</td>
+							<c:choose>
+								<c:when test="${companyApplication.app_cp_status }">
+									<td>운영중(${companyApplication.app_cp_open_date_time })</td>
+								</c:when>
+								<c:otherwise>
+									<td>오픈예정(${companyApplication.app_cp_open_date_time })</td>
+								</c:otherwise>
+							</c:choose>
+							<!-- <td>운영중(2019.07.24)</td> -->
+							<td><button><i class="fas fa-times"></i></button></td>
+						</tr>
+					</c:forEach>
 				</table>
 				<a href="#" class="prev"><i class="fas fa-caret-left"></i></a>
 				<ul class="pager">
-					<li class="on"><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
+					<c:forEach var="i" begin="${current_min_page }" end="${current_max_page }">
+						<c:choose>
+							<c:when test="${ i eq current_page}">
+								<li class="on"><a href="./companyInvestApplyList.cp?page=${i }">${i}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="./companyInvestApplyList.cp?page=${i }">${i }</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
 				</ul>
 				<a href="#" class="next"><i class="fas fa-caret-right"></i></a>
 			</div>
