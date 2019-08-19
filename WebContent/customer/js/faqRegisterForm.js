@@ -1,3 +1,4 @@
+// 유정 - faq 게시물 등록하기
 function register(){
 	var title = $('#title').val();
 	var content = $('#content').val();
@@ -28,7 +29,7 @@ function submit(category, title, content){
 		dataType : "json",
 		
 		success : function(data){
-			if(String(data.result) == "register_success") {
+			if(String(data.result) == "faqRegister_success") {
 				alert('게시물이 등록되었습니다.');
 				opener.location.href='./faqBoard.cu';
 				window.close();

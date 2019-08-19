@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.common.action.Action;
 import net.common.action.ActionForward;
 import net.customer.action.FaqBoardAction;
+import net.customer.action.FaqDeleteAction;
 import net.customer.action.FaqModifyFormAction;
 import net.customer.action.FaqRegisterFormAction;
 import net.customer.action.InquiryAnswerFormAction;
@@ -51,6 +52,10 @@ public class CustomerController extends HttpServlet implements Servlet{
 			    break;
 			case "/faqRegisterForm.cu":
 				action = new FaqRegisterFormAction();
+				forward = action.execute(request, response);
+				break;
+			case "/faqDelete.cu":
+				action = new FaqDeleteAction();
 				forward = action.execute(request, response);
 				break;
 			case "/inquiryAnswerForm.cu":
