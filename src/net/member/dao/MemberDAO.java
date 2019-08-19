@@ -11,6 +11,7 @@ import java.util.List;
 import com.mysql.jdbc.CallableStatement;
 
 import net.member.dto.Member;
+import net.util.Paging;
 
 public class MemberDAO {
 	private static MemberDAO instance;
@@ -41,6 +42,53 @@ public class MemberDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	// 회원리스트
+	public boolean getMemberList(List<Member> memberList,int _page,Paging paging) {
+		CallableStatement cstmt = null;
+		try {
+			cstmt = (CallableStatement) conn.prepareCall("CALL SELECT_MEMBER_LIST(?,?,?,?,?)");
+			cstmt.setInt(1, _page);
+			cstmt.setInt(2, 10);
+			cstmt.registerOutParameter("_current_min_page", java.sql.Types.INTEGER);
+			cstmt.registerOutParameter("_current_max_page", java.sql.Types.INTEGER);
+			cstmt.registerOutParameter("_max_page", java.sql.Types.INTEGER);
+
+			rs = cstmt.executeQuery();
+
+			paging.setCurrent_min_page( cstmt.getInt("_current_min_page"));
+			paging.setCurrent_max_page(cstmt.getInt("_current_max_page"));
+			paging.setMax_page(cstmt.getInt("_max_page"));
+			
+			
+			while (rs.next()) {
+				Member member = new Member();
+				member.setMb_idx(rs.getInt("mb_idx"));
+				member.setMb_id(rs.getString("mb_id"));
+				member.setMb_name(rs.getString("mb_name"));
+				member.setMb_email(rs.getString("mb_email"));
+				member.setMb_phone(rs.getString("mb_phone"));
+				member.setMb_recommend(rs.getString("mb_recommend"));
+				memberList.add(member);
+			}
+			return true;
+		} catch (Exception ex) {
+			System.out.println("SelectMemberList 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (cstmt != null)
+					cstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("연결 해제 실패: " + e.getMessage());
+			}
+		}
+
+		return false;
 	}
 
 	// 회원리스트
@@ -80,7 +128,7 @@ public class MemberDAO {
 		return MemberList;
 	}
 
-	// 기업 신청 리스트 최대 페이지
+	// 회원 리스트 최대 페이지
 	public int getMemberListMaxPage() {
 		int max_page = 0;
 		String sql = "SELECT CEIL( COUNT(*)/ ? ) AS MAX_PAGE FROM member";

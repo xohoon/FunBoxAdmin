@@ -6,7 +6,7 @@ public class CompanyInvested {
 	private String cp_manager;
 	private String cp_phone;
 	private int cp_pre_net_profit_ratio;
-	private int D_day;
+	private int d_day;
 	private String iv_balance_stock;
 
 	public String getCp_name() {
@@ -50,11 +50,11 @@ public class CompanyInvested {
 	}
 
 	public int getD_day() {
-		return D_day;
+		return d_day;
 	}
 
 	public void setD_day(int d_day) {
-		D_day = d_day;
+		this.d_day = d_day;
 	}
 
 	public String getIv_balance_stock() {
