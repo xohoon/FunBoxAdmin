@@ -2,12 +2,14 @@ package net.company.dto;
 
 public class CompanyApplication {
 	private int app_cp_idx;
+	private String app_cp_name;
 	private String mb_id;
 	private String app_cp_manager;
 	private String app_cp_hp;
 	private String app_cp_ch;
 	private String app_cp_sector;
 	private boolean app_cp_status;
+	private String app_cp_open_date_time;
 	private boolean app_deleted_status;
 
 	public int getApp_cp_idx() {
@@ -16,6 +18,14 @@ public class CompanyApplication {
 
 	public void setApp_cp_idx(int app_cp_idx) {
 		this.app_cp_idx = app_cp_idx;
+	}
+
+	public String getApp_cp_name() {
+		return app_cp_name;
+	}
+
+	public void setApp_cp_name(String app_cp_name) {
+		this.app_cp_name = app_cp_name;
 	}
 
 	public String getMb_id() {
@@ -64,6 +74,14 @@ public class CompanyApplication {
 
 	public void setApp_cp_status(boolean app_cp_status) {
 		this.app_cp_status = app_cp_status;
+	}
+
+	public String getApp_cp_open_date_time() {
+		return app_cp_open_date_time;
+	}
+
+	public void setApp_cp_open_date_time(String app_cp_open_date_time) {
+		this.app_cp_open_date_time = app_cp_open_date_time;
 	}
 
 	public boolean isApp_deleted_status() {

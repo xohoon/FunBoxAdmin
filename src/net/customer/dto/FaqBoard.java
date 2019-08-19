@@ -9,6 +9,14 @@ public class FaqBoard {
 	private String title;
 	private String content;
 	private Date reg_date_time;
+	private String mb_name;
+		
+	public String getMb_name() {
+		return mb_name;
+	}
+	public void setMb_name(String mb_name) {
+		this.mb_name = mb_name;
+	}
 	public int getIdx() {
 		return idx;
 	}

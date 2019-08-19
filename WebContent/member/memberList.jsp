@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,7 +48,17 @@
 						<th>전화번호</th>
 						<th>추천인ID</th>
 					</tr>
-					<tr>
+					<c:forEach var="member" items="${memberList}">
+						<tr>
+							<td>${member.mb_idx }</td>
+							<td onclick="window.open('./memberDetail.mb','이름(아이디)','width=640,height=720,top=0,left=0,scrollbars=yes');">${member.mb_id }</td>
+							<td>${member.mb_email }</td>
+							<td>${member.mb_name }</td>
+							<td>${member.mb_phone }</td>
+							<td>${member.mb_recommend }</td>
+						</tr>
+					</c:forEach>
+					<!-- <tr>
 						<td>1</td>
 						<td onclick="window.open('./memberDetail.mb','이름(아이디)','width=640,height=720,top=0,left=0,scrollbars=yes');">dkdlel</td>
 						<td>asdfggg@iolab.kr</td>
@@ -62,13 +73,20 @@
 						<td>아이오</td>
 						<td>010-1234-5678</td>
 						<td>cncjsdls</td>
-					</tr>
+					</tr> -->
 				</table>
 				<a href="#" class="prev"><i class="fas fa-caret-left"></i></a>
 				<ul class="pager">
-					<li class="on"><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
+					<c:forEach var="i" begin="${current_min_page }" end="${current_max_page }">
+						<c:choose>
+							<c:when test="${ i eq current_page}">
+								<li class="on"><a href="./memberList.mb?page=${i }">${i}</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="./memberList.mb?page=${i }">${i }</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
 				</ul>
 				<a href="#" class="next"><i class="fas fa-caret-right"></i></a>
 			</div>

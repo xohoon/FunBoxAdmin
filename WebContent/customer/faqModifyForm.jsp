@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,53 +17,45 @@
 <body>
 	<div class="sec13_view">
 	  <div>
-	  <label>제목</label><textarea class="tit">Q. 자주묻는 질문1</textarea>
+	  <label>제목</label><textarea class="tit">${faq.title }</textarea>
     </div>
     <div>
     <label>카테고리</label>
     <select>
-	    <option>입출금</option>
-	    <option selected>투자</option>
-	    <option>기타</option>
+    	<c:choose>
+    		<c:when test="${faq.category == 1 }">
+			    <option selected>입출금</option>
+			    <option>투자</option>
+			    <option>기타</option>
+	    	</c:when>
+	    	<c:when test="${faq.category == 2 }">
+			    <option>입출금</option>
+			    <option selected>투자</option>
+			    <option>기타</option>
+	    	</c:when>
+	    	<c:otherwise>
+	    		<option>입출금</option>
+			    <option>투자</option>
+			    <option selected>기타</option>
+	    	</c:otherwise>
+	    </c:choose>
 	  </select>
 	  </div>
 	  <div>
-	    <label>글쓴이</label><input type="text" value="아이오">
+	    <label>글쓴이</label><input type="text" value="${faq.mb_name }">
     </div>
     <div>
-	    <label>날짜</label><input type="text" value="2019.07.25 13:28:44">
+	    <label>날짜</label><input type="text" value="${faq.reg_date_time }">
 	  </div>
-	  <textarea>등록한 답변내용이 들어가는 자립니당</textarea>
+	  <textarea>${faq.content }</textarea>
+	  <input type="hidden" id="faq_idx" value="${faq.idx }">
 	  <input type="file">
 	  <a href="#" download><i class="fas fa-save"></i> 첨부파일 다운로드</a>
-	  <button class="submit out">삭제하기</button>
+	  <button class="submit out" onclick="faqDel();">삭제하기</button>
 	  <button class="submit rec">수정하기</button>
 	  <button class="submit save">저장하기</button>
-		<button class="submit cancel">취소</button>
+	  <button class="submit cancel">취소</button>
 	</div>
-	
-	<script>
-    $(function(){
-      $('.save').hide();
-      $('.cancel').hide();
-      $('input').prop('readonly',true);
-      $('textarea').prop('readonly',true);
-      $('input[type=file]').hide();  
-        $('.rec').on('click', function(rectify){
-          $('input').css('border','1px solid #ddd');
-          $('input').prop('readonly',false);
-          $('textarea').prop('readonly',false);
-          $('input[type=file]').show();
-          $(this).hide();
-          $('.out').hide();
-          $('.save').show();
-          $('.cancel').show();
-        });
-        
-        $('.cancel').on('click', function(){
-            location.reload();
-        });
-    });
-  </script>
+	<script src="customer/js/faqModifyForm.js"></script>
 </body>
 </html>

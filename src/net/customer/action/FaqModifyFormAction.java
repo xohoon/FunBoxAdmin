@@ -1,3 +1,4 @@
+
 package net.customer.action;
 
 import javax.servlet.http.HttpServletRequest;
@@ -6,7 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 import net.common.action.Action;
 import net.common.action.ActionForward;
 import net.customer.dao.CustomerDAO;
+import net.customer.dto.FaqBoard;
 
+// 유정 추가
 public class FaqModifyFormAction implements Action {
 
 	@Override
@@ -16,6 +19,9 @@ public class FaqModifyFormAction implements Action {
 		int faq_idx = Integer.parseInt(request.getParameter("idx"));
 		
 		CustomerDAO customer_dao = new CustomerDAO();
+		FaqBoard faq = customer_dao.faqDetail(faq_idx);
+		
+		request.setAttribute("faq", faq);
 		
 		forward.setRedirect(false);
 		forward.setPath("./customer/faqModifyForm.jsp");

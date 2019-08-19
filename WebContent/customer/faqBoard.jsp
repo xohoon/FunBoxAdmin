@@ -31,7 +31,7 @@
 			  <option value="2">투자 관련</option>
 			  <option value="3">기타</option>
 			</select>
-			<button class="write" onclick="window.open('./faqRegisterForm.cu','게시물등록','width=840,height=640,top=0,left=0,scrollbars=yes');">게시물등록</button>
+			<button class="write" onclick="window.open('./faqRegister.cu','게시물등록','width=840,height=640,top=0,left=0,scrollbars=yes');">게시물등록</button>
 			<button>비활성화</button>
 			<button>활성화</button>
 				<table>
@@ -63,7 +63,7 @@
 					  </c:otherwise>
 					  </c:choose>
 					  <td onclick="window.open('./faqModifyForm.cu?idx=${faq_list.idx}','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">${faq_list.title}</td>
-					  <td>관리자</td>
+					  <td>${faq_list.mb_name }</td>
 					  <td>${faq_list.reg_date_time}</td>
 					  <td>Yes</td>
 					</tr>
@@ -86,8 +86,8 @@
 					  <td>기타</td>
 					  </c:otherwise>
 					  </c:choose>
-					  <td onclick="window.open('./faqModifyForm.cu','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">${faq_list.title}</td>
-					  <td>관리자</td>
+					  <td onclick="window.open('./faqModifyForm.cu?idx=${faq_list.idx}','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">${faq_list.title}</td>
+					  <td>${faq_list.mb_name }</td>
 					  <td>${faq_list.reg_date_time}</td>
 					  <td>Yes</td>
 					</tr>
@@ -110,8 +110,8 @@
 					  <td>기타</td>
 					  </c:otherwise>
 					  </c:choose>
-					  <td onclick="window.open('./faqModifyForm.cu','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">${faq_list.title}</td>
-					  <td>관리자</td>
+					  <td onclick="window.open('./faqModifyForm.cu?idx=${faq_list.idx}','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">${faq_list.title}</td>
+					  <td>${faq_list.mb_name }</td>
 					  <td>${faq_list.reg_date_time}</td>
 					  <td>Yes</td>
 					</tr>
@@ -134,8 +134,8 @@
 					  <td>기타</td>
 					  </c:otherwise>
 					  </c:choose>
-					  <td onclick="window.open('./faqModifyForm.cu','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">${faq_list.title}</td>
-					  <td>관리자</td>
+					  <td onclick="window.open('./faqModifyForm.cu?idx=${faq_list.idx}','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">${faq_list.title}</td>
+					  <td>${faq_list.mb_name }</td>
 					  <td>${faq_list.reg_date_time}</td>
 					  <td>Yes</td>
 					</tr>
