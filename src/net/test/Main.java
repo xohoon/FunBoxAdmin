@@ -24,14 +24,11 @@ public class Main {
 		
 		//System.out.println(companyApplicationList.get(0).getApp_cp_idx());
 		
-<<<<<<< HEAD
-	//	System.out.println(companyDAO.getCompanyApplicationMaxPage());
-=======
 		//System.out.println(companyDAO.getCompanyApplicationMaxPage());
 		Paging paging = new Paging();
+
 		companyDAO.getCompanyInvestedList(companyInvestedList, 1, "12", paging);
 		System.out.println(companyInvestedList.size());
->>>>>>> branch 'master' of https://github.com/xohoon/FunBoxAdmin.git
 		
 	}
 

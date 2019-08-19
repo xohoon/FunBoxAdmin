@@ -69,7 +69,7 @@
             	</tr>
             </c:forEach>
           </table>
-          <a href="#" class="prev"><i class="fas fa-caret-left"></i></a>
+          <a href="./companyInvestedList.cp?page=${current_page-1 }&funding_status=${funding_status}" class="prev"><i class="fas fa-caret-left"></i></a>
           <ul class="pager">
             <c:forEach var="i" begin="${current_min_page }" end="${current_max_page }">
             	<c:choose>
@@ -82,7 +82,7 @@
             	</c:choose>
 			</c:forEach>
           </ul>
-          <a href="#" class="next"><i class="fas fa-caret-right"></i></a>
+          <a href="./companyInvestedList.cp?page=${current_page+1 }&funding_status=${funding_status}" class="next"><i class="fas fa-caret-right"></i></a>
         </div>
         <div class="doneGroup"></div>
 			</div>

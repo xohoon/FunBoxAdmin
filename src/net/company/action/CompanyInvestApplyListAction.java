@@ -44,7 +44,11 @@ public class CompanyInvestApplyListAction implements Action {
 
 		}
 		
-		request.setAttribute("current_page", page);
+		if (paging.getMax_page() < page) {
+			request.setAttribute("current_page", paging.getMax_page());
+		}else {
+			request.setAttribute("current_page", page);
+		}		
 		request.setAttribute("current_min_page", paging.getCurrent_min_page());
 		request.setAttribute("current_max_page", paging.getCurrent_max_page());
 		request.setAttribute("max_page", paging.getMax_page());

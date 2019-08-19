@@ -17,26 +17,26 @@
 <body>
 	<div class="sec13_view">
 	  <div>
-	  <label>제목</label><textarea class="tit">${faq.title }</textarea>
+	  <label>제목</label><textarea class="tit" id="title">${faq.title }</textarea>
     </div>
     <div>
     <label>카테고리</label>
-    <select>
+    <select id="selectBox">
     	<c:choose>
     		<c:when test="${faq.category == 1 }">
-			    <option selected>입출금</option>
-			    <option>투자</option>
-			    <option>기타</option>
+			    <option value="1" selected>입출금</option>
+			    <option value="2">투자</option>
+			    <option value="3">기타</option>
 	    	</c:when>
 	    	<c:when test="${faq.category == 2 }">
-			    <option>입출금</option>
-			    <option selected>투자</option>
-			    <option>기타</option>
+			    <option value="1">입출금</option>
+			    <option value="2" selected>투자</option>
+			    <option value="3">기타</option>
 	    	</c:when>
 	    	<c:otherwise>
-	    		<option>입출금</option>
-			    <option>투자</option>
-			    <option selected>기타</option>
+	    		<option value="1">입출금</option>
+			    <option value="2">투자</option>
+			    <option value="3" selected>기타</option>
 	    	</c:otherwise>
 	    </c:choose>
 	  </select>
@@ -47,13 +47,13 @@
     <div>
 	    <label>날짜</label><input type="text" value="${faq.reg_date_time }">
 	  </div>
-	  <textarea>${faq.content }</textarea>
+	  <textarea id="content">${faq.content }</textarea>
 	  <input type="hidden" id="faq_idx" value="${faq.idx }">
 	  <input type="file">
 	  <a href="#" download><i class="fas fa-save"></i> 첨부파일 다운로드</a>
 	  <button class="submit out" onclick="faqDel();">삭제하기</button>
 	  <button class="submit rec">수정하기</button>
-	  <button class="submit save">저장하기</button>
+	  <button class="submit save" onclick="faqSave();">저장하기</button>
 	  <button class="submit cancel">취소</button>
 	</div>
 	<script src="customer/js/faqModifyForm.js"></script>
