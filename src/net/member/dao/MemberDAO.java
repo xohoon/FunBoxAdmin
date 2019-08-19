@@ -22,7 +22,6 @@ public class MemberDAO {
 			instance = new MemberDAO();
 		return instance;
 	}
-
 	// 4.
 	private Connection conn;
 	private static String URL = "jdbc:mysql://52.79.240.236/funbox?serverTimezone=Asia/Seoul&useSSL=false&useUnicode=true&characterEncoding=utf8";

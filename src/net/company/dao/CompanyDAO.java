@@ -12,7 +12,6 @@ import com.mysql.jdbc.CallableStatement;
 
 import net.company.dto.CompanyApplication;
 import net.company.dto.CompanyInvested;
-import net.member.dto.Member;
 import net.util.Paging;
 
 public class CompanyDAO {
