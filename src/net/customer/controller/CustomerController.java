@@ -14,6 +14,7 @@ import net.common.action.Action;
 import net.common.action.ActionForward;
 import net.customer.action.FaqBoardAction;
 import net.customer.action.FaqDeleteAction;
+import net.customer.action.FaqModifyAction;
 import net.customer.action.FaqModifyFormAction;
 import net.customer.action.FaqRegisterFormAction;
 import net.customer.action.InquiryAnswerFormAction;
@@ -39,6 +40,10 @@ public class CustomerController extends HttpServlet implements Servlet{
 			switch (command) {
 			case "/faqBoard.cu":
 				action = new FaqBoardAction();
+				forward = action.execute(request, response);
+				break;
+			case "/faqModify.cu":
+				action = new FaqModifyAction();
 				forward = action.execute(request, response);
 				break;
 			case "/faqModifyForm.cu":
