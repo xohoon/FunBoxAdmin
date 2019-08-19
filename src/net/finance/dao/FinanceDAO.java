@@ -43,10 +43,10 @@ public class FinanceDAO {
 		}
 	}
 	// 윤식 추가 -- 재정관리 / 토큰 입출금 내역
-	public ArrayList<Token> getTokenWithdrawList(int startRow, int pageSize, String category) {
+	public ArrayList<Token> getTokenWithdrawList(int startRow, int pageSize, String category, String id) {
 		
-		String sql = "SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time FROM token_deposit AS A, member AS B UNION "  
-				     +"SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time from token_withdraw AS A, member AS B "  
+		String sql = "SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time FROM token_deposit AS A, member AS B WHERE B.mb_id like '%"+ id +"%' UNION "  
+				     +"SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time from token_withdraw AS A, member AS B where B.mb_id like '%"+ id +"%' "  
 				     +"ORDER BY td_date_time DESC limit "
 				     +startRow + ", " + pageSize;
 		
@@ -59,15 +59,15 @@ public class FinanceDAO {
 				pstmt = conn.prepareStatement(sql);
 				rs = pstmt.executeQuery();
 			}else if(category.equals("1")){ // 입금
-				sql = "SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time FROM token_deposit AS A, member AS B WHERE A.td_to_address='durlsmswlrkqwnthrkemfdjrksmszksdlqslekdqmfkzpttlftlrksqhrlehwkfdksehlrhdkwnalclfrjtrkxwyejejrlfdjdirlfdlwhwjfdlehlsmswlqhftndlTtmqslek'UNION "
-					 +"SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time from token_withdraw AS A, member AS B "
+				sql = "SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time FROM token_deposit AS A, member AS B WHERE A.td_to_address='durlsmswlrkqwnthrkemfdjrksmszksdlqslekdqmfkzpttlftlrksqhrlehwkfdksehlrhdkwnalclfrjtrkxwyejejrlfdjdirlfdlwhwjfdlehlsmswlqhftndlTtmqslek' and B.mb_id like '%"+ id +"%' UNION "
+					 +"SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time from token_withdraw AS A, member AS B where B.mb_id like '%"+ id +"%' "
 					 +"ORDER BY td_date_time DESC limit "
 					 +startRow + ", " + pageSize;
 				pstmt = conn.prepareStatement(sql);
 				rs = pstmt.executeQuery();
 			}else if(category.equals("2")){ // 출금
-				sql = "SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time FROM token_deposit AS A, member AS B UNION "
-					  +"SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time from token_withdraw AS A, member AS B  WHERE A.td_from_address='durlsmswlrkqwnthrkemfdjrksmszksdlqslekdqmfkzpttlftlrksqhrlehwkfdksehlrhdkwnalclfrjtrkxwyejejrlfdjdirlfdlwhwjfdlehlsmswlqhftndlTtmqslek'"
+				sql = "SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time FROM token_deposit AS A, member AS B where B.mb_id like '%"+ id +"%' UNION "
+					  +"SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time from token_withdraw AS A, member AS B  WHERE A.td_from_address='durlsmswlrkqwnthrkemfdjrksmszksdlqslekdqmfkzpttlftlrksqhrlehwkfdksehlrhdkwnalclfrjtrkxwyejejrlfdjdirlfdlwhwjfdlehlsmswlqhftndlTtmqslek' and B.mb_id like '%"+ id +"%'"
 					  +"ORDER BY td_date_time DESC limit "
 					  +startRow + ", " + pageSize;
 				pstmt = conn.prepareStatement(sql);
@@ -103,14 +103,13 @@ public class FinanceDAO {
 		return null;
 	}
 	
-	// 토큰 입출금 내역
-	public int tokenCount(String category) {
+	// 토큰 입출금 내역 카운트
+	public int tokenCount(String category , String id) {
 		PreparedStatement pstmt = null;
 		int count = 0;
 		ResultSet rs = null;
-		String sql = "SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time FROM token_deposit AS A, member AS B UNION "  
-			     +"SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time from token_withdraw AS A, member AS B "  
-			     +"ORDER BY td_date_time DESC";
+		String sql = "SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time FROM token_deposit AS A, member AS B WHERE B.mb_id like '%"+ id +"%' UNION "  
+			     +"SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time from token_withdraw AS A, member AS B where B.mb_id like '%"+ id +"%' " ;			     			     
 
 		try {
 			if (category.equals("0")) { // 전체
@@ -118,27 +117,22 @@ public class FinanceDAO {
 				rs = pstmt.executeQuery();
 				
 			}else if(category.equals("1")){ // 입금
-				sql = "SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time FROM token_deposit AS A, member AS B WHERE A.td_to_address='durlsmswlrkqwnthrkemfdjrksmszksdlqslekdqmfkzpttlftlrksqhrlehwkfdksehlrhdkwnalclfrjtrkxwyejejrlfdjdirlfdlwhwjfdlehlsmswlqhftndlTtmqslek'UNION "
-					 +"SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time from token_withdraw AS A, member AS B "
-					 +"ORDER BY td_date_time DESC";
+				sql = "SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time FROM token_deposit AS A, member AS B WHERE A.td_to_address='durlsmswlrkqwnthrkemfdjrksmszksdlqslekdqmfkzpttlftlrksqhrlehwkfdksehlrhdkwnalclfrjtrkxwyejejrlfdjdirlfdlwhwjfdlehlsmswlqhftndlTtmqslek' and B.mb_id like '%"+ id +"%' UNION "
+					 +"SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time from token_withdraw AS A, member AS B where B.mb_id like '%"+ id +"%' ";						 
 				pstmt = conn.prepareStatement(sql);
 				rs = pstmt.executeQuery();
 			}else if(category.equals("2")){
-				sql = "SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time FROM token_deposit AS A, member AS B UNION "
-					  +"SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time from token_withdraw AS A, member AS B  WHERE A.td_from_address='durlsmswlrkqwnthrkemfdjrksmszksdlqslekdqmfkzpttlftlrksqhrlehwkfdksehlrhdkwnalclfrjtrkxwyejejrlfdjdirlfdlwhwjfdlehlsmswlqhftndlTtmqslek'"
-					  +"ORDER BY td_date_time DESC";
+				sql = "SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time FROM token_deposit AS A, member AS B where B.mb_id like '%"+ id +"%' UNION "
+				     +"SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time from token_withdraw AS A, member AS B  WHERE A.td_from_address='durlsmswlrkqwnthrkemfdjrksmszksdlqslekdqmfkzpttlftlrksqhrlehwkfdksehlrhdkwnalclfrjtrkxwyejejrlfdjdirlfdlwhwjfdlehlsmswlqhftndlTtmqslek' and B.mb_id like '%"+ id +"%'";						 
 				pstmt = conn.prepareStatement(sql);
 				rs = pstmt.executeQuery();
 			}
 
 			rs.last();
-
 			count = rs.getRow();
-
 			rs.beforeFirst();
 
 			return count;
-
 		} catch (Exception ex) {
 			System.out.println("tokenCount 에러: " + ex);
 		} finally {
@@ -154,53 +148,6 @@ public class FinanceDAO {
 			}
 		}
 		return 0;
-	}
-	
-	@SuppressWarnings({ "unchecked", "unused" })
-	public JSONArray Search_ID_List(String id) {
-		
-	String sql = "SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time FROM token_deposit AS A, member AS B WHERE B.mb_id ='"+id+"' UNION "  
-				 +"SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time from token_withdraw AS A, member AS B WHERE B.mb_id ='"+id+"' ORDER BY td_date_time DESC";
-			     //+startRow + ", " + pageSize;
-	
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	
-	JSONArray jsonArr = new JSONArray(); 
-	System.out.println(sql);
-	
-	try { 
-		pstmt = conn.prepareStatement(sql);
-		rs = pstmt.executeQuery();
-	
-		while (rs.next()) {
-			JSONObject jsonObj = new JSONObject();
-			jsonObj.put("mb_id", rs.getString("mb_id"));
-			jsonObj.put("td_from_address", rs.getString("td_from_address"));
-			jsonObj.put("td_to_address", rs.getString("td_to_address"));
-			jsonObj.put("td_amount", rs.getString("td_amount"));
-			jsonObj.put("td_status", rs.getString("td_status"));
-			jsonObj.put("td_date_time", rs.getString("td_date_time"));
-			jsonArr.add(jsonObj);						
-		}
-		return jsonArr;
-		
-	} catch (Exception ex) {
-		System.out.println("Search_ID List에러: " + ex);
-	} finally {
-		try {
-			if (rs != null)
-				rs.close();
-			if (pstmt != null)
-				pstmt.close();
-			if (conn != null)
-				conn.close();
-		} catch (Exception e) {
-			System.out.println("해제 실패 : " + e.getMessage());
-		}
-	}
-
-	return null;				
 	}
 	
 }

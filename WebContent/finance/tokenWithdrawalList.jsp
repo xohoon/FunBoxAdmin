@@ -28,85 +28,31 @@
 		ArrayList<Token> token = (ArrayList<Token>)request.getAttribute("tokenTransfer");
 		String category = request.getParameter("category");
 		String categroyFlag = request.getParameter("categroyFlag");
+		String searchID =request.getParameter("searchID");
+		System.out.println("test : " + searchID);
+		
 	%>
 	<script>
 		function category(button){
+			var selectOption = document.getElementById("selectID").value;
+			var searchID = document.getElementById("hiddensearchID").value;
+			console.log(searchID);
 			var category = button;
-			location.href='./tokenWithdrawalList.fn?category='+category;
+			location.href='./tokenWithdrawalList.fn?category='+category+"&searchID="+searchID;
 				
 		}
 		
 		function btnIdsearch(){
 			var selectOption = document.getElementById("selectID").value;
 			var searchID =  document.getElementById("searchID").value;
-			
-			
-			if(selectOption == '0'){ 
-				alert('찾고자 하는 옵션을 선택해주세요.');
+
+			if(selectOption == '0'){				
+				location.href='./tokenWithdrawalList.fn?category='+0;
 			}else{
-				 $.ajax({
-					url : './tokenWithdrawalSearch.fn', 
-					type : 'POST',
-					data: {"searchID":searchID},	    			
-	    			dataType : 'json',
-		    			success:function(data){
-		    				$('table').remove();
-		    				$('#pagers').remove();
-		    				
-		    				var tablefrom;
-		    				var count = "1";
-		    				tablefrom = "<table>";
-		    				tablefrom += "<tr><th>번호</th><th>아이디</th><th>구분</th><th>TX Hash</th><th>수량</th><th>상태</th><th>날짜</th></tr>";
-		    				tablefrom += "<tr>";
-		    				for (var i = 0; i < data.length; i++) {
-		    					
-		    		         	tablefrom +="<th>"+ count +"</th>";
-		    		         	if(data[i].td_to_address == 'durlsmswlrkqwnthrkemfdjrksmszksdlqslekdqmfkzpttlftlrksqhrlehwkfdksehlrhdkwnalclfrjtrkxwyejejrlfdjdirlfdlwhwjfdlehlsmswlqhftndlTtmqslek'){
-		    		         		tablefrom +="<th>"+ data[i].mb_id +"</th>";
-		    		         		tablefrom +="<td>입금</td>";
-		    		         		tablefrom +="<td>"+ data[i].td_from_address +"</td>";
-		    		         		tablefrom +="<td>"+ data[i].td_amount +"</td>";
-		    		         		if(data[i].td_status == "0"){
-		    		         			tablefrom +="<td>대기</td>";	
-		    		         		}else if(data[i].td_status == "1"){
-		    		         			tablefrom +="<td>수락</td>";
-		    		         		}else if(data[i].td_status == "2"){
-		    		         			tablefrom +="<td>취소</td>";
-		    		         		}
-		    		         		tablefrom +="<th>"+ data[i].td_date_time +"</th>";
-		    		         	}else{
-		    		         		tablefrom +="<td>"+ data[i].mb_id +"</td>";
-		    		         		tablefrom +="<td>출금</td>";
-		    		         		tablefrom +="<td>"+ data[i].td_from_address +"</td>";
-		    		         		tablefrom +="<td>"+ data[i].td_amount +"</td>";
-		    		         		if(data[i].td_status == "0"){
-		    		         			tablefrom +="<td>대기</td>";	
-		    		         		}else if(data[i].td_status == "1"){
-		    		         			tablefrom +="<td>수락</td>";
-		    		         		}else if(data[i].td_status == "2"){
-		    		         			tablefrom +="<td>취소</td>";
-		    		         		}
-		    		         		tablefrom +="<th>"+ data[i].td_date_time +"</th>";
-		    		         	}
-		    		         	count++;
-		    		         	tablefrom +="</tr>";
-		    		        }
-		    				
-		    				tablefrom += "</table>";
-		    				console.log(tablefrom);
-		    				 $( '#searchpostion' ).append( tablefrom );
-		    				 
-	    				},error:function(data){
-	    					alert("데이터 통신을 실패 하였습니다. 개발실에 문의 하세요.");	    					
-	    				}
-				});
-			} 
-			
+				location.href='./tokenWithdrawalList.fn?searchID='+searchID;
+			}
 		}
 		
-		function showSerchFrom(obj){			
-		
-		}
 	</script>
 </head>
 
@@ -118,7 +64,7 @@
 			<h2>토큰 입출금 내역</h2>
 			<div class="sch">
 				<select id = 'selectID' name = 'selectID' title='아이디검색'>
-					<option value = '0'>- 선택 -</option>
+					<option value = '0'>- 전체 -</option>
 					<option value = '1'>아이디</option>
 				</select>
 				<input id = 'searchID' name = 'searchID' type="text" onkeydown='javascript:if(event.keyCode==13){func.searchEnter({}); return false;}' maxlength='10'>
@@ -131,9 +77,9 @@
 						<li id = button2 value = "1" onclick = "category(this.value)">입금</li>
 						<li id = button3 value = "2" onclick = "category(this.value)">출금</li>
 						<input type="hidden" id="cate_color" name="cate_color" value="${category}">
+						<input type="hidden" id="hiddensearchID" name="hiddensearchID" value="${searchID}">
 					</ul>
 				</ul>
-				<div id = "searchpostion"></div>
 				<c:if test = "${category == '0'}">
 					<table>
 						<tr>						
@@ -185,8 +131,7 @@
 							
 						</tr>	
 						</c:forEach>					
-					</table>
-					<div id = pagers>
+					</table>					
 						<c:if test="${count > 0}">
 							<c:set var="pageCount"
 								value="${count / pageSize + ( count % pageSize == 0 ? 0 : 1)}" />
@@ -196,25 +141,24 @@
 								<c:set var="endPage" value="${pageCount}" />
 							</c:if>
 								<c:if test="${numPageGroup > 1}">
-								<b><a href="./tokenWithdrawalList.fn?pageNum=${(numPageGroup-2)*pageGroupSize+1 }&category=${categroyFlag}" class="prev">◀</a></b>
+								<b><a href="./tokenWithdrawalList.fn?pageNum=${(numPageGroup-2)*pageGroupSize+1 }&category=${categroyFlag}&searchID=${searchID}" class="prev">◀</a></b>
 							</c:if>
 								<ul class="pager">
 								<c:forEach var="i" begin="${startPage}" end="${endPage}">
 									<c:choose>
 										<c:when test="${currentPage == i}">
-											<b><a class="on" href="./tokenWithdrawalList.fn?pageNum=${i}&category=${categroyFlag}"><font size=3>${i}</font></a></b>
+											<b><a class="on" href="./tokenWithdrawalList.fn?pageNum=${i}&category=${categroyFlag}&searchID=${searchID}"><font size=3>${i}</font></a></b>
 										</c:when>
 										<c:otherwise>
-											<li><a href="./tokenWithdrawalList.fn?pageNum=${i}&category=${categroyFlag}"><font size=3>${i}</font></a></li>
+											<li><a href="./tokenWithdrawalList.fn?pageNum=${i}&category=${categroyFlag}&searchID=${searchID}"><font size=3>${i}</font></a></li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 							</ul>
 								<c:if test="${numPageGroup < pageGroupCount}">
-								<b><a href="./tokenWithdrawalList.fn?pageNum=${numPageGroup*pageGroupSize+1}&category=${categroyFlag}" class="next">▶</a></b>
+								<b><a href="./tokenWithdrawalList.fn?pageNum=${numPageGroup*pageGroupSize+1}&category=${categroyFlag}&searchID=${searchID}" class="next">▶</a></b>
 								</c:if>
 						</c:if>
-					</div>
 					</c:if>
 					<c:if test = "${category == '1'}">
 					<table>
@@ -256,22 +200,22 @@
 								<c:set var="endPage" value="${pageCount}" />
 							</c:if>
 								<c:if test="${numPageGroup > 1}">
-								<b><a href="./tokenWithdrawalList.fn?pageNum=${(numPageGroup-2)*pageGroupSize+1 }&category=${categroyFlag}" class="prev">◀</a></b>
+								<b><a href="./tokenWithdrawalList.fn?pageNum=${(numPageGroup-2)*pageGroupSize+1 }&category=${categroyFlag}&searchID=${searchID}" class="prev">◀</a></b>
 							</c:if>
 								<ul class="pager">
 								<c:forEach var="i" begin="${startPage}" end="${endPage}">
 									<c:choose>
 										<c:when test="${currentPage == i}">
-											<b><a class="on" href="./tokenWithdrawalList.fn?pageNum=${i}&category=${categroyFlag}"><font size=3>${i}</font></a></b>
+											<b><a class="on" href="./tokenWithdrawalList.fn?pageNum=${i}&category=${categroyFlag}&searchID=${searchID}"><font size=3>${i}</font></a></b>
 										</c:when>
 										<c:otherwise>
-											<li><a href="./tokenWithdrawalList.fn?pageNum=${i}&category=${categroyFlag}"><font size=3>${i}</font></a></li>
+											<li><a href="./tokenWithdrawalList.fn?pageNum=${i}&category=${categroyFlag}&searchID=${searchID}"><font size=3>${i}</font></a></li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 							</ul>
 								<c:if test="${numPageGroup < pageGroupCount}">
-								<b><a href="./tokenWithdrawalList.fn?pageNum=${numPageGroup*pageGroupSize+1}&category=${categroyFlag}" class="next">▶</a></b>
+								<b><a href="./tokenWithdrawalList.fn?pageNum=${numPageGroup*pageGroupSize+1}&category=${categroyFlag}&searchID=${searchID}" class="next">▶</a></b>
 								</c:if>
 						</c:if>
 					</c:if>
@@ -316,22 +260,22 @@
 								<c:set var="endPage" value="${pageCount}" />
 							</c:if>
 								<c:if test="${numPageGroup > 1}">
-								<b><a href="./tokenWithdrawalList.fn?pageNum=${(numPageGroup-2)*pageGroupSize+1 }&category=${categroyFlag}" class="prev">◀</a></b>
+								<b><a href="./tokenWithdrawalList.fn?pageNum=${(numPageGroup-2)*pageGroupSize+1 }&category=${categroyFlag}&searchID=${searchID}" class="prev">◀</a></b>
 							</c:if>
 								<ul class="pager">
 								<c:forEach var="i" begin="${startPage}" end="${endPage}">
 									<c:choose>
 										<c:when test="${currentPage == i}">
-											<b><a class="on" href="./tokenWithdrawalList.fn?pageNum=${i}&category=${categroyFlag}"><font size=3>${i}</font></a></b>
+											<b><a class="on" href="./tokenWithdrawalList.fn?pageNum=${i}&category=${categroyFlag}&searchID=${searchID}"><font size=3>${i}</font></a></b>
 										</c:when>
 										<c:otherwise>
-											<li><a href="./tokenWithdrawalList.fn?pageNum=${i}&category=${categroyFlag}"><font size=3>${i}</font></a></li>
+											<li><a href="./tokenWithdrawalList.fn?pageNum=${i}&category=${categroyFlag}&searchID=${searchID}"><font size=3>${i}</font></a></li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
 								</ul>
 								<c:if test="${numPageGroup < pageGroupCount}">
-								<b><a href="./tokenWithdrawalList.fn?pageNum=${numPageGroup*pageGroupSize+1}&category=${categroyFlag}" class="next">▶</a></b>
+								<b><a href="./tokenWithdrawalList.fn?pageNum=${numPageGroup*pageGroupSize+1}&category=${categroyFlag}&searchID=${searchID}" class="next">▶</a></b>
 								</c:if>
 						</c:if>					
 				</c:if>				
