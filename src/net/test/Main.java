@@ -19,7 +19,7 @@ public class Main {
 		
 		//System.out.println(companyApplicationList.get(0).getApp_cp_idx());
 		
-		System.out.println(companyDAO.getCompanyApplicationMaxPage());
+	//	System.out.println(companyDAO.getCompanyApplicationMaxPage());
 		
 	}
 

@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
 <!DOCTYPE html>
-<html lang="en">s
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,6 +13,7 @@
 	<title>FUNBOX ADMIN</title>
 	<script src="./js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<link href="./css/common.css" rel="stylesheet">
 	<link href="./css/admin.css" rel="stylesheet">
 	<link href="./css/txaddress.css" rel="stylesheet">
@@ -28,6 +29,85 @@
 		String category = request.getParameter("category");
 		String categroyFlag = request.getParameter("categroyFlag");
 	%>
+	<script>
+		function category(button){
+			var category = button;
+			location.href='./tokenWithdrawalList.fn?category='+category;
+				
+		}
+		
+		function btnIdsearch(){
+			var selectOption = document.getElementById("selectID").value;
+			var searchID =  document.getElementById("searchID").value;
+			
+			
+			if(selectOption == '0'){ 
+				alert('찾고자 하는 옵션을 선택해주세요.');
+			}else{
+				 $.ajax({
+					url : './tokenWithdrawalSearch.fn', 
+					type : 'POST',
+					data: {"searchID":searchID},	    			
+	    			dataType : 'json',
+		    			success:function(data){
+		    				$('table').remove();
+		    				$('#pagers').remove();
+		    				
+		    				var tablefrom;
+		    				var count = "1";
+		    				tablefrom = "<table>";
+		    				tablefrom += "<tr><th>번호</th><th>아이디</th><th>구분</th><th>TX Hash</th><th>수량</th><th>상태</th><th>날짜</th></tr>";
+		    				tablefrom += "<tr>";
+		    				for (var i = 0; i < data.length; i++) {
+		    					
+		    		         	tablefrom +="<th>"+ count +"</th>";
+		    		         	if(data[i].td_to_address == 'durlsmswlrkqwnthrkemfdjrksmszksdlqslekdqmfkzpttlftlrksqhrlehwkfdksehlrhdkwnalclfrjtrkxwyejejrlfdjdirlfdlwhwjfdlehlsmswlqhftndlTtmqslek'){
+		    		         		tablefrom +="<th>"+ data[i].mb_id +"</th>";
+		    		         		tablefrom +="<td>입금</td>";
+		    		         		tablefrom +="<td>"+ data[i].td_from_address +"</td>";
+		    		         		tablefrom +="<td>"+ data[i].td_amount +"</td>";
+		    		         		if(data[i].td_status == "0"){
+		    		         			tablefrom +="<td>대기</td>";	
+		    		         		}else if(data[i].td_status == "1"){
+		    		         			tablefrom +="<td>수락</td>";
+		    		         		}else if(data[i].td_status == "2"){
+		    		         			tablefrom +="<td>취소</td>";
+		    		         		}
+		    		         		tablefrom +="<th>"+ data[i].td_date_time +"</th>";
+		    		         	}else{
+		    		         		tablefrom +="<td>"+ data[i].mb_id +"</td>";
+		    		         		tablefrom +="<td>출금</td>";
+		    		         		tablefrom +="<td>"+ data[i].td_from_address +"</td>";
+		    		         		tablefrom +="<td>"+ data[i].td_amount +"</td>";
+		    		         		if(data[i].td_status == "0"){
+		    		         			tablefrom +="<td>대기</td>";	
+		    		         		}else if(data[i].td_status == "1"){
+		    		         			tablefrom +="<td>수락</td>";
+		    		         		}else if(data[i].td_status == "2"){
+		    		         			tablefrom +="<td>취소</td>";
+		    		         		}
+		    		         		tablefrom +="<th>"+ data[i].td_date_time +"</th>";
+		    		         	}
+		    		         	count++;
+		    		         	tablefrom +="</tr>";
+		    		        }
+		    				
+		    				tablefrom += "</table>";
+		    				console.log(tablefrom);
+		    				 $( '#searchpostion' ).append( tablefrom );
+		    				 
+	    				},error:function(data){
+	    					alert("데이터 통신을 실패 하였습니다. 개발실에 문의 하세요.");	    					
+	    				}
+				});
+			} 
+			
+		}
+		
+		function showSerchFrom(obj){			
+		
+		}
+	</script>
 </head>
 
 <body>
@@ -37,12 +117,12 @@
 		<section id="sec03">
 			<h2>토큰 입출금 내역</h2>
 			<div class="sch">
-				<select>
-					<option>- 선택 -</option>
-					<option>아이디</option>
+				<select id = 'selectID' name = 'selectID' title='아이디검색'>
+					<option value = '0'>- 선택 -</option>
+					<option value = '1'>아이디</option>
 				</select>
-				<input type="text">
-				<button><i class="fas fa-search"></i></button>
+				<input id = 'searchID' name = 'searchID' type="text" onkeydown='javascript:if(event.keyCode==13){func.searchEnter({}); return false;}' maxlength='10'>
+				<button onclick = "btnIdsearch()"><i class="fas fa-search"></i></button>
 			</div>
 			<div class="con">
 				<ul class="tab">
@@ -53,6 +133,7 @@
 						<input type="hidden" id="cate_color" name="cate_color" value="${category}">
 					</ul>
 				</ul>
+				<div id = "searchpostion"></div>
 				<c:if test = "${category == '0'}">
 					<table>
 						<tr>						
@@ -105,6 +186,7 @@
 						</tr>	
 						</c:forEach>					
 					</table>
+					<div id = pagers>
 						<c:if test="${count > 0}">
 							<c:set var="pageCount"
 								value="${count / pageSize + ( count % pageSize == 0 ? 0 : 1)}" />
@@ -132,6 +214,7 @@
 								<b><a href="./tokenWithdrawalList.fn?pageNum=${numPageGroup*pageGroupSize+1}&category=${categroyFlag}" class="next">▶</a></b>
 								</c:if>
 						</c:if>
+					</div>
 					</c:if>
 					<c:if test = "${category == '1'}">
 					<table>
@@ -223,6 +306,7 @@
 						</tr>	
 						</c:forEach>					
 					</table>
+					
 					<c:if test="${count > 0}">
 							<c:set var="pageCount"
 								value="${count / pageSize + ( count % pageSize == 0 ? 0 : 1)}" />
@@ -245,22 +329,18 @@
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
-							</ul>
+								</ul>
 								<c:if test="${numPageGroup < pageGroupCount}">
 								<b><a href="./tokenWithdrawalList.fn?pageNum=${numPageGroup*pageGroupSize+1}&category=${categroyFlag}" class="next">▶</a></b>
 								</c:if>
-						</c:if>
-					</c:if>
+						</c:if>					
+				</c:if>				
 			</div>
 		</section>
 		<footer></footer>
 	</div>
 	<script>
-	function category(button){
-		var category = button;
-		location.href='./tokenWithdrawalList.fn?category='+category;
-			
-	}
+	
 	$(function(){
       var tdA = $('td:contains("입금")');
       var tdB = $('td:contains("출금")');
@@ -295,17 +375,14 @@
 			$(function(){
 			  if($('#cate_color').val() == '0'){
 				  $('.tab li').removeClass('on');
-				  	console.log($('.tab li'));
 				  	$('#button1').addClass('on');
 			  }
 			  else if($('#cate_color').val() == '1'){
 				  $('.tab li').removeClass('on');
-				  console.log($('.tab li'));
 				  $('#button2').addClass('on');
 		 	  }
 			  else if($('#cate_color').val() == '2'){
 				  $('.tab li').removeClass('on');
-				  console.log($('.tab li'));
 				  $('#button3').addClass('on');
 			  }
 			
