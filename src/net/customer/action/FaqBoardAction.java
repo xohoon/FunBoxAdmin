@@ -10,6 +10,7 @@ import net.common.action.ActionForward;
 import net.customer.dao.CustomerDAO;
 import net.customer.dto.FaqBoard;
 
+// 유정추가
 public class FaqBoardAction implements Action {
 	
 	@Override

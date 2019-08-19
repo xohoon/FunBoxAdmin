@@ -89,12 +89,12 @@ public class CustomerDAO {
 		// 0을 넣었을때 다른 sql 구문이 돌수 있게 하자
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		String sql = "select * from faq where category=? order by reg_date_time desc limit " + startRow
+		String sql = "select f.idx, f.category, f.title, f.content, f.reg_date_time, m.mb_name from faq as f join member as m on f.mb_idx = m.mb_idx where category=? order by reg_date_time desc limit " + startRow
 				+ ", " + pageSize;
 
 		try {
 			if (category.equals("0")) {
-				sql = "select * from faq order by reg_date_time desc limit " + startRow + "," + pageSize;
+				sql = "select f.idx, f.category, f.title, f.content, f.reg_date_time, m.mb_name from faq as f join member as m on f.mb_idx = m.mb_idx order by reg_date_time desc limit " + startRow + "," + pageSize;
 				pstm = conn.prepareStatement(sql);
 				rs = pstm.executeQuery();
 			} else {
@@ -110,6 +110,7 @@ public class CustomerDAO {
 				faq.setTitle(rs.getString("title"));
 				faq.setContent(rs.getString("content"));
 				faq.setReg_date_time(rs.getDate("reg_date_time"));
+				faq.setMb_name(rs.getString("mb_name"));
 				faq_list.add(faq);
 			}
 			return faq_list;
@@ -139,20 +140,21 @@ public class CustomerDAO {
 		ResultSet rs = null;
 		
 		try {
-			String sql = "select * from faq where idx = ?";
+			String sql = "select f.idx, f.category, f.title, f.content, f.reg_date_time, m.mb_name from faq as f join member as m on f.mb_idx = m.mb_idx where idx = ? order by reg_date_time";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				FaqBoard faqBoard = new FaqBoard();
-				faqBoard.setIdx(rs.getInt("idx"));
-				faqBoard.setCategory(rs.getInt("category"));
-				faqBoard.setTitle(rs.getString("title"));
-				faqBoard.setContent(rs.getString("content"));
-				faqBoard.setReg_date_time(rs.getDate("reg_date_time"));
+				FaqBoard faq = new FaqBoard();
+				faq.setIdx(rs.getInt("idx"));
+				faq.setCategory(rs.getInt("category"));
+				faq.setTitle(rs.getString("title"));
+				faq.setContent(rs.getString("content"));
+				faq.setReg_date_time(rs.getDate("reg_date_time"));
+				faq.setMb_name(rs.getString("mb_name"));
 				
-				return faqBoard;
+				return faq;
 			}
 
 		} catch (Exception ex) {
