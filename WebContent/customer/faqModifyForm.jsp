@@ -48,36 +48,14 @@
 	    <label>날짜</label><input type="text" value="${faq.reg_date_time }">
 	  </div>
 	  <textarea>${faq.content }</textarea>
+	  <input type="hidden" id="faq_idx" value="${faq.idx }">
 	  <input type="file">
 	  <a href="#" download><i class="fas fa-save"></i> 첨부파일 다운로드</a>
-	  <button class="submit out">삭제하기</button>
+	  <button class="submit out" onclick="faqDel();">삭제하기</button>
 	  <button class="submit rec">수정하기</button>
 	  <button class="submit save">저장하기</button>
 	  <button class="submit cancel">취소</button>
 	</div>
-	
-	<script>
-    $(function(){
-      $('.save').hide();
-      $('.cancel').hide();
-      $('input').prop('readonly',true);
-      $('textarea').prop('readonly',true);
-      $('input[type=file]').hide();  
-        $('.rec').on('click', function(rectify){
-          $('input').css('border','1px solid #ddd');
-          $('input').prop('readonly',false);
-          $('textarea').prop('readonly',false);
-          $('input[type=file]').show();
-          $(this).hide();
-          $('.out').hide();
-          $('.save').show();
-          $('.cancel').show();
-        });
-        
-        $('.cancel').on('click', function(){
-            location.reload();
-        });
-    });
-  </script>
+	<script src="customer/js/faqModifyForm.js"></script>
 </body>
 </html>

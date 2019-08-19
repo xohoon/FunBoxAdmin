@@ -10,7 +10,7 @@ import net.common.action.ActionForward;
 import net.customer.dao.CustomerDAO;
 import net.customer.dto.FaqBoard;
 
-// 유정추가
+// 유정 추가
 public class FaqBoardAction implements Action {
 	
 	@Override
@@ -25,7 +25,7 @@ public class FaqBoardAction implements Action {
 				category = "0";
 			}
 		}catch(NullPointerException e) {
-			category = "0";			
+			category = "0";
 		}
 
 		// 페이징 처리 구문
