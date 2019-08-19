@@ -10,6 +10,7 @@
 	<title>FUNBOX ADMIN</title>
 	<script src="./js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
+	<script type="text/javascript" src="company/js/companyInvestApplyList.js"></script>
 	<link href="./css/common.css" rel="stylesheet">
 	<link href="./css/admin.css" rel="stylesheet">
 	<script>
@@ -66,11 +67,11 @@
 								</c:otherwise>
 							</c:choose>
 							<!-- <td>운영중(2019.07.24)</td> -->
-							<td><button><i class="fas fa-times"></i></button></td>
+							<td><button onclick="confirmDeleteApply(${companyApplication.app_cp_idx},'${companyApplication.app_cp_name}');"><i class="fas fa-times" ></i></button></td>
 						</tr>
 					</c:forEach>
 				</table>
-				<a href="#" class="prev"><i class="fas fa-caret-left"></i></a>
+				<a href="./companyInvestApplyList.cp?page=${current_page - 1 }" class="prev"><i class="fas fa-caret-left"></i></a>
 				<ul class="pager">
 					<c:forEach var="i" begin="${current_min_page }" end="${current_max_page }">
 						<c:choose>
@@ -83,13 +84,13 @@
 						</c:choose>
 					</c:forEach>
 				</ul>
-				<a href="#" class="next"><i class="fas fa-caret-right"></i></a>
+				<a href="./companyInvestApplyList.cp?page=${current_page + 1 }" class="next"><i class="fas fa-caret-right"></i></a>
 			</div>
 		</section>
 		<footer></footer>
 	</div>
 	<script>
-		setTimeout(function () {
+/* 		setTimeout(function () {
 		   jQuery('.nav3').trigger('click');
 			jQuery('.nav32').addClass('on');
 		}, 500);
@@ -103,7 +104,7 @@
       $('td button').click(function(){
         $(this).parents('tr').remove();
       });
-		});
+		}); */
 	</script>
 </body>
 

@@ -45,7 +45,7 @@ public class MemberDAO {
 	}
 
 	// 회원리스트
-	public boolean getMemberList(List<Member> memberList,int _page,Paging paging) {
+	public boolean getMemberList(List<Member> memberList, int _page, Paging paging) {
 		CallableStatement cstmt = null;
 		try {
 			cstmt = (CallableStatement) conn.prepareCall("CALL SELECT_MEMBER_LIST(?,?,?,?,?)");
@@ -57,11 +57,10 @@ public class MemberDAO {
 
 			rs = cstmt.executeQuery();
 
-			paging.setCurrent_min_page( cstmt.getInt("_current_min_page"));
+			paging.setCurrent_min_page(cstmt.getInt("_current_min_page"));
 			paging.setCurrent_max_page(cstmt.getInt("_current_max_page"));
 			paging.setMax_page(cstmt.getInt("_max_page"));
-			
-			
+
 			while (rs.next()) {
 				Member member = new Member();
 				member.setMb_idx(rs.getInt("mb_idx"));
@@ -128,20 +127,64 @@ public class MemberDAO {
 		return MemberList;
 	}
 
-	// 회원 리스트 최대 페이지
-	public int getMemberListMaxPage() {
-		int max_page = 0;
-		String sql = "SELECT CEIL( COUNT(*)/ ? ) AS MAX_PAGE FROM member";
+	// 회원가입 id 중복체크
+	public boolean checkDuplicationID(String mb_id) {
+		String sql = "SELECT mb_id FROM member WHERE mb_id = ?";
+		PreparedStatement pstm = null;
+		try {
+			pstm = conn.prepareStatement(sql);
+			pstm.setString(1, mb_id);
+			rs = pstm.executeQuery();
+
+			if (rs.next()) {
+				return false;
+			} else {
+				return true;
+			}
+
+		} catch (Exception ex) {
+			System.out.println("checkDuplicationID 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstm != null)
+					pstm.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("연결 해제 실패: " + e.getMessage());
+			}
+		}
+		return false;
+	}
+
+	// 회원등록
+	public boolean registeMember(Member member) {
+		String sql = "insert into member(mb_id,mb_pw,mb_pincode,mb_email,mb_name,mb_phone,mb_add_num,mb_add_ch,mb_add_more,mb_add_extra,mb_recommend,reg_date_time) values (?,?,?,?,?,?,?,?,?,?,?,now())";
+		int result = 0;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, 10);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				max_page = rs.getInt("MAX_PAGE");
+			pstmt.setString(1, member.getMb_id());
+			pstmt.setString(2, member.getMb_pw());
+			pstmt.setString(3, member.getMb_pincode());
+			pstmt.setString(4, member.getMb_email());
+			pstmt.setString(5, member.getMb_name());
+			pstmt.setString(6, member.getMb_phone());
+			pstmt.setString(7, member.getMb_add_num());
+			pstmt.setString(8, member.getMb_add_ch());
+			pstmt.setString(9, member.getMb_add_more());
+			pstmt.setString(10, member.getMb_add_extra());
+			pstmt.setString(11, member.getMb_recommend());
+
+			result = pstmt.executeUpdate();
+			if (result != 0) {
+				return true;
 			}
 		} catch (Exception ex) {
-			System.out.println("getMemberListMaxPage 에러: " + ex);
+			System.out.println("registerMember 에러: " + ex);
 		} finally {
 			try {
 				if (rs != null)
@@ -154,6 +197,6 @@ public class MemberDAO {
 				System.out.println("연결 해제 실패: " + e.getMessage());
 			}
 		}
-		return max_page;
+		return false;
 	}
 }

@@ -58,24 +58,8 @@
 							<td>${member.mb_recommend }</td>
 						</tr>
 					</c:forEach>
-					<!-- <tr>
-						<td>1</td>
-						<td onclick="window.open('./memberDetail.mb','이름(아이디)','width=640,height=720,top=0,left=0,scrollbars=yes');">dkdlel</td>
-						<td>asdfggg@iolab.kr</td>
-						<td>아이오</td>
-						<td>010-1234-5678</td>
-						<td>cncjsdls</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td onclick="window.open('./memberDetail.mb','이름(아이디)','width=640,height=720,top=0,left=0,scrollbars=yes');">dkdlel</td>
-						<td>asdfggg@iolab.kr</td>
-						<td>아이오</td>
-						<td>010-1234-5678</td>
-						<td>cncjsdls</td>
-					</tr> -->
 				</table>
-				<a href="#" class="prev"><i class="fas fa-caret-left"></i></a>
+				<a href="./memberList.mb?page=${current_page }" class="prev"><i class="fas fa-caret-left"></i></a>
 				<ul class="pager">
 					<c:forEach var="i" begin="${current_min_page }" end="${current_max_page }">
 						<c:choose>
@@ -88,7 +72,7 @@
 						</c:choose>
 					</c:forEach>
 				</ul>
-				<a href="#" class="next"><i class="fas fa-caret-right"></i></a>
+				<a href="./memberList.mb?page=${current_page }" class="next"><i class="fas fa-caret-right"></i></a>
 			</div>
 		</section>
 		<footer></footer>
