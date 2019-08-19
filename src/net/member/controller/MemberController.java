@@ -12,10 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.common.action.Action;
 import net.common.action.ActionForward;
+import net.member.action.CheckDuplicationIDAction;
 import net.member.action.MemberDetailAction;
 import net.member.action.MemberInvestedListAction;
 import net.member.action.MemberListAction;
 import net.member.action.MemberRegisterAction;
+import net.member.action.RegisteMemberAction;
 
 @WebServlet("/MemberController")
 public class MemberController extends HttpServlet implements Servlet {
@@ -33,21 +35,31 @@ public class MemberController extends HttpServlet implements Servlet {
 		try {
 			switch (command) {
 			case "/memberList.mb":
-				action = new MemberListAction(); // 회원리스트
+				action = new MemberListAction(); // �쉶�썝由ъ뒪�듃
 				forward = action.execute(request, response);
 				break;
 			case "/memberDetail.mb":
-				action = new MemberDetailAction(); // 회원정보 상세보기 및 수정
+				action = new MemberDetailAction(); // �쉶�썝�젙蹂� �긽�꽭蹂닿린 諛� �닔�젙
 				forward = action.execute(request, response);
 				break;
-			case "/memberInvestedList.mb": // 투자내역
+			case "/memberInvestedList.mb": // �닾�옄�궡�뿭
 				action = new MemberInvestedListAction();
 				forward = action.execute(request, response);
 				break;			
-			case "/memberRegister.mb": // 회원등록
+			case "/memberRegister.mb": // �쉶�썝�벑濡�
 				action = new MemberRegisterAction(); 
 				forward = action.execute(request, response);
-				break;			
+				break;
+			case "/registeMember.mb": // �쉶�썝�벑濡�
+				//ajax 통신
+				action = new RegisteMemberAction(); 
+				forward = action.execute(request, response);
+				break;
+			case "/CheckDuplicationID.mb":
+				//ajax 통신
+				action = new CheckDuplicationIDAction();
+				forward = action.execute(request, response);
+				break;
 			default:
 				break;
 			}
@@ -55,7 +67,7 @@ public class MemberController extends HttpServlet implements Servlet {
 			e.printStackTrace();
 		}
 
-		///////////////////////윤식 추가 end///////////////////////
+		///////////////////////�쑄�떇 異붽� end///////////////////////
 		
 		if (forward != null) {
 			if (forward.isRedirect()) {

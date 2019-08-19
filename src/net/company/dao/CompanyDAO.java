@@ -87,13 +87,14 @@ public class CompanyDAO {
 	}
 
 	// 기업신청서 리스트
-	public boolean getCompanyApplicationList(List<CompanyApplication> companyApplicationList, int _page, Paging paging) {
+	public boolean getCompanyApplicationList(List<CompanyApplication> companyApplicationList, int _page,
+			Paging paging) {
 		CallableStatement cstmt = null;
 		try {
 			cstmt = (CallableStatement) conn.prepareCall("CALL SELECT_COMPANY_APPLICATION_LIST(?,?,?,?,?)");
 			cstmt.setInt(1, _page);
 			cstmt.setInt(2, 10);
-			
+
 			cstmt.registerOutParameter("_current_min_page", java.sql.Types.INTEGER);
 			cstmt.registerOutParameter("_current_max_page", java.sql.Types.INTEGER);
 			cstmt.registerOutParameter("_max_page", java.sql.Types.INTEGER);
@@ -137,54 +138,26 @@ public class CompanyDAO {
 		return false;
 	}
 
-	// 기업 신청 리스트 최대 페이지
-	public int getCompanyApplicationListMaxPage() {
-		int max_page = 0;
-		String sql = "SELECT CEIL( COUNT(*)/ ? ) AS MAX_PAGE FROM company_application";
-		PreparedStatement pstmt = null;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, 10);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				max_page = rs.getInt("MAX_PAGE");
-			}
-		} catch (Exception ex) {
-			System.out.println("getCompanyApplicationMaxPage 에러: " + ex);
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				System.out.println("연결 해제 실패: " + e.getMessage());
-			}
-		}
-		return max_page;
-	}
-
 	// 기업 투자 목록 리스트
-	public boolean getCompanyInvestedList(List<CompanyInvested> companyInvestedList,int _page, String _cp_funding_status,Paging paging) {
+	public boolean getCompanyInvestedList(List<CompanyInvested> companyInvestedList, int _page,
+			String _cp_funding_status, Paging paging) {
 		CallableStatement cstmt = null;
 		try {
 			cstmt = (CallableStatement) conn.prepareCall("CALL SELECT_COMPANY_INVESTED_LIST(?,?,?,?,?,?)");
 			cstmt.setInt(1, _page);
 			cstmt.setString(2, _cp_funding_status);
 			cstmt.setInt(3, 10);
-			
+
 			cstmt.registerOutParameter("_current_min_page", java.sql.Types.INTEGER);
 			cstmt.registerOutParameter("_current_max_page", java.sql.Types.INTEGER);
 			cstmt.registerOutParameter("_max_page", java.sql.Types.INTEGER);
-			
+
 			rs = cstmt.executeQuery();
 
 			paging.setCurrent_min_page(cstmt.getInt("_current_min_page"));
 			paging.setCurrent_max_page(cstmt.getInt("_current_max_page"));
 			paging.setMax_page(cstmt.getInt("_max_page"));
-			
+
 			while (rs.next()) {
 				CompanyInvested companyInvested = new CompanyInvested();
 				companyInvested.setCp_name(rs.getString("cp_name"));
@@ -215,33 +188,25 @@ public class CompanyDAO {
 		return false;
 	}
 
-	// 투자 기업 리스트 최대 페이지
-	public int getInvestedCompanyList(String cp_funding_status) {
-		int max_page = 0;
-		String sql = "SELECT CEIL(count(*)/?) as MAX_PAGE FROM company cp INNER JOIN company_invest cp_iv ON cp.cp_idx = cp_iv.cp_idx INNER JOIN company_pre_revenue cp_rv ON cp.cp_idx = cp_rv.cp_idx WHERE cp.cp_funding_status = ?";
+	public boolean deleteCompanyApply(int app_cp_idx) {
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, 10);
-			pstmt.setString(2, cp_funding_status);
-			rs = pstmt.executeQuery();
-			if (rs.next()) {
-				max_page = rs.getInt("MAX_PAGE");
-			}
+			pstmt = conn.prepareStatement("UPDATE company_application SET app_deleted_status = true WHERE app_cp_idx = ?");
+			pstmt.setInt(1, app_cp_idx);
+			pstmt.executeUpdate();
+			return true;
 		} catch (Exception ex) {
-			System.out.println("getInvestedCompanyList 에러: " + ex);
+			System.out.println("deleteCompanyApply 에러: " + ex);
 		} finally {
 			try {
-				if (rs != null)
-					rs.close();
 				if (pstmt != null)
 					pstmt.close();
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {
-				System.out.println("연결 해제 실패: " + e.getMessage());
+				System.out.println("해제 실패 : " + e.getMessage());
 			}
 		}
-		return max_page;
+		return false;
 	}
 }

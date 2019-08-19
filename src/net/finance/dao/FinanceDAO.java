@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import net.customer.dto.Token;
 
@@ -65,7 +67,7 @@ public class FinanceDAO {
 				rs = pstmt.executeQuery();
 			}else if(category.equals("2")){ // 출금
 				sql = "SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time FROM token_deposit AS A, member AS B UNION "
-					  +"SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time from token_withdraw AS A, member AS B  WHERE A.td_to_address='durlsmswlrkqwnthrkemfdjrksmszksdlqslekdqmfkzpttlftlrksqhrlehwkfdksehlrhdkwnalclfrjtrkxwyejejrlfdjdirlfdlwhwjfdlehlsmswlqhftndlTtmqslek'"
+					  +"SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time from token_withdraw AS A, member AS B  WHERE A.td_from_address='durlsmswlrkqwnthrkemfdjrksmszksdlqslekdqmfkzpttlftlrksqhrlehwkfdksehlrhdkwnalclfrjtrkxwyejejrlfdjdirlfdlwhwjfdlehlsmswlqhftndlTtmqslek'"
 					  +"ORDER BY td_date_time DESC limit "
 					  +startRow + ", " + pageSize;
 				pstmt = conn.prepareStatement(sql);
@@ -123,7 +125,7 @@ public class FinanceDAO {
 				rs = pstmt.executeQuery();
 			}else if(category.equals("2")){
 				sql = "SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time FROM token_deposit AS A, member AS B UNION "
-					  +"SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time from token_withdraw AS A, member AS B  WHERE A.td_to_address='durlsmswlrkqwnthrkemfdjrksmszksdlqslekdqmfkzpttlftlrksqhrlehwkfdksehlrhdkwnalclfrjtrkxwyejejrlfdjdirlfdlwhwjfdlehlsmswlqhftndlTtmqslek'"
+					  +"SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time from token_withdraw AS A, member AS B  WHERE A.td_from_address='durlsmswlrkqwnthrkemfdjrksmszksdlqslekdqmfkzpttlftlrksqhrlehwkfdksehlrhdkwnalclfrjtrkxwyejejrlfdjdirlfdlwhwjfdlehlsmswlqhftndlTtmqslek'"
 					  +"ORDER BY td_date_time DESC";
 				pstmt = conn.prepareStatement(sql);
 				rs = pstmt.executeQuery();
@@ -152,6 +154,53 @@ public class FinanceDAO {
 			}
 		}
 		return 0;
+	}
+	
+	@SuppressWarnings({ "unchecked", "unused" })
+	public JSONArray Search_ID_List(String id) {
+		
+	String sql = "SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time FROM token_deposit AS A, member AS B WHERE B.mb_id ='"+id+"' UNION "  
+				 +"SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time from token_withdraw AS A, member AS B WHERE B.mb_id ='"+id+"' ORDER BY td_date_time DESC";
+			     //+startRow + ", " + pageSize;
+	
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	
+	JSONArray jsonArr = new JSONArray(); 
+	System.out.println(sql);
+	
+	try { 
+		pstmt = conn.prepareStatement(sql);
+		rs = pstmt.executeQuery();
+	
+		while (rs.next()) {
+			JSONObject jsonObj = new JSONObject();
+			jsonObj.put("mb_id", rs.getString("mb_id"));
+			jsonObj.put("td_from_address", rs.getString("td_from_address"));
+			jsonObj.put("td_to_address", rs.getString("td_to_address"));
+			jsonObj.put("td_amount", rs.getString("td_amount"));
+			jsonObj.put("td_status", rs.getString("td_status"));
+			jsonObj.put("td_date_time", rs.getString("td_date_time"));
+			jsonArr.add(jsonObj);						
+		}
+		return jsonArr;
+		
+	} catch (Exception ex) {
+		System.out.println("Search_ID List에러: " + ex);
+	} finally {
+		try {
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (conn != null)
+				conn.close();
+		} catch (Exception e) {
+			System.out.println("해제 실패 : " + e.getMessage());
+		}
+	}
+
+	return null;				
 	}
 	
 }

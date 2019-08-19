@@ -26,6 +26,7 @@ public class Main {
 		
 		//System.out.println(companyDAO.getCompanyApplicationMaxPage());
 		Paging paging = new Paging();
+
 		companyDAO.getCompanyInvestedList(companyInvestedList, 1, "12", paging);
 		System.out.println(companyInvestedList.size());
 		

@@ -14,6 +14,7 @@ import net.common.action.Action;
 import net.common.action.ActionForward;
 import net.finance.action.TokenExchangeListAction;
 import net.finance.action.TokenWithdrawalListAction;
+import net.finance.action.tokenWithdrawalSearchAction;
 
 @WebServlet("/FinanceController")
 public class FinanceController extends HttpServlet implements Servlet{
@@ -27,7 +28,7 @@ public class FinanceController extends HttpServlet implements Servlet{
 		String command = RequestURI.substring(contextPath.length());
 		ActionForward forward = null;
 		Action action = null;
-		
+		System.out.println(command);
 		try {
 			switch (command) { // 포인트환전내역
 			case "/tokenExchangeList.fn":
@@ -36,6 +37,10 @@ public class FinanceController extends HttpServlet implements Servlet{
 				break;
 			case "/tokenWithdrawalList.fn": //토큰입출내역
 				action = new TokenWithdrawalListAction();
+				forward = action.execute(request, response);
+				break;
+			case "/tokenWithdrawalSearch.fn": //검색 출력
+				action = new tokenWithdrawalSearchAction();
 				forward = action.execute(request, response);
 				break;
 			default:

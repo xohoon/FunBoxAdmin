@@ -75,6 +75,11 @@ public class CompanyController extends HttpServlet {
 				action = new CompanyAllListAction();
 				forward = action.execute(request, response);
 				break;
+			case "/deleteCompanyInvestApply.cp":
+				//ajax
+				action = new DeleteCompanyInvestApply();
+				forward = action.execute(request, response);
+				break;
 			default:
 				break;
 			}
