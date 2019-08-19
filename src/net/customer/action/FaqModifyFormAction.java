@@ -1,3 +1,4 @@
+
 package net.customer.action;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,7 +9,7 @@ import net.common.action.ActionForward;
 import net.customer.dao.CustomerDAO;
 import net.customer.dto.FaqBoard;
 
-// 유정추가
+// 유정 추가
 public class FaqModifyFormAction implements Action {
 
 	@Override

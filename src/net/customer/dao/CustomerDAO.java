@@ -40,7 +40,7 @@ public class CustomerDAO {
 		}
 	}
 	
-	// 총 faq 리스트 수 출력 함수
+	// 유정 - 총 faq 리스트 수 출력 함수
 	public int faqCount(String category) {
 		PreparedStatement pstmt = null;
 		int count = 0;
@@ -83,7 +83,7 @@ public class CustomerDAO {
 		return 0;
 	}
 	
-	// 고객지원 - FAQ 불러오기
+	// 유정 - 고객지원 - FAQ 불러오기
 	public ArrayList<FaqBoard> getFaq(String category, int startRow, int pageSize) throws Exception {
 		ArrayList<FaqBoard> faq_list = new ArrayList<FaqBoard>();
 		// 0을 넣었을때 다른 sql 구문이 돌수 있게 하자
@@ -134,13 +134,13 @@ public class CustomerDAO {
 		return null;
 	}
 	
-	// faq 상세 불러오기
+	// 유정 - faq 상세 불러오기
 	public FaqBoard faqDetail(int idx) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		String sql = "select f.idx, f.category, f.title, f.content, f.reg_date_time, m.mb_name from faq as f join member as m on f.mb_idx = m.mb_idx where idx = ? order by reg_date_time";
 		
 		try {
-			String sql = "select f.idx, f.category, f.title, f.content, f.reg_date_time, m.mb_name from faq as f join member as m on f.mb_idx = m.mb_idx where idx = ? order by reg_date_time";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			rs = pstmt.executeQuery();
@@ -173,5 +173,38 @@ public class CustomerDAO {
 		}
 
 		return null;
+	}
+	
+	// 유정 - faq 게시물 등록
+	public boolean faqRegister(FaqBoard faq) {
+		String sql = "insert into faq(category,title,content,reg_date_time) values (?,?,?,CURRENT_TIMESTAMP)";
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, faq.getCategory());
+			pstmt.setString(2, faq.getTitle());
+			pstmt.setString(3, faq.getContent());
+			
+			result = pstmt.executeUpdate();
+			if(result != 0) {
+				return true;
+			}
+		}catch(Exception e) {
+			System.out.println("faqRegister 에러: " + e);
+		}finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("연결 해제 실패: " + e.getMessage());
+			}
+		}
+		return false;
 	}
 }

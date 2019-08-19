@@ -44,6 +44,11 @@ public class CustomerController extends HttpServlet implements Servlet{
 				action = new FaqModifyFormAction();
 				forward = action.execute(request, response);
 				break;
+			case "/faqRegister.cu":
+				forward = new ActionForward();
+			    forward.setRedirect(false); 
+			    forward.setPath("./customer/faqRegisterForm.jsp");
+			    break;
 			case "/faqRegisterForm.cu":
 				action = new FaqRegisterFormAction();
 				forward = action.execute(request, response);
