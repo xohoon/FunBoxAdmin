@@ -89,12 +89,12 @@ public class CustomerDAO {
 		// 0을 넣었을때 다른 sql 구문이 돌수 있게 하자
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		String sql = "select f.idx,f.category,f.title,f.content,f.reg_date_time,m.mb_name from faq as f join member as m on f.mb_idx=m.mb_idx where category=? order by idx desc limit " + startRow
+		String sql = "select f.idx,f.category,f.title,f.content,f.reg_date_time,f.status,m.mb_name from faq as f join member as m on f.mb_idx=m.mb_idx where category=? order by idx desc limit " + startRow
 				+ ", " + pageSize;
 
 		try {
 			if (category.equals("0")) {
-				sql = "select f.idx,f.category,f.title,f.content,f.reg_date_time,m.mb_name from faq as f join member as m on f.mb_idx=m.mb_idx order by idx desc limit " + startRow + "," + pageSize;
+				sql = "select f.idx,f.category,f.title,f.content,f.reg_date_time,f.status,m.mb_name from faq as f join member as m on f.mb_idx=m.mb_idx order by idx desc limit " + startRow + "," + pageSize;
 				pstm = conn.prepareStatement(sql);
 				rs = pstm.executeQuery();
 			} else {
@@ -111,6 +111,7 @@ public class CustomerDAO {
 				faq.setTitle(rs.getString("title"));
 				faq.setContent(rs.getString("content"));
 				faq.setReg_date_time(rs.getDate("reg_date_time"));
+				faq.setStatus(rs.getInt("status"));
 				faq.setMb_name(rs.getString("mb_name"));
 				
 				faq_list.add(faq);

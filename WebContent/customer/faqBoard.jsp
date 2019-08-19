@@ -65,7 +65,12 @@
 					  <td onclick="window.open('./faqModifyForm.cu?idx=${faq_list.idx}','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">${faq_list.title}</td>
 					  <td>${faq_list.mb_name }</td>
 					  <td>${faq_list.reg_date_time}</td>
+					  <c:if test="${faq_list.status == 1}">
 					  <td>Yes</td>
+					  </c:if>
+					  <c:if test="${faq_list.status == 0}">
+					  <td>No</td>
+					  </c:if>
 					</tr>
 					</c:forEach>
 					</c:if>
@@ -89,7 +94,12 @@
 					  <td onclick="window.open('./faqModifyForm.cu?idx=${faq_list.idx}','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">${faq_list.title}</td>
 					  <td>${faq_list.mb_name }</td>
 					  <td>${faq_list.reg_date_time}</td>
+					  <c:if test="${faq_list.status == 1}">
 					  <td>Yes</td>
+					  </c:if>
+					  <c:if test="${faq_list.status == 0}">
+					  <td>No</td>
+					  </c:if>
 					</tr>
 					</c:forEach>
 					</c:if>
@@ -113,7 +123,12 @@
 					  <td onclick="window.open('./faqModifyForm.cu?idx=${faq_list.idx}','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">${faq_list.title}</td>
 					  <td>${faq_list.mb_name }</td>
 					  <td>${faq_list.reg_date_time}</td>
+					  <c:if test="${faq_list.status == 1}">
 					  <td>Yes</td>
+					  </c:if>
+					  <c:if test="${faq_list.status == 0}">
+					  <td>No</td>
+					  </c:if>
 					</tr>
 					</c:forEach>
 					</c:if>
@@ -137,7 +152,12 @@
 					  <td onclick="window.open('./faqModifyForm.cu?idx=${faq_list.idx}','자주묻는질문','width=800,height=720,top=0,left=0,scrollbars=yes');">${faq_list.title}</td>
 					  <td>${faq_list.mb_name }</td>
 					  <td>${faq_list.reg_date_time}</td>
+					  <c:if test="${faq_list.status == 1}">
 					  <td>Yes</td>
+					  </c:if>
+					  <c:if test="${faq_list.status == 0}">
+					  <td>No</td>
+					  </c:if>
 					</tr>
 					</c:forEach>
 					</c:if>
