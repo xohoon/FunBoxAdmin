@@ -89,12 +89,12 @@ public class CustomerDAO {
 		// 0을 넣었을때 다른 sql 구문이 돌수 있게 하자
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
-		String sql = "select f.idx,f.category,f.title,f.content,f.reg_date_time,m.mb_name from faq as f join member as m on f.mb_idx=m.mb_idx where category=? order by reg_date_time desc limit " + startRow
+		String sql = "select f.idx,f.category,f.title,f.content,f.reg_date_time,m.mb_name from faq as f join member as m on f.mb_idx=m.mb_idx where category=? order by idx desc limit " + startRow
 				+ ", " + pageSize;
 
 		try {
 			if (category.equals("0")) {
-				sql = "select f.idx,f.category,f.title,f.content,f.reg_date_time,m.mb_name from faq as f join member as m on f.mb_idx=m.mb_idx order by reg_date_time desc limit " + startRow + "," + pageSize;
+				sql = "select f.idx,f.category,f.title,f.content,f.reg_date_time,m.mb_name from faq as f join member as m on f.mb_idx=m.mb_idx order by idx desc limit " + startRow + "," + pageSize;
 				pstm = conn.prepareStatement(sql);
 				rs = pstm.executeQuery();
 			} else {
@@ -105,12 +105,14 @@ public class CustomerDAO {
 
 			while (rs.next()) {
 				FaqBoard faq = new FaqBoard();
+				
 				faq.setIdx(rs.getInt("idx"));
 				faq.setCategory(rs.getInt("category"));
 				faq.setTitle(rs.getString("title"));
 				faq.setContent(rs.getString("content"));
 				faq.setReg_date_time(rs.getDate("reg_date_time"));
 				faq.setMb_name(rs.getString("mb_name"));
+				
 				faq_list.add(faq);
 			}
 			return faq_list;
@@ -156,7 +158,6 @@ public class CustomerDAO {
 				
 				return faq;
 			}
-
 		} catch (Exception ex) {
 			System.out.println("faqDetail 에러: " + ex);
 		} finally {
@@ -171,7 +172,7 @@ public class CustomerDAO {
 				System.out.println("연결 해제 실패: " + e.getMessage());
 			}
 		}
-
+		
 		return null;
 	}
 	
@@ -181,6 +182,7 @@ public class CustomerDAO {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, faq.getCategory());
@@ -188,6 +190,7 @@ public class CustomerDAO {
 			pstmt.setString(3, faq.getContent());
 			
 			result = pstmt.executeUpdate();
+			
 			if(result != 0) {
 				return true;
 			}
@@ -205,6 +208,7 @@ public class CustomerDAO {
 				System.out.println("연결 해제 실패: " + e.getMessage());
 			}
 		}
+		
 		return false;
 	}
 	
@@ -214,11 +218,13 @@ public class CustomerDAO {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, faq_idx);
 			
 			result = pstmt.executeUpdate();
+			
 			if(result != 0) {
 				return true;
 			}
@@ -236,6 +242,41 @@ public class CustomerDAO {
 				System.out.println("연결 해제 실패: " + e.getMessage());
 			}
 		}
+		
+		return false;
+	}
+	
+	// 유정 - faq 게시물 수정하기
+	public boolean faqModify(FaqBoard faq) {
+		String sql = "update faq set category=?,title=?,content=? where idx=?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, faq.getCategory());
+			pstmt.setString(2, faq.getTitle());
+			pstmt.setString(3, faq.getContent());
+			pstmt.setInt(4, faq.getIdx());
+			pstmt.executeUpdate();
+			
+			return true;
+			
+		} catch (Exception ex) {
+			System.out.println("faqModify 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+		
 		return false;
 	}
 }

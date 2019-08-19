@@ -5,12 +5,19 @@ import java.util.Date;
 public class FaqBoard {
 
 	private int idx;
+	private int mb_idx;
 	private int category; //faq 구분(1:입출금, 2:투자, 3:기타)
 	private String title;
 	private String content;
 	private Date reg_date_time;
 	private String mb_name;
 		
+	public int getMb_idx() {
+		return mb_idx;
+	}
+	public void setMb_idx(int mb_idx) {
+		this.mb_idx = mb_idx;
+	}
 	public String getMb_name() {
 		return mb_name;
 	}
