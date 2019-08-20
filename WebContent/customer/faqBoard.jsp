@@ -32,8 +32,8 @@
 			  <option value="3">기타</option>
 			</select>
 			<button class="write" onclick="window.open('./faqRegister.cu','게시물등록','width=840,height=640,top=0,left=0,scrollbars=yes');">게시물등록</button>
-			<button>비활성화</button>
-			<button>활성화</button>
+			<button id="off_status">비활성화</button>
+			<button id="on_status">활성화</button>
 				<table>
 					<tr>
 					  <th></th>
@@ -49,7 +49,7 @@
 					<c:if test="${cate == 0}">
 					<c:forEach var="faq_list" items="${faq}">
 					<tr>
-            		  <td><input type="checkbox"></td>
+            		  <td><input type="checkbox" name="status" value="${faq_list.idx}"></td>
 					  <td>${faq_list.idx}</td>
 					  <c:choose>
 					  <c:when test="${faq_list.category == 1}">
@@ -78,7 +78,7 @@
 					<c:if test="${cate == 1}">
 					<c:forEach var="faq_list" items="${faq}">
 					<tr>
-            		  <td><input type="checkbox"></td>
+            		  <td><input type="checkbox" id="status"></td>
 					  <td>${faq_list.idx}</td>
 					  <c:choose>
 					  <c:when test="${faq_list.category == 1}">
@@ -107,7 +107,7 @@
 					<c:if test="${cate == 2}">
 					<c:forEach var="faq_list" items="${faq}">
 					<tr>
-            		  <td><input type="checkbox"></td>
+            		  <td><input type="checkbox" id="status"></td>
 					  <td>${faq_list.idx}</td>
 					  <c:choose>
 					  <c:when test="${faq_list.category == 1}">
@@ -136,7 +136,7 @@
 					<c:if test="${cate == 3}">
 					<c:forEach var="faq_list" items="${faq}">
 					<tr>
-            		  <td><input type="checkbox"></td>
+            		  <td><input type="checkbox" id="status"></td>
 					  <td>${faq_list.idx}</td>
 					  <c:choose>
 					  <c:when test="${faq_list.category == 1}">
