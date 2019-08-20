@@ -14,7 +14,7 @@ public class RegisteMemberAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
+		//request.setCharacterEncoding("utf-8");
 		MemberJson memberJson = new MemberJson();
 		Member member = new Member();
 		

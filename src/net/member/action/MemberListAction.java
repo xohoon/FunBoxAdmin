@@ -16,7 +16,7 @@ public class MemberListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
+		//request.setCharacterEncoding("utf-8");
 
 		String page_string = request.getParameter("page");
 		String search_type_string = request.getParameter("search_type");
