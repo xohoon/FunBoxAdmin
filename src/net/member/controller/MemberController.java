@@ -16,6 +16,7 @@ import net.member.action.CheckDuplicationIDAction;
 import net.member.action.MemberDetailAction;
 import net.member.action.MemberListAction;
 import net.member.action.MemberRegisterAction;
+import net.member.action.ModifyMemberAction;
 import net.member.action.RegisteMemberAction;
 
 @WebServlet("/MemberController")
@@ -48,6 +49,11 @@ public class MemberController extends HttpServlet implements Servlet {
 			case "/registeMember.mb": // �쉶�썝�벑濡�
 				//ajax 통신
 				action = new RegisteMemberAction(); 
+				forward = action.execute(request, response);
+				break;
+			case "/modifyMember.mb":
+				//ajax 통신
+				action = new ModifyMemberAction();
 				forward = action.execute(request, response);
 				break;
 			case "/CheckDuplicationID.mb":

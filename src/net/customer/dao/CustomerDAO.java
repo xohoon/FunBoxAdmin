@@ -280,4 +280,36 @@ public class CustomerDAO {
 		
 		return false;
 	}
+	
+	// 유정 - faq 게시물 활성화/비활성화 하기
+	public boolean faqShow(int status, int faq_idx) {
+		String sql = "update faq set status=? where idx=?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, status);
+			pstmt.setInt(2, faq_idx);
+			pstmt.executeUpdate();
+			
+			return true;
+			
+		} catch (Exception ex) {
+			System.out.println("faqShow 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+		
+		return false;
+	}
 }

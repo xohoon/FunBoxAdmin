@@ -53,7 +53,7 @@
 					<c:forEach var="member" items="${memberList}">
 						<tr>
 							<td>${member.mb_idx }</td>
-							<td onclick="window.open('./memberDetail.mb','이름(아이디)','width=640,height=720,top=0,left=0,scrollbars=yes');">${member.mb_id }</td>
+							<td onclick="window.open('./memberDetail.mb?mb_idx=${member.mb_idx}','이름(아이디)','width=640,height=720,top=0,left=0,scrollbars=yes');">${member.mb_id }</td>
 							<td>${member.mb_email }</td>
 							<td>${member.mb_name }</td>
 							<td>${member.mb_phone }</td>

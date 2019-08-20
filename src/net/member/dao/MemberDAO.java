@@ -5,11 +5,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mysql.jdbc.CallableStatement;
 
 import net.member.dto.Member;
+import net.member.dto.MemberLateInvested;
 import net.util.Paging;
 
 public class MemberDAO {
@@ -21,6 +23,7 @@ public class MemberDAO {
 			instance = new MemberDAO();
 		return instance;
 	}
+
 	// 4.
 	private Connection conn;
 	private static String URL = "jdbc:mysql://52.79.240.236/funbox?serverTimezone=Asia/Seoul&useSSL=false&useUnicode=true&characterEncoding=utf8";
@@ -43,7 +46,8 @@ public class MemberDAO {
 	}
 
 	// ȸ������Ʈ
-	public boolean getMemberList(List<Member> memberList, int _page,int _search_type,String _search_word ,Paging paging) {
+	public boolean getMemberList(List<Member> memberList, int _page, int _search_type, String _search_word,
+			Paging paging) {
 		CallableStatement cstmt = null;
 		try {
 			cstmt = (CallableStatement) conn.prepareCall("CALL SELECT_MEMBER_LIST(?,?,?,?,?,?,?)");
@@ -89,15 +93,15 @@ public class MemberDAO {
 
 		return false;
 	}
-	
+
 	// ȸ������ id �ߺ�üũ
 	public boolean checkDuplicationID(String mb_id) {
 		String sql = "SELECT mb_id FROM member WHERE mb_id = ?";
-		PreparedStatement pstm = null;
+		PreparedStatement pstmt = null;
 		try {
-			pstm = conn.prepareStatement(sql);
-			pstm.setString(1, mb_id);
-			rs = pstm.executeQuery();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mb_id);
+			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				return false;
@@ -111,8 +115,8 @@ public class MemberDAO {
 			try {
 				if (rs != null)
 					rs.close();
-				if (pstm != null)
-					pstm.close();
+				if (pstmt != null)
+					pstmt.close();
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {
@@ -163,4 +167,123 @@ public class MemberDAO {
 		return false;
 	}
 
+	// ȸ�� �� ����
+	public List<MemberLateInvested> getMemberLateInvestedList(int mb_idx) {
+		String sql = "SELECT mi_name, mi_point, mi_hoiling_stock, mi_reg_date_time FROM member_invest WHERE mb_idx = ? ORDER BY mi_reg_date_time DESC LIMIT 0,10";
+		PreparedStatement pstmt = null;
+		List<MemberLateInvested> memberLateInvestedList = new ArrayList<MemberLateInvested>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mb_idx);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				MemberLateInvested memberLateInvested = new MemberLateInvested();
+				memberLateInvested.setMi_name(rs.getString("mi_name"));
+				memberLateInvested.setMi_point(rs.getString("mi_point"));
+				memberLateInvested.setMi_hoiling_stock(rs.getString("mi_hoiling_stock"));
+				memberLateInvested.setMi_reg_date_time(rs.getDate("mi_reg_date_time"));
+				memberLateInvestedList.add(memberLateInvested);
+			}
+
+			return memberLateInvestedList;
+		} catch (Exception ex) {
+			System.out.println("getMemberLateInvestedList ����: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("���� ���� ����: " + e.getMessage());
+			}
+		}
+		return memberLateInvestedList;
+	}
+
+	public Member getMember(int mb_idx) {
+		String sql = "SELECT * FROM member WHERE mb_idx = ?";
+		PreparedStatement pstmt = null;
+		Member member = new Member();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mb_idx);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				member.setMb_idx(mb_idx);
+				member.setMb_id(rs.getString("mb_id"));
+				member.setMb_name(rs.getString("mb_name"));
+				member.setMb_email(rs.getString("mb_email"));
+				member.setMb_phone(rs.getString("mb_phone"));
+				member.setMb_add_num(rs.getString("mb_add_num"));
+				member.setMb_add_ch(rs.getString("mb_add_ch"));
+				member.setMb_add_more(rs.getString("mb_add_more"));
+				member.setMb_add_extra(rs.getString("mb_add_extra"));
+				member.setMb_recommend(rs.getString("mb_recommend"));
+				member.setMb_point(rs.getString("mb_point"));
+				member.setMb_token(rs.getString("mb_token"));
+			}
+
+			return member;
+		} catch (Exception ex) {
+			System.out.println("getMember ����: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("���� ���� ����: " + e.getMessage());
+			}
+		}
+		return member;
+	}
+
+	public boolean modifyMember(Member member) {
+		String sql = "UPDATE member SET mb_name=?,mb_id=?,mb_email=?,mb_phone=?,mb_add_num=?,mb_add_ch=?,mb_add_more=?,mb_add_extra=?,mb_recommend=?,mb_point=?,mb_token=? WHERE mb_idx = ?";
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, member.getMb_name());
+			pstmt.setString(2, member.getMb_id());
+			pstmt.setString(3, member.getMb_email());
+			pstmt.setString(4, member.getMb_phone());
+			pstmt.setString(5, member.getMb_add_num());
+			pstmt.setString(6, member.getMb_add_ch());
+			pstmt.setString(7, member.getMb_add_more());
+			pstmt.setString(8, member.getMb_add_extra());
+			pstmt.setString(9, member.getMb_recommend());
+			pstmt.setString(10, member.getMb_point());
+			pstmt.setString(11, member.getMb_token());
+			pstmt.setInt(12, member.getMb_idx());
+
+			result = pstmt.executeUpdate();
+			if (result != 0) {
+				return true;
+			}
+		} catch (Exception ex) {
+			System.out.println("modifyMember ����: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("���� ���� ����: " + e.getMessage());
+			}
+		}
+		return false;
+	}
 }
