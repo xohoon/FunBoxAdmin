@@ -14,7 +14,7 @@
 			입출금 내역</li>
 		<li class="nav23" onclick="location.href='./tokenExchangeList.fn'">포인트
 			환전 내역</li>
-		<li class="nav24" onclick="location.href='./memberInvestedList.mb'">투자
+		<li class="nav24" onclick="location.href='./memberInvestedList.fn'">투자
 			내역</li>
 	</ul>
 	<a href="#" class="nav3"><i class="fas fa-building"></i>&nbsp;&nbsp;투자기업관리<span>+</span></a>

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.common.action.Action;
 import net.common.action.ActionForward;
+
+import net.finance.action.MemberInvestedListAction;
 import net.finance.action.TokenExchangeListAction;
 import net.finance.action.TokenWithdrawalListAction;
 
@@ -34,10 +36,14 @@ public class FinanceController extends HttpServlet implements Servlet{
 				action = new TokenExchangeListAction();
 				forward = action.execute(request, response);
 				break;
-			case "/tokenWithdrawalList.fn": //�넗�겙�엯異쒕궡�뿭
+			case "/tokenWithdrawalList.fn": //
 				action = new TokenWithdrawalListAction();
 				forward = action.execute(request, response);
-				break;	
+				break;
+			case "/memberInvestedList.fn": // 투자내역 관리 윤식 추가
+				action = new MemberInvestedListAction();
+				forward = action.execute(request, response);
+				break;				
 			default:
 				break;
 			}

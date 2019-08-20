@@ -14,7 +14,6 @@ import net.common.action.Action;
 import net.common.action.ActionForward;
 import net.member.action.CheckDuplicationIDAction;
 import net.member.action.MemberDetailAction;
-import net.member.action.MemberInvestedListAction;
 import net.member.action.MemberListAction;
 import net.member.action.MemberRegisterAction;
 import net.member.action.RegisteMemberAction;
@@ -40,10 +39,6 @@ public class MemberController extends HttpServlet implements Servlet {
 				break;
 			case "/memberDetail.mb":
 				action = new MemberDetailAction(); // �쉶�썝�젙蹂� �긽�꽭蹂닿린 諛� �닔�젙
-				forward = action.execute(request, response);
-				break;
-			case "/memberInvestedList.mb": // �닾�옄�궡�뿭
-				action = new MemberInvestedListAction();
 				forward = action.execute(request, response);
 				break;			
 			case "/memberRegister.mb": // �쉶�썝�벑濡�
