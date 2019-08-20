@@ -185,4 +185,25 @@ public class Member {
 		this.secession_date_time = secession_date_time;
 	}
 
+	@Override
+	public String toString() {
+		return "Member [mb_idx=" + mb_idx + ", mb_id=" + mb_id + ", mb_pw=" + mb_pw + ", mb_pincode=" + mb_pincode
+				+ ", mb_name=" + mb_name + ", mb_phone=" + mb_phone + ", mb_add_num=" + mb_add_num + ", mb_add_ch="
+				+ mb_add_ch + ", mb_add_more=" + mb_add_more + ", mb_add_extra=" + mb_add_extra + ", mb_email="
+				+ mb_email + ", mb_recommend=" + mb_recommend + ", mb_wallet_address=" + mb_wallet_address
+				+ ", mb_point=" + mb_point + ", mb_token=" + mb_token + ", agree1=" + agree1 + ", agree2=" + agree2
+				+ ", mb_sort=" + mb_sort + ", reg_date_time=" + reg_date_time + ", secession_date_time="
+				+ secession_date_time + ", getMb_idx()=" + getMb_idx() + ", getMb_id()=" + getMb_id() + ", getMb_pw()="
+				+ getMb_pw() + ", getMb_pincode()=" + getMb_pincode() + ", getMb_name()=" + getMb_name()
+				+ ", getMb_phone()=" + getMb_phone() + ", getMb_add_num()=" + getMb_add_num() + ", getMb_add_ch()="
+				+ getMb_add_ch() + ", getMb_add_more()=" + getMb_add_more() + ", getMb_add_extra()=" + getMb_add_extra()
+				+ ", getMb_email()=" + getMb_email() + ", getMb_recommend()=" + getMb_recommend()
+				+ ", getMb_wallet_address()=" + getMb_wallet_address() + ", getMb_point()=" + getMb_point()
+				+ ", getMb_token()=" + getMb_token() + ", isAgree1()=" + isAgree1() + ", isAgree2()=" + isAgree2()
+				+ ", getMb_sort()=" + getMb_sort() + ", getReg_date_time()=" + getReg_date_time()
+				+ ", getSecession_date_time()=" + getSecession_date_time() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}
+	
+	
 }

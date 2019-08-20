@@ -46,4 +46,23 @@ public class MemberJson {
 
 		return jsonObject;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public JSONObject modifyMemberResult(Member member) {
+		MemberDAO dao = new MemberDAO();
+		jsonObject = new JSONObject();
+		try {
+			if (dao.modifyMember(member)) {
+				jsonObject.put("result", 0);
+				jsonObject.put("message", "회원 수정 완료.");
+			} else {
+				jsonObject.put("result", 1);
+				jsonObject.put("message", "회원 수정 실패.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return jsonObject;
+	}
 }

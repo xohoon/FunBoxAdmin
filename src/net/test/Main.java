@@ -30,7 +30,7 @@ public class Main {
 		//companyDAO.getCompanyInvestedList(companyInvestedList, 1, "12", paging);
 		//System.out.println(companyInvestedList.size());
 		
-		Integer ee = Integer.parseInt("ss");
+		
 	}
 
 }
