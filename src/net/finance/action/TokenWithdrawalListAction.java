@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.common.action.Action;
 import net.common.action.ActionForward;
-import net.customer.dto.Token;
 import net.finance.dao.FinanceDAO;
+import net.finance.dto.Token;
 
 public class TokenWithdrawalListAction implements Action {
 

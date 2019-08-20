@@ -16,7 +16,7 @@ public class CompanyInvestedListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
+		//request.setCharacterEncoding("utf-8");
 		ActionForward forward = new ActionForward();
 		String page_string = request.getParameter("page");
 		String funding_status = request.getParameter("funding_status");

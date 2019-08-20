@@ -1,4 +1,4 @@
-<%@page import="net.customer.dto.Token"%>
+<%@page import="net.finance.dto.Token"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -29,7 +29,6 @@
 		String category = request.getParameter("category");
 		String categroyFlag = request.getParameter("categroyFlag");
 		String searchID =request.getParameter("searchID");
-		System.out.println("test : " + searchID);
 		
 	%>
 	<script>

@@ -10,6 +10,8 @@
 	<title>FUNBOX ADMIN</title>
 	<script src="./js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
+	<!-- <script type="text/javascript" src="member/js/memberList.js"></script> -->
+	<script type="text/javascript" src="./js/listSearching.js"></script>
 	<link href="./css/common.css" rel="stylesheet">
 	<link href="./css/admin.css" rel="stylesheet">
 	<script>
@@ -28,15 +30,15 @@
 		<section id="sec01">
 			<h2>회원리스트</h2>
 			<div class="sch">
-				<select>
-					<option>- 선택 -</option>
-					<option>아이디</option>
-					<option>이름</option>
-					<option>E-mail</option>
-					<option>전화번호</option>
+				<select id="search_type">
+					<option value="0">- 선택 -</option>
+					<option value="1">아이디</option>
+					<option value="2">이름</option>
+					<option value="3">E-mail</option>
+					<option value="4">전화번호</option>
 				</select>
-				<input type="text">
-				<button><i class="fas fa-search"></i></button>
+				<input id="search_word" type="text">
+				<button id="search"><i class="fas fa-search"></i></button>
 			</div>
 			<div class="con">
 				<table>
@@ -59,20 +61,20 @@
 						</tr>
 					</c:forEach>
 				</table>
-				<a href="./memberList.mb?page=${current_page }" class="prev"><i class="fas fa-caret-left"></i></a>
+				<a href="./memberList.mb?page=${current_page - 1}&search_type=${search_type}&search_word=${search_word}" class="prev"><i class="fas fa-caret-left"></i></a>
 				<ul class="pager">
 					<c:forEach var="i" begin="${current_min_page }" end="${current_max_page }">
 						<c:choose>
 							<c:when test="${ i eq current_page}">
-								<li class="on"><a href="./memberList.mb?page=${i }">${i}</a></li>
+								<li class="on"><a href="./memberList.mb?page=${i }&search_type=${search_type}&search_word=${search_word}">${i}</a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="./memberList.mb?page=${i }">${i }</a></li>
+								<li><a href="./memberList.mb?page=${i }&search_type=${search_type}&search_word=${search_word}">${i }</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 				</ul>
-				<a href="./memberList.mb?page=${current_page }" class="next"><i class="fas fa-caret-right"></i></a>
+				<a href="./memberList.mb?page=${current_page + 1}&search_type=${search_type}&search_word=${search_word}" class="next"><i class="fas fa-caret-right"></i></a>
 			</div>
 		</section>
 		<footer></footer>

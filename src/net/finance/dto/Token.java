@@ -1,4 +1,4 @@
-package net.customer.dto;
+package net.finance.dto;
 
 
 public class Token {

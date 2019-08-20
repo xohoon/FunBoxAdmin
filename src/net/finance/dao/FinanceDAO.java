@@ -6,11 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import com.mysql.jdbc.CallableStatement;
 
-import net.customer.dto.Token;
+import net.finance.dto.Point;
+import net.finance.dto.Token;
+import net.member.dto.Member;
+import net.util.Paging;
 
 public class FinanceDAO {
 	private static FinanceDAO instance;
@@ -42,7 +45,7 @@ public class FinanceDAO {
 			e.printStackTrace();
 		}
 	}
-	// 윤식 추가 -- 재정관리 / 토큰 입출금 내역
+	// 윤식 추가 -- 재정관리 / 토큰 입출금 내역 List, 검색 조회
 	public ArrayList<Token> getTokenWithdrawList(int startRow, int pageSize, String category, String id) {
 		
 		String sql = "SELECT B.mb_id, A.td_to_address, A.td_from_address, A.td_amount, A.td_status, A.td_date_time FROM token_deposit AS A, member AS B WHERE B.mb_id like '%"+ id +"%' UNION "  
@@ -135,6 +138,122 @@ public class FinanceDAO {
 			return count;
 		} catch (Exception ex) {
 			System.out.println("tokenCount 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+		return 0;
+	}
+	
+	// 포인트 환전 내역 List 불러오기
+	public ArrayList<Point> gettokenExchangeList(int startRow, int pageSize, String category, String id) {
+		String sql = "SELECT DISTINCT C.mb_id, A.po_category, A.po_amount, A.po_date_time, B.tk_amount FROM point_transaction as A, token_transaction as B ,member as C " 
+					+ "WHERE A.tk_idx = B.tk_idx AND A.po_category = 2 AND C.mb_id like '%"+ id +"%' UNION " 
+					+ "SELECT DISTINCT C.mb_id, A.po_category, A.po_amount, A.po_date_time, B.tk_amount FROM point_transaction as A, token_transaction as B, member as C " 
+					+ "WHERE A.tk_idx = B.tk_idx AND A.po_category = 3 AND C.mb_id like '%"+ id +"%' "
+					+ "ORDER BY po_date_time DESC limit "
+					+ startRow + ", " + pageSize;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<Point> transPointList = new ArrayList<Point>(); 
+		
+		try {
+			if (category.equals("0")) { // 전체
+				
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+			}else if(category.equals("1")){ // 충전
+				sql = "SELECT DISTINCT C.mb_id, A.po_category, A.po_amount, A.po_date_time, B.tk_amount FROM point_transaction as A, token_transaction as B ,member as C " 
+					+ "WHERE A.tk_idx = B.tk_idx AND A.po_category = 2 AND C.mb_id like '%"+ id +"%' " 					
+					+ "ORDER BY po_date_time DESC limit "
+					+ startRow + ", " + pageSize;
+				
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+			}else if(category.equals("2")){ // 환전
+				sql = "SELECT DISTINCT C.mb_id, A.po_category, A.po_amount, A.po_date_time, B.tk_amount FROM point_transaction as A, token_transaction as B ,member as C " 
+					+ "WHERE A.tk_idx = B.tk_idx AND A.po_category = 3 AND C.mb_id like '%"+ id +"%' "
+					+ "ORDER BY po_date_time DESC limit "
+					+ startRow + ", " + pageSize;
+
+				
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+			}
+			while (rs.next()) {
+				Point pointList = new Point();
+				
+				pointList.setMb_id(rs.getString("mb_id"));
+				pointList.setPo_category(rs.getString("po_category"));
+				pointList.setPo_amount(rs.getString("po_amount"));
+				pointList.setPo_date_time(rs.getString("po_date_time"));
+				pointList.setTk_amount(rs.getString("tk_amount"));
+				
+				transPointList.add(pointList);								
+			}
+			
+			return transPointList;
+			
+		} catch (Exception ex) {
+			System.out.println("tokenExchangeList 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+		
+	return null;
+	} 
+	// 포인트 환전 내역 count
+	public int pointCount(String category , String id) {
+		PreparedStatement pstmt = null;
+		int count = 0;
+		ResultSet rs = null;
+		String sql = "SELECT DISTINCT C.mb_id, A.po_category, A.po_amount, A.po_date_time, B.tk_amount FROM point_transaction as A, token_transaction as B ,member as C " 
+				+ "WHERE A.tk_idx = B.tk_idx AND A.po_category = 2 AND C.mb_id like '%"+ id +"%' UNION " 
+				+ "SELECT DISTINCT C.mb_id, A.po_category, A.po_amount, A.po_date_time, B.tk_amount FROM point_transaction as A, token_transaction as B, member as C " 
+				+ "WHERE A.tk_idx = B.tk_idx AND A.po_category = 3 AND C.mb_id like '%"+ id +"%' ";			     			     
+
+		try {
+			if (category.equals("0")) { // 전체
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+			}else if(category.equals("1")){ // 환전
+				sql = "SELECT DISTINCT C.mb_id, A.po_category, A.po_amount, A.po_date_time, B.tk_amount FROM point_transaction as A, token_transaction as B ,member as C " 
+					+ "WHERE A.tk_idx = B.tk_idx AND A.po_category = 2 AND C.mb_id like '%"+ id +"%' ";
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+			}else if(category.equals("2")){ // 충전
+				sql = "SELECT DISTINCT C.mb_id, A.po_category, A.po_amount, A.po_date_time, B.tk_amount FROM point_transaction as A, token_transaction as B ,member as C " 
+					+ "WHERE A.tk_idx = B.tk_idx AND A.po_category = 3 AND C.mb_id like '%"+ id +"%' ";						 
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+			}
+
+			rs.last();
+			count = rs.getRow();
+			rs.beforeFirst();
+
+			return count;
+		} catch (Exception ex) {
+			System.out.println("pointCount 에러: " + ex);
 		} finally {
 			try {
 				if (rs != null)

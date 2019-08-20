@@ -21,7 +21,7 @@ public class FinanceController extends HttpServlet implements Servlet{
     
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8"); 
+		//request.setCharacterEncoding("utf-8"); 
 		String RequestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = RequestURI.substring(contextPath.length());
@@ -29,12 +29,12 @@ public class FinanceController extends HttpServlet implements Servlet{
 		Action action = null;
 		System.out.println(command);
 		try {
-			switch (command) { // 포인트환전내역
+			switch (command) { // �룷�씤�듃�솚�쟾�궡�뿭
 			case "/tokenExchangeList.fn":
 				action = new TokenExchangeListAction();
 				forward = action.execute(request, response);
 				break;
-			case "/tokenWithdrawalList.fn": //토큰입출내역
+			case "/tokenWithdrawalList.fn": //�넗�겙�엯異쒕궡�뿭
 				action = new TokenWithdrawalListAction();
 				forward = action.execute(request, response);
 				break;	

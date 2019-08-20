@@ -13,7 +13,7 @@ public class CheckDuplicationIDAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
+		//request.setCharacterEncoding("utf-8");
 		MemberJson memberJson = new MemberJson();
 
 		String mb_id = request.getParameter("mb_id");

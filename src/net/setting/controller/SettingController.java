@@ -20,7 +20,7 @@ public class SettingController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		//request.setCharacterEncoding("utf-8");
 		String RequestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = RequestURI.substring(contextPath.length());
@@ -30,7 +30,7 @@ public class SettingController extends HttpServlet {
 		try {
 			switch (command) {
 			case "/feesManagement.st":
-				action = new feesManagementAciton(); // 수수료 윤식 추가
+				action = new feesManagementAciton(); // �닔�닔猷� �쑄�떇 異붽�
 				forward = action.execute(request, response);
 				break;
 			default:
@@ -39,7 +39,7 @@ public class SettingController extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		///////////////////////윤식 추가 end///////////////////////
+		///////////////////////�쑄�떇 異붽� end///////////////////////
 		
 		if (forward != null) {
 			if (forward.isRedirect()) {
