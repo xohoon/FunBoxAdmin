@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.mysql.jdbc.CallableStatement;
@@ -46,53 +45,41 @@ public class CompanyDAO {
 		}
 	}
 
-	// 기업신청서 리스트
-	public List<CompanyApplication> getCompanyApplicationList(int _page) {
-		CallableStatement cstmt = null;
-		List<CompanyApplication> companyApplicationList = new ArrayList<CompanyApplication>();
-		try {
-			cstmt = (CallableStatement) conn.prepareCall("CALL SELECT_COMPANY_APPLICATION_LIST(?,?)");
-			cstmt.setInt(1, _page);
-			cstmt.setInt(2, 10);
-			rs = cstmt.executeQuery();
-			while (rs.next()) {
-				CompanyApplication companyApplication = new CompanyApplication();
-				companyApplication.setApp_cp_idx(rs.getInt("app_cp_idx"));
-				companyApplication.setMb_id(rs.getString("mb_id"));
-				companyApplication.setApp_cp_manager(rs.getString("app_cp_manager"));
-				companyApplication.setApp_cp_hp(rs.getString("app_cp_hp"));
-				companyApplication.setApp_cp_ch(rs.getString("app_cp_ch"));
-				companyApplication.setApp_cp_sector(rs.getString("app_cp_sector"));
-				companyApplication.setApp_cp_status(rs.getBoolean("app_cp_status"));
-				companyApplication.setApp_deleted_status(rs.getBoolean("app_deleted_status"));
-				companyApplicationList.add(companyApplication);
-			}
-		} catch (Exception ex) {
-			System.out.println("getCompanyApplicationList 에러: " + ex);
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (cstmt != null)
-					cstmt.close();
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				System.out.println("연결 해제 실패: " + e.getMessage());
-			}
-		}
-
-		return companyApplicationList;
-	}
+	/*
+	 * // 기업신청서 리스트 public List<CompanyApplication> getCompanyApplicationList(int
+	 * _page) { CallableStatement cstmt = null; List<CompanyApplication>
+	 * companyApplicationList = new ArrayList<CompanyApplication>(); try { cstmt =
+	 * (CallableStatement)
+	 * conn.prepareCall("CALL SELECT_COMPANY_APPLICATION_LIST(?,?)");
+	 * cstmt.setInt(1, _page); cstmt.setInt(2, 10); rs = cstmt.executeQuery(); while
+	 * (rs.next()) { CompanyApplication companyApplication = new
+	 * CompanyApplication();
+	 * companyApplication.setApp_cp_idx(rs.getInt("app_cp_idx"));
+	 * companyApplication.setMb_id(rs.getString("mb_id"));
+	 * companyApplication.setApp_cp_manager(rs.getString("app_cp_manager"));
+	 * companyApplication.setApp_cp_hp(rs.getString("app_cp_hp"));
+	 * companyApplication.setApp_cp_ch(rs.getString("app_cp_ch"));
+	 * companyApplication.setApp_cp_sector(rs.getString("app_cp_sector"));
+	 * companyApplication.setApp_cp_status(rs.getBoolean("app_cp_status"));
+	 * companyApplication.setApp_deleted_status(rs.getBoolean("app_deleted_status"))
+	 * ; companyApplicationList.add(companyApplication); } } catch (Exception ex) {
+	 * System.out.println("getCompanyApplicationList 에러: " + ex); } finally { try {
+	 * if (rs != null) rs.close(); if (cstmt != null) cstmt.close(); if (conn !=
+	 * null) conn.close(); } catch (Exception e) { System.out.println("연결 해제 실패: " +
+	 * e.getMessage()); } }
+	 * 
+	 * return companyApplicationList; }
+	 */
 
 	// 기업신청서 리스트
-	public boolean getCompanyApplicationList(List<CompanyApplication> companyApplicationList, int _page,
-			Paging paging) {
+	public boolean getCompanyApplicationList(List<CompanyApplication> companyApplicationList, int _page,int _search_type,String _search_word,Paging paging) {
 		CallableStatement cstmt = null;
 		try {
-			cstmt = (CallableStatement) conn.prepareCall("CALL SELECT_COMPANY_APPLICATION_LIST(?,?,?,?,?)");
+			cstmt = (CallableStatement) conn.prepareCall("CALL SELECT_COMPANY_APPLICATION_LIST(?,?,?,?,?,?,?)");
 			cstmt.setInt(1, _page);
-			cstmt.setInt(2, 10);
+			cstmt.setInt(2, _search_type);
+			cstmt.setString(3, _search_word);
+			cstmt.setInt(4, 10);
 
 			cstmt.registerOutParameter("_current_min_page", java.sql.Types.INTEGER);
 			cstmt.registerOutParameter("_current_max_page", java.sql.Types.INTEGER);

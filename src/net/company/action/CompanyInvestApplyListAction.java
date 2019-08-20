@@ -17,18 +17,36 @@ public class CompanyInvestApplyListAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		ActionForward forward = new ActionForward();
+		
 		String page_string = request.getParameter("page");
+		String search_type_string = request.getParameter("search_type");
+		String search_word = request.getParameter("search_word");
+
 		Integer page = 0;
+		Integer search_type = 0;
 		
 		if (page_string == null) {
 			page = 1;
-		}else {
-			page = Integer.parseInt(page_string);
+		} else {
+			try {
+				page = Integer.parseInt(page_string);
+			} catch (NumberFormatException nfe) {
+				page = 0;
+			}
+			if (page < 1) {
+				page = 1;
+			}
 		}
-		
-		if (page < 1) {
-			page = 1;
+
+		if (search_type_string != null) {
+			try {
+				search_type = Integer.parseInt(search_type_string);
+			} catch (NumberFormatException nfe) {
+				search_type = 0;
+			}
+			if (search_type > 3) {
+				search_type = 0;
+			}
 		}
 		
 		
@@ -37,7 +55,7 @@ public class CompanyInvestApplyListAction implements Action {
 		
 		
 		CompanyDAO companyDAO = new CompanyDAO();
-		companyDAO.getCompanyApplicationList(companyApplicationList,page,paging);
+		companyDAO.getCompanyApplicationList(companyApplicationList,page,search_type, search_word,paging);
 
 		// 잘 못된 접근
 		if (companyApplicationList.size() < 1) {
@@ -52,8 +70,11 @@ public class CompanyInvestApplyListAction implements Action {
 		request.setAttribute("current_min_page", paging.getCurrent_min_page());
 		request.setAttribute("current_max_page", paging.getCurrent_max_page());
 		request.setAttribute("max_page", paging.getMax_page());
+		request.setAttribute("search_type", search_type);
+		request.setAttribute("search_word", search_word);
 		request.setAttribute("companyApplicationList", companyApplicationList);
 		
+		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("./company/companyInvestApplyList.jsp");
 		return forward;

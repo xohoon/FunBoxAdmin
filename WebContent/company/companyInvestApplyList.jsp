@@ -10,6 +10,7 @@
 	<title>FUNBOX ADMIN</title>
 	<script src="./js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
+	<script type="text/javascript" src="./js/listSearching.js"></script>
 	<script type="text/javascript" src="company/js/companyInvestApplyList.js"></script>
 	<link href="./css/common.css" rel="stylesheet">
 	<link href="./css/admin.css" rel="stylesheet">
@@ -29,14 +30,14 @@
 		<section id="sec05">
 			<h2>투자 기업 신청 리스트</h2>
 			<div class="sch">
-				<select>
-					<option>- 선택 -</option>
-					<option>아이디</option>
-					<option>기업명</option>
-					<option>담당자</option>
+				<select id="search_type">
+					<option value="0">- 선택 -</option>
+					<option value="1">아이디</option>
+					<option value="2">기업명</option>
+					<option value="3">담당자</option>
 				</select>
-				<input type="text">
-				<button><i class="fas fa-search"></i></button>
+				<input id="search_word" type="text">
+				<button id="search"><i class="fas fa-search"></i></button>
 			</div>
 			<div class="con">
 				<table>
@@ -71,31 +72,31 @@
 						</tr>
 					</c:forEach>
 				</table>
-				<a href="./companyInvestApplyList.cp?page=${current_page - 1 }" class="prev"><i class="fas fa-caret-left"></i></a>
+				<a href="./companyInvestApplyList.cp?page=${current_page - 1 }&search_type=${search_type}&search_word=${search_word}" class="prev"><i class="fas fa-caret-left"></i></a>
 				<ul class="pager">
 					<c:forEach var="i" begin="${current_min_page }" end="${current_max_page }">
 						<c:choose>
 							<c:when test="${ i eq current_page}">
-								<li class="on"><a href="./companyInvestApplyList.cp?page=${i }">${i}</a></li>
+								<li class="on"><a href="./companyInvestApplyList.cp?page=${i }&search_type=${search_type}&search_word=${search_word}">${i}</a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a href="./companyInvestApplyList.cp?page=${i }">${i }</a></li>
+								<li><a href="./companyInvestApplyList.cp?page=${i }&search_type=${search_type}&search_word=${search_word}">${i }</a></li>
 							</c:otherwise>
 						</c:choose>
 					</c:forEach>
 				</ul>
-				<a href="./companyInvestApplyList.cp?page=${current_page + 1 }" class="next"><i class="fas fa-caret-right"></i></a>
+				<a href="./companyInvestApplyList.cp?page=${current_page + 1 }&search_type=${search_type}&search_word=${search_word}" class="next"><i class="fas fa-caret-right"></i></a>
 			</div>
 		</section>
 		<footer></footer>
 	</div>
 	<script>
-/* 		setTimeout(function () {
+		setTimeout(function () {
 		   jQuery('.nav3').trigger('click');
 			jQuery('.nav32').addClass('on');
 		}, 500);
 		
-		$(function(){
+		/* $(function(){
 			$('.pager li').click(function(){
 				$('.pager li').removeClass('on');
 				$(this).addClass('on');
@@ -104,7 +105,7 @@
       $('td button').click(function(){
         $(this).parents('tr').remove();
       });
-		}); */
+		});  */
 	</script>
 </body>
 

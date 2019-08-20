@@ -44,12 +44,14 @@ public class MemberDAO {
 	}
 
 	// 회원리스트
-	public boolean getMemberList(List<Member> memberList, int _page, Paging paging) {
+	public boolean getMemberList(List<Member> memberList, int _page,int _search_type,String _search_word ,Paging paging) {
 		CallableStatement cstmt = null;
 		try {
-			cstmt = (CallableStatement) conn.prepareCall("CALL SELECT_MEMBER_LIST(?,?,?,?,?)");
+			cstmt = (CallableStatement) conn.prepareCall("CALL SELECT_MEMBER_LIST(?,?,?,?,?,?,?)");
 			cstmt.setInt(1, _page);
-			cstmt.setInt(2, 10);
+			cstmt.setInt(2, _search_type);
+			cstmt.setString(3, _search_word);
+			cstmt.setInt(4, 10);
 			cstmt.registerOutParameter("_current_min_page", java.sql.Types.INTEGER);
 			cstmt.registerOutParameter("_current_max_page", java.sql.Types.INTEGER);
 			cstmt.registerOutParameter("_max_page", java.sql.Types.INTEGER);
@@ -87,43 +89,6 @@ public class MemberDAO {
 		}
 
 		return false;
-	}
-
-	// 회원리스트
-	public List<Member> getMemberList(int _page) {
-		CallableStatement cstmt = null;
-		List<Member> MemberList = new ArrayList<Member>();
-		try {
-			cstmt = (CallableStatement) conn.prepareCall("CALL SELECT_MEMBER_LIST(?)");
-			cstmt.setInt(1, _page);
-			cstmt.setInt(2, 10);
-			rs = cstmt.executeQuery();
-			while (rs.next()) {
-				Member member = new Member();
-				member.setMb_idx(rs.getInt("mb_idx"));
-				member.setMb_id(rs.getString("mb_id"));
-				member.setMb_id(rs.getString("mb_name"));
-				member.setMb_id(rs.getString("mb_email"));
-				member.setMb_id(rs.getString("mb_phone"));
-				member.setMb_id(rs.getString("mb_recommend"));
-				MemberList.add(member);
-			}
-		} catch (Exception ex) {
-			System.out.println("SelectMemberList 에러: " + ex);
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (cstmt != null)
-					cstmt.close();
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				System.out.println("연결 해제 실패: " + e.getMessage());
-			}
-		}
-
-		return MemberList;
 	}
 
 	// 회원가입 id 중복체크
