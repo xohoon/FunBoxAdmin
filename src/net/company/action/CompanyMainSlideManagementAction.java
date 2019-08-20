@@ -10,7 +10,7 @@ public class CompanyMainSlideManagementAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8"); //茄臂贸府
+		//request.setCharacterEncoding("utf-8"); //茄臂贸府
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("./company/companyMainSlideManagement.jsp");

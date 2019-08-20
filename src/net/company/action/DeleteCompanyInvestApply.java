@@ -13,7 +13,7 @@ public class DeleteCompanyInvestApply implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
+		//request.setCharacterEncoding("utf-8");
 		CompanyJson companyJson = new CompanyJson();
 
 		String app_cp_idx = request.getParameter("app_cp_idx");
