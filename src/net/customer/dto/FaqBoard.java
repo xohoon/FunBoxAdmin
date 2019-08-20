@@ -11,7 +11,14 @@ public class FaqBoard {
 	private String content;
 	private Date reg_date_time;
 	private String mb_name;
+	private int status;
 		
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	public int getMb_idx() {
 		return mb_idx;
 	}

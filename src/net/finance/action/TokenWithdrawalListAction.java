@@ -13,6 +13,7 @@ import net.finance.dao.FinanceDAO;
 public class TokenWithdrawalListAction implements Action {
 
 	String categroyFlag = "";
+	String searchID = "";
 	
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -20,7 +21,8 @@ public class TokenWithdrawalListAction implements Action {
 		
 		ActionForward forward = new ActionForward();		
 		String category = request.getParameter("category");
-		
+		String searchid = request.getParameter("searchID");
+		System.out.println("searchID:"  +searchid);
 		try {
 			if(category.equals(null)) {
 				category = "0";
@@ -28,7 +30,13 @@ public class TokenWithdrawalListAction implements Action {
 		}catch(NullPointerException e) {
 			category = "0";			
 		}
-		
+		try {
+			if(searchid.equals(null)) {
+				searchid = "";
+			}
+		}catch(NullPointerException e) {
+			searchid = "";			
+		}
 		// 페이징 처리 구문
 		int pageSize = 10; // 한페이지에 보여줄 List		
 		int pageGroupSize = 5; // 페이지 단위 [◀] 1 2 3 4 5 [▶]
@@ -46,22 +54,23 @@ public class TokenWithdrawalListAction implements Action {
 		int count = 0;
 		int number = 0;
 		categroyFlag = category;
+		searchID = searchid;
 		
 		FinanceDAO fiance_dao_count = new FinanceDAO();
-		count = fiance_dao_count.tokenCount(category);
+		count = fiance_dao_count.tokenCount(category, searchid);
 		if(count > 0) {
 			if (endRow > count) {
 				endRow = count;
 			}
 			FinanceDAO fiance_dao = new FinanceDAO();
 			ArrayList<Token> tokenTransfer = new ArrayList<Token>();
-			tokenTransfer = fiance_dao.getTokenWithdrawList(startRow - 1, pageSize, category);
+			tokenTransfer = fiance_dao.getTokenWithdrawList(startRow - 1, pageSize, category, searchid);
 			System.out.println("tokenTransfer : " + tokenTransfer.toString());		
 			request.setAttribute("tokenTransfer", tokenTransfer);
 		}else {
 			FinanceDAO fiance_dao = new FinanceDAO();
 			ArrayList<Token> tokenTransfer = new ArrayList<Token>();
-			tokenTransfer = fiance_dao.getTokenWithdrawList(startRow - 1, pageSize, category);
+			tokenTransfer = fiance_dao.getTokenWithdrawList(startRow - 1, pageSize, category, searchid);
 			System.out.println("tokenTransfer : " + tokenTransfer.toString());		
 			request.setAttribute("tokenTransfer", tokenTransfer);
 		}
@@ -93,6 +102,7 @@ public class TokenWithdrawalListAction implements Action {
 		
 		request.setAttribute("pageGroupCount", new Integer(pageGroupCount));		
 		request.setAttribute("categroyFlag", categroyFlag);
+		request.setAttribute("searchID", searchID);
 		request.setAttribute("category", category);
 		forward.setRedirect(false);
 		forward.setPath("./finance/tokenWithdrawalList.jsp");
