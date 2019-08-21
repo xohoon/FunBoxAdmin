@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>all_Group</title>
-<link href="css/common.css" rel="stylesheet">
+    <link href="css/common.css" rel="stylesheet">
 <link href="css/admin.css" rel="stylesheet">
 <script src="../js/jquery-3.1.1.min.js"></script>
-<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
-<script type="text/javascript" src="company/js/companyDeadLineManagement.js"></script>
-    
+<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>    
 </head>
 <body>
 
@@ -22,7 +21,15 @@
       <th>아이디</th>
       <th>담당자</th>
     </tr>
-    <tr>
+    <c:forEach var="company" items="${companyList }">
+    	<tr>
+	     <td><button class="allBtn">선택</button></td>
+	      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">${company.cp_name }</td>
+	      <td>${company.mb_id }</td>
+	      <td>${company.cp_manager }</td>
+	    </tr>
+    </c:forEach>
+    <!-- <tr>
      <td><button class="allBtn">선택</button></td>
       <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">바른생선회</td>
       <td>아이디</td>
@@ -111,10 +118,11 @@
       <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">검색왕</td>
       <td>아이디</td>
       <td>아이오</td>
-    </tr>
+    </tr> -->
   </table>
   
 <script>
 </script>
 </body>
 </html>
+

@@ -9,7 +9,9 @@ import java.util.List;
 
 import com.mysql.jdbc.CallableStatement;
 
+import net.company.dto.Company;
 import net.company.dto.CompanyApplication;
+import net.company.dto.CompanyApplicationDetail;
 import net.company.dto.CompanyInvested;
 import net.util.Paging;
 
@@ -45,34 +47,9 @@ public class CompanyDAO {
 		}
 	}
 
-	/*
-	 * // ±â¾÷½ÅÃ»¼­ ¸®½ºÆ® public List<CompanyApplication> getCompanyApplicationList(int
-	 * _page) { CallableStatement cstmt = null; List<CompanyApplication>
-	 * companyApplicationList = new ArrayList<CompanyApplication>(); try { cstmt =
-	 * (CallableStatement)
-	 * conn.prepareCall("CALL SELECT_COMPANY_APPLICATION_LIST(?,?)");
-	 * cstmt.setInt(1, _page); cstmt.setInt(2, 10); rs = cstmt.executeQuery(); while
-	 * (rs.next()) { CompanyApplication companyApplication = new
-	 * CompanyApplication();
-	 * companyApplication.setApp_cp_idx(rs.getInt("app_cp_idx"));
-	 * companyApplication.setMb_id(rs.getString("mb_id"));
-	 * companyApplication.setApp_cp_manager(rs.getString("app_cp_manager"));
-	 * companyApplication.setApp_cp_hp(rs.getString("app_cp_hp"));
-	 * companyApplication.setApp_cp_ch(rs.getString("app_cp_ch"));
-	 * companyApplication.setApp_cp_sector(rs.getString("app_cp_sector"));
-	 * companyApplication.setApp_cp_status(rs.getBoolean("app_cp_status"));
-	 * companyApplication.setApp_deleted_status(rs.getBoolean("app_deleted_status"))
-	 * ; companyApplicationList.add(companyApplication); } } catch (Exception ex) {
-	 * System.out.println("getCompanyApplicationList ¿¡·¯: " + ex); } finally { try {
-	 * if (rs != null) rs.close(); if (cstmt != null) cstmt.close(); if (conn !=
-	 * null) conn.close(); } catch (Exception e) { System.out.println("¿¬°á ÇØÁ¦ ½ÇÆĞ: " +
-	 * e.getMessage()); } }
-	 * 
-	 * return companyApplicationList; }
-	 */
-
-	// ±â¾÷½ÅÃ»¼­ ¸®½ºÆ®
-	public boolean getCompanyApplicationList(List<CompanyApplication> companyApplicationList, int _page,int _search_type,String _search_word,Paging paging) {
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
+	public boolean getCompanyApplicationList(List<CompanyApplication> companyApplicationList, int _page,
+			int _search_type, String _search_word, Paging paging) {
 		CallableStatement cstmt = null;
 		try {
 			cstmt = (CallableStatement) conn.prepareCall("CALL SELECT_COMPANY_APPLICATION_LIST(?,?,?,?,?,?,?)");
@@ -107,7 +84,7 @@ public class CompanyDAO {
 			}
 			return true;
 		} catch (Exception ex) {
-			System.out.println("getCompanyApplicationList ¿¡·¯: " + ex);
+			System.out.println("getCompanyApplicationList ï¿½ï¿½ï¿½ï¿½: " + ex);
 		} finally {
 			try {
 				if (rs != null)
@@ -117,14 +94,14 @@ public class CompanyDAO {
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {
-				System.out.println("¿¬°á ÇØÁ¦ ½ÇÆĞ: " + e.getMessage());
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: " + e.getMessage());
 			}
 		}
 
 		return false;
 	}
 
-	// ±â¾÷ ÅõÀÚ ¸ñ·Ï ¸®½ºÆ®
+	// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
 	public boolean getCompanyInvestedList(List<CompanyInvested> companyInvestedList, int _page,
 			String _cp_funding_status, Paging paging) {
 		CallableStatement cstmt = null;
@@ -157,7 +134,7 @@ public class CompanyDAO {
 			}
 			return true;
 		} catch (Exception ex) {
-			System.out.println("getCompanyInvestedList ¿¡·¯: " + ex);
+			System.out.println("getCompanyInvestedList ï¿½ï¿½ï¿½ï¿½: " + ex);
 		} finally {
 			try {
 				if (rs != null)
@@ -167,7 +144,7 @@ public class CompanyDAO {
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {
-				System.out.println("¿¬°á ÇØÁ¦ ½ÇÆĞ: " + e.getMessage());
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: " + e.getMessage());
 			}
 		}
 
@@ -177,12 +154,13 @@ public class CompanyDAO {
 	public boolean deleteCompanyApply(int app_cp_idx) {
 		PreparedStatement pstmt = null;
 		try {
-			pstmt = conn.prepareStatement("UPDATE company_application SET app_deleted_status = true WHERE app_cp_idx = ?");
+			pstmt = conn
+					.prepareStatement("UPDATE company_application SET app_deleted_status = true WHERE app_cp_idx = ?");
 			pstmt.setInt(1, app_cp_idx);
 			pstmt.executeUpdate();
 			return true;
 		} catch (Exception ex) {
-			System.out.println("deleteCompanyApply ¿¡·¯: " + ex);
+			System.out.println("deleteCompanyApply ï¿½ï¿½ï¿½ï¿½: " + ex);
 		} finally {
 			try {
 				if (pstmt != null)
@@ -190,9 +168,97 @@ public class CompanyDAO {
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {
-				System.out.println("ÇØÁ¦ ½ÇÆĞ : " + e.getMessage());
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ : " + e.getMessage());
 			}
 		}
+		return false;
+	}
+
+	public CompanyApplicationDetail getCompanyApplicationDetail(int app_cp_idx) {
+		String sql = "SELECT * FROM company_application WHERE app_cp_idx = ?";
+		PreparedStatement pstmt = null;
+		CompanyApplicationDetail companyApplicationDetail = new CompanyApplicationDetail();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, app_cp_idx);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				companyApplicationDetail.setApp_cp_name(rs.getString("app_cp_name"));
+				companyApplicationDetail.setMb_id(rs.getString("mb_id"));
+				companyApplicationDetail.setApp_cp_manager(rs.getString("app_cp_manager"));
+				companyApplicationDetail.setApp_cp_hp(rs.getString("app_cp_hp"));
+				companyApplicationDetail.setApp_cp_num(rs.getString("mb_add_num"));
+				companyApplicationDetail.setApp_cp_ch(rs.getString("app_cp_ch"));
+				companyApplicationDetail.setApp_cp_more(rs.getString("app_cp_more"));
+				companyApplicationDetail.setApp_cp_extra(rs.getString("app_cp_extra"));
+				companyApplicationDetail.setApp_cp_sector(rs.getString("app_cp_sector"));
+				companyApplicationDetail.setApp_cp_status(rs.getBoolean("app_cp_status"));
+				companyApplicationDetail.setApp_cp_open_date_time(rs.getString("app_cp_open_date_time"));
+				companyApplicationDetail.setApp_cp_prestige(rs.getString("app_cp_prestige"));
+				companyApplicationDetail.setApp_cp_deposit(rs.getString("app_cp_deposit"));
+				companyApplicationDetail.setApp_cp_monthly(rs.getString("app_cp_monthly"));
+				companyApplicationDetail.setApp_cp_goal_amount(rs.getString("app_cp_goal_amount"));
+				companyApplicationDetail.setApp_cp_avg_monthly_profit(rs.getString("app_cp_avg_monthly_profit"));
+				companyApplicationDetail.setApp_cp_monthly_profit(rs.getString("app_cp_monthly_profit"));
+				companyApplicationDetail.setApp_cp_during(rs.getString("app_cp_during"));
+				companyApplicationDetail.setApp_cp_inv_min_amount(rs.getString("app_cp_inv_min_amount"));
+				companyApplicationDetail.setApp_cp_introduction(rs.getString("app_cp_introduction"));
+				companyApplicationDetail.setApp_cp_purpose(rs.getString("app_cp_purpose"));
+				companyApplicationDetail.setApp_cp_point(rs.getString("app_cp_point"));
+				// íŒŒì¼
+			}
+		} catch (Exception ex) {
+			System.out.println("getMember ï¿½ï¿½ï¿½ï¿½: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: " + e.getMessage());
+			}
+		}
+		return companyApplicationDetail;
+	}
+
+	// ì „ì²´ëª©ë¡ ë“¤ê³ ì˜¤ê¸°
+	public boolean getCompanyAllList(List<Company> companyList,int _search_type, String _search_word ) {
+		CallableStatement cstmt = null;
+		try {
+			cstmt = (CallableStatement) conn.prepareCall("CALL SELECT_COMPANY_LIST(?,?)");
+			cstmt.setInt(1, _search_type);
+			cstmt.setString(2, _search_word);
+
+			rs = cstmt.executeQuery();
+
+			while (rs.next()) {
+				Company company = new Company();
+				company.setCp_idx(rs.getInt("cp_idx"));
+				company.setCp_name(rs.getString("cp_name"));
+				company.setMb_id(rs.getString("mb_id"));
+				company.setCp_manager(rs.getString("cp_manager"));
+				companyList.add(company);
+			}
+			return true;
+		} catch (Exception ex) {
+			System.out.println("getCompanyAllList Error: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (cstmt != null)
+					cstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: " + e.getMessage());
+			}
+		}
+
 		return false;
 	}
 }
