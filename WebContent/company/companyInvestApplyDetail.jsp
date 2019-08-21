@@ -87,19 +87,59 @@
 		</div>
 		<div>
 		  <label>제출서류</label>
-      <p><span>사업자등록증</span> <a href="#" download>사업자등록증.jpg<i class="fas fa-download"></i></a></p>
-      <p><span>재무제표</span> <a href="#" download>재무제표.pdf<i class="fas fa-download"></i></a></p>
-      <p><span>부동산계약서</span> <a href="#" download>부동산계약서.pdf<i class="fas fa-download"></i></a></p>
+		  <p>
+		  	<span>사업자등록증</span>
+		  	<c:if test="${companyApplicationDetail.app_cp_registrantion ne null}">
+        		<a href="./CompanyInvesteApplyFileDownload?app_cp_idx=${companyApplicationDetail.app_cp_idx }&fileName=${companyApplicationDetail.app_cp_alias_registrantion}" download>${companyApplicationDetail.app_cp_registrantion }<i class="fas fa-download"></i></a>
+        	</c:if>
+	      </p>
+	      <p>
+	      	<span>재무제표</span>
+	      	<c:if test="${companyApplicationDetail.app_cp_financial ne null}">
+        		<a href="./CompanyInvesteApplyFileDownload?app_cp_idx=${companyApplicationDetail.app_cp_idx }&fileName=${companyApplicationDetail.app_cp_alias_financial}" download>${companyApplicationDetail.app_cp_financial }<i class="fas fa-download"></i></a>
+        	</c:if>
+	      </p>
+	      <p>
+	      	<span>부동산계약서</span>
+	      	<c:if test="${companyApplicationDetail.app_cp_estate_contract ne null}">
+        		<a href="./CompanyInvesteApplyFileDownload?app_cp_idx=${companyApplicationDetail.app_cp_idx }&fileName=${companyApplicationDetail.app_cp_alias_estate_contract}" download>${companyApplicationDetail.app_cp_estate_contract }<i class="fas fa-download"></i></a>
+        	</c:if>
+	      </p>
       <p class="cf">
         <span>매장사진</span>
-        <a href="#" download>1.jpg<i class="fas fa-download"></i></a>
-        <a href="#" download>2.jpg<i class="fas fa-download"></i></a>
-        <a href="#" download>3.jpg<i class="fas fa-download"></i></a>
+        <c:if test="${companyApplicationDetail.app_cp_image1 ne null}">
+        	<a href="./CompanyInvesteApplyFileDownload?app_cp_idx=${companyApplicationDetail.app_cp_idx }&fileName=${companyApplicationDetail.app_cp_alias_image1}" download>${companyApplicationDetail.app_cp_image1 }<i class="fas fa-download"></i></a>
+        </c:if>
+        <c:if test="${companyApplicationDetail.app_cp_image2 ne null}">
+        	<a href="./CompanyInvesteApplyFileDownload?app_cp_idx=${companyApplicationDetail.app_cp_idx }&fileName=${companyApplicationDetail.app_cp_alias_image2}" download>${companyApplicationDetail.app_cp_image2 }<i class="fas fa-download"></i></a>
+        </c:if>
+        <c:if test="${companyApplicationDetail.app_cp_image3 ne null}">
+        	<a href="./CompanyInvesteApplyFileDownload?app_cp_idx=${companyApplicationDetail.app_cp_idx }&fileName=${companyApplicationDetail.app_cp_alias_image3}" download>${companyApplicationDetail.app_cp_image3 }<i class="fas fa-download"></i></a>
+        </c:if>
+        <c:if test="${companyApplicationDetail.app_cp_image4 ne null}">
+        	<a href="./CompanyInvesteApplyFileDownload?app_cp_idx=${companyApplicationDetail.app_cp_idx }&fileName=${companyApplicationDetail.app_cp_alias_image4}" download>${companyApplicationDetail.app_cp_image4 }<i class="fas fa-download"></i></a>
+        </c:if>
+        <c:if test="${companyApplicationDetail.app_cp_image5 ne null}">
+        	<a href="./CompanyInvesteApplyFileDownload?app_cp_idx=${companyApplicationDetail.app_cp_idx }&fileName=${companyApplicationDetail.app_cp_alias_image5}" download>${companyApplicationDetail.app_cp_image5 }<i class="fas fa-download"></i></a>
+        </c:if>
       </p>
       <p class="cf">
         <span>기타서류</span>
-        <a href="#" download>정관.pdf<i class="fas fa-download"></i></a>
-        <a href="#" download>결산장부.pdf<i class="fas fa-download"></i></a>
+        <c:if test="${companyApplicationDetail.app_cp_alias_other_document1 ne null}">
+        	<a href="./CompanyInvesteApplyFileDownload?app_cp_idx=${companyApplicationDetail.app_cp_idx }&fileName=${companyApplicationDetail.app_cp_alias_other_document1}" download>${companyApplicationDetail.app_cp_other_document1 }<i class="fas fa-download"></i></a>
+        </c:if>
+        <c:if test="${companyApplicationDetail.app_cp_alias_other_document2 ne null}">
+        	<a href="./CompanyInvesteApplyFileDownload?app_cp_idx=${companyApplicationDetail.app_cp_idx }&fileName=${companyApplicationDetail.app_cp_alias_other_document2}" download>${companyApplicationDetail.app_cp_other_document2 }<i class="fas fa-download"></i></a>
+        </c:if>
+        <c:if test="${companyApplicationDetail.app_cp_alias_other_document3 ne null}">
+        	<a href="./CompanyInvesteApplyFileDownload?app_cp_idx=${companyApplicationDetail.app_cp_idx }&fileName=${companyApplicationDetail.app_cp_alias_other_document3}" download>${companyApplicationDetail.app_cp_other_document3 }<i class="fas fa-download"></i></a>
+        </c:if>
+        <c:if test="${companyApplicationDetail.app_cp_alias_other_document4 ne null}">
+        	<a href="./CompanyInvesteApplyFileDownload?app_cp_idx=${companyApplicationDetail.app_cp_idx }&fileName=${companyApplicationDetail.app_cp_alias_other_document4}" download>${companyApplicationDetail.app_cp_other_document4 }<i class="fas fa-download"></i></a>
+        </c:if>
+        <c:if test="${companyApplicationDetail.app_cp_alias_other_document5 ne null}">
+        	<a href="./CompanyInvesteApplyFileDownload?app_cp_idx=${companyApplicationDetail.app_cp_idx }&fileName=${companyApplicationDetail.app_cp_alias_other_document5}" download>${companyApplicationDetail.app_cp_other_document5 }<i class="fas fa-download"></i></a>
+        </c:if>
       </p>
 		</div>
 	</div><!--.sec05_1-->

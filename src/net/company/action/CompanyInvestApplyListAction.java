@@ -16,8 +16,6 @@ public class CompanyInvestApplyListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//request.setCharacterEncoding("utf-8");
-		
 		String page_string = request.getParameter("page");
 		String search_type_string = request.getParameter("search_type");
 		String search_word = request.getParameter("search_word");
@@ -57,7 +55,7 @@ public class CompanyInvestApplyListAction implements Action {
 		CompanyDAO companyDAO = new CompanyDAO();
 		companyDAO.getCompanyApplicationList(companyApplicationList,page,search_type, search_word,paging);
 
-		// Àß ¸øµÈ Á¢±Ù
+		// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		if (companyApplicationList.size() < 1) {
 
 		}

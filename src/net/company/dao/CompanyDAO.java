@@ -48,8 +48,7 @@ public class CompanyDAO {
 	}
 
 	// �����û�� ����Ʈ
-	public boolean getCompanyApplicationList(List<CompanyApplication> companyApplicationList, int _page,
-			int _search_type, String _search_word, Paging paging) {
+	public boolean getCompanyApplicationList(List<CompanyApplication> companyApplicationList, int _page, int _search_type, String _search_word, Paging paging) {
 		CallableStatement cstmt = null;
 		try {
 			cstmt = (CallableStatement) conn.prepareCall("CALL SELECT_COMPANY_APPLICATION_LIST(?,?,?,?,?,?,?)");
@@ -102,8 +101,7 @@ public class CompanyDAO {
 	}
 
 	// ��� ���� ��� ����Ʈ
-	public boolean getCompanyInvestedList(List<CompanyInvested> companyInvestedList, int _page,
-			String _cp_funding_status, Paging paging) {
+	public boolean getCompanyInvestedList(List<CompanyInvested> companyInvestedList, int _page,String _cp_funding_status, Paging paging) {
 		CallableStatement cstmt = null;
 		try {
 			cstmt = (CallableStatement) conn.prepareCall("CALL SELECT_COMPANY_INVESTED_LIST(?,?,?,?,?,?)");
@@ -184,6 +182,7 @@ public class CompanyDAO {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
+				companyApplicationDetail.setApp_cp_idx(rs.getInt("app_cp_idx"));
 				companyApplicationDetail.setApp_cp_name(rs.getString("app_cp_name"));
 				companyApplicationDetail.setMb_id(rs.getString("mb_id"));
 				companyApplicationDetail.setApp_cp_manager(rs.getString("app_cp_manager"));
@@ -206,7 +205,38 @@ public class CompanyDAO {
 				companyApplicationDetail.setApp_cp_introduction(rs.getString("app_cp_introduction"));
 				companyApplicationDetail.setApp_cp_purpose(rs.getString("app_cp_purpose"));
 				companyApplicationDetail.setApp_cp_point(rs.getString("app_cp_point"));
+				
 				// 파일
+				companyApplicationDetail.setApp_cp_registrantion(rs.getString("app_cp_registrantion"));
+				companyApplicationDetail.setApp_cp_financial(rs.getString("app_cp_financial"));
+				companyApplicationDetail.setApp_cp_estate_contract(rs.getString("app_cp_estate_contract"));
+				companyApplicationDetail.setApp_cp_image1(rs.getString("app_cp_image1"));
+				companyApplicationDetail.setApp_cp_image2(rs.getString("app_cp_image2"));
+				companyApplicationDetail.setApp_cp_image3(rs.getString("app_cp_image3"));
+				companyApplicationDetail.setApp_cp_image4(rs.getString("app_cp_image4"));
+				companyApplicationDetail.setApp_cp_image5(rs.getString("app_cp_image5"));
+				companyApplicationDetail.setApp_cp_other_document1(rs.getString("app_cp_other_document1"));
+				companyApplicationDetail.setApp_cp_other_document2(rs.getString("app_cp_other_document2"));
+				companyApplicationDetail.setApp_cp_other_document3(rs.getString("app_cp_other_document3"));
+				companyApplicationDetail.setApp_cp_other_document4(rs.getString("app_cp_other_document4"));
+				companyApplicationDetail.setApp_cp_other_document5(rs.getString("app_cp_other_document5"));
+				
+				// 파일 이명
+				companyApplicationDetail.setApp_cp_alias_registrantion(rs.getString("app_cp_alias_registrantion"));
+				companyApplicationDetail.setApp_cp_alias_financial(rs.getString("app_cp_alias_financial"));
+				companyApplicationDetail.setApp_cp_alias_estate_contract(rs.getString("app_cp_alias_estate_contract"));
+				companyApplicationDetail.setApp_cp_alias_image1(rs.getString("app_cp_alias_image1"));
+				companyApplicationDetail.setApp_cp_alias_image2(rs.getString("app_cp_alias_image2"));
+				companyApplicationDetail.setApp_cp_alias_image3(rs.getString("app_cp_alias_image3"));
+				companyApplicationDetail.setApp_cp_alias_image4(rs.getString("app_cp_alias_image4"));
+				companyApplicationDetail.setApp_cp_alias_image5(rs.getString("app_cp_alias_image5"));
+				companyApplicationDetail.setApp_cp_alias_other_document1(rs.getString("app_cp_alias_other_document1"));
+				companyApplicationDetail.setApp_cp_alias_other_document2(rs.getString("app_cp_alias_other_document2"));
+				companyApplicationDetail.setApp_cp_alias_other_document3(rs.getString("app_cp_alias_other_document3"));
+				companyApplicationDetail.setApp_cp_alias_other_document4(rs.getString("app_cp_alias_other_document4"));
+				companyApplicationDetail.setApp_cp_alias_other_document5(rs.getString("app_cp_alias_other_document5"));
+				
+				
 			}
 		} catch (Exception ex) {
 			System.out.println("getMember ����: " + ex);
@@ -260,5 +290,37 @@ public class CompanyDAO {
 		}
 
 		return false;
+	}
+	
+	public String getDownloadPath(int app_cp_idx) {
+		String sql = "SELECT app_cp_real_path FROM company_application WHERE app_cp_idx = ?";
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, app_cp_idx);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				return rs.getString("app_cp_real_path");
+			}
+		} catch (Exception ex) {
+			System.out.println("getUploadFilePath 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+
+		return null;
 	}
 }
