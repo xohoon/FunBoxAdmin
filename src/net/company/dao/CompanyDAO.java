@@ -188,7 +188,7 @@ public class CompanyDAO {
 				companyApplicationDetail.setMb_id(rs.getString("mb_id"));
 				companyApplicationDetail.setApp_cp_manager(rs.getString("app_cp_manager"));
 				companyApplicationDetail.setApp_cp_hp(rs.getString("app_cp_hp"));
-				companyApplicationDetail.setApp_cp_num(rs.getString("mb_add_num"));
+				companyApplicationDetail.setApp_cp_num(rs.getString("app_cp_num"));
 				companyApplicationDetail.setApp_cp_ch(rs.getString("app_cp_ch"));
 				companyApplicationDetail.setApp_cp_more(rs.getString("app_cp_more"));
 				companyApplicationDetail.setApp_cp_extra(rs.getString("app_cp_extra"));

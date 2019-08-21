@@ -53,7 +53,7 @@
 					</tr>
 					<c:forEach var="companyApplication" items="${companyApplicationList }">
 						<tr>
-							<td onclick="window.open('./companyInvestApplyDetail.cp','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">${companyApplication.app_cp_name }</td>
+							<td onclick="window.open('./companyInvestApplyDetail.cp?app_cp_idx=${companyApplication.app_cp_idx}','dkdlel','width=640,height=720,top=0,left=0,scrollbars=yes');">${companyApplication.app_cp_name }</td>
 							<td>${companyApplication.mb_id }</td>
 							<td>${companyApplication.app_cp_manager }</td>
 							<td>${companyApplication.app_cp_hp }</td>
