@@ -125,11 +125,11 @@ public class CompanyDAO {
 				CompanyInvested companyInvested = new CompanyInvested();
 				companyInvested.setCp_name(rs.getString("cp_name"));
 				companyInvested.setMb_id(rs.getString("mb_id"));
-				companyInvested.setMb_id(rs.getString("cp_manager"));
-				companyInvested.setMb_id(rs.getString("cp_phone"));
+				companyInvested.setCp_manager(rs.getString("cp_manager"));
+				companyInvested.setCp_phone(rs.getString("cp_phone"));
 				companyInvested.setCp_pre_net_profit_ratio(rs.getInt("cp_pre_net_profit_ratio"));
 				companyInvested.setD_day(rs.getInt("d_day"));
-				companyInvested.setMb_id(rs.getString("iv_balance_stock"));
+				companyInvested.setIv_balance_stock(rs.getString("iv_balance_stock"));
 				companyInvestedList.add(companyInvested);
 			}
 			return true;
