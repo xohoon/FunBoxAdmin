@@ -16,10 +16,10 @@ public class MemberJson {
 		try {
 			if (dao.checkDuplicationID(mb_id)) {
 				jsonObject.put("result", 0);
-				jsonObject.put("message", "»ç¿ë ÇÒ ¼ö ÀÖ´Â ID ÀÔ´Ï´Ù.");
+				jsonObject.put("message", "ì‚¬ìš© ê°€ëŠ¥í•œ ID ì…ë‹ˆë‹¤.");
 			} else {
 				jsonObject.put("result", 1);
-				jsonObject.put("message", "ÀÌ¹Ì »ç¿ë Áß ÀÎ ID ÀÔ´Ï´Ù.");
+				jsonObject.put("message", "ì´ë¯¸ ì‚¬ìš© ì¤‘ì¸ ID ì…ë‹ˆë‹¤.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -35,10 +35,10 @@ public class MemberJson {
 		try {
 			if (dao.registeMember(member)) {
 				jsonObject.put("result", 0);
-				jsonObject.put("message", "È¸¿ø µî·Ï ¿Ï·á.");
+				jsonObject.put("message", "íšŒì›ë“±ë¡ ì™„ë£Œ.");
 			} else {
 				jsonObject.put("result", 1);
-				jsonObject.put("message", "È¸¿ø µî·Ï ½ÇÆĞ.");
+				jsonObject.put("message", "íšŒì›ë“±ë¡ ì‹¤íŒ¨.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -54,10 +54,10 @@ public class MemberJson {
 		try {
 			if (dao.modifyMember(member)) {
 				jsonObject.put("result", 0);
-				jsonObject.put("message", "È¸¿ø ¼öÁ¤ ¿Ï·á.");
+				jsonObject.put("message", "È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½.");
 			} else {
 				jsonObject.put("result", 1);
-				jsonObject.put("message", "È¸¿ø ¼öÁ¤ ½ÇÆĞ.");
+				jsonObject.put("message", "È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

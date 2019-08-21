@@ -1,4 +1,16 @@
 $(function() {
+	mb_id = document.getElementById('mb_id');
+	mb_pw = document.getElementById('mb_pw');
+	mb_pincode = document.getElementById('mb_pincode');
+	mb_email = document.getElementById('mb_email');
+	mb_name = document.getElementById('mb_name');
+	mb_phone = document.getElementById('mb_phone');
+	mb_add_num = document.getElementById('mb_add_num');
+	mb_add_ch = document.getElementById('mb_add_ch');
+	mb_add_more = document.getElementById('mb_add_more');
+	mb_add_extra = document.getElementById('mb_add_extra');
+	mb_recommend = document.getElementById('mb_recommend');
+	
 	document.getElementById('search_post').addEventListener('click',function() { searchPost(); });
 	document.getElementById('check_duplication_ID').addEventListener('click',function() { checkDuplicateID(); });
 	document.getElementById('registe').addEventListener('click',function() { registeMember(); });
@@ -23,6 +35,18 @@ var email_regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z
 var blank_regex = /[\s]/g;
 
 var duplication_check_flag = false;
+
+var mb_id;
+var mb_pw;
+var mb_pincode;
+var mb_email;
+var mb_name;
+var mb_phone;
+var mb_add_num;
+var mb_add_ch;
+var mb_add_more;
+var mb_add_extra;
+var mb_recommend;
 
 //id 유효성 검사
 function checkRegExID(){
@@ -61,7 +85,6 @@ function checkRegExID(){
 }
 
 function checkRegEx(reg, object, message) {
-
 	if (reg.test(object.value)) {
 		return true;
 	}
@@ -72,7 +95,7 @@ function checkRegEx(reg, object, message) {
 }
 
 //중복 체크
-function checkDuplicateID() {
+function checkDuplicateID() {	
 	$.ajax({
 		url : './CheckDuplicationID.mb',
 		method : "POST",
@@ -100,9 +123,84 @@ function checkDuplicateID() {
 	});
 }
 
+function checkEffectiveness(reg, ref) {
+	return reg.test(ref.value);
+}
 
 //회원 등록
 function registeMember() {
+	if (blank_regex.test(mb_id.value)) {
+		alert('아이디는 공백을 포함할 수 없습니다.');
+		return false;
+	}
+	if (!id_regex.test(mb_id.value)) {
+		alert('아이디는 6~15자리의 영문,숫자 사용만 가능합니다.');
+		return false;
+	}
+	if (!duplication_check_flag) {
+		alert('ID 중복 체크 해주세요.');
+		return false;
+	}
+	
+	if (blank_regex.test(mb_pw.value)) {
+		alert('비밀번호는 공백을 포함할 수 없습니다.');
+		return false;
+	}
+	if (!pw_regex.test(mb_pw.value)) {
+		alert('비밀번호는 8~15자리의 영문,숫자,특수문자 사용만 가능합니다.');
+		return false;
+	}
+	
+	if (blank_regex.test(mb_pincode.value)) {
+		alert('Pin code는 공백을 포함할 수 없습니다.');
+		return false;
+	}
+	if (!num_regex.test(mb_pincode.value)) {
+		alert('Pin code는 숫자만 사용 가능합니다.');
+		return false;
+	}
+	if (!pincode_regex.test(mb_pincode.value)) {
+		alert('Pin code는 숫자 6자리 여야합니다.');
+		return false;
+	}
+	
+	if (blank_regex.test(mb_email.value)) {
+		alert('E-mail은 공백을 포함할 수 없습니다.');
+		return false;
+	}
+	if (!email_regex.test(mb_email.value)) {
+		alert('옳바른 E-mail을 사용해주세요.');
+		return false;
+	}
+	
+	if (!name_regex.test(mb_name.value)) {
+		alert('이름은 한글/영어만 사용 가능합니다.');
+		return false;
+	}
+	
+	if (blank_regex.test(mb_phone.value)) {
+		alert('휴대전화번호는 공백을 포함할 수 없습니다.');
+		return false;
+	}
+	if (!num_regex.test(mb_phone.value)) {
+		alert('휴대전화번호 숫자만 사용 가능합니다.');
+		return false;
+	}
+	if (!phone_regex.test(mb_phone.value)) {
+		alert('휴대전화번호 11자리를 입력해주세요.');
+		return false;
+	}
+	
+	
+	if (blank_regex.test(mb_recommend.value)) {
+		alert('추천인 아이디는 공백을 포함할 수 없습니다.');
+		return false;
+	}
+	if (!id_regex.test(mb_recommend.value)) {
+		alert('추천인 아이디는 6~15자리의 영문,숫자 사용만 가능합니다.');
+		return false;
+	}
+
 	$.ajax({
 		url : './registeMember.mb',
 		method : "POST",
@@ -186,3 +284,4 @@ function searchPost() {
 		}
 	}).open();
 }
+

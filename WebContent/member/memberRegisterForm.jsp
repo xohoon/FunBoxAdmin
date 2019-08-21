@@ -30,29 +30,29 @@
 			<div class="con">
 				<div>
 				<label>아이디</label>
-				<input id="mb_id" type="text" maxlength="15" placeholder="영문 또는 영문/숫자 조합, 6~15자리 등록가능합니다.">
+				<input id="mb_id" type="text" maxlength="15" placeholder="영문 또는 영문/숫자 조합, 6~15자리 등록가능합니다." autocomplete="off">
 				<input id="check_duplication_ID" type="button" value='중복확인'>
 			  </div>
 			  <!--#id-->
 			  <div>
 				<label>비밀번호</label>
-				<input id="mb_pw" type="password" maxlength="15" placeholder="영문/숫자/특수문자 조합, 8~15자리 등록가능합니다.">
+				<input id="mb_pw" type="password" maxlength="15" placeholder="영문/숫자/특수문자 조합, 8~15자리 등록가능합니다." autocomplete="off">
 			  </div>
 			  <!--pw-->
-			  <div>
+			  <!-- <div>
 				<label>비밀번호 확인</label>
 				<input id="mb_pw_check" type="password" maxlength="15" placeholder="비밀번호를 한번 더 입력해주세요.">
-			  </div>
+			  </div> -->
 			  <!--pwssword check-->
 			  <div>
 				<label>Pin code</label>
 				<input id="mb_pincode" type="password" maxlength="6" placeholder="숫자 6자리 등록가능합니다.">
 			  </div>
 			  <!--pin-->
-			  <div>
+			  <!-- <div>
 				<label>Pin code 확인</label>
 				<input id="mb_pincode_check" type="password" maxlength="6" placeholder="핀코드를 한번 더 입력해주세요.">
-			  </div>
+			  </div> -->
 			  <!--pwssword check-->
 			  <div>
 				<label>E-mail</label>

@@ -33,7 +33,7 @@
 		        <p><span>1</span> / 100</p>
 		        <i class="far fa-hand-pointer"> Click</i>
 		      </li>
-		      <li onclick="location.href='./memberRegister.mb'">
+		      <li onclick="location.href='./memberRegisterForm.mb'">
 		      <h4>회원 등록하기</h4>
           <p>NEW</p>
 		        <i class="far fa-hand-pointer"> Click</i>

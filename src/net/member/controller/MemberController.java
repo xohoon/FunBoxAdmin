@@ -42,7 +42,7 @@ public class MemberController extends HttpServlet implements Servlet {
 				action = new MemberDetailAction(); // �쉶�썝�젙蹂� �긽�꽭蹂닿린 諛� �닔�젙
 				forward = action.execute(request, response);
 				break;			
-			case "/memberRegister.mb": // �쉶�썝�벑濡�
+			case "/memberRegisterForm.mb": // �쉶�썝�벑濡�
 				action = new MemberRegisterAction(); 
 				forward = action.execute(request, response);
 				break;
