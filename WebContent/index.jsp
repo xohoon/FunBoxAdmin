@@ -96,7 +96,7 @@
 		      <h4>포인트 환전 내역</h4>
 		        <i class="far fa-hand-pointer"> Click</i>
 		      </li>
-		      <li onclick="location.href='./tokenExchangeList.fn'">
+		      <li onclick="location.href='./memberInvestedList.fn'">
 		      <h4>투자 내역</h4>
 		        <i class="far fa-hand-pointer"> Click</i>
 		      </li>

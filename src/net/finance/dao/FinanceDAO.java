@@ -6,14 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
-import com.mysql.jdbc.CallableStatement;
-
+import net.finance.dto.Invest;
 import net.finance.dto.Point;
 import net.finance.dto.Token;
-import net.member.dto.Member;
-import net.util.Paging;
 
 public class FinanceDAO {
 	private static FinanceDAO instance;
@@ -269,4 +265,141 @@ public class FinanceDAO {
 		return 0;
 	}
 	
+	// 투자 내역 List 불러오기
+		public ArrayList<Invest> getInvestList(int startRow, int pageSize, String category, String id) {
+			
+			String sql = "select mb_id, mi_category, mi_name, mi_point, mi_reg_date_time, mi_note from member_invest "
+						+"where mb_id like '%"+ id +"%' "
+						+"ORDER BY mi_reg_date_time DESC limit "
+						+ startRow + ", " + pageSize;
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			ArrayList<Invest> transInvestList = new ArrayList<Invest>(); 
+			
+			try {
+				if (category.equals("0")) { // 전체					
+					pstmt = conn.prepareStatement(sql);
+					rs = pstmt.executeQuery();
+					
+				}else if(category.equals("1")){ // 투자
+					sql = "select mb_id, mi_category, mi_name, mi_point, mi_reg_date_time, mi_note from member_invest "
+						+"where mb_id like '%"+ id +"%' and "
+						+"mi_category = '투자' "
+						+"ORDER BY mi_reg_date_time DESC limit "
+						+ startRow + ", " + pageSize;		
+					
+					pstmt = conn.prepareStatement(sql);
+					rs = pstmt.executeQuery();
+					
+				}else if(category.equals("2")){ // 이자
+					sql = "select mb_id, mi_category, mi_name, mi_point, mi_reg_date_time, mi_note from member_invest "
+						+"where mb_id like '%"+ id +"%' and "
+						+"mi_category = '이자' "
+						+ "ORDER BY mi_reg_date_time DESC limit "
+						+ startRow + ", " + pageSize;					
+						
+					pstmt = conn.prepareStatement(sql);
+					rs = pstmt.executeQuery();
+					
+				}else if(category.equals("3")){ // 회수
+					sql = "select mb_id, mi_category, mi_name, mi_point, mi_reg_date_time, mi_note from member_invest "
+						+"where mb_id like '%"+ id +"%' and "
+						+"mi_category = '회수' "
+						+ "ORDER BY mi_reg_date_time DESC limit "
+						+ startRow + ", " + pageSize;						
+						
+					pstmt = conn.prepareStatement(sql);
+					rs = pstmt.executeQuery();
+					
+				}
+				while (rs.next()) {
+					Invest investList = new Invest();
+					investList.setMb_id(rs.getString("mb_id"));
+					investList.setMi_category(rs.getString("mi_category"));
+					investList.setMi_name(rs.getString("mi_name"));
+					investList.setMi_point(rs.getString("mi_point"));
+					investList.setMi_reg_date_time(rs.getString("mi_reg_date_time"));
+					investList.setMi_note(rs.getString("mi_note"));
+					
+					transInvestList.add(investList);
+				}
+				
+				return transInvestList;
+				
+			} catch (Exception ex) {
+				System.out.println("getInvestList 에러: " + ex);
+			} finally {
+				try {
+					if (rs != null)
+						rs.close();
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (Exception e) {
+					System.out.println("해제 실패 : " + e.getMessage());
+				}
+			}
+			
+		return null;
+		} 
+		
+	// 투자내역 개수 불러오기
+	public int investCount(String category , String id) {
+		PreparedStatement pstmt = null;
+		int count = 0;
+		ResultSet rs = null;
+		String sql = "select mb_id, mi_category,mi_name,mi_point,mi_reg_date_time,mi_note from member_invest "
+					+"where mb_id like '%"+ id +"%' ";			     			     
+
+		try {
+			if (category.equals("0")) { // 전체
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+			}else if(category.equals("1")){ // 입금
+				sql = "select mb_id, mi_category,mi_name,mi_point,mi_reg_date_time,mi_note from member_invest "
+					 +"where mb_id like '%"+ id +"%' and "
+					 +"mi_category = '투자'";
+				
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+			}else if(category.equals("2")){
+				sql = "select mb_id, mi_category,mi_name,mi_point,mi_reg_date_time,mi_note from member_invest "
+						 +"where mb_id like '%"+ id +"%' and "
+						 +"mi_category = '이자'";						 
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+			}else if(category.equals("3")){
+				sql = "select mb_id, mi_category,mi_name,mi_point,mi_reg_date_time,mi_note from member_invest "
+						 +"where mb_id like '%"+ id +"%' and "
+						 +"mi_category = '회수'";						 
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+			}
+
+			rs.last();
+			count = rs.getRow();
+			rs.beforeFirst();
+
+			return count;
+		} catch (Exception ex) {
+			System.out.println("investCount 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+		return 0;
+	}
+	 
 }

@@ -45,7 +45,7 @@ public class MemberDAO {
 		}
 	}
 
-	// È¸¿ø¸®½ºÆ®
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 	public boolean getMemberList(List<Member> memberList, int _page, int _search_type, String _search_word,
 			Paging paging) {
 		CallableStatement cstmt = null;
@@ -77,7 +77,7 @@ public class MemberDAO {
 			}
 			return true;
 		} catch (Exception ex) {
-			System.out.println("SelectMemberList ¿¡·¯: " + ex);
+			System.out.println("SelectMemberList ï¿½ï¿½ï¿½ï¿½: " + ex);
 		} finally {
 			try {
 				if (rs != null)
@@ -87,14 +87,14 @@ public class MemberDAO {
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {
-				System.out.println("¿¬°á ÇØÁ¦ ½ÇÆÐ: " + e.getMessage());
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: " + e.getMessage());
 			}
 		}
 
 		return false;
 	}
 
-	// È¸¿ø°¡ÀÔ id Áßº¹Ã¼Å©
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ id ï¿½ßºï¿½Ã¼Å©
 	public boolean checkDuplicationID(String mb_id) {
 		String sql = "SELECT mb_id FROM member WHERE mb_id = ?";
 		PreparedStatement pstmt = null;
@@ -110,7 +110,7 @@ public class MemberDAO {
 			}
 
 		} catch (Exception ex) {
-			System.out.println("checkDuplicationID ¿¡·¯: " + ex);
+			System.out.println("checkDuplicationID ï¿½ï¿½ï¿½ï¿½: " + ex);
 		} finally {
 			try {
 				if (rs != null)
@@ -120,13 +120,13 @@ public class MemberDAO {
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {
-				System.out.println("¿¬°á ÇØÁ¦ ½ÇÆÐ: " + e.getMessage());
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: " + e.getMessage());
 			}
 		}
 		return false;
 	}
 
-	// È¸¿øµî·Ï
+	// È¸ï¿½ï¿½ï¿½ï¿½ï¿½
 	public boolean registeMember(Member member) {
 		String sql = "insert into member(mb_id,mb_pw,mb_pincode,mb_email,mb_name,mb_phone,mb_add_num,mb_add_ch,mb_add_more,mb_add_extra,mb_recommend,reg_date_time) values (?,?,?,?,?,?,?,?,?,?,?,now())";
 		int result = 0;
@@ -151,7 +151,7 @@ public class MemberDAO {
 				return true;
 			}
 		} catch (Exception ex) {
-			System.out.println("registerMember ¿¡·¯: " + ex);
+			System.out.println("registerMember ï¿½ï¿½ï¿½ï¿½: " + ex);
 		} finally {
 			try {
 				if (rs != null)
@@ -161,13 +161,13 @@ public class MemberDAO {
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {
-				System.out.println("¿¬°á ÇØÁ¦ ½ÇÆÐ: " + e.getMessage());
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: " + e.getMessage());
 			}
 		}
 		return false;
 	}
 
-	// È¸¿ø »ó¼¼ º¸±â
+	// È¸ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public List<MemberLateInvested> getMemberLateInvestedList(int mb_idx) {
 		String sql = "SELECT mi_name, mi_point, mi_hoiling_stock, mi_reg_date_time FROM member_invest WHERE mb_idx = ? ORDER BY mi_reg_date_time DESC LIMIT 0,10";
 		PreparedStatement pstmt = null;
@@ -187,7 +187,7 @@ public class MemberDAO {
 
 			return memberLateInvestedList;
 		} catch (Exception ex) {
-			System.out.println("getMemberLateInvestedList ¿¡·¯: " + ex);
+			System.out.println("getMemberLateInvestedList ï¿½ï¿½ï¿½ï¿½: " + ex);
 		} finally {
 			try {
 				if (rs != null)
@@ -197,7 +197,7 @@ public class MemberDAO {
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {
-				System.out.println("¿¬°á ÇØÁ¦ ½ÇÆÐ: " + e.getMessage());
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: " + e.getMessage());
 			}
 		}
 		return memberLateInvestedList;
@@ -229,7 +229,7 @@ public class MemberDAO {
 
 			return member;
 		} catch (Exception ex) {
-			System.out.println("getMember ¿¡·¯: " + ex);
+			System.out.println("getMember ï¿½ï¿½ï¿½ï¿½: " + ex);
 		} finally {
 			try {
 				if (rs != null)
@@ -239,7 +239,7 @@ public class MemberDAO {
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {
-				System.out.println("¿¬°á ÇØÁ¦ ½ÇÆÐ: " + e.getMessage());
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: " + e.getMessage());
 			}
 		}
 		return member;
@@ -271,7 +271,7 @@ public class MemberDAO {
 				return true;
 			}
 		} catch (Exception ex) {
-			System.out.println("modifyMember ¿¡·¯: " + ex);
+			System.out.println("modifyMember ï¿½ï¿½ï¿½ï¿½: " + ex);
 		} finally {
 			try {
 				if (rs != null)
@@ -281,7 +281,7 @@ public class MemberDAO {
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {
-				System.out.println("¿¬°á ÇØÁ¦ ½ÇÆÐ: " + e.getMessage());
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½: " + e.getMessage());
 			}
 		}
 		return false;
