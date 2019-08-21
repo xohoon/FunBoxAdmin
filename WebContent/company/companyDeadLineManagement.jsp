@@ -9,6 +9,7 @@
 	<title>FUNBOX ADMIN</title>
 	<script src="./js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
+	<script type="text/javascript" src="company/js/companyDeadLineManagement.js"></script>
 	<link href="./css/common.css" rel="stylesheet">
 	<link href="./css/admin.css" rel="stylesheet">
 	<script>
@@ -41,11 +42,11 @@
                   <h3>마감임박</h3>
                   <ul class="push">
                     <li>
-                      <input type="radio" name="push" id="auto" value="자동" checked>
+                      <input type="radio" name="push" id="auto" value="자동" onclick="autocheck(this.value)" checked >
                       <label for="auto">자동</label>
                     </li>
                     <li>
-                      <input type="radio" name="push" id="man" value="수동">
+                      <input type="radio" name="push" id="man" value="수동" onclick="autocheck(this.value)">
                       <label for="man">수동</label>
                     </li>
                   </ul>
@@ -64,7 +65,7 @@
                          <td></td>
                          <td></td>
                          <td></td>
-                         <td><button class="topDelBtn">삭제</button></td>
+                         <td><button class="topDelBtn" onclick = "eventcheck()">삭제</button></td>
                          <td>
                            <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
                            <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
@@ -75,7 +76,7 @@
                          <td></td>
                          <td></td>
                          <td></td>
-                         <td><button class="topDelBtn">삭제</button></td>
+                         <td><button class="topDelBtn" onclick = "eventcheck()">삭제</button></td>
                          <td>
                            <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
                            <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
@@ -86,14 +87,53 @@
                          <td></td>
                          <td></td>
                          <td></td>
-                         <td><button class="topDelBtn">삭제</button></td>
+                         <td><button class="topDelBtn" onclick = "eventcheck()">삭제</button></td>
                          <td>
                            <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
                            <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
                           </td>
                        </tr>
                      </table>
+                      <table>
+                       <tr>
+                         <th>번호</th>
+                         <th>상호명</th>
+                         <th>아이디</th>
+                         <th>담당자</th>
+                         <th></th>
+                         <th></th>
+                       </tr>
+                       <tr>
+                         <td>1</td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td><button class="topDelBtn" onclick = "eventcheck()">삭제</button></td>
+                         <td>
+                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
+                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
+                          </td>
+                       </tr>
+                       <tr>
+                         <td>2</td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                         <td><button class="topDelBtn" onclick = "eventcheck()">삭제</button></td>
+                         <td>
+                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
+                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
+                          </td>
+                       </tr>
+                       <tr>
+                         <td>3</td>
+                         <td></td>
+                         <td></td>
+                         <td></td>
+                       </tr>
+                     </table>
                    </div>
+                   
                 </div>
 			</div>
 		</section>
