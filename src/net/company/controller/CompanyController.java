@@ -18,7 +18,7 @@ public class CompanyController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws UnsupportedEncodingException {
-		//request.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
 		String RequestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = RequestURI.substring(contextPath.length());
@@ -31,7 +31,7 @@ public class CompanyController extends HttpServlet {
 				action = new CompanyBannerManagementAction();
 				forward = action.execute(request, response);
 				break;
-			case "/companyDeadLineManagement.cp":
+			case "/companyDeadLineManagement.cp": // 윤식 추가
 				action = new CompanyDeadLineManagementAction();
 				forward = action.execute(request, response);
 				break;

@@ -62,7 +62,6 @@
 				<select id = 'selectID' name = 'selectID' title='아이디검색'>
 					<option value = '0'>- 전체 -</option>
 					<option value = '1'>아이디</option>
-					<option value = '2'>기업명</option>				
 				</select>
 				<input id = 'searchID' name = 'searchID' type="text" onkeydown='javascript:if(event.keyCode==13){func.searchEnter({}); return false;}' maxlength='10'>
 				<button onclick = "btnIdsearch()"><i class="fas fa-search"></i></button>
