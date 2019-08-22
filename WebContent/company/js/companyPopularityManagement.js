@@ -35,7 +35,7 @@ $(".allBtn").on('click', function() {
 });
 
 $(document).ready(function() {
-	$("#bgColor").children().css('backgroundColor', '#d3d3d3');
+	$(".topList").children().css('backgroundColor', '#d3d3d3');
 	$(".allList").children().css('backgroundColor', '#d3d3d3');
 	
 	$(".allBtn").prop("disabled", true);
@@ -49,11 +49,13 @@ $(document).ready(function() {
 
 	$(".downBtn").prop("disabled", true);
 	$(".downBtn").css('backgroundColor', '#d3d3d3');
+	
+	$("input[name='push']").attr('disabled', true);
 });
 
 $("#modityBtn").on('click', function() {
-	$("#bgColor").css('backgroundColor', 'transparent');
-	$(".allList").css('backgroundColor', 'transparent');
+	$(".topList").children().css('backgroundColor', 'transparent');
+	$(".allList").children().css('backgroundColor', 'transparent');
 	
 	$(".allBtn").prop("disabled", false);
 	$(".allBtn").css('backgroundColor', 'transparent');

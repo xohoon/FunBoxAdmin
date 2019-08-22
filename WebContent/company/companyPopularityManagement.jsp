@@ -52,124 +52,16 @@
                   </ul>
                    <div class="topList" id="bgColor">
                      <table id="test01">
-                       <tr>
-                         <th>순위</th>
-                         <th>상호명</th>
-                         <th>아이디</th>
-                         <th>담당자</th>
-                         <th></th>
-                         <th></th>
-                       </tr>
-                       <tr>
-                         <td>1</td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td><button class="topDelBtn">삭제</button></td>
-                         <td>
-                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
-                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
-                          </td>
-                       </tr>
-                       <tr>
-                         <td>2</td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td><button class="topDelBtn">삭제</button></td>
-                         <td>
-                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
-                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
-                          </td>
-                       </tr>
-                       <tr>
-                         <td>3</td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td><button class="topDelBtn">삭제</button></td>
-                         <td>
-                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
-                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
-                          </td>
-                       </tr>
-                       <tr>
-                         <td>4</td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td><button class="topDelBtn">삭제</button></td>
-                         <td>
-                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
-                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
-                          </td>
-                       </tr>
-                       <tr>
-                         <td>5</td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td><button class="topDelBtn">삭제</button></td>
-                         <td>
-                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
-                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
-                          </td>
-                       </tr>
-                       <tr>
-                         <td>6</td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td><button class="topDelBtn">삭제</button></td>
-                         <td>
-                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
-                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
-                          </td>
-                       </tr>
-                       <tr>
-                         <td>7</td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td><button class="topDelBtn">삭제</button></td>
-                         <td>
-                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
-                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
-                          </td>
-                       </tr>
-                       <tr>
-                         <td>8</td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td><button class="topDelBtn">삭제</button></td>
-                         <td>
-                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
-                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
-                          </td>
-                       </tr>
-                       <tr>
-                         <td>9</td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td><button class="topDelBtn">삭제</button></td>
-                         <td>
-                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
-                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
-                          </td>
-                       </tr>
-                       <tr>
-                         <td>10</td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td><button class="topDelBtn">삭제</button></td>
-                         <td>
-                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
-                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
-                          </td>
-                       </tr>
+                     	<tbody id="added_table">
+	                       <tr>
+	                         <th>순위</th>
+	                         <th>상호명</th>
+	                         <th>아이디</th>
+	                         <th>담당자</th>
+	                         <th></th>
+	                         <th></th>
+	                       </tr>
+                       </tbody>
                      </table>
                    </div>
                    <input type="button" id="modityBtn" value="수정" style="margin-top:10px;">
