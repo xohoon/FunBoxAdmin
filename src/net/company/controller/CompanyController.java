@@ -31,14 +31,10 @@ public class CompanyController extends HttpServlet {
 				action = new CompanyDeadLineManagementAction();
 				forward = action.execute(request, response);
 				break;
-			case "/companyDeadLineAjax.cp": // 윤식 추가 auto top 3
+			case "/companyDeadLineAjax.cp": // 윤식 추가  수동 top 3
 				action = new CompanyDeadLineAjaxAction();
 				forward = action.execute(request, response);
-				break;
-			case "/companyDeadLineManAjax.cp": // 윤식 추가 수동 top 3
-				action = new CompanyDeadLineManAjaxAction();
-				forward = action.execute(request, response);
-				break;
+				break;	
 			case "/companyInvestApplyDetail.cp":
 				action = new CompanyInvestApplyDetailAction();
 				forward = action.execute(request, response);
