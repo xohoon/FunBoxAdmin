@@ -12,8 +12,6 @@
 <script src="https://kit.fontawesome.com/947fdcffe2.js"></script>    
 </head>
 <body>
-
-
 <table class="allGroup">
     <tr>
       <th>선택</th>
@@ -23,7 +21,7 @@
     </tr>
     <c:forEach var="company" items="${companyList }">
     	<tr>
-	     <td><button class="allBtn">선택</button></td>
+	     <td><button id="${company.cp_idx }" value ="${company.cp_idx }" class="allBtn">선택</button></td>
 	      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">${company.cp_name }</td>
 	      <td>${company.mb_id }</td>
 	      <td>${company.cp_manager }</td>
