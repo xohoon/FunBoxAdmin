@@ -19,7 +19,7 @@ public class CompanyDeadLineAjaxAction implements Action {
 		System.out.println("category :"+category);
 		
 		CompanyDAO companydao = new CompanyDAO();
-		JSONArray auto3list = companydao.getauto3List(category);
+		JSONArray auto3list = companydao.getMan3List();
 		
 		response.setContentType("application/x-json;charset=UTF-8");
 		response.getWriter().print(auto3list);

@@ -267,67 +267,6 @@ public class CompanyDAO {
 
 		return false;
 	}
-	// 마감 임박 클라이언트 등록된 3개 List 들고 오기(자동)
-	@SuppressWarnings({ "unchecked", "unused" })
-	public JSONArray getauto3List(String category) {
-		
-	String sql = "select " 
-				+"cp.mb_id, "
-				+"cp.cp_idx, " 				 
-				+"cp.cp_name, " 
-				+"cp.cp_branch, "
-				+"cp.cp_manager, "
-				+"cp_i.iv_current_amount, " 
-				+"cp_i.iv_goal_amount, "
-				+"cp_i.iv_appl_stop_date_time, "
-				+"round((iv_current_amount/iv_goal_amount)*100) as persent from company cp, company_file cp_f, company_invest cp_i " 
-				+"where cp_i.iv_appl_stop_date_time > now() " 
-				+"AND cp.cp_open_status = true " 
-				+"AND cp.cp_idx = cp_i.cp_idx " 
-				+"AND cp.cp_idx = cp_f.cp_idx " 
-				+"order by cp_i.iv_appl_stop_date_time asc limit 3";
-			     	
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
-	
-	JSONArray jsonArr = new JSONArray(); 
-	System.out.println(sql);
-	
-	try { 
-		pstmt = conn.prepareStatement(sql);
-		rs = pstmt.executeQuery();
-	
-		while (rs.next()) {
-			JSONObject jsonObj = new JSONObject();
-			jsonObj.put("cp_idx", rs.getString("cp.cp_idx"));
-			jsonObj.put("cp_name", rs.getString("cp.cp_name"));
-			jsonObj.put("mb_id", rs.getString("cp.mb_id"));
-			jsonObj.put("cp_manager", rs.getString("cp.cp_manager"));
-			
-			jsonArr.add(jsonObj);						
-		}
-		System.out.println(jsonArr.toString());
-		
-		return jsonArr;
-		
-	} catch (Exception ex) {
-		System.out.println("getauto3List에러: " + ex);
-	} finally {
-		try {
-			if (rs != null)
-				rs.close();
-			if (pstmt != null)
-				pstmt.close();
-			if (conn != null)
-				conn.close();
-		} catch (Exception e) {
-			System.out.println("해제 실패 : " + e.getMessage());
-		}
-	}
-
-	return null;				
-	}
-	
 	
 	// 마감 임박 클라이언트 수동 List 값 가져 오기(수동)
 		@SuppressWarnings({ "unchecked", "unused" })
@@ -380,40 +319,7 @@ public class CompanyDAO {
 
 		return null;
 	}
-		
-	// 자동 수동 상태 들고오기
-	public boolean getAutoStatus(int aas_idx) {
-		String sql = "SELECT aas_auto_status FROM admin_am_setting WHERE aas_idx = ?";
-
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, aas_idx);
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				return rs.getBoolean("aas_auto_status");
-			}
-		} catch (Exception ex) {
-			System.out.println("getAutoStatus 에러: " + ex);
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				System.out.println("해제 실패 : " + e.getMessage());
-			}
-		}
-
-		return true;
-	}
-		
+	
 	/////////////////////////////////태훈시작//////////////////////////////////////////////
 	// 실시간 수동 목록 가져오기
 		public List<CompanyPopularityList> getCompanyPopularityList() {
