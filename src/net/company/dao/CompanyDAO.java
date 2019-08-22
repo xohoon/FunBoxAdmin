@@ -5,18 +5,20 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-//import com.mysql.cj.jdbc.CallableStatement;
 import com.mysql.jdbc.CallableStatement;
+//import com.mysql.cj.jdbc.CallableStatement;
 
 import net.company.dto.Company;
 import net.company.dto.CompanyApplication;
 import net.company.dto.CompanyApplicationDetail;
 import net.company.dto.CompanyInvested;
+import net.company.dto.CompanyPopularityList;
 import net.util.Paging;
 
 public class CompanyDAO {
@@ -298,8 +300,52 @@ public class CompanyDAO {
 			}
 
 			return true;
-		}
+	}
 	
+	/////////////////////////////////태훈시작//////////////////////////////////////////////
+	// 실시간 수동 목록 가져오기
+		public List<CompanyPopularityList> getCompanyPopularityList() {
+			String sql = "SELECT cp_idx, cp_name, manager_name, member_id "
+					+ "FROM popularityManagement_list "
+					+ "ORDER BY cp_idx DESC";
+
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			List<CompanyPopularityList> realList = new ArrayList<CompanyPopularityList>();
+
+			try {
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+
+				while (rs.next()) {
+					CompanyPopularityList realDAO = new CompanyPopularityList();
+					realDAO.setCp_idx(rs.getInt("cp_idx"));
+					realDAO.setCp_name(rs.getString("cp_name"));
+					realDAO.setManager_name(rs.getString("manager_name"));
+					realDAO.setMember_id(rs.getString("member_id"));
+					
+					realList.add(realDAO);
+				}
+				return realList;
+			} catch (Exception ex) {
+				System.out.println("getUploadFilePath 에러: " + ex);
+			} finally {
+				try {
+					if (rs != null)
+						rs.close();
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (Exception e) {
+					System.out.println("해제 실패 : " + e.getMessage());
+				}
+			}
+
+			return null;
+		}
+		/////////////////////////////////태훈끝//////////////////////////////////////////////
+	 /// 윤식 추가 수동 마감임박 불러오기
 		@SuppressWarnings({ "unchecked", "unused" })
 		public JSONArray getMan3List() {
 			String sql = "select cp_idx, cp_name, mb_id, cp_manager from admin_deadLine";
