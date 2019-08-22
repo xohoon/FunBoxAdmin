@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.common.action.Action;
 import net.common.action.ActionForward;
-import net.company.action.CompanyBannerManagementAction;
+import net.company.action.CompanyMainSlideManagement2Action;
 
 public class AdminController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -27,7 +27,7 @@ public class AdminController extends HttpServlet {
 		try {
 			switch (command) {
 			case "/loginForm.ad":
-				action = new CompanyBannerManagementAction();
+				action = new CompanyMainSlideManagement2Action();
 				forward = action.execute(request, response);
 				break;
 			default:

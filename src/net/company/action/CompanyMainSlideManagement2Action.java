@@ -6,14 +6,13 @@ import javax.servlet.http.HttpServletResponse;
 import net.common.action.Action;
 import net.common.action.ActionForward;
 
-public class CompanyBannerManagementAction implements Action {
+public class CompanyMainSlideManagement2Action implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//request.setCharacterEncoding("utf-8"); //한글처리
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("./company/companyBannerManagement.jsp");
+		forward.setPath("./company/companyMainSlideManagement2.jsp");
 		return forward;
 	}
 
