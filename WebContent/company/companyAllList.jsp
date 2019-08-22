@@ -9,7 +9,8 @@
     <link href="css/common.css" rel="stylesheet">
 <link href="css/admin.css" rel="stylesheet">
 <script src="../js/jquery-3.1.1.min.js"></script>
-<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>    
+<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
+<script type="text/javascript" src="company/js/companyPopularityManagement.js"></script> 
 </head>
 <body>
 

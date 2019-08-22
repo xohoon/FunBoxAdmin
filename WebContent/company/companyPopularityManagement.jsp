@@ -9,6 +9,7 @@
 	<title>FUNBOX ADMIN</title>
 	<script src="./js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
+	<script type="text/javascript" src="company/js/companyPopularityManagement.js"></script>
 	<link href="./css/common.css" rel="stylesheet">
 	<link href="./css/admin.css" rel="stylesheet">
 	<script>
@@ -49,8 +50,8 @@
                       <label for="man">수동</label>
                     </li>
                   </ul>
-                   <div class="topList">
-                     <table>
+                   <div class="topList" id="bgColor">
+                     <table id="test01">
                        <tr>
                          <th>순위</th>
                          <th>상호명</th>
@@ -171,6 +172,8 @@
                        </tr>
                      </table>
                    </div>
+                   <input type="button" id="modityBtn" value="수정" style="margin-top:10px;">
+                   <input type="button" id="saveBtn" value="저장" style="margin-left:10px; margin-top:10px;">
                 </div>
 			</div>
 		</section>

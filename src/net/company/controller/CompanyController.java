@@ -80,6 +80,10 @@ public class CompanyController extends HttpServlet {
 				action = new DeleteCompanyInvestApply();
 				forward = action.execute(request, response);
 				break;
+			case "/companyPopularityManagementUpdate.cp":
+				action = new companyPopularityManagementUpdateAction();
+				forward = action.execute(request, response);
+				break;
 			default:
 				break;
 			}
