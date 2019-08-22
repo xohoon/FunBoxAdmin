@@ -52,85 +52,16 @@
                   </ul>
                    <div class="topList">
                      <table>
-                       <tr>
-                         <th>번호</th>
-                         <th>상호명</th>
-                         <th>아이디</th>
-                         <th>담당자</th>
-                         <th></th>
-                         <th></th>
-                       </tr>
-                       <tr>
-                         <td>1</td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td><button class="topDelBtn" onclick = "eventcheck()">삭제</button></td>
-                         <td>
-                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
-                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
-                          </td>
-                       </tr>
-                       <tr>
-                         <td>2</td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td><button class="topDelBtn" onclick = "eventcheck()">삭제</button></td>
-                         <td>
-                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
-                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
-                          </td>
-                       </tr>
-                       <tr>
-                         <td>3</td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td><button class="topDelBtn" onclick = "eventcheck()">삭제</button></td>
-                         <td>
-                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
-                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
-                          </td>
-                       </tr>
-                     </table>
-                      <table>
-                       <tr>
-                         <th>번호</th>
-                         <th>상호명</th>
-                         <th>아이디</th>
-                         <th>담당자</th>
-                         <th></th>
-                         <th></th>
-                       </tr>
-                       <tr>
-                         <td>1</td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td><button class="topDelBtn" onclick = "eventcheck()">삭제</button></td>
-                         <td>
-                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
-                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
-                          </td>
-                       </tr>
-                       <tr>
-                         <td>2</td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                         <td><button class="topDelBtn" onclick = "eventcheck()">삭제</button></td>
-                         <td>
-                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
-                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
-                          </td>
-                       </tr>
-                       <tr>
-                         <td>3</td>
-                         <td></td>
-                         <td></td>
-                         <td></td>
-                       </tr>
+                     	<tbody id="added_table">
+	                       <tr>
+	                         <th>번호</th>
+	                         <th>상호명</th>
+	                         <th>아이디</th>
+	                         <th>담당자</th>
+	                         <th></th>
+	                         <th></th>
+	                       </tr>
+                       </tbody>
                      </table>
                    </div>
                    

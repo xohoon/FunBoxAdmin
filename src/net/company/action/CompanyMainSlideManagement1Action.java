@@ -5,15 +5,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.common.action.Action;
 import net.common.action.ActionForward;
+import net.company.dao.CompanyDAO;
 
-public class CompanyMainSlideManagementAction implements Action {
+public class CompanyMainSlideManagement1Action implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		//request.setCharacterEncoding("utf-8"); //�ѱ�ó��
+		CompanyDAO companyDAO = new CompanyDAO();
+		//mainbanner 1 슬라이드 상태
+		boolean auto_status = companyDAO.getAutoStatus(4);
+		
 		ActionForward forward = new ActionForward();
+		
+		request.setAttribute("auto_status", auto_status);
+		
 		forward.setRedirect(false);
-		forward.setPath("./company/companyMainSlideManagement.jsp");
+		forward.setPath("./company/companyMainSlideManagement1.jsp");
 		return forward;
 	}
 
