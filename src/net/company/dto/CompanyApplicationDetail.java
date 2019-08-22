@@ -1,6 +1,7 @@
 package net.company.dto;
 
 public class CompanyApplicationDetail {
+	private int app_cp_idx;
 	private String app_cp_name;
 	private String mb_id;
 	private String app_cp_manager;
@@ -51,6 +52,14 @@ public class CompanyApplicationDetail {
 	private String app_cp_alias_other_document4;
 	private String app_cp_alias_other_document5;
 	private String app_cp_real_path;
+
+	public int getApp_cp_idx() {
+		return app_cp_idx;
+	}
+
+	public void setApp_cp_idx(int app_cp_idx) {
+		this.app_cp_idx = app_cp_idx;
+	}
 
 	public String getApp_cp_name() {
 		return app_cp_name;

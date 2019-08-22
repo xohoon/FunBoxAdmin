@@ -33,7 +33,7 @@
 		        <p><span>1</span> / 100</p>
 		        <i class="far fa-hand-pointer"> Click</i>
 		      </li>
-		      <li onclick="location.href='./memberRegister.mb'">
+		      <li onclick="location.href='./memberRegisterForm.mb'">
 		      <h4>회원 등록하기</h4>
           <p>NEW</p>
 		        <i class="far fa-hand-pointer"> Click</i>
@@ -73,12 +73,12 @@
           <p>3</p>
 		        <i class="far fa-hand-pointer"> 수정하기</i>
 		      </li>
-		      <li onclick="location.href='./companyMainSlideManagement.cp'">
+		      <li onclick="location.href='./companyMainSlideManagement1.cp'">
 		      <h4>메인배너1</h4>
           <p>3</p>
 		        <i class="far fa-hand-pointer"> 수정하기</i>
 		      </li>
-		      <li onclick="location.href='./companyBannerManagement.cp'">
+		      <li onclick="location.href='./companyMainSlideManagement2.cp'">
 		      <h4>메인배너2</h4>
           <p>2</p>
 		        <i class="far fa-hand-pointer"> 수정하기</i>

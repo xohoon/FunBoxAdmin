@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.company.dao.CompanyDAO;
 
-public class CompanyFileDownload extends HttpServlet {
+public class CompanyInvesteApplyFileDownload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	public CompanyFileDownload() {
+	public CompanyInvesteApplyFileDownload() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -22,13 +22,22 @@ public class CompanyFileDownload extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// ① 파일명 가져오기
-		String fileName = request.getParameter("filename");
+		String app_cp_idx_string = request.getParameter("app_cp_idx");
+		Integer app_cp_idx = 0;
+		
+		try {
+			app_cp_idx = Integer.parseInt(app_cp_idx_string);
+		} catch (NumberFormatException nfe) {
+			//error processing
+		}
+		
+		String fileName = request.getParameter("fileName");
 		//int cp_idx = Integer.parseInt(request.getParameter("cp_idx"));
 		CompanyDAO compnayDao = new CompanyDAO();
 		
 		// ② 경로 가져오기
-		String saveDir = compnayDao.getUploadDirectory();
-		
+		String saveDir = compnayDao.getDownloadPath(app_cp_idx);
+
 		//local 경로
 		//String saveDir = "C:/Users/user/Desktop/download_test";
 		

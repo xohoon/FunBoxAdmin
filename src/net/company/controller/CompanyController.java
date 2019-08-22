@@ -27,10 +27,6 @@ public class CompanyController extends HttpServlet {
 
 		try {
 			switch (command) {
-			case "/companyBannerManagement.cp":
-				action = new CompanyBannerManagementAction();
-				forward = action.execute(request, response);
-				break;
 			case "/companyDeadLineManagement.cp": // 윤식 추가
 				action = new CompanyDeadLineManagementAction();
 				forward = action.execute(request, response);
@@ -63,8 +59,12 @@ public class CompanyController extends HttpServlet {
 				action = new CompanyInvestedListAction();
 				forward = action.execute(request, response);
 				break;
-			case "/companyMainSlideManagement.cp":
-				action = new CompanyMainSlideManagementAction();
+			case "/companyMainSlideManagement1.cp":
+				action = new CompanyMainSlideManagement1Action();
+				forward = action.execute(request, response);
+				break;
+			case "/companyMainSlideManagement2.cp":
+				action = new CompanyMainSlideManagement2Action();
 				forward = action.execute(request, response);
 				break;
 			case "/companyPopularityManagement.cp":
