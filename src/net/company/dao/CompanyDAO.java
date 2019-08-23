@@ -12,7 +12,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.mysql.jdbc.CallableStatement;
-//import com.mysql.cj.jdbc.CallableStatement;
+// import com.mysql.cj.jdbc.CallableStatement;
 
 import net.company.dto.Company;
 import net.company.dto.CompanyApplication;
@@ -300,12 +300,18 @@ public class CompanyDAO {
 
 		return true;
 	}
-
-	@SuppressWarnings({ "unchecked", "unused" })
-	public JSONArray getMan3List() {
-
-		String sql = "select " + "cp_idx, " + "mb_id, " + "cp_name, " + "cp_manager " + "from admin_deadLine ";
-
+		
+	 // 마감 임박 클라이언트 수동 List 값 가져 오기(수동) 윤식 추가
+		@SuppressWarnings({ "unchecked", "unused" })
+		public JSONArray getMan3List() {
+			
+		String sql = "select " 					
+					+"cp_idx, " 
+					+"mb_id, "
+					+"cp_name, " 					
+					+"cp_manager "
+					+"from admin_deadLine ";					
+				     	
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
