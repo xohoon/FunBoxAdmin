@@ -47,6 +47,8 @@ function removeItem(object){
 	Button.className = 'allBtn';
 	Button.style = "background-color: transparent";
 	Button.innerText='선택';
+	Button.addEventListener('click',function() { addManualToList(Button); all_list.removeChild(Button.parentElement.parentElement); });
+	
 	Td.append(Button);
 	
 	trTag.insertBefore(Td,trTag.children[0]);
