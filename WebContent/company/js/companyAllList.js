@@ -22,10 +22,10 @@ function addManualToList(object){
 	var cp_manager = object.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.innerText;
 	var itemHtml ="";
 	itemHtml += "<tr><td>"+ added_table.children().length + "</td>";
-	itemHtml += "<td>" + cp_name + "</td>";
-	itemHtml += "<td>" + mb_id + "</td>";
-	itemHtml += "<td>" + cp_manager + "</td>";
-	itemHtml += "<td><button type='button' class='topDelBtn' onclick='removeItem(this);'>삭제</button></td><td><button type='button' class='upBtn' onclick='up(this);''><i class='fas fa-chevron-up'></i></button><button type='button' class='downBtn' onclick='down(this);'><i class='fas fa-chevron-down'></i></button></td><input name='"+count+"' class='cp_idx' type='hidden' value='"+object.id+"'></tr>";
+	itemHtml += "<td id='cp_name_"+count+"'>" + cp_name + "</td>";
+	itemHtml += "<td id='mb_id_"+count+"'>" + mb_id + "</td>";
+	itemHtml += "<td id='cp_manager_name_"+count+"'>" + cp_manager + "</td>";
+	itemHtml += "<td><button type='button' class='topDelBtn' onclick='removeItem(this);'>삭제</button></td><td><button type='button' class='upBtn' onclick='up(this);''><i class='fas fa-chevron-up'></i></button><button type='button' class='downBtn' onclick='down(this);'><i class='fas fa-chevron-down'></i></button></td><input name='cp_idx_"+count+"' class='cp_idx' type='hidden' value='"+object.id+"'></tr>";
 	
 	added_table.append(itemHtml);
 	count++;
@@ -63,6 +63,41 @@ function removeItem(object){
 	
 	count--;
 };
+
+function swapUp(trTag){
+	var temp = trTag.children[6].name;
+	trTag.children[6].name = trTag.previousSibling.children[6].name;
+	trTag.previousSibling.children[6].name = temp;
+	
+	temp = trTag.children[1].id;
+	trTag.children[1].id = trTag.previousSibling.children[1].id;
+	trTag.previousSibling.children[1].id = temp;
+	
+	temp = trTag.children[2].id;
+	trTag.children[2].id = trTag.previousSibling.children[2].id;
+	trTag.previousSibling.children[2].id = temp;
+	
+	temp = trTag.children[3].id;
+	trTag.children[3].id = trTag.previousSibling.children[3].id;
+	trTag.previousSibling.children[3].id = temp;
+}
+function swapDown(trTag){
+	var temp = trTag.children[6].name;
+	trTag.children[6].name = trTag.nextElementSibling.children[6].name;
+	trTag.nextElementSibling.children[6].name = temp;
+	
+	temp = trTag.children[1].id;
+	trTag.children[1].id = trTag.nextElementSibling.children[1].id;
+	trTag.nextElementSibling.children[1].id = temp;
+	
+	temp = trTag.children[2].id;
+	trTag.children[2].id = trTag.nextElementSibling.children[2].id;
+	trTag.nextElementSibling.children[2].id = temp;
+	
+	temp = trTag.children[3].id;
+	trTag.children[3].id = trTag.nextElementSibling.children[3].id;
+	trTag.nextElementSibling.children[3].id = temp;
+}
 var a;
 function up(object){
 	var trTag = object.parentElement.parentElement;
@@ -70,12 +105,12 @@ function up(object){
 		return false;
 	}
 	
-	var hidden_name = trTag.children[6].name;
+	/*var hidden_name = trTag.children[6].name;
 	trTag.children[6].name = trTag.previousSibling.children[6].name;
-	trTag.previousSibling.children[6].name = hidden_name;
+	trTag.previousSibling.children[6].name = hidden_name;*/
+	swapUp(trTag);
 	
 	added_table_js.insertBefore(trTag,trTag.previousSibling);
-	a = trTag.children[6];
 	reloadNumbering();
 };
 
@@ -85,9 +120,10 @@ function down(object){
 		return false;
 	}
 	
-	var hidden_name = trTag.children[6].name;
+	/*var hidden_name = trTag.children[6].name;
 	trTag.children[6].name = trTag.nextElementSibling.children[6].name;
-	trTag.nextElementSibling.children[6].name = hidden_name;
+	trTag.nextElementSibling.children[6].name = hidden_name;*/
+	swapDown(trTag);
 	
 	added_table_js.insertBefore(trTag.nextElementSibling,trTag);
 	reloadNumbering();
