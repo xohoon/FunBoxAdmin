@@ -89,10 +89,12 @@ public class CompanyController extends HttpServlet {
 				action = new DeleteCompanyInvestApply();
 				forward = action.execute(request, response);
 				break;
+				//태훈추가//
 			case "/companyPopularityManagementUpdate.cp":
 				action = new companyPopularityManagementUpdateAction();
 				forward = action.execute(request, response);
 				break;
+				//태훈끝//
 			default:
 				break;
 			}

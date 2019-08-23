@@ -3,13 +3,13 @@ $(function(){
 	added_table = $('#added_table');
 	added_table_js = document.getElementById('added_table');
 	all_list = document.getElementById('all_list');
-	
 	Array.from(document.getElementsByClassName("allBtn")).forEach(function(item) {		
 		item.addEventListener('click',function() { addManualToList(item); all_list.removeChild(item.parentElement.parentElement); });
 	});
 	
 	
 });
+var count = 1;
 var test;
 var added_table;
 var added_table_js;
@@ -21,20 +21,45 @@ function addManualToList(object){
 	var mb_id = object.parentElement.nextElementSibling.nextElementSibling.innerText;
 	var cp_manager = object.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.innerText;
 	var itemHtml ="";
-	itemHtml += "<tr><input name='cp_idx_"+object.id+"' class='cp_idx' type='hidden' value='"+object.id+"'><td>"+ added_table.children().length + "</td>";
+	itemHtml += "<tr><td>"+ added_table.children().length + "</td>";
 	itemHtml += "<td>" + cp_name + "</td>";
 	itemHtml += "<td>" + mb_id + "</td>";
 	itemHtml += "<td>" + cp_manager + "</td>";
-	itemHtml += "<td><button class='topDelBtn' onclick='removeItem(this);'>삭제</button></td><td><button class='upBtn' onclick='up(this);''><i class='fas fa-chevron-up'></i></button><button class='downBtn' onclick='down(this);'><i class='fas fa-chevron-down'></i></button></td></tr>";
+	itemHtml += "<td><button class='topDelBtn' onclick='removeItem(this);'>삭제</button></td><td><button class='upBtn' onclick='up(this);''><i class='fas fa-chevron-up'></i></button><button class='downBtn' onclick='down(this);'><i class='fas fa-chevron-down'></i></button></td><input name='"+count+"' class='cp_idx' type='hidden' value='"+object.id+"'></tr>";
 	
 	added_table.append(itemHtml);
+	count++;
 };
 
 function removeItem(object){
+	var trTag = object.parentElement.parentElement;
 	
-	//all_list.appendChild(object.parentElement.parentElement);
-	added_table_js.removeChild(object.parentElement.parentElement);	
+	var value = object.parentElement.parentElement.children[6].value;
+	
+	trTag.removeChild(trTag.children[6]);
+	trTag.removeChild(object.parentElement.nextElementSibling);
+	trTag.removeChild(object.parentElement);
+	
+	var Td = document.createElement('td');
+	var Button = document.createElement('button');
+	Button.id = value;
+	Button.value = value;
+	Button.className = 'allBtn';
+	Button.style = "background-color: transparent";
+	Button.innerText='선택';
+	Td.append(Button);
+	
+	trTag.insertBefore(Td,trTag.children[0]);
+	trTag.removeChild(trTag.children[1]);
+
+	added_table_js.removeChild(trTag);
+	
 	reloadNumbering();
+	
+	all_list.appendChild(trTag);
+	
+	
+	count--;
 };
 
 function up(object){

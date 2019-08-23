@@ -50,23 +50,25 @@
                       <label for="man">수동</label>
                     </li>
                   </ul>
-                   <div class="topList" id="bgColor">
-                     <table id="test01">
-                     	<tbody id="added_table">
-	                       <tr>
-	                         <th>순위</th>
-	                         <th>상호명</th>
-	                         <th>아이디</th>
-	                         <th>담당자</th>
-	                         <th></th>
-	                         <th></th>
-	                       </tr>
-                       </tbody>
-                     </table>
-                   </div>
-                   <input type="button" id="modityBtn" value="수정" style="margin-top:10px;">
-                   <input type="button" id="saveBtn" value="저장" style="margin-left:10px; margin-top:10px;">
-                </div>
+                  	<form method="post" action="./companyPopularityManagementUpdate.cp" >
+	                   <div class="topList" id="bgColor">
+	                     <table id="test01">
+	                     	<tbody id="added_table">
+		                       <tr>
+		                         <th>순위</th>
+		                         <th>상호명</th>
+		                         <th>아이디</th>
+		                         <th>담당자</th>
+		                         <th></th>
+		                         <th></th>
+		                       </tr>
+	                       </tbody>
+	                     </table>
+	                   </div>
+	                   <input type="button" id="modityBtn" value="수정" style="margin-top:10px;">
+	                   <input type="submit" id="saveBtn" value="적용" style="margin-left:10px; margin-top:10px;">
+                  	</form>
+	              </div>
 			</div>
 		</section>
 		<footer></footer>
