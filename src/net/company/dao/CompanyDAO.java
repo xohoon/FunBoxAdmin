@@ -347,6 +347,12 @@ public class CompanyDAO {
 
 		return null;
 	}
+	// 윤식 추가 - 자동, 수동 헨들러
+	public int getAuto_ManDeadLine() {
+		
+		
+		return 0;
+	}
 
 	///////////////////////////////// 태훈시작//////////////////////////////////////////////
 	// 실시간 수동 목록 가져오기
@@ -388,6 +394,40 @@ public class CompanyDAO {
 		}
 
 		return null;
+	}
+	
+	// 실시간 수동 데이터 넣기
+	public boolean insertPopularityManagement(List<Integer> cp_idx_list, List<String> cp_name_list, List<String> mb_id_list, List<String> manager_name_list) {
+		String sql = "";
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		System.out.println(">>1"+cp_idx_list.toString());
+		System.out.println(">>2"+cp_name_list.toString());
+		System.out.println(">>3"+mb_id_list.toString());
+		System.out.println(">>4"+manager_name_list.toString());
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			result = pstmt.executeUpdate();
+			if (result != 0) {
+				return true;
+			}
+		} catch (Exception ex) {
+			System.out.println("insertPopularityManagement 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("연결 해제 실패: " + e.getMessage());
+			}
+		}
+		return false;
 	}
 	///////////////////////////////// 태훈끝//////////////////////////////////////////////
 
