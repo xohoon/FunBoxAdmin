@@ -31,6 +31,7 @@ function addManualToList(object){
 };
 
 function removeItem(object){
+	
 	//all_list.appendChild(object.parentElement.parentElement);
 	added_table_js.removeChild(object.parentElement.parentElement);	
 	reloadNumbering();
