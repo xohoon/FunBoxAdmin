@@ -11,9 +11,7 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-
-//import com.mysql.jdbc.CallableStatement;
-import com.mysql.cj.jdbc.CallableStatement;
+import com.mysql.jdbc.CallableStatement;
 
 import net.company.dto.Company;
 import net.company.dto.CompanyApplication;
@@ -301,18 +299,13 @@ public class CompanyDAO {
 
 		return true;
 	}
-		
-	 // 마감 임박 클라이언트 수동 List 값 가져 오기(수동) 윤식 추가
-		@SuppressWarnings({ "unchecked", "unused" })
-		public JSONArray getMan3List() {
-			
-		String sql = "select " 					
-					+"cp_idx, " 
-					+"mb_id, "
-					+"cp_name, " 					
-					+"cp_manager "
-					+"from admin_deadLine ";					
-				     	
+
+	// 마감 임박 클라이언트 수동 List 값 가져 오기(수동) 윤식 추가
+	@SuppressWarnings({ "unchecked", "unused" })
+	public JSONArray getMan3List() {
+
+		String sql = "select " + "cp_idx, " + "mb_id, " + "cp_name, " + "cp_manager " + "from admin_deadLine ";
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
@@ -401,6 +394,72 @@ public class CompanyDAO {
 
 		return null;
 	}
+	
+	// 실시간 수동 데이터 넣기
+	public boolean insertPopularityManagement(List<Integer> cp_idx_list, List<String> cp_name_list, List<String> mb_id_list, List<String> manager_name_list) {
+		String sql = "";
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		System.out.println(">>1"+cp_idx_list.toString());
+		System.out.println(">>2"+cp_name_list.toString());
+		System.out.println(">>3"+mb_id_list.toString());
+		System.out.println(">>4"+manager_name_list.toString());
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			result = pstmt.executeUpdate();
+			if (result != 0) {
+				return true;
+			}
+		} catch (Exception ex) {
+			System.out.println("insertPopularityManagement 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("연결 해제 실패: " + e.getMessage());
+			}
+		}
+		return false;
+	}
 	///////////////////////////////// 태훈끝//////////////////////////////////////////////
+
+	public String getDownloadPath(int app_cp_idx) {
+		String sql = "SELECT app_cp_real_path FROM company_application WHERE app_cp_idx = ?";
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, app_cp_idx);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				return rs.getString("app_cp_real_path");
+			}
+		} catch (Exception ex) {
+			System.out.println("getUploadFilePath 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+
+		return null;
+	}
 
 }
