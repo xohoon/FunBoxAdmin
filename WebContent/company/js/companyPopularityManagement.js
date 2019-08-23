@@ -33,7 +33,7 @@ $(".allBtn").on('click', function() {
 	 */
 	
 });
-
+/*
 $("#saveBtn").on('click', function() {
 	$.ajax({
         url : "./companyPopularityManagementUpdate.cp",
@@ -50,5 +50,5 @@ $("#saveBtn").on('click', function() {
         }
     });
 });
-
+*/
 

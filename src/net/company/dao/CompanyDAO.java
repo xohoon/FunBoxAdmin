@@ -11,8 +11,8 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-//import com.mysql.jdbc.CallableStatement;
-import com.mysql.cj.jdbc.CallableStatement;
+import com.mysql.jdbc.CallableStatement;
+// import com.mysql.cj.jdbc.CallableStatement;
 
 import net.company.dto.Company;
 import net.company.dto.CompanyApplication;
@@ -268,42 +268,6 @@ public class CompanyDAO {
 		return false;
 	}
 	
-<<<<<<< HEAD
-	// 자동 수동 상태 들고오기 // 박신규 추가
-	public boolean getAutoStatus(int aas_idx) {
-		String sql = "SELECT aas_auto_status FROM admin_am_setting WHERE aas_idx = ?";
-
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, aas_idx);
-			rs = pstmt.executeQuery();
-
-			if (rs.next()) {
-				return rs.getBoolean("aas_auto_status");
-			}
-		} catch (Exception ex) {
-			System.out.println("getAutoStatus 에러: " + ex);
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-				if (conn != null)
-					conn.close();
-			} catch (Exception e) {
-				System.out.println("해제 실패 : " + e.getMessage());
-			}
-		}
-
-		return true;
-	}
-	
-	// 마감 임박 클라이언트 수동 List 값 가져 오기(수동)
-=======
 		// 자동 수동 상태 들고오기 // 박신규 추가
 		public boolean getAutoStatus(int aas_idx) {
 			String sql = "SELECT aas_auto_status FROM admin_am_setting WHERE aas_idx = ?";
@@ -338,7 +302,6 @@ public class CompanyDAO {
 		}
 		
 	 // 마감 임박 클라이언트 수동 List 값 가져 오기(수동) 윤식 추가
->>>>>>> branch 'master' of https://github.com/xohoon/FunBoxAdmin.git
 		@SuppressWarnings({ "unchecked", "unused" })
 		public JSONArray getMan3List() {
 			
