@@ -10,8 +10,14 @@ import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+<<<<<<< HEAD
 
 import com.mysql.jdbc.CallableStatement;
+=======
+
+import com.mysql.jdbc.CallableStatement;
+// import com.mysql.cj.jdbc.CallableStatement;
+>>>>>>> branch 'master' of https://github.com/xohoon/FunBoxAdmin.git
 
 import net.company.dto.Company;
 import net.company.dto.CompanyApplication;
@@ -299,18 +305,13 @@ public class CompanyDAO {
 
 		return true;
 	}
-		
-	 // 마감 임박 클라이언트 수동 List 값 가져 오기(수동) 윤식 추가
-		@SuppressWarnings({ "unchecked", "unused" })
-		public JSONArray getMan3List() {
-			
-		String sql = "select " 					
-					+"cp_idx, " 
-					+"mb_id, "
-					+"cp_name, " 					
-					+"cp_manager "
-					+"from admin_deadLine ";					
-				     	
+
+	// 마감 임박 클라이언트 수동 List 값 가져 오기(수동) 윤식 추가
+	@SuppressWarnings({ "unchecked", "unused" })
+	public JSONArray getMan3List() {
+
+		String sql = "select " + "cp_idx, " + "mb_id, " + "cp_name, " + "cp_manager " + "from admin_deadLine ";
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
@@ -394,5 +395,37 @@ public class CompanyDAO {
 		return null;
 	}
 	///////////////////////////////// 태훈끝//////////////////////////////////////////////
+
+	public String getDownloadPath(int app_cp_idx) {
+		String sql = "SELECT app_cp_real_path FROM company_application WHERE app_cp_idx = ?";
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, app_cp_idx);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				return rs.getString("app_cp_real_path");
+			}
+		} catch (Exception ex) {
+			System.out.println("getUploadFilePath 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+
+		return null;
+	}
 
 }

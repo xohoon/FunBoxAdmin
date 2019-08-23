@@ -63,20 +63,33 @@ function removeItem(object){
 	
 	count--;
 };
-
+var a;
 function up(object){
-	if (object.parentElement.parentElement.children[0].innerText <= 1) {
+	var trTag = object.parentElement.parentElement;
+	if (trTag.children[0].innerText <= 1) {
 		return false;
 	}
-	added_table_js.insertBefore(object.parentElement.parentElement,object.parentElement.parentElement.previousSibling);
+	
+	var hidden_name = trTag.children[6].name;
+	trTag.children[6].name = trTag.previousSibling.children[6].name;
+	trTag.previousSibling.children[6].name = hidden_name;
+	
+	added_table_js.insertBefore(trTag,trTag.previousSibling);
+	a = trTag.children[6];
 	reloadNumbering();
 };
 
 function down(object){
-	if (object.parentElement.parentElement.children[0].innerText >= added_table.children().length -1 ) {
+	var trTag = object.parentElement.parentElement;
+	if (trTag.children[0].innerText >= added_table.children().length -1 ) {
 		return false;
 	}
-	added_table_js.insertBefore(object.parentElement.parentElement.nextElementSibling,object.parentElement.parentElement);
+	
+	var hidden_name = trTag.children[6].name;
+	trTag.children[6].name = trTag.nextElementSibling.children[6].name;
+	trTag.nextElementSibling.children[6].name = hidden_name;
+	
+	added_table_js.insertBefore(trTag.nextElementSibling,trTag);
 	reloadNumbering();
 };
 
