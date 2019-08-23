@@ -19,12 +19,12 @@ public class companyPopularityManagementUpdateAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		ActionForward forward = new ActionForward();
-		
+		System.out.println("어디까지오니");
 		int cp_idx_1 = Integer.parseInt(request.getParameter("cp_idx_1"));
 		System.out.println(">>1"+cp_idx_1);
 		
 		forward.setRedirect(false);
-		forward.setPath("./company/companyPopularityManagement.jsp");
+		forward.setPath("./companyPopularityManagement.cp");
 		return forward;
 	}
 
