@@ -1,22 +1,27 @@
 $(function(){
-	Array.from(document.getElementsByClassName("allBtn")).forEach(function(item) {
-		   item.addEventListener('click',function() { addManualToList(item.id); });
+	
+	added_table = $('#added_table');
+	added_table_js = document.getElementById('added_table');
+	all_list = document.getElementById('all_list');
+	
+	Array.from(document.getElementsByClassName("allBtn")).forEach(function(item) {		
+		item.addEventListener('click',function() { addManualToList(item); all_list.removeChild(item.parentElement.parentElement); });
 	});
+	
+	
 });
-
-
-var added_table = $('#added_table');
-var added_table_js = document.getElementById('added_table');
 var test;
+var added_table;
+var added_table_js;
+var all_list;
 
 // 수동으로 추가하기
-function addManualToList(cp_idx){
-	var company = document.getElementById(cp_idx);
-	var cp_name = company.parentElement.nextElementSibling.innerText;
-	var mb_id = company.parentElement.nextElementSibling.nextElementSibling.innerText;
-	var cp_manager = company.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.innerText;
-	var itemHtml = "";
-	itemHtml += "<tr><td class='cp_idx'>"+ added_table.children().length + "</td>";
+function addManualToList(object){
+	var cp_name = object.parentElement.nextElementSibling.innerText;
+	var mb_id = object.parentElement.nextElementSibling.nextElementSibling.innerText;
+	var cp_manager = object.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.innerText;
+	var itemHtml ="";
+	itemHtml += "<tr><input name='cp_idx_"+object.id+"' class='cp_idx' type='hidden' value='"+object.id+"'><td>"+ added_table.children().length + "</td>";
 	itemHtml += "<td>" + cp_name + "</td>";
 	itemHtml += "<td>" + mb_id + "</td>";
 	itemHtml += "<td>" + cp_manager + "</td>";
@@ -26,6 +31,8 @@ function addManualToList(cp_idx){
 };
 
 function removeItem(object){
+	
+	//all_list.appendChild(object.parentElement.parentElement);
 	added_table_js.removeChild(object.parentElement.parentElement);	
 	reloadNumbering();
 };

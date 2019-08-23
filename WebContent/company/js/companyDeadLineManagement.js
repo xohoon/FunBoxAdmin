@@ -1,14 +1,13 @@
-
 $(document).ready(function() {
-	console.log("test");
+	
 	var category = "0";	
+	
 	$.ajax({
 		url : './companyDeadLineAjax.cp', 
 		type : 'POST',
 		data : {"category":category},
 		dataType : 'json',
 			success:function(data){
-				console.log("성공");
 				var itemHtml = "";
 				for(var i=0 ; i<data.length; i++){
 					var number = i+1;
@@ -27,4 +26,6 @@ $(document).ready(function() {
 				alert("데이터 통신을 실패 하였습니다. 개발실에 문의 하세요.");	    					
 			}
 	});			
-}); 
+});
+
+
