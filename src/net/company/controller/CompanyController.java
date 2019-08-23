@@ -19,16 +19,17 @@ public class CompanyController extends HttpServlet {
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
+		
 		String RequestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = RequestURI.substring(contextPath.length());
 		ActionForward forward = null;
 		Action action = null;
-
+		System.out.println("command : " + command);
 		try {
 			switch (command) {
 			case "/companyDeadLineManagement.cp": // 윤식 추가
-				action = new CompanyDeadLineSaveAjaxAction();
+				action = new CompanyDeadLineAction();
 				forward = action.execute(request, response);
 				break;
 			case "/companyDeadLineAjax.cp": // 윤식 추가  수동 top 3 처음페이지 불러올때
@@ -36,7 +37,7 @@ public class CompanyController extends HttpServlet {
 				forward = action.execute(request, response);
 				break;
 			case "/companyDeadLineAjaxSave.cp": // 윤식 추가  수동 top 3 지정후 저장
-				action = new CompanyDeadLineAjaxAction();
+				action = new CompanyDeadLineSaveAjaxAction();
 				forward = action.execute(request, response);
 				break;	
 			case "/companyInvestApplyDetail.cp":

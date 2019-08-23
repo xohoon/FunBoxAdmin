@@ -13,7 +13,8 @@ $(document).ready(function() {
 				var itemHtml = "";
 				for(var i=0 ; i<data.length; i++){
 					var number = i+1;
-					itemHtml += "<tr><td class='cp_idx'>"+ number + "</td>";
+					itemHtml += "<tr><input name='cp_idx_"+ data[i].cp_idx +"' class='cp_idx' type='hidden' value='"+data[i].cp_idx+"'>";
+					itemHtml += "<td>"+ number + "</td>";
 					itemHtml += "<td>" + data[i].cp_name + "</td>";
 					itemHtml += "<td>" + data[i].mb_id + "</td>";
 					itemHtml += "<td>" + data[i].cp_manager + "</td>";
@@ -29,11 +30,32 @@ $(document).ready(function() {
 			}
 	});			
 });
+function radiocheck(){
+	var radioVal = $('input[name="button"]:checked').val();
+	$('#radioVal').val(radioVal);
+}
 
 
-function saveBtn(){
-	var cp_idx;
+//자동 - 1 , 수동 - 0
+function savebt(frm){
+	console.log(frm);
+	var radioVal = $('input[name="button"]:checked').val();
 	
+	if (radioVal == 0) {
+		if(confirm("수동으로 저장하시겠습니까?") == true){
+			frm.submit();
+		}else{
+			alert("수동 저장을 취소되었습니다.");
+		}
+	}else if(radioVal == 1){
+		if(confirm("자동으로 저장하시겠습니까?") == true){
+			frm.submit();
+		}else{
+			alert("자동 저장을 취소되었습니다.");
+		}
+	}else{
+		alert("자동 수동 버튼을 클릭해주세요.");
+	}
 	
 	
 }
