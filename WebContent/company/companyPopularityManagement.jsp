@@ -50,7 +50,7 @@
                       <label for="man">수동</label>
                     </li>
                   </ul>
-                  	<form method="post" action="./companyPopularityManagementUpdate.cp" >
+                  	<form method="post" action="./companyPopularityManagementUpdate.cp">
 	                   <div class="topList" id="bgColor">
 	                     <table id="test01">
 	                     	<tbody id="added_table">
