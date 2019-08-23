@@ -353,6 +353,12 @@ public class CompanyDAO {
 
 		return null;
 	}
+	// 윤식 추가 - 자동, 수동 헨들러
+	public int getAuto_ManDeadLine() {
+		
+		
+		return 0;
+	}
 
 	///////////////////////////////// 태훈시작//////////////////////////////////////////////
 	// 실시간 수동 목록 가져오기
