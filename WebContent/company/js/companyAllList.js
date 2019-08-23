@@ -34,11 +34,24 @@ function addManualToList(object){
 function removeItem(object){
 	var trTag = object.parentElement.parentElement;
 	
-	trTag.removeChild(object.parentElement.parentElement.children[6]);
+	var value = object.parentElement.parentElement.children[6].value;
+	
+	trTag.removeChild(trTag.children[6]);
 	trTag.removeChild(object.parentElement.nextElementSibling);
 	trTag.removeChild(object.parentElement);
 	
+	var Td = document.createElement('td');
+	var Button = document.createElement('button');
+	Button.id = value;
+	Button.value = value;
+	Button.className = 'allBtn';
+	Button.style = "background-color: transparent";
+	Button.innerText='선택';
+	Td.append(Button);
 	
+	trTag.insertBefore(Td,trTag.children[0]);
+	trTag.removeChild(trTag.children[1]);
+
 	added_table_js.removeChild(trTag);
 	
 	reloadNumbering();

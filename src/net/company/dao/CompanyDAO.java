@@ -232,7 +232,7 @@ public class CompanyDAO {
 	}
 
 	// 전체목록 들고오기
-	public boolean getCompanyAllList(List<Company> companyList,int _search_type, String _search_word ) {
+	public boolean getCompanyAllList(List<Company> companyList, int _search_type, String _search_word) {
 		CallableStatement cstmt = null;
 		try {
 			cstmt = (CallableStatement) conn.prepareCall("CALL SELECT_COMPANY_LIST(?,?)");
@@ -267,8 +267,7 @@ public class CompanyDAO {
 
 		return false;
 	}
-	
-<<<<<<< HEAD
+
 	// 자동 수동 상태 들고오기 // 박신규 추가
 	public boolean getAutoStatus(int aas_idx) {
 		String sql = "SELECT aas_auto_status FROM admin_am_setting WHERE aas_idx = ?";
@@ -301,77 +300,35 @@ public class CompanyDAO {
 
 		return true;
 	}
-	
-	// 마감 임박 클라이언트 수동 List 값 가져 오기(수동)
-=======
-		// 자동 수동 상태 들고오기 // 박신규 추가
-		public boolean getAutoStatus(int aas_idx) {
-			String sql = "SELECT aas_auto_status FROM admin_am_setting WHERE aas_idx = ?";
 
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
+	@SuppressWarnings({ "unchecked", "unused" })
+	public JSONArray getMan3List() {
 
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, aas_idx);
-				rs = pstmt.executeQuery();
+		String sql = "select " + "cp_idx, " + "mb_id, " + "cp_name, " + "cp_manager " + "from admin_deadLine ";
 
-				if (rs.next()) {
-					return rs.getBoolean("aas_auto_status");
-				}
-			} catch (Exception ex) {
-				System.out.println("getAutoStatus 에러: " + ex);
-			} finally {
-				try {
-					if (rs != null)
-						rs.close();
-					if (pstmt != null)
-						pstmt.close();
-					if (conn != null)
-						conn.close();
-				} catch (Exception e) {
-					System.out.println("해제 실패 : " + e.getMessage());
-				}
-			}
-
-			return true;
-		}
-		
-	 // 마감 임박 클라이언트 수동 List 값 가져 오기(수동) 윤식 추가
->>>>>>> branch 'master' of https://github.com/xohoon/FunBoxAdmin.git
-		@SuppressWarnings({ "unchecked", "unused" })
-		public JSONArray getMan3List() {
-			
-		String sql = "select " 					
-					+"cp_idx, " 
-					+"mb_id, "
-					+"cp_name, " 					
-					+"cp_manager "
-					+"from admin_deadLine ";					
-				     	
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
-		JSONArray jsonArr = new JSONArray(); 
+
+		JSONArray jsonArr = new JSONArray();
 		System.out.println(sql);
-		
-		try { 
+
+		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-		
+
 			while (rs.next()) {
 				JSONObject jsonObj = new JSONObject();
 				jsonObj.put("cp_idx", rs.getString("cp_idx"));
 				jsonObj.put("mb_id", rs.getString("mb_id"));
-				jsonObj.put("cp_name", rs.getString("cp_name"));				
+				jsonObj.put("cp_name", rs.getString("cp_name"));
 				jsonObj.put("cp_manager", rs.getString("cp_manager"));
-				
-				jsonArr.add(jsonObj);						
+
+				jsonArr.add(jsonObj);
 			}
 			System.out.println(jsonArr.toString());
-			
+
 			return jsonArr;
-			
+
 		} catch (Exception ex) {
 			System.out.println("getMan3List에러: " + ex);
 		} finally {
@@ -389,51 +346,48 @@ public class CompanyDAO {
 
 		return null;
 	}
-	
-	/////////////////////////////////태훈시작//////////////////////////////////////////////
+
+	///////////////////////////////// 태훈시작//////////////////////////////////////////////
 	// 실시간 수동 목록 가져오기
-		public List<CompanyPopularityList> getCompanyPopularityList() {
-			String sql = "SELECT cp_idx, cp_name, manager_name, member_id "
-					+ "FROM popularityManagement_list "
-					+ "ORDER BY cp_idx DESC";
+	public List<CompanyPopularityList> getCompanyPopularityList() {
+		String sql = "SELECT cp_idx, cp_name, manager_name, member_id " + "FROM popularityManagement_list "
+				+ "ORDER BY cp_idx DESC";
 
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			List<CompanyPopularityList> realList = new ArrayList<CompanyPopularityList>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<CompanyPopularityList> realList = new ArrayList<CompanyPopularityList>();
 
-			try {
-				pstmt = conn.prepareStatement(sql);
-				rs = pstmt.executeQuery();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 
-				while (rs.next()) {
-					CompanyPopularityList realDAO = new CompanyPopularityList();
-					realDAO.setCp_idx(rs.getInt("cp_idx"));
-					realDAO.setCp_name(rs.getString("cp_name"));
-					realDAO.setManager_name(rs.getString("manager_name"));
-					realDAO.setMember_id(rs.getString("member_id"));
-					
-					realList.add(realDAO);
-				}
-				return realList;
-			} catch (Exception ex) {
-				System.out.println("getUploadFilePath 에러: " + ex);
-			} finally {
-				try {
-					if (rs != null)
-						rs.close();
-					if (pstmt != null)
-						pstmt.close();
-					if (conn != null)
-						conn.close();
-				} catch (Exception e) {
-					System.out.println("해제 실패 : " + e.getMessage());
-				}
+			while (rs.next()) {
+				CompanyPopularityList realDAO = new CompanyPopularityList();
+				realDAO.setCp_idx(rs.getInt("cp_idx"));
+				realDAO.setCp_name(rs.getString("cp_name"));
+				realDAO.setManager_name(rs.getString("manager_name"));
+				realDAO.setMember_id(rs.getString("member_id"));
+
+				realList.add(realDAO);
 			}
-
-			return null;
+			return realList;
+		} catch (Exception ex) {
+			System.out.println("getUploadFilePath 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
 		}
-		/////////////////////////////////태훈끝//////////////////////////////////////////////
-	
-		
-	
+
+		return null;
+	}
+	///////////////////////////////// 태훈끝//////////////////////////////////////////////
+
 }
