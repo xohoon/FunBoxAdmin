@@ -34,6 +34,10 @@ function addManualToList(object){
 function removeItem(object){
 	var trTag = object.parentElement.parentElement;
 	
+	trTag.children[1].id ='';
+	trTag.children[2].id ='';
+	trTag.children[3].id ='';
+	
 	var value = object.parentElement.parentElement.children[6].value;
 	
 	trTag.removeChild(trTag.children[6]);
@@ -98,7 +102,6 @@ function swapDown(trTag){
 	trTag.children[3].id = trTag.nextElementSibling.children[3].id;
 	trTag.nextElementSibling.children[3].id = temp;
 }
-var a;
 function up(object){
 	var trTag = object.parentElement.parentElement;
 	if (trTag.children[0].innerText <= 1) {
@@ -137,6 +140,9 @@ function reloadNumbering(){
 			return;
 		}
 		item.children[0].innerText = i;
+		item.children[1].id = 'cp_name_'+i;
+		item.children[2].id = 'mb_id_'+i;
+		item.children[3].id = 'cp_manager_name_'+i;
 		i++;
 	});
 };
