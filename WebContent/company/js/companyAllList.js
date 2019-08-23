@@ -76,3 +76,64 @@ function reloadNumbering(){
 		i++;
 	});
 };
+
+// 태훈 추가 - 기능 제어
+$(document).ready(function() {
+	$(".topList").children().css('backgroundColor', '#d3d3d3');
+	$(".allList").children().css('backgroundColor', '#d3d3d3');
+	
+	$(".allBtn").prop("disabled", true);
+	$(".allBtn").css('backgroundColor', '#d3d3d3');
+	
+	$(".topDelBtn").prop("disabled", true);
+	$(".topDelBtn").css('backgroundColor', '#d3d3d3');
+	
+	$(".upBtn").prop("disabled", true);
+	$(".upBtn").css('backgroundColor', '#d3d3d3');
+
+	$(".downBtn").prop("disabled", true);
+	$(".downBtn").css('backgroundColor', '#d3d3d3');
+	
+	$("input[name='push']").attr('disabled', true);
+});
+
+$("#modityBtn").on('click', function() {
+	var BtnText = $("#modityBtn").val();
+	if(BtnText == "수정") {
+		$(".topList").children().css('backgroundColor', 'transparent');
+		$(".allList").children().css('backgroundColor', 'transparent');
+		
+		$(".allBtn").prop("disabled", false);
+		$(".allBtn").css('backgroundColor', 'transparent');
+		
+		$(".topDelBtn").prop("disabled", false);
+		$(".topDelBtn").css('backgroundColor', 'transparent');
+		
+		$(".upBtn").prop("disabled", false);
+		$(".upBtn").css('backgroundColor', 'transparent');
+	
+		$(".downBtn").prop("disabled", false);
+		$(".downBtn").css('backgroundColor', 'transparent');
+		
+		$("input[name='push']").attr('disabled', false);
+		$("#modityBtn").val("비활성화");
+	}else if(BtnText == "비활성화") {
+		$(".topList").children().css('backgroundColor', '#d3d3d3');
+		$(".allList").children().css('backgroundColor', '#d3d3d3');
+		
+		$(".allBtn").prop("disabled", true);
+		$(".allBtn").css('backgroundColor', '#d3d3d3');
+		
+		$(".topDelBtn").prop("disabled", true);
+		$(".topDelBtn").css('backgroundColor', '#d3d3d3');
+		
+		$(".upBtn").prop("disabled", true);
+		$(".upBtn").css('backgroundColor', '#d3d3d3');
+
+		$(".downBtn").prop("disabled", true);
+		$(".downBtn").css('backgroundColor', '#d3d3d3');
+		
+		$("input[name='push']").attr('disabled', true);
+		$("#modityBtn").val("수정");
+	}
+});

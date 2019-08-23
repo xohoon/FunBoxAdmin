@@ -34,45 +34,21 @@ $(".allBtn").on('click', function() {
 	
 });
 
-$(document).ready(function() {
-	$(".topList").children().css('backgroundColor', '#d3d3d3');
-	$(".allList").children().css('backgroundColor', '#d3d3d3');
-	
-	$(".allBtn").prop("disabled", true);
-	$(".allBtn").css('backgroundColor', '#d3d3d3');
-	
-	$(".topDelBtn").prop("disabled", true);
-	$(".topDelBtn").css('backgroundColor', '#d3d3d3');
-	
-	$(".upBtn").prop("disabled", true);
-	$(".upBtn").css('backgroundColor', '#d3d3d3');
-
-	$(".downBtn").prop("disabled", true);
-	$(".downBtn").css('backgroundColor', '#d3d3d3');
-	
-	$("input[name='push']").attr('disabled', true);
-});
-
-$("#modityBtn").on('click', function() {
-	$(".topList").children().css('backgroundColor', 'transparent');
-	$(".allList").children().css('backgroundColor', 'transparent');
-	
-	$(".allBtn").prop("disabled", false);
-	$(".allBtn").css('backgroundColor', 'transparent');
-	
-	$(".topDelBtn").prop("disabled", false);
-	$(".topDelBtn").css('backgroundColor', 'transparent');
-	
-	$(".upBtn").prop("disabled", false);
-	$(".upBtn").css('backgroundColor', 'transparent');
-
-	$(".downBtn").prop("disabled", false);
-	$(".downBtn").css('backgroundColor', 'transparent');
-	
-});
-
 $("#saveBtn").on('click', function() {
-	location.href="./companyPopularityManagementUpdate.cp";
+	$.ajax({
+        url : "./companyPopularityManagementUpdate.cp",
+        type : "POST",
+        dataType : "JSON",
+        data : {
+        	"tdArr" : tdArr
+        },
+        success : function(data) {
+        	
+        },
+        error : function(e) {
+        	alert('통신 실패');
+        }
+    });
 });
 
 
