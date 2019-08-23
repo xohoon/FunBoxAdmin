@@ -25,7 +25,7 @@ function addManualToList(object){
 	itemHtml += "<td>" + cp_name + "</td>";
 	itemHtml += "<td>" + mb_id + "</td>";
 	itemHtml += "<td>" + cp_manager + "</td>";
-	itemHtml += "<td><button class='topDelBtn' onclick='removeItem(this);'>삭제</button></td><td><button class='upBtn' onclick='up(this);''><i class='fas fa-chevron-up'></i></button><button class='downBtn' onclick='down(this);'><i class='fas fa-chevron-down'></i></button></td><input name='"+count+"' class='cp_idx' type='hidden' value='"+object.id+"'></tr>";
+	itemHtml += "<td><button type='button' class='topDelBtn' onclick='removeItem(this);'>삭제</button></td><td><button type='button' class='upBtn' onclick='up(this);''><i class='fas fa-chevron-up'></i></button><button type='button' class='downBtn' onclick='down(this);'><i class='fas fa-chevron-down'></i></button></td><input name='"+count+"' class='cp_idx' type='hidden' value='"+object.id+"'></tr>";
 	
 	added_table.append(itemHtml);
 	count++;

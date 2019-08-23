@@ -53,6 +53,7 @@
                       <label for="man">수동</label>
                      </li>
                   </ul>
+                   <form name="save" method="post" action="./companyDeadLineAjaxSave.cp">
                    <div class="topList">                  
                      <table>                     
                      <input type="hidden" id="radioVal" name="radioVal" value="1">
@@ -70,6 +71,7 @@
                    </div>                                     
 	                   <input type="button" id="modityBtn" value="수정" style="margin-top:10px;">
 	                   <input type="button" id="save" onclick = "savebt(this.form)" value="저장" style="margin-left:10px; margin-top:10px;">
+                   </form>                
                 </div>
 			</div>
 		</section>

@@ -17,7 +17,8 @@ public class CompanyDeadLineSaveAjaxAction implements Action {
 		forward.setRedirect(false);
 		System.out.println(" CompanyDeadLineSaveAjaxAction 확인");
 		//String button = response("button");
-		String button = (String)request.getAttribute("button");
+		//String button = (String)request.getAttribute("button");
+		String button = request.getParameter("button");
 		System.out.println(button);
 		
 		
