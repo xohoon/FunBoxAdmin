@@ -143,22 +143,22 @@ function reloadNumbering(){
 
 // 태훈 추가 - 기능 제어
 $(document).ready(function() {
-	$(".topList").children().css('backgroundColor', '#d3d3d3');
-	$(".allList").children().css('backgroundColor', '#d3d3d3');
-	
-	$(".allBtn").prop("disabled", true);
-	$(".allBtn").css('backgroundColor', '#d3d3d3');
-	
-	$(".topDelBtn").prop("disabled", true);
-	$(".topDelBtn").css('backgroundColor', '#d3d3d3');
-	
-	$(".upBtn").prop("disabled", true);
-	$(".upBtn").css('backgroundColor', '#d3d3d3');
-
-	$(".downBtn").prop("disabled", true);
-	$(".downBtn").css('backgroundColor', '#d3d3d3');
-	
-	$("input[name='push']").attr('disabled', true);
+		$(".topList").children().css('backgroundColor', '#d3d3d3');
+		$(".allList").children().css('backgroundColor', '#d3d3d3');
+		
+		$(".allBtn").prop("disabled", true);
+		$(".allBtn").css('backgroundColor', '#d3d3d3');
+		
+		$(".topDelBtn").prop("disabled", true);
+		$(".topDelBtn").css('backgroundColor', '#d3d3d3');
+		
+		$(".upBtn").prop("disabled", true);
+		$(".upBtn").css('backgroundColor', '#d3d3d3');
+		
+		$(".downBtn").prop("disabled", true);
+		$(".downBtn").css('backgroundColor', '#d3d3d3');
+		
+		$("input[name='push']").attr('disabled', true);
 });
 
 $("#modityBtn").on('click', function() {
