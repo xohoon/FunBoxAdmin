@@ -1,11 +1,14 @@
 package net.company.action;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.common.action.Action;
 import net.common.action.ActionForward;
 import net.company.dao.CompanyDAO;
+import net.company.dto.CompanyDeadLine;
 
 
 public class CompanyDeadLineSaveAjaxAction implements Action {
@@ -21,14 +24,9 @@ public class CompanyDeadLineSaveAjaxAction implements Action {
 		String radioVal = request.getParameter("radioVal");
 		System.out.println(radioVal);
 		
-		if(radioVal.equals("0")) { // 수동일때
-			//해당 쿼리문 돌기
-			CompanyDAO companydao = new CompanyDAO();
-			
-		}else if(radioVal.equals("1")) { // 자동일때
-			CompanyDAO companydao = new CompanyDAO();
-		
-		}
+		CompanyDAO companydao = new CompanyDAO();
+		ArrayList<CompanyDeadLine> transDeadLineList = companydao.getAuto_ManDeadLineSearchList(radioVal, "");
+		System.out.println("transDeadLineList :" + transDeadLineList.toString());	
 				
 		forward.setPath("./company/companyDeadLineManagement.jsp");
 		return forward;
