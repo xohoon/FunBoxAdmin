@@ -46,14 +46,14 @@
 				<div class="top">
                   <h3>마감임박</h3>
                   <ul class="push">
-                    <li>
-                      <input type="radio" name="push" id="auto" value="1" checked >
-                      <label for="auto">자동</label>
-                    </li>
-                    <li>
-                      <input type="radio" name="push" id="man" value="0"> 
+                  <li>
+                  	<input type="radio" id="auto" name = "button" value="자동" checked>
+                    <label for="auto">자동</label>
+                  </li>
+                   <li>
+                      <input type="radio" id="man" name = "button" value="수동">
                       <label for="man">수동</label>
-                    </li>
+                     </li>
                   </ul>
                    <div class="topList">
                      <table>
@@ -68,7 +68,9 @@
 	                       </tr>
                        </tbody>
                      </table>
-                   </div>                
+                   </div>
+                   <input type="button" id="modityBtn" value="수정" style="margin-top:10px;">
+                   <input type="button" id="save" onclick = "saveBtn()" value="저장" style="margin-left:10px; margin-top:10px;">                
                 </div>
 			</div>
 		</section>

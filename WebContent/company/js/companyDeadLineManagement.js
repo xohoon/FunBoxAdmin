@@ -1,4 +1,6 @@
 $(document).ready(function() {
+//	$("input[name = 'auto']").attr('disabled', true);
+//	$("input[name = 'man']").attr('disabled', true);
 	
 	var category = "0";	
 	
@@ -29,3 +31,9 @@ $(document).ready(function() {
 });
 
 
+function saveBtn(){
+	var cp_idx;
+	
+	
+	
+}
