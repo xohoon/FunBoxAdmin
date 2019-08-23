@@ -11,7 +11,7 @@ import net.common.action.ActionForward;
 import net.company.dao.CompanyDAO;
 import net.company.dto.CompanyPopularityList;
 
-public class CompanyPopularityManagementAction implements Action {
+public class companyPopularityManagementUpdateAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

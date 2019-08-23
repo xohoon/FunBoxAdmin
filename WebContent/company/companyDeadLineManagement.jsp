@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,11 +45,11 @@
                   <h3>마감임박</h3>
                   <ul class="push">
                     <li>
-                      <input type="radio" name="push" id="auto" value="자동" onclick="autocheck(this.value)" checked >
+                      <input type="radio" name="push" id="auto" value="1" checked >
                       <label for="auto">자동</label>
                     </li>
                     <li>
-                      <input type="radio" name="push" id="man" value="수동" onclick="autocheck(this.value)">
+                      <input type="radio" name="push" id="man" value="0"> 
                       <label for="man">수동</label>
                     </li>
                   </ul>
@@ -64,7 +67,6 @@
                        </tbody>
                      </table>
                    </div>
-                   
                 </div>
 			</div>
 		</section>
