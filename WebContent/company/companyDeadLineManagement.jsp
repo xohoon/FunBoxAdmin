@@ -44,17 +44,19 @@
 				<div class="top">
                   <h3>마감임박</h3>
                   <ul class="push">
-                    <li>
-                      <input type="radio" name="push" id="auto" value="1" checked >
-                      <label for="auto">자동</label>
-                    </li>
-                    <li>
-                      <input type="radio" name="push" id="man" value="0"> 
+                  <li>
+                  	<input type="radio" id="auto" name = "button" value="1" onclick = "radiocheck()" checked>
+                    <label for="auto">자동</label>
+                  </li>
+                   <li>
+                      <input type="radio" id="man" name = "button" value="0" onclick = "radiocheck()">
                       <label for="man">수동</label>
-                    </li>
+                     </li>
                   </ul>
-                   <div class="topList">
-                     <table>
+                   <form name="save" method="post" action="./companyDeadLineAjaxSave.cp">
+                   <div class="topList">                  
+                     <table>                     
+                     <input type="hidden" id="radioVal" name="radioVal" value="1">
                      	<tbody id="added_table">
 	                       <tr>
 	                         <th>번호</th>
@@ -64,9 +66,12 @@
 	                         <th></th>
 	                         <th></th>
 	                       </tr>
-                       </tbody>
-                     </table>
-                   </div>
+                       </tbody>                       
+                     </table>                     
+                   </div>                                     
+	                   <input type="button" id="modityBtn" value="수정" style="margin-top:10px;">
+	                   <input type="button" id="save" onclick = "savebt(this.form)" value="저장" style="margin-left:10px; margin-top:10px;">
+                   </form>                
                 </div>
 			</div>
 		</section>

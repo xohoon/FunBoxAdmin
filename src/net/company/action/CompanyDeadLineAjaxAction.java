@@ -16,7 +16,6 @@ public class CompanyDeadLineAjaxAction implements Action {
 		@SuppressWarnings("unused")
 		
 		String category = request.getParameter("category");
-		System.out.println("category :"+category);
 		
 		CompanyDAO companydao = new CompanyDAO();
 		JSONArray auto3list = companydao.getMan3List();
