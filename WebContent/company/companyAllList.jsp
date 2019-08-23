@@ -16,20 +16,22 @@
 
 
 <table class="allGroup">
-    <tr>
-      <th>선택</th>
-      <th>상호명</th>
-      <th>아이디</th>
-      <th>담당자</th>
-    </tr>
-    <c:forEach var="company" items="${companyList }">
-    	<tr>
-	     <td><button id="${company.cp_idx }" value="${company.cp_idx }" class="allBtn">선택</button></td>
-	      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">${company.cp_name }</td>
-	      <td>${company.mb_id }</td>
-	      <td>${company.cp_manager }</td>
+	<tbody id="all_list">
+	    <tr>
+	      <th>선택</th>
+	      <th>상호명</th>
+	      <th>아이디</th>
+	      <th>담당자</th>
 	    </tr>
-    </c:forEach>
+	    <c:forEach var="company" items="${companyList }">
+	    	<tr>
+		     <td><button id="${company.cp_idx }" value="${company.cp_idx }" class="allBtn">선택</button></td>
+		      <td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">${company.cp_name }</td>
+		      <td>${company.mb_id }</td>
+		      <td>${company.cp_manager }</td>
+		    </tr>
+	    </c:forEach>
+    </tbody>
   </table>
 <script>
 
