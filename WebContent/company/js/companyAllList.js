@@ -153,6 +153,7 @@ function reloadNumbering(){
 		item.children[1].id = 'cp_name_'+i;
 		item.children[2].id = 'mb_id_'+i;
 		item.children[3].id = 'cp_manager_name_'+i;
+		item.children[6].name = 'cp_idx_'+i;
 		i++;
 	});
 };
