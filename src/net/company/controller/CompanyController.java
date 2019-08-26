@@ -94,6 +94,11 @@ public class CompanyController extends HttpServlet {
 				action = new companyPopularityManagementUpdateAction();
 				forward = action.execute(request, response);
 				break;
+			case "/ComapnyPopularityInfoAjax.cp":
+				//ajax
+				action = new CompanyPopularityInfoAjax();
+				forward = action.execute(request, response);
+				break;
 				//태훈끝//
 			default:
 				break;
