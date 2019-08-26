@@ -31,15 +31,15 @@
 			}
 	});			
 });*/
-function radiocheck(){
-	var radioVal = $('input[name="button"]:checked').val();
-	$('#radioVal').val(radioVal);
-}
 
+function hiddenRadio(radioval){
+	$('#radioVal').val(radioval);	
+}
 
 //자동 - 1 , 수동 - 0
 function savebt(frm){	
-	var radioVal = $('input[name="button"]:checked').val();
+	var radioVal = $('input[name="push"]:checked').val();
+	console.log(radioVal);
 	
 	if (radioVal == 0) {
 		if(confirm("수동으로 저장하시겠습니까?") == true){
