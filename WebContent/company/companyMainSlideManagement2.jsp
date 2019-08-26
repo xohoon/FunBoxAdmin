@@ -66,7 +66,7 @@
 	                       <c:forEach var="companyAdded" items="${companyAddedList }" varStatus="status">
 	                       		<tr>
 	                       			<td>${status.count }</td>
-	                       			<td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">${companyAdded.cp_name }</td>
+	                       			<td>${companyAdded.cp_name }</td>
 								    <td>${companyAdded.mb_id }</td>
 								    <td>${companyAdded.cp_manager }</td>
 								    <td><button type="button" class="topDelBtn" onclick="removeItem(this);">삭제</button></td>

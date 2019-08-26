@@ -76,7 +76,7 @@ function removeItem(object){
 	
 	count--;
 };
-
+var test;
 function swapUp(trTag){
 	var temp = trTag.children[6].name;
 	trTag.children[6].name = trTag.previousSibling.children[6].name;
@@ -112,8 +112,11 @@ function swapDown(trTag){
 	trTag.children[3].id = trTag.nextElementSibling.children[3].id;
 	trTag.nextElementSibling.children[3].id = temp;
 }
+
+var test;
 function up(object){
 	var trTag = object.parentElement.parentElement;
+	test =trTag;
 	if (trTag.children[0].innerText <= 1) {
 		return false;
 	}
@@ -194,6 +197,7 @@ function setAutoManual(){
 	Array.from(document.getElementsByClassName("cp_idx")).forEach(function(item) {		
 		cp_idx_value_arr.push(item.value);
 	});
+	console.log(cp_idx_value_arr);
 	$.ajax({
 		url : './setAutoOrManual.cp',
 		method : "POST",
