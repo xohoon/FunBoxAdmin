@@ -549,8 +549,7 @@ public class CompanyDAO {
 	@SuppressWarnings({ "unchecked", "unused" })
 	public JSONArray getCompanyPopularityList() {
 		String sql = "SELECT cp_idx, cp_name, manager_name, member_id "
-				+ "FROM popularityManagement_list "
-				+ "ORDER BY cp_idx DESC";
+				+ "FROM popularityManagement_list ";
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -571,7 +570,7 @@ public class CompanyDAO {
 			}
 			return jsonArr;
 		} catch (Exception ex) {
-			System.out.println("getCompanyPopularityList 에러: " + ex);
+			System.out.println("getCompanyPopularityList ajax 에러: " + ex);
 		} finally {
 			try {
 				if (rs != null)
@@ -592,7 +591,7 @@ public class CompanyDAO {
 	public List<CompanyPopularityList> getCompanyPopularityInfo() {
 		String sql = "SELECT cp_idx, cp_name, manager_name, member_id "
 				+ "FROM popularityManagement_list "
-				+ "ORDER BY cp_idx DESC";
+				+ "ORDER BY popu_idx ASC";
 		List<CompanyPopularityList> popuList = new ArrayList<CompanyPopularityList>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -611,7 +610,7 @@ public class CompanyDAO {
 			}
 			return popuList;
 		} catch (Exception ex) {
-			System.out.println("getCompanyPopularityList 에러: " + ex);
+			System.out.println("getCompanyPopularityList ctag 에러: " + ex);
 		} finally {
 			try {
 				if (rs != null)
@@ -651,6 +650,7 @@ public class CompanyDAO {
 			  cstmt.execute(); 
 			  result = cstmt.getInt("@RESULT"); 
 			  if(result == 1) {
+				  System.out.println("result:::"+result);
 				  return result;
 			  }else {
 				  result = -1;
