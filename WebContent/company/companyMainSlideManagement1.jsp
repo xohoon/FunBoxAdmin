@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,6 +63,17 @@
 	                         <th></th>
 	                         <th></th>
 	                       </tr>
+	                       <c:forEach var="companyAdded" items="${companyAddedList }" varStatus="status">
+	                       		<tr>
+	                       			<td>${status.count }</td>
+	                       			<td onclick="window.open('http://iofunbox.dothome.co.kr/corporation.jsp','바른생선회','width=1240,height=800,top=0,left=0,scrollbars=yes');">${companyAdded.cp_name }</td>
+								    <td>${companyAdded.mb_id }</td>
+								    <td>${companyAdded.cp_manager }</td>
+								    <td><button type="button" class="topDelBtn" onclick="removeItem(this);">삭제</button></td>
+								    <td><button type="button" class="upBtn" onclick="up(this);"><i class="fas fa-chevron-up"></i></button><button type="button" class="downBtn" onclick="down(this);"><i class="fas fa-chevron-down"></i></button></td>
+								    <input name="cp_idx_${status.count }" class="cp_idx" type="hidden" value="${companyAdded.cp_idx }">
+	                       		</tr>
+		                   </c:forEach>
                      	</tbody>
                      </table>
                    </div>

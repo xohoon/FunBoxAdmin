@@ -8,21 +8,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
-
 import com.mysql.jdbc.CallableStatement;
 //import com.mysql.cj.jdbc.CallableStatement;
 
-
 import net.company.dto.Company;
+import net.company.dto.CompanyAdded;
 import net.company.dto.CompanyApplication;
 import net.company.dto.CompanyApplicationDetail;
 import net.company.dto.CompanyDeadLine;
 import net.company.dto.CompanyInvested;
 import net.company.dto.CompanyPopularityList;
-import net.finance.dto.Token;
 import net.util.Paging;
 
 public class CompanyDAO {
@@ -320,6 +315,7 @@ public class CompanyDAO {
 				company.setCp_manager(rs.getString("cp_manager"));
 				companyList.add(company);
 			}
+			return true;
 			
 		} catch (Exception ex) {
 			System.out.println("getCompanyAllList 에러: " + ex);
@@ -336,8 +332,71 @@ public class CompanyDAO {
 			}
 		}
 
-		return true;
+		return false;
 	}
+	
+	//해당 페이지 수동 테이블 들고오기
+	public boolean getCompanyAddedList(List<CompanyAdded> companyAddedList,int _category) {
+		String sql = "";
+		switch (_category) {
+			case 1:
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM popularityManagement_list)";
+				break;
+			case 2:
+				sql = "";
+				break;
+			case 3:
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM admin_deadLine)";
+				break;			
+	
+			case 4:
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM am_banner_1)";
+				break;			
+	
+			case 5:
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM am_banner_2)";
+				break;			
+	
+			default:
+				break;
+		}
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				CompanyAdded companyAdded = new CompanyAdded();
+				companyAdded.setCp_idx(rs.getInt("cp_idx"));
+				companyAdded.setCp_name(rs.getString("cp_name"));
+				companyAdded.setMb_id(rs.getString("mb_id"));
+				companyAdded.setCp_manager(rs.getString("cp_manager"));
+				companyAddedList.add(companyAdded);
+			}
+			
+			return true;
+			
+		} catch (Exception ex) {
+			System.out.println("getCompanyAddedList 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+
+		return false;
+	}
+	
 
 	// 자동 수동 상태 들고오기 // 박신규 추가
 	public boolean getAutoStatus(int aas_idx) {
