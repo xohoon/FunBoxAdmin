@@ -12,8 +12,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 
-//import com.mysql.jdbc.CallableStatement;
-import com.mysql.cj.jdbc.CallableStatement;
+import com.mysql.jdbc.CallableStatement;
+//import com.mysql.cj.jdbc.CallableStatement;
 
 
 import net.company.dto.Company;
@@ -475,7 +475,7 @@ public class CompanyDAO {
 		return transDeadLineList;
 		
 	} catch (Exception ex) {
-		System.out.println("tokenExchangeList 에러: " + ex);
+		System.out.println("getAuto_ManDeadLineSearchList 에러: " + ex);
 	} finally {
 		try {
 			if (rs != null)
@@ -491,7 +491,41 @@ public class CompanyDAO {
 	
 	return null;
 			
-}
+}	
+	// admin_am_setting update 자동 수동
+	public boolean setAutoStatus(int ass_idx, boolean auto_status) {
+		
+		String sql = "UPDATE admin_am_setting SET aas_auto_status ="+ auto_status +" WHERE aas_idx = "+ass_idx;  
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		System.out.println(sql);
+		
+		try {
+			pstmt = conn.prepareStatement(sql);						
+			pstmt.executeUpdate();
+
+			return true;
+			
+		} catch (Exception ex) {
+			System.out.println("setAutoStatus 에러: " + ex);
+			
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+
+		return false;
+	}
+	
 	// 마감임박 admin_deadLine 테이블에 insert
 	public boolean insertAutoManDeadLineList(ArrayList<CompanyDeadLine> transDeadLineList) {
 		String sql = "INSERT INTO admin_deadLine("
