@@ -1,6 +1,5 @@
 package net.company.action;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,22 +12,31 @@ import net.company.dto.CompanyPopularityList;
 
 // 태훈 실시간 수동 목록
 public class CompanyPopularityManagementAction implements Action {
-
-	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
 		request.setCharacterEncoding("utf-8");
+		
 		ActionForward forward = new ActionForward();
-		
-		CompanyPopularityList popularity = new CompanyPopularityList();
-		List<CompanyPopularityList> popuList = new ArrayList<CompanyPopularityList>();
-		CompanyDAO companyDAO = new CompanyDAO();
-		popuList = companyDAO.getCompanyPopularityList();
-		
-		request.setAttribute("popuList", popuList);
-		
 		forward.setRedirect(false);
+		System.out.println(" CompanyPopularityManagementAction 확인");
+		
+		int aas_idx = 1;
+		CompanyDAO companyDAO = new CompanyDAO();
+		boolean aas_auto_status = companyDAO.getAutoStatus(aas_idx);
+		System.out.println("boolean 반환::"+aas_auto_status);
+		companyDAO = new CompanyDAO();
+		List<CompanyPopularityList> popuInfo = companyDAO.getCompanyPopularityInfo();
+		
+		if(aas_auto_status == true) {
+			request.setAttribute("auto_status", 1);
+			request.setAttribute("popuInfo", popuInfo);
+		}else {
+			request.setAttribute("auto_status", 0);
+			request.setAttribute("popuInfo", popuInfo);
+		}
+		
 		forward.setPath("./company/companyPopularityManagement.jsp");
-		return forward;
+		return forward;	
 	}
 
 }

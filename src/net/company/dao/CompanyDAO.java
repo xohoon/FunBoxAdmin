@@ -12,11 +12,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 
+
 import com.mysql.jdbc.CallableStatement;
 //import com.mysql.cj.jdbc.CallableStatement;
 
-
 import net.company.dto.Company;
+import net.company.dto.CompanyAdded;
 import net.company.dto.CompanyApplication;
 import net.company.dto.CompanyApplicationDetail;
 import net.company.dto.CompanyDeadLine;
@@ -319,6 +320,7 @@ public class CompanyDAO {
 				company.setCp_manager(rs.getString("cp_manager"));
 				companyList.add(company);
 			}
+			return true;
 			
 		} catch (Exception ex) {
 			System.out.println("getCompanyAllList 에러: " + ex);
@@ -335,8 +337,71 @@ public class CompanyDAO {
 			}
 		}
 
-		return true;
+		return false;
 	}
+	
+	//해당 페이지 수동 테이블 들고오기
+	public boolean getCompanyAddedList(List<CompanyAdded> companyAddedList,int _category) {
+		String sql = "";
+		switch (_category) {
+			case 1:
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM popularityManagement_list)";
+				break;
+			case 2:
+				sql = "";
+				break;
+			case 3:
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM admin_deadLine)";
+				break;			
+	
+			case 4:
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM am_banner_1)";
+				break;			
+	
+			case 5:
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM am_banner_2)";
+				break;			
+	
+			default:
+				break;
+		}
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				CompanyAdded companyAdded = new CompanyAdded();
+				companyAdded.setCp_idx(rs.getInt("cp_idx"));
+				companyAdded.setCp_name(rs.getString("cp_name"));
+				companyAdded.setMb_id(rs.getString("mb_id"));
+				companyAdded.setCp_manager(rs.getString("cp_manager"));
+				companyAddedList.add(companyAdded);
+			}
+			
+			return true;
+			
+		} catch (Exception ex) {
+			System.out.println("getCompanyAddedList 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+
+		return false;
+	}
+	
 
 	// 자동 수동 상태 들고오기 // 박신규 추가
 	public boolean getAutoStatus(int aas_idx) {
@@ -579,31 +644,32 @@ public class CompanyDAO {
 
 
 	///////////////////////////////// 태훈시작//////////////////////////////////////////////
-	// 실시간 수동 목록 가져오기
-	public List<CompanyPopularityList> getCompanyPopularityList() {
-		String sql = "SELECT cp_idx, cp_name, manager_name, member_id " + "FROM popularityManagement_list "
-				+ "ORDER BY cp_idx DESC";
+	// 실시간 수동 목록 가져오기 ajax 버전
+	@SuppressWarnings({ "unchecked", "unused" })
+	public JSONArray getCompanyPopularityList() {
+		String sql = "SELECT cp_idx, cp_name, manager_name, member_id "
+				+ "FROM popularityManagement_list ";
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<CompanyPopularityList> realList = new ArrayList<CompanyPopularityList>();
+		JSONArray jsonArr = new JSONArray();
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				CompanyPopularityList realDAO = new CompanyPopularityList();
-				realDAO.setCp_idx(rs.getInt("cp_idx"));
-				realDAO.setCp_name(rs.getString("cp_name"));
-				realDAO.setManager_name(rs.getString("manager_name"));
-				realDAO.setMember_id(rs.getString("member_id"));
+				JSONObject jsonObj = new JSONObject();
+				jsonObj.put("cp_idx", rs.getInt("cp_idx"));
+				jsonObj.put("cp_name", rs.getString("cp_name"));
+				jsonObj.put("manager_name", rs.getString("manager_name"));
+				jsonObj.put("member_id", rs.getString("member_id"));
 
-				realList.add(realDAO);
+				jsonArr.add(jsonObj);
 			}
-			return realList;
+			return jsonArr;
 		} catch (Exception ex) {
-			System.out.println("getUploadFilePath 에러: " + ex);
+			System.out.println("getCompanyPopularityList ajax 에러: " + ex);
 		} finally {
 			try {
 				if (rs != null)
@@ -620,26 +686,30 @@ public class CompanyDAO {
 		return null;
 	}
 
-	// 실시간 수동 데이터 넣기
-	public boolean insertPopularityManagement(List<Integer> cp_idx_list, List<String> cp_name_list,
-			List<String> mb_id_list, List<String> manager_name_list) {
-		String sql = "";
-		int result = 0;
+	// 실시간 수동 데이터 가져오기 c태그
+	public List<CompanyPopularityList> getCompanyPopularityInfo() {
+		String sql = "SELECT cp_idx, cp_name, manager_name, member_id "
+				+ "FROM popularityManagement_list "
+				+ "ORDER BY popu_idx ASC";
+		List<CompanyPopularityList> popuList = new ArrayList<CompanyPopularityList>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		System.out.println(">>1" + cp_idx_list.toString());
-		System.out.println(">>2" + cp_name_list.toString());
-		System.out.println(">>3" + mb_id_list.toString());
-		System.out.println(">>4" + manager_name_list.toString());
 		try {
 			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 
-			result = pstmt.executeUpdate();
-			if (result != 0) {
-				return true;
+			while (rs.next()) {
+				CompanyPopularityList popuVO = new CompanyPopularityList();
+				popuVO.setCp_idx(rs.getInt("cp_idx"));
+				popuVO.setCp_name(rs.getString("cp_name"));
+				popuVO.setManager_name(rs.getString("manager_name"));
+				popuVO.setMember_id(rs.getString("member_id"));
+				
+				popuList.add(popuVO);
 			}
+			return popuList;
 		} catch (Exception ex) {
-			System.out.println("insertPopularityManagement 에러: " + ex);
+			System.out.println("getCompanyPopularityList ctag 에러: " + ex);
 		} finally {
 			try {
 				if (rs != null)
@@ -649,10 +719,56 @@ public class CompanyDAO {
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+
+		return null;
+	}
+	
+	// 실시간 수동 데이터 넣기
+	public int insertPopularityManagement(List<Integer> cp_idx_list) {
+		int result = 0;
+		CallableStatement cstmt = null;
+		ResultSet rs = null;
+		try {
+			  cstmt = (CallableStatement) conn.prepareCall("call POPULARITY(?,?,?,?,?,?,?,?,?,?,?)");
+			  
+			  cstmt.setInt(1, cp_idx_list.get(0)); 
+			  cstmt.setInt(2, cp_idx_list.get(1)); 
+			  cstmt.setInt(3, cp_idx_list.get(2)); 
+			  cstmt.setInt(4, cp_idx_list.get(3)); 
+			  cstmt.setInt(5, cp_idx_list.get(4)); 
+			  cstmt.setInt(6, cp_idx_list.get(5)); 
+			  cstmt.setInt(7, cp_idx_list.get(6)); 
+			  cstmt.setInt(8, cp_idx_list.get(7)); 
+			  cstmt.setInt(9, cp_idx_list.get(8)); 
+			  cstmt.setInt(10, cp_idx_list.get(9)); 
+			  cstmt.registerOutParameter(11, java.sql.Types.INTEGER);
+			  
+			  cstmt.execute(); 
+			  result = cstmt.getInt("@RESULT"); 
+			  if(result == 1) {
+				  System.out.println("result:::"+result);
+				  return result;
+			  }else {
+				  result = -1;
+			  }
+		} catch (Exception ex) {
+			System.out.println("insertPopularityManagement 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (cstmt != null)
+					cstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
 				System.out.println("연결 해제 실패: " + e.getMessage());
 			}
 		}
-		return false;
+		return result;
 	}
 	///////////////////////////////// 태훈끝//////////////////////////////////////////////
 
