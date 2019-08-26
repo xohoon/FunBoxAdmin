@@ -8,7 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.mysql.jdbc.CallableStatement;
+
 //import com.mysql.cj.jdbc.CallableStatement;
 
 import net.company.dto.Company;
@@ -605,31 +609,33 @@ public class CompanyDAO {
 
 
 	///////////////////////////////// 태훈시작//////////////////////////////////////////////
-	// 실시간 수동 목록 가져오기
-	public List<CompanyPopularityList> getCompanyPopularityList() {
-		String sql = "SELECT cp_idx, cp_name, manager_name, member_id " + "FROM popularityManagement_list "
+	// 실시간 수동 목록 가져오기 ajax 버전
+	@SuppressWarnings({ "unchecked", "unused" })
+	public JSONArray getCompanyPopularityList() {
+		String sql = "SELECT cp_idx, cp_name, manager_name, member_id "
+				+ "FROM popularityManagement_list "
 				+ "ORDER BY cp_idx DESC";
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<CompanyPopularityList> realList = new ArrayList<CompanyPopularityList>();
+		JSONArray jsonArr = new JSONArray();
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				CompanyPopularityList realDAO = new CompanyPopularityList();
-				realDAO.setCp_idx(rs.getInt("cp_idx"));
-				realDAO.setCp_name(rs.getString("cp_name"));
-				realDAO.setManager_name(rs.getString("manager_name"));
-				realDAO.setMember_id(rs.getString("member_id"));
+				JSONObject jsonObj = new JSONObject();
+				jsonObj.put("cp_idx", rs.getInt("cp_idx"));
+				jsonObj.put("cp_name", rs.getString("cp_name"));
+				jsonObj.put("manager_name", rs.getString("manager_name"));
+				jsonObj.put("member_id", rs.getString("member_id"));
 
-				realList.add(realDAO);
+				jsonArr.add(jsonObj);
 			}
-			return realList;
+			return jsonArr;
 		} catch (Exception ex) {
-			System.out.println("getUploadFilePath 에러: " + ex);
+			System.out.println("getCompanyPopularityList 에러: " + ex);
 		} finally {
 			try {
 				if (rs != null)
@@ -646,26 +652,30 @@ public class CompanyDAO {
 		return null;
 	}
 
-	// 실시간 수동 데이터 넣기
-	public boolean insertPopularityManagement(List<Integer> cp_idx_list, List<String> cp_name_list,
-			List<String> mb_id_list, List<String> manager_name_list) {
-		String sql = "";
-		int result = 0;
+	// 실시간 수동 데이터 가져오기 c태그
+	public List<CompanyPopularityList> getCompanyPopularityInfo() {
+		String sql = "SELECT cp_idx, cp_name, manager_name, member_id "
+				+ "FROM popularityManagement_list "
+				+ "ORDER BY cp_idx DESC";
+		List<CompanyPopularityList> popuList = new ArrayList<CompanyPopularityList>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		System.out.println(">>1" + cp_idx_list.toString());
-		System.out.println(">>2" + cp_name_list.toString());
-		System.out.println(">>3" + mb_id_list.toString());
-		System.out.println(">>4" + manager_name_list.toString());
 		try {
 			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 
-			result = pstmt.executeUpdate();
-			if (result != 0) {
-				return true;
+			while (rs.next()) {
+				CompanyPopularityList popuVO = new CompanyPopularityList();
+				popuVO.setCp_idx(rs.getInt("cp_idx"));
+				popuVO.setCp_name(rs.getString("cp_name"));
+				popuVO.setManager_name(rs.getString("manager_name"));
+				popuVO.setMember_id(rs.getString("member_id"));
+				
+				popuList.add(popuVO);
 			}
+			return popuList;
 		} catch (Exception ex) {
-			System.out.println("insertPopularityManagement 에러: " + ex);
+			System.out.println("getCompanyPopularityList 에러: " + ex);
 		} finally {
 			try {
 				if (rs != null)
@@ -675,10 +685,55 @@ public class CompanyDAO {
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+
+		return null;
+	}
+	
+	// 실시간 수동 데이터 넣기
+	public int insertPopularityManagement(List<Integer> cp_idx_list) {
+		int result = 0;
+		CallableStatement cstmt = null;
+		ResultSet rs = null;
+		try {
+			  cstmt = (CallableStatement) conn.prepareCall("call POPULARITY(?,?,?,?,?,?,?,?,?,?,?)");
+			  
+			  cstmt.setInt(1, cp_idx_list.get(0)); 
+			  cstmt.setInt(2, cp_idx_list.get(1)); 
+			  cstmt.setInt(3, cp_idx_list.get(2)); 
+			  cstmt.setInt(4, cp_idx_list.get(3)); 
+			  cstmt.setInt(5, cp_idx_list.get(4)); 
+			  cstmt.setInt(6, cp_idx_list.get(5)); 
+			  cstmt.setInt(7, cp_idx_list.get(6)); 
+			  cstmt.setInt(8, cp_idx_list.get(7)); 
+			  cstmt.setInt(9, cp_idx_list.get(8)); 
+			  cstmt.setInt(10, cp_idx_list.get(9)); 
+			  cstmt.registerOutParameter(11, java.sql.Types.INTEGER);
+			  
+			  cstmt.execute(); 
+			  result = cstmt.getInt("@RESULT"); 
+			  if(result == 1) {
+				  return result;
+			  }else {
+				  result = -1;
+			  }
+		} catch (Exception ex) {
+			System.out.println("insertPopularityManagement 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (cstmt != null)
+					cstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
 				System.out.println("연결 해제 실패: " + e.getMessage());
 			}
 		}
-		return false;
+		return result;
 	}
 	///////////////////////////////// 태훈끝//////////////////////////////////////////////
 

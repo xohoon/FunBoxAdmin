@@ -11,7 +11,7 @@ import net.company.dao.CompanyDAO;
 import net.company.dto.CompanyDeadLine;
 
 
-public class CompanyDeadLineSaveAjaxAction implements Action {
+public class CompanyDeadLineSaveAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -22,7 +22,7 @@ public class CompanyDeadLineSaveAjaxAction implements Action {
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
-		System.out.println(" CompanyDeadLineSaveAjaxAction 확인");
+		System.out.println(" CompanyDeadLineSaveAction 확인");
 		// 자동 : 1 , 수동 : 0
 		String radioVal = request.getParameter("radioVal");
 		//String radioVal = request.getParameter("radioVal");

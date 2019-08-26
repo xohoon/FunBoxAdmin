@@ -1,54 +1,63 @@
-var checkBtn;
-var tr;
-var td;
-var tdArr = new Array();
-
-$(".allBtn").on('click', function() {
-	var checkBtn = $(this);
-	var tr = checkBtn.parent().parent();
-	var td = tr.children();
-
-	console.log("row values1 ::: " + tr.text());
-	console.log("row values2 ::: " + td.text());
-	var cp_name = td.eq(1).text();
-	var cp_id = td.eq(2).text();
-	var cp_manager = td.eq(3).text();
-
-	console.log("row values3 ::: " + cp_name + "//" + cp_id + "//"
-			+ cp_manager);
-
-	td.each(function(i) {
-		tdArr.push(td.eq(i).text());
-	});
-
-	console.log("td Array ::: " + tdArr);
-
-	/*
-	var table = document.getElementById(test01);
-	var rowlen = table.rows.length;
-	var row = table.insertRow(rowlen - 1);
-	
-	console.log("addROW" + cp_name);
-	row.insertCell(1).innerHTML = cp_name;
-	 */
-	
-});
 /*
-$("#saveBtn").on('click', function() {
-	$.ajax({
-        url : "./companyPopularityManagementUpdate.cp",
-        type : "POST",
-        dataType : "JSON",
-        data : {
-        	"tdArr" : tdArr
-        },
-        success : function(data) {
-        	
-        },
-        error : function(e) {
-        	alert('통신 실패');
-        }
-    });
-});
-*/
 
+$(document).ready(function() {
+	var setting = "0";	
+	alert("1212");
+	$.ajax({
+		url : './ComapnyPopularityInfoAjax.cp', 
+		type : 'POST',
+		data : {
+			"setting":setting
+			},
+		dataType : 'json',
+			success:function(data){
+				var items = "";
+				for(var i=0 ; i<data.length; i++){
+					var number = i+1;
+					items += "<tr>";
+					items += "<td>"+ number + "</td>";
+					items += "<td id='cp_name_"+number+"'>" + data[i].cp_name + "</td>";
+					items += "<td id='mb_id_"+number+"'>" + data[i].member_id + "</td>";
+					items += "<td id='cp_manager_name_"+number+"'>" + data[i].manager_name + "</td>";					
+					items += "<td><button type = 'button' class='topDelBtn' onclick='removeItem(this);'>삭제</button></td>";
+					items += "<td><button type = 'button' class='upBtn' onclick='up(this);'>";
+					items += "<i class='fas fa-chevron-up'></i></button>";
+					items += "<button type = 'button' class='downBtn' onclick='down(this);'>";
+					items +=	"<i class='fas fa-chevron-down'></i></button></td><input name='cp_idx_"+ data[i].cp_idx +"' class='cp_idx' type='hidden' value='"+data[i].cp_idx+"'></tr>";
+					
+				}
+				 $( '#added_table' ).append( items );
+			},error:function(data){
+				alert("데이터 통신을 실패 하였습니다. 개발실에 문의 하세요.");	    					
+			}
+	});			
+});
+
+function radiocheck(){
+	var radioVal = $('input[name="button"]:checked').val();
+	$('#radioVal').val(radioVal);
+}
+
+//자동 - 1 , 수동 - 0
+function savebt(frm){
+	console.log(frm);
+	var radioVal = $('input[name="button"]:checked').val();
+	
+	if (radioVal == 0) {
+		if(confirm("수동으로 저장하시겠습니까?") == true){
+			frm.submit();
+		}else{
+			alert("수동 저장을 취소되었습니다.");
+		}
+	}else if(radioVal == 1){
+		if(confirm("자동으로 저장하시겠습니까?") == true){
+			frm.submit();
+		}else{
+			alert("자동 저장을 취소되었습니다.");
+		}
+	}else{
+		alert("자동 수동 버튼을 클릭해주세요.");
+	}
+	
+}
+*/

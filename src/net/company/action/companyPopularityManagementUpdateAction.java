@@ -111,7 +111,7 @@ public class companyPopularityManagementUpdateAction implements Action {
 		manager_name_list.add(manager_name_10);
 		
 		CompanyDAO companyDAO = new CompanyDAO();
-		companyDAO.insertPopularityManagement(cp_idx_list, cp_name_list, mb_id_list, manager_name_list);
+		companyDAO.insertPopularityManagement(cp_idx_list);
 		
 		forward.setRedirect(false);
 		forward.setPath("./companyPopularityManagement.cp");
