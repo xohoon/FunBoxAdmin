@@ -18,7 +18,7 @@
 		  $('#gnb').load('./template/categoryTemplate.jsp');
 		  $('footer').load('./template/footer.jsp');
 		  //$('.allList').load('../company/compnayAllList.jsp');
-		  $('.allList').load('./compnayAllList.cp');
+		  $('.allList').load('./compnayAllList.cp?category=4');
 		});
 	</script>
 </head>
@@ -51,6 +51,8 @@
                     </li>
                   </ul>
                    <div class="topList">
+                   <input type="button" id="modityBtn" value="수정" style="margin-top:10px;">
+	               <input type="submit" id="saveBtn" value="적용" style="margin-left:10px; margin-top:10px;">
                    <form action="">
                      <table>
                      	<tbody id="added_table">
@@ -62,43 +64,12 @@
 	                         <th></th>
 	                         <th></th>
 	                       </tr>
-	                       <!-- <tr>
-	                         <td>1</td>
-	                         <td></td>
-	                         <td></td>
-	                         <td></td>
-	                         <td><button class="topDelBtn">삭제</button></td>
-	                         <td>
-	                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
-	                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
-	                          </td>
-	                       </tr>
-	                       <tr>
-	                         <td>2</td>
-	                         <td></td>
-	                         <td></td>
-	                         <td></td>
-	                         <td><button class="topDelBtn">삭제</button></td>
-	                         <td>
-	                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
-	                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
-	                          </td>
-	                       </tr>
-	                       <tr>
-	                         <td>3</td>
-	                         <td></td>
-	                         <td></td>
-	                         <td></td>
-	                         <td><button class="topDelBtn">삭제</button></td>
-	                         <td>
-	                           <button class="upBtn"><i class="fas fa-chevron-up"></i></button>
-	                           <button class="downBtn"><i class="fas fa-chevron-down"></i></button>
-	                          </td>
-	                       </tr> -->
                      	</tbody>
                      </table>
-                     </form>
                    </div>
+                   <input type="button" id="modityBtn" value="수정" style="margin-top:10px;">
+	                   <input type="submit" id="saveBtn" value="적용" style="margin-left:10px; margin-top:10px;">
+                     </form>
                 </div>
 			</div>
 		</section>

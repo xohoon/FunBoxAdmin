@@ -18,7 +18,7 @@
 		  $('#gnb').load('./template/categoryTemplate.jsp');
 		  $('footer').load('./template/footer.jsp');
 		  //$('.allList').load('../company/compnayAllList.jsp');
-		  $('.allList').load('./compnayAllList.cp');
+		  $('.allList').load('./compnayAllList.cp?category=1');
 		});
 	</script>
 </head>
