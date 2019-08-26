@@ -32,17 +32,37 @@ public class CompanyJson {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public JSONObject getInsertManualTableResult(int aas_idx,Integer[] cp_idx_value_arr ) {
+	public JSONObject getInsertManualTableResult(int aas_idx,Integer[] cp_idx_value_arr,boolean auto_status ) {
 		jsonObject = new JSONObject();
-		CompanyDAO companyDAO = new CompanyDAO();
+		
 		try {
-			if(companyDAO.insertManualTable(aas_idx, cp_idx_value_arr)) {
-				jsonObject.put("result", 0);
-				jsonObject.put("message", "aas_idx : "+aas_idx+"이 수동으로 처리되었습니다.");
+			boolean result = false;
+			CompanyDAO companyDAO = new CompanyDAO();
+			result = companyDAO.setAutoStatus(aas_idx, auto_status);
+			if (!auto_status) {
+				companyDAO = new CompanyDAO();
+				result = companyDAO.deleteManualTable(aas_idx);
+				companyDAO = new CompanyDAO();
+				result = companyDAO.insertManualTable(aas_idx, cp_idx_value_arr);
+				if(result) {
+					jsonObject.put("result", 0);
+					jsonObject.put("message", "aas_idx : "+aas_idx+"이 수동으로 처리되었습니다.");
+				}else {
+					jsonObject.put("result", 1);
+					jsonObject.put("message", "알수 없는 오류 발생!!!!");
+				}
 			}else {
-				jsonObject.put("result", 1);
-				jsonObject.put("message", "알수 없는 오류 발생!!!!");
+				if(result) {
+					jsonObject.put("result", 0);
+					jsonObject.put("message", "aas_idx :"+aas_idx+"이 자동으로 처리되었습니다.");
+				}else {
+					jsonObject.put("result", 1);
+					jsonObject.put("message", "알수 없는 오류 발생!!!!");
+				}
 			}
+			
+
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

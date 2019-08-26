@@ -32,14 +32,7 @@ public class SetAutoOrManualAction implements Action{
 			cp_idx_value_arr[i] = Integer.parseInt(cp_idx_value_arr_string[i]);
 		}
 		
-		JSONObject jsonObject = null;
-		
-		if (auto_status) {
-			
-		}else {
-			jsonObject = companyJson.getInsertManualTableResult(aas_idx, cp_idx_value_arr);
-		}
-		
+		JSONObject jsonObject = companyJson.getInsertManualTableResult(aas_idx, cp_idx_value_arr,auto_status);
 		
 
 		response.setContentType("application/x-json; charset=UTF-8");

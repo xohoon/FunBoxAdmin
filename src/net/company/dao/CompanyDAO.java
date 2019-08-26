@@ -280,7 +280,7 @@ public class CompanyDAO {
 				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM popularityManagement_list)";
 				break;
 			case 2:
-				sql = "";
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM recommended_company)";
 				break;
 			case 3:
 				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM admin_deadLine)";
@@ -348,12 +348,11 @@ public class CompanyDAO {
 				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM popularityManagement_list)";
 				break;
 			case 2:
-				sql = "";
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM recommended_company)";
 				break;
 			case 3:
 				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM admin_deadLine)";
 				break;			
-	
 			case 4:
 				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM am_banner_1)";
 				break;			
@@ -437,6 +436,55 @@ public class CompanyDAO {
 		return true;
 	}
 	
+	public boolean deleteManualTable(int aas_idx) {
+		String sql = "";
+		switch (aas_idx) {
+			case 1:
+				sql = "DELETE FROM popularityManagement_list";
+				break;
+			case 2:
+				sql = "";
+				break;
+			case 3:
+				sql = "DELETE FROM admin_deadLine";
+				break;			
+	
+			case 4:
+				sql = "DELETE FROM am_banner_1";
+				break;			
+	
+			case 5:
+				sql = "DELETE FROM am_banner_2";
+				break;			
+	
+			default:
+				break;
+		}
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.executeUpdate();
+			return true;
+			
+		} catch (Exception ex) {
+			System.out.println("deleteManualTable 에러: " + ex);
+			
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+		return false;
+	}
+	
 	public boolean insertManualTable(int aas_idx,Integer[] cp_idx_value_arr) {
 		String sql = "";
 		switch (aas_idx) {
@@ -447,15 +495,15 @@ public class CompanyDAO {
 				sql = "";
 				break;
 			case 3:
-				sql = "";
+				sql = "INSERT INTO recommended_company SELECT cp.cp_idx, cp.cp_name, cp.cp_sector, cp.cp_branch, cp.cp_monthly_profit, round((cp_iv.iv_current_amount/cp_iv.iv_goal_amount*100)) as percent, cp_iv.iv_goal_amount, cp_iv.iv_current_amount, cp_iv.iv_appl_stop_date_time, concat(cp_f.cf_directory,cp_f.cf_image1) as thumbnail_image, cp.cp_recommand_count FROM company as cp JOIN company_invest as cp_iv ON cp.cp_idx = cp_iv.cp_idx JOIN company_file as cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN (";
 				break;			
 	
 			case 4:
-				sql = "INSERT INTO am_banner_1 SELECT cp.cp_idx,cp.cp_name,cp.cp_name,cp.cp_intro_content,cp_f.cf_image2 as banner_image FROM company cp JOIN company_file cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN(";
+				sql = "INSERT INTO am_banner_1 SELECT cp.cp_idx,cp.cp_name,cp.cp_name,concat(cp_f.cf_directory,cp_f.cf_image2) as banner_image FROM company cp JOIN company_file cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN(";
 				break;			
 	
 			case 5:
-				sql = "";
+				sql = "INSERT INTO am_banner_2 SELECT cp.cp_idx,cp.cp_name,cp.cp_name,cp.cp_intro_content,cp.cp_open_datetime, concat(cp_f.cf_directory,cp_f.cf_image2) as banner_image FROM company cp JOIN company_file cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN(";
 				break;			
 	
 			default:
@@ -496,6 +544,7 @@ public class CompanyDAO {
 		}
 		return false;
 	}
+	
 
 	// 마감 임박 클라이언트 수동 List 값 가져 오기(수동) 윤식 추가
 	public ArrayList<CompanyDeadLine> getMan3List() {

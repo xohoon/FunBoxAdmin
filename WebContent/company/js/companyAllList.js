@@ -170,7 +170,7 @@ function setAutoManual(){
 		traditional : true,
 		data : {
 			auto_status : document.getElementById('auto').checked,
-			aas_idx : 4,
+			aas_idx : document.getElementById('aas_idx').value,
 			cp_idx_value_arr : cp_idx_value_arr			
 			},
 		type : "json"

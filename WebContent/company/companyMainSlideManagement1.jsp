@@ -83,6 +83,7 @@
 		<footer></footer>
 	</div>
 	<input type="hidden" id="auto_status" name="auto_status" value="${auto_status}">
+	<input type="hidden" id="aas_idx" name="aas_idx" value="${aas_idx}">
 </body>
 <script>  
 	setTimeout(function () {

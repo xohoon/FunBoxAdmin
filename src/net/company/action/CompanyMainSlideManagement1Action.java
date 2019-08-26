@@ -28,6 +28,7 @@ public class CompanyMainSlideManagement1Action implements Action {
 		
 		request.setAttribute("auto_status", auto_status);
 		request.setAttribute("companyAddedList", companyAddedList);
+		request.setAttribute("aas_idx", 4);
 		
 		forward.setRedirect(false);
 		forward.setPath("./company/companyMainSlideManagement1.jsp");
