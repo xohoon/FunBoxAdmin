@@ -1,6 +1,5 @@
 $(function(){
 	//자동 수동 초기값 설정
-	alert(document.getElementById('auto_status').value);
 	if (document.getElementById('auto_status').value == true) {
 		document.getElementById('auto').checked = true;
 	}else{
@@ -95,6 +94,7 @@ function swapUp(trTag){
 	trTag.children[3].id = trTag.previousSibling.children[3].id;
 	trTag.previousSibling.children[3].id = temp;
 }
+
 function swapDown(trTag){
 	var temp = trTag.children[6].name;
 	trTag.children[6].name = trTag.nextElementSibling.children[6].name;
@@ -153,6 +153,7 @@ function reloadNumbering(){
 		item.children[1].id = 'cp_name_'+i;
 		item.children[2].id = 'mb_id_'+i;
 		item.children[3].id = 'cp_manager_name_'+i;
+		item.children[6].name = 'cp_idx_'+i;
 		i++;
 	});
 };

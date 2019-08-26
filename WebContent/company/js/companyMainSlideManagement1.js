@@ -1,9 +1,5 @@
-
-/*
 $(function(){
-	if (document.getElementById('auto_status').value) {
-		document.getElementById('auto').checked = true;
-	}else{
-		document.getElementById('man').checked = true;
-	}
-});*/
+	document.getElementById('saveBtn').addEventListener('click',function() {
+		var count = document.getElementById('added_table').childElementCount - 1;
+	});
+});
