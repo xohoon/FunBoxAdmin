@@ -22,7 +22,6 @@
 		});
 	</script>
 </head>
-
 <body>
 	<div id="wrap">
 		<header></header>
@@ -42,7 +41,7 @@
                   <h3>메인배너1</h3>
                   <ul class="push">
                     <li>
-                      <input type="radio" name="push" id="auto" value="자동" checked>
+                      <input type="radio" name="push" id="auto" value="자동">
                       <label for="auto">자동</label>
                     </li>
                     <li>
@@ -73,11 +72,12 @@
 		</section>
 		<footer></footer>
 	</div>
-	<script>  
+	<input type="hidden" id="auto_status" name="auto_status" value="${auto_status}">
+</body>
+<script>  
 	setTimeout(function () {
 	  jQuery('.nav3').trigger('click');
 	  jQuery('.nav38').addClass('on');
 	}, 500);
-	</script>
-</body>
+</script>
 </html>
