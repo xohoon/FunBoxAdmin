@@ -619,9 +619,9 @@ public class CompanyDAO {
 			
 }	
 	// admin_am_setting update 자동 수동
-	public boolean setAutoStatus(int ass_idx, boolean auto_status) {
+	public boolean setAutoStatus(int aas_idx, boolean auto_status) {
 		
-		String sql = "UPDATE admin_am_setting SET aas_auto_status ="+ auto_status +" WHERE aas_idx = "+ass_idx;  
+		String sql = "UPDATE admin_am_setting SET aas_auto_status ="+ auto_status +" WHERE aas_idx = "+aas_idx;  
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
