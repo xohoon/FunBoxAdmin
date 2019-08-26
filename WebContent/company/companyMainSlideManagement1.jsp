@@ -51,8 +51,6 @@
                     </li>
                   </ul>
                    <div class="topList">
-                   <input type="button" id="modityBtn" value="수정" style="margin-top:10px;">
-	               <input type="button" id="saveBtn" value="적용" style="margin-left:10px; margin-top:10px;">
                      <table>
                      	<tbody id="added_table">
                      		<tr>

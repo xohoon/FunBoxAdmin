@@ -192,6 +192,13 @@ function setAutoManual(){
 	});
 };
 
+function countLimit(minCount,maxCount){
+	var count = document.getElementById('added_table').childElementCount - 1;	
+	if (minCount <= count && maxCount >= count) {
+		return true;
+	}
+	return false;
+};
 
 // 태훈 추가 - 기능 제어
 $(document).ready(function() {

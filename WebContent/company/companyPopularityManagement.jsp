@@ -83,7 +83,7 @@
 				                        <td>${popuInfo.manager_name }</td>
 				                        <td><button type="button" class="topDelBtn" onclick="removeItem(this);">삭제</button></td>
 				                        <td><button type='button' class='upBtn' onclick='up(this);'><i class='fas fa-chevron-up'></i></button><button type='button' class='downBtn' onclick='down(this);'><i class='fas fa-chevron-down'></i></button></td>
-				                        <input name='cp_idx_"+${status.count}+"' class='cp_idx' type='hidden' value="${popuInfo.cp_idx }">
+				                        <input name='cp_idx_${status.count}' class='cp_idx' type='hidden' value="${popuInfo.cp_idx }">
 				                   </tr>
 								</c:forEach>
 	                       </tbody>

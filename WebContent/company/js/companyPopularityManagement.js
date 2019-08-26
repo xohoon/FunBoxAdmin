@@ -1,5 +1,9 @@
 //자동 - 1 , 수동 - 0
 function saveCheck(frm){
+	if (!countLimit(10,10)) {
+		alert('');
+		return false;
+	}
 	console.log("autostatusvalue:::::1"+$("#auto_status").text());
 	if(document.getElementById('auto').checked) {
 		$("#auto_status").text('1');
