@@ -36,10 +36,10 @@
 			onclick="location.href='./companyDeadLineManagement.cp'">마감 임박
 			기업 관리</li>
 		<li class="nav38"
-			onclick="location.href='./companyMainSlideManagement.cp'">메인배너1
+			onclick="location.href='./companyMainSlideManagement1.cp'">메인배너1
 			관리</li>
 		<li class="nav39"
-			onclick="location.href='./companyBannerManagement.cp'">메인배너2 관리</li>
+			onclick="location.href='./companyMainSlideManagement2.cp'">메인배너2 관리</li>
 	</ul>
 	<a href="#" class="nav4"><i class="fas fa-headset"></i>&nbsp;&nbsp;고객지원관리<span>+</span></a>
 	<ul class="nav41">

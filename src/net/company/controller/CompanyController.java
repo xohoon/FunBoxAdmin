@@ -85,6 +85,11 @@ public class CompanyController extends HttpServlet {
 				action = new DeleteCompanyInvestApply();
 				forward = action.execute(request, response);
 				break;
+			case "/setAutoOrManual.cp":
+				//ajax
+				action = new SetAutoOrManualAction();
+				forward = action.execute(request, response);
+				break;	
 				//태훈추가//
 			case "/companyPopularityManagementUpdate.cp":
 				action = new companyPopularityManagementUpdateAction();
