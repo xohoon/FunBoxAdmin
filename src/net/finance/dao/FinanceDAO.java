@@ -180,7 +180,6 @@ public class FinanceDAO {
 					+ "WHERE A.tk_idx = B.tk_idx AND A.po_category = 3 AND C.mb_id like '%"+ id +"%' "
 					+ "ORDER BY po_date_time DESC limit "
 					+ startRow + ", " + pageSize;
-
 				
 				pstmt = conn.prepareStatement(sql);
 				rs = pstmt.executeQuery();
