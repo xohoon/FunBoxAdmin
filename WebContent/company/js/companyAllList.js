@@ -159,6 +159,37 @@ function reloadNumbering(){
 };
 
 function setAutoManual(){
+	
+	var aas_idx = Number.parseInt(document.getElementById('aas_idx').value);
+	var min_count;
+	var max_count;
+	switch (aas_idx) {
+	case 1:
+		
+		break;
+	case 2:
+		min_count = 4;
+		max_count = 4;
+		break;
+	case 3:
+		break;
+	case 4:
+		min_count = 1;
+		max_count = 8;
+		break;
+	case 5:
+		min_count = 1;
+		max_count = 8;
+		break;		
+	default:
+		break;
+	}
+	
+	if (!countLimit(min_count,max_count)) {
+		alert('개수 제한 오류');
+		return false;
+	}
+	
 	var cp_idx_value_arr = new Array();
 	Array.from(document.getElementsByClassName("cp_idx")).forEach(function(item) {		
 		cp_idx_value_arr.push(item.value);
@@ -169,7 +200,7 @@ function setAutoManual(){
 		traditional : true,
 		data : {
 			auto_status : document.getElementById('auto').checked,
-			aas_idx : document.getElementById('aas_idx').value,
+			aas_idx : aas_idx,
 			cp_idx_value_arr : cp_idx_value_arr			
 			},
 		type : "json"
@@ -192,6 +223,7 @@ function setAutoManual(){
 	});
 };
 
+//추가된 리스트에
 function countLimit(minCount,maxCount){
 	var count = document.getElementById('added_table').childElementCount - 1;	
 	if (minCount <= count && maxCount >= count) {
@@ -230,6 +262,26 @@ $(document).ready(function() {
 		$("#saveBtn").attr('disabled', true);
 		$("input[name='push']").attr('disabled', true);
 });
+
+function disableController(){
+	$(".topList").children().css('backgroundColor', '#d3d3d3');
+	$(".allList").children().css('backgroundColor', '#d3d3d3');
+	
+	$(".allBtn").prop("disabled", true);
+	$(".allBtn").css('backgroundColor', '#d3d3d3');
+	
+	$(".topDelBtn").prop("disabled", true);
+	$(".topDelBtn").css('backgroundColor', '#d3d3d3');
+	
+	$(".upBtn").prop("disabled", true);
+	$(".upBtn").css('backgroundColor', '#d3d3d3');
+	
+	$(".downBtn").prop("disabled", true);
+	$(".downBtn").css('backgroundColor', '#d3d3d3');
+	
+	$("#saveBtn").attr('disabled', true);
+	$("input[name='push']").attr('disabled', true);
+};
 
 $("#modityBtn").on('click', function() {
 	var BtnText = $("#modityBtn").val();

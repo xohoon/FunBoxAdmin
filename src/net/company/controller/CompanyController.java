@@ -32,12 +32,7 @@ public class CompanyController extends HttpServlet {
 				action = new CompanyDeadLineAction();
 				forward = action.execute(request, response);
 				break;
-			/*
-			 * case "/companyDeadLineAjax.cp": // 윤식 추가 수동 top 3 처음페이지 불러올때 action = new
-			 * CompanyDeadLineAjaxAction(); forward = action.execute(request, response);
-			 * break;
-			 */
-			case "/companyDeadLineAjaxSave.cp": // 윤식 추가  수동 top 3 지정후 저장
+			case "/CompanyDeadLineSaveAction.cp": // 윤식 추가  수동 top 3 지정후 저장
 				action = new CompanyDeadLineSaveAction();
 				forward = action.execute(request, response);
 				break;	

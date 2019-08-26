@@ -52,19 +52,19 @@
 				<div class="top">
                   <h3>마감임박</h3>
                   <ul class="push">
-                  <li>
-                  	<input type="radio" id="auto" name = "button" value="1" onclick = "radiocheck()">
-                    <label for="auto">자동</label>
-                  </li>
                    <li>
-                      <input type="radio" id="man" name = "button" value="0" onclick = "radiocheck()">
+                      <input type="radio" name="push" id="auto" value="1" onclick = "hiddenRadio(this.value)">
+                      <label for="auto">자동</label>
+                    </li>
+                    <li>
+                      <input type="radio" name="push" id="man" value="0" onclick = "hiddenRadio(this.value)">
                       <label for="man">수동</label>
-                     </li>
+                    </li>
                   </ul>
-                   <form name="save" method="post" action="./companyDeadLineAjaxSave.cp">
+                   <form name="save" method="post" action="./CompanyDeadLineSaveAction.cp">
                    <div class="topList">                  
                      <table>                     
-                     <input type="hidden" id="radioVal" name="radioVal" value="1">
+                     <input type="hidden" id="radioVal" name="radioVal" value="0">
                      	<tbody id="added_table">
                      	  <tr>
 	                         <th>번호</th>

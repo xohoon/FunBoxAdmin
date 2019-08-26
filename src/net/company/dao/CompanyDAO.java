@@ -499,11 +499,11 @@ public class CompanyDAO {
 				break;			
 	
 			case 4:
-				sql = "INSERT INTO am_banner_1 SELECT cp.cp_idx,cp.cp_name,cp.cp_name,concat(cp_f.cf_directory,cp_f.cf_image2) as banner_image FROM company cp JOIN company_file cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN(";
+				sql = "INSERT INTO am_banner_1 SELECT cp.cp_idx,cp.cp_name,cp.cp_branch,cp.cp_intro_content,concat(cp_f.cf_directory,cp_f.cf_image2) as banner_image FROM company cp JOIN company_file cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN(";
 				break;			
 	
 			case 5:
-				sql = "INSERT INTO am_banner_2 SELECT cp.cp_idx,cp.cp_name,cp.cp_name,cp.cp_intro_content,cp.cp_open_datetime, concat(cp_f.cf_directory,cp_f.cf_image2) as banner_image FROM company cp JOIN company_file cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN(";
+				sql = "INSERT INTO am_banner_2 SELECT cp.cp_idx,cp.cp_name,cp.cp_branch,cp.cp_intro_content,cp.cp_open_datetime, concat(cp_f.cf_directory,cp_f.cf_image2) as banner_image FROM company cp JOIN company_file cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN(";
 				break;			
 	
 			default:
@@ -602,7 +602,7 @@ public class CompanyDAO {
 				+"where cp.cp_open_status = true " 
 				+"AND cp.cp_idx ='"+ id +"' "
 				+"AND cp_i.cp_idx ='"+ id +"' "  
-				+"AND cp_f.cp_idx ='"+ id +"' "
+				+"AND cp_f.cp_idx ='"+ id +"' "				
 				+"AND cp.mb_id = mb.mb_id ";
 			
 
@@ -615,6 +615,7 @@ public class CompanyDAO {
 		if (radioVal.equals("0")) { // 수동			
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
+			
 		}else if(radioVal.equals("1")){ // 자동
 				sql = "select mb.mb_id, cp.cp_manager, "+"cp.cp_idx, "+"cp.cp_monthly_profit, "+"cp.cp_sector, "+"cp.cp_name, "+"cp.cp_branch, "+"cp_i.iv_current_amount, "+"cp_i.iv_goal_amount, "+"cp_i.iv_appl_stop_date_time, "
 					+"concat(cp_f.cf_directory,cp_f.cf_image1) as thumbnail_image, "
@@ -623,11 +624,13 @@ public class CompanyDAO {
 					+"AND cp.cp_open_status = true " 
 					+"AND cp.cp_idx = cp_i.cp_idx " 
 					+"AND cp.cp_idx = cp_f.cp_idx " 
+					+"AND cp.mb_id = mb.mb_id "
 					+"order by cp_i.iv_appl_stop_date_time asc limit 3";
 			
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 		}
+		
 		while (rs.next()) {
 			CompanyDeadLine DeadLineList = new CompanyDeadLine();
 			
@@ -700,41 +703,91 @@ public class CompanyDAO {
 
 		return false;
 	}
+	// 테이블 비우기
+	public boolean deletetalbe() {
+		String sql = "DELETE FROM admin_deadLine";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.execute();
+			System.out.println("테이블 비우기 성공");
+			return true;
+			
+		}catch (Exception ex) {
+			System.out.println("deletetalbe 에러: " + ex);
+		}finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("연결 해제 실패: " + e.getMessage());
+			}
+		}
+		
+		return false;
+	}
 	
 	// 마감임박 admin_deadLine 테이블에 insert
-	public boolean insertAutoManDeadLineList(ArrayList<CompanyDeadLine> transDeadLineList) {
+	public boolean insertAutoManDeadLineList(String radioVal, String id) {
+		
 		String sql = "INSERT INTO admin_deadLine("
-				+ "cp_idx, mb_id, cp_manager, cp_monthly_profit, cp_sector, cp_name, cp_branch, "
-				+ "iv_current_amount, iv_goal_amount, appl_stop_date_time, thumbnail_image, persent) "
-				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		System.out.println("insertAutoManDeadLineList :" + transDeadLineList.toString());
+					+ "cp_idx, mb_id, cp_manager, cp_monthly_profit, cp_sector, cp_name, cp_branch, "
+					+ "iv_current_amount, iv_goal_amount, appl_stop_date_time, thumbnail_image, persent) "
+					+ "select cp.cp_idx, mb.mb_id, cp.cp_manager, cp.cp_monthly_profit, cp.cp_sector, cp.cp_name, cp.cp_branch, cp_i.iv_current_amount, cp_i.iv_goal_amount, cp_i.iv_appl_stop_date_time, " 
+					+ "concat(cp_f.cf_directory,cp_f.cf_image1) as thumbnail_image," 
+					+ "round((iv_current_amount/iv_goal_amount)*100) as persent "
+					+ "from company cp, company_file cp_f, company_invest cp_i, member mb " 
+					+ "where cp.cp_idx ='"+ id +"' " 
+					+ "AND cp_i.cp_idx ='"+ id +"' "  
+					+ "AND cp_f.cp_idx ='"+ id +"' "				
+					+ "AND cp.mb_id = mb.mb_id ";
+		
 		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			for(int i =0 ; i < transDeadLineList.size() ; i++) {							
-				pstmt.setInt(1, transDeadLineList.get(i).getCp_idx());
-				pstmt.setString(2, transDeadLineList.get(i).getMb_id());
-				pstmt.setString(3, transDeadLineList.get(i).getCp_manager());
-				pstmt.setInt(4, transDeadLineList.get(i).getCp_monthly_profit());
-				pstmt.setString(5, transDeadLineList.get(i).getCp_sector());
-				pstmt.setString(6, transDeadLineList.get(i).getCp_name());
-				pstmt.setString(7, transDeadLineList.get(i).getCp_branch());			
-				pstmt.setString(8, transDeadLineList.get(i).getIv_current_amount());
-				pstmt.setString(9, transDeadLineList.get(i).getIv_goal_amount());
-				pstmt.setString(10, transDeadLineList.get(i).getAppl_stop_date_time());
-				pstmt.setString(11, transDeadLineList.get(i).getThumbnail_image());
-				pstmt.setString(12, transDeadLineList.get(i).getPersent());
-			}			
-			result = pstmt.executeUpdate();
-			System.out.println(pstmt);
-			
-			if (result != 0) {
-				return true;
+		
+		System.out.println("radioVal: "+ radioVal );
+		System.out.println("id: "+ id );
+		
+		try {		
+			if(radioVal.equals("0")){
+				pstmt = conn.prepareStatement(sql);
+				result = pstmt.executeUpdate();
+
+				if (result != 0) {
+					return true;
+				}
+				
+			}else if(radioVal.equals("1")){ // 자동
+				sql = "INSERT INTO admin_deadLine("
+						+ "cp_idx, mb_id, cp_manager, cp_monthly_profit, cp_sector, cp_name, cp_branch, "
+						+ "iv_current_amount, iv_goal_amount, appl_stop_date_time, thumbnail_image, persent) "
+						+ "select cp.cp_idx, mb.mb_id, cp.cp_manager, cp.cp_monthly_profit, cp.cp_sector, cp.cp_name, cp.cp_branch, cp_i.iv_current_amount, cp_i.iv_goal_amount, cp_i.iv_appl_stop_date_time, "
+						+ "concat(cp_f.cf_directory,cp_f.cf_image1) as thumbnail_image, "
+						+ "round((iv_current_amount/iv_goal_amount)*100) as persent from company cp, company_file cp_f, company_invest cp_i, member mb " 
+						+ "where cp_i.iv_appl_stop_date_time > now() " 
+						+ "AND cp.cp_open_status = true " 
+						+ "AND cp.cp_idx = cp_i.cp_idx " 
+						+ "AND cp.cp_idx = cp_f.cp_idx " 
+						+ "AND cp.mb_id = mb.mb_id "
+						+ "order by cp_i.iv_appl_stop_date_time asc limit 3";
+				
+				pstmt = conn.prepareStatement(sql);
+				result = pstmt.executeUpdate();
+
+				if (result != 0) {
+					return true;
+				}				
 			}
+						
 		} catch (Exception ex) {
-			System.out.println("InsertCompany 에러: " + ex);
+			System.out.println("insertAutoManDeadLineList 에러: " + ex);
 		} finally {
 			try {
 				if (rs != null)
