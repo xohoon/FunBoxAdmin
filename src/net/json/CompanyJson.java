@@ -14,20 +14,38 @@ public class CompanyJson {
 		try {
 			if (app_cp_idx < 0) {
 				jsonObject.put("result", 2);
-				jsonObject.put("message", "È®ÀÎµÇÁö ¾ÊÀº ¿À·ù");
+				jsonObject.put("message", "È®ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			}else {
 				if (companyDAO.deleteCompanyApply(app_cp_idx)) {
 					jsonObject.put("result", 0);
-					jsonObject.put("message", app_cp_idx + "¹ø ½ÅÃ»¼­ »èÁ¦ ¼º°ø");
+					jsonObject.put("message", app_cp_idx + "ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 				}else{
 					jsonObject.put("result", 1);
-					jsonObject.put("message", app_cp_idx + "¹ø ½ÅÃ»¼­ »èÁ¦ ½ÇÆÐ");
+					jsonObject.put("message", app_cp_idx + "ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 				}
 			}			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+		return jsonObject;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public JSONObject getInsertManualTableResult(int aas_idx,Integer[] cp_idx_value_arr ) {
+		jsonObject = new JSONObject();
+		CompanyDAO companyDAO = new CompanyDAO();
+		try {
+			if(companyDAO.insertManualTable(aas_idx, cp_idx_value_arr)) {
+				jsonObject.put("result", 0);
+				jsonObject.put("message", "aas_idx : "+aas_idx+"ì´ ìˆ˜ë™ìœ¼ë¡œ ì²˜ë¦¬ë˜ì—ˆìŠµë‹ˆë‹¤.");
+			}else {
+				jsonObject.put("result", 1);
+				jsonObject.put("message", "ì•Œìˆ˜ ì—†ëŠ” ì˜¤ë¥˜ ë°œìƒ!!!!");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return jsonObject;
 	}
 

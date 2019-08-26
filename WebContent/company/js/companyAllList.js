@@ -9,6 +9,7 @@ $(function(){
 	added_table = $('#added_table');
 	added_table_js = document.getElementById('added_table');
 	all_list = document.getElementById('all_list');
+	
 	Array.from(document.getElementsByClassName("allBtn")).forEach(function(item) {		
 		item.addEventListener('click',function() { addManualToList(item); all_list.removeChild(item.parentElement.parentElement); });
 	});
@@ -155,6 +156,38 @@ function reloadNumbering(){
 		item.children[3].id = 'cp_manager_name_'+i;
 		item.children[6].name = 'cp_idx_'+i;
 		i++;
+	});
+};
+
+function setAutoManual(){
+	var cp_idx_value_arr = new Array();
+	Array.from(document.getElementsByClassName("cp_idx")).forEach(function(item) {		
+		cp_idx_value_arr.push(item.value);
+	});
+	$.ajax({
+		url : './setAutoOrManual.cp',
+		method : "POST",
+		traditional : true,
+		data : {
+			auto_status : document.getElementById('auto').checked,
+			aas_idx : 4,
+			cp_idx_value_arr : cp_idx_value_arr			
+			},
+		type : "json"
+	}).done(function(resultData) {
+		switch (resultData.result) {
+		case 0:
+			alert(resultData.message);
+			break;
+		case 1:
+			alert(resultData.message);
+			break;	
+		default:
+			break;
+		}
+	}).fail(function() {
+		alert('서버통신 오류');
+	}).always(function() {
 	});
 };
 

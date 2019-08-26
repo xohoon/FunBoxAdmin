@@ -401,6 +401,7 @@ public class CompanyDAO {
 		return false;
 	}
 	
+	
 
 	// 자동 수동 상태 들고오기 // 박신규 추가
 	public boolean getAutoStatus(int aas_idx) {
@@ -433,6 +434,66 @@ public class CompanyDAO {
 		}
 
 		return true;
+	}
+	
+	public boolean insertManualTable(int aas_idx,Integer[] cp_idx_value_arr) {
+		String sql = "";
+		switch (aas_idx) {
+			case 1:
+				sql = "";
+				break;
+			case 2:
+				sql = "";
+				break;
+			case 3:
+				sql = "";
+				break;			
+	
+			case 4:
+				sql = "INSERT INTO am_banner_1 SELECT cp.cp_idx,cp.cp_name,cp.cp_name,cp.cp_intro_content,cp_f.cf_image2 as banner_image FROM company cp JOIN company_file cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN(";
+				break;			
+	
+			case 5:
+				sql = "";
+				break;			
+	
+			default:
+				break;
+		}
+		for (int i = 0; i < cp_idx_value_arr.length; i++) {
+			if (i + 1 == cp_idx_value_arr.length) {
+				sql += "?)";
+			}else {
+				sql += "?,";
+			}
+		}
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			for (int i = 0; i < cp_idx_value_arr.length; i++) {
+				pstmt.setInt(i+1, cp_idx_value_arr[i]);
+			}
+			pstmt.executeUpdate();
+			return true;
+			
+		} catch (Exception ex) {
+			System.out.println("insertManualTable 에러: " + ex);
+			
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+		return false;
 	}
 
 	// 마감 임박 클라이언트 수동 List 값 가져 오기(수동) 윤식 추가
