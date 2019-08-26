@@ -17,6 +17,7 @@
 <body>
 	<div class="sec13_new">
 	  <h3>자주묻는질문 등록하기</h3>
+	  <form>
 	  <label>제목</label>
 	  <textarea class="tit" id="title"></textarea>
 	  <select id="selectBox">
@@ -25,8 +26,9 @@
 	    <option value="3">기타</option>
 	  </select>
 	  <textarea id="content"></textarea>
-	  <input type="file">
+	  <input type="file" id="uploadfile"/>
 	  <button class="submit" onclick="register();">등록하기</button>
+	  </form>
 	</div>
 </body>
 </html>

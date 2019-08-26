@@ -1,4 +1,4 @@
-$(document).ready(function() {
+/*$(document).ready(function() {
 //	$("input[name = 'auto']").attr('disabled', true);
 //	$("input[name = 'man']").attr('disabled', true);
 	
@@ -22,7 +22,7 @@ $(document).ready(function() {
 					itemHtml += "<td><button type = 'button' class='upBtn' onclick='up(this);'>";
 					itemHtml += "<i class='fas fa-chevron-up'></i></button>";
 					itemHtml += "<button type = 'button' class='downBtn' onclick='down(this);'>";
-					itemHtml +=	"<i class='fas fa-chevron-down'></i></button></td><input name='cp_idx_"+ data[i].cp_idx +"' class='cp_idx' type='hidden' value='"+data[i].cp_idx+"'></tr>";
+					itemHtml +=	"<i class='fas fa-chevron-down'></i></button></td><input name='cp_idx_"+ number +"' class='cp_idx' type='hidden' value='"+data[i].cp_idx+"'></tr>";
 					
 				}
 				 $( '#added_table' ).append( itemHtml );
@@ -30,7 +30,7 @@ $(document).ready(function() {
 				alert("데이터 통신을 실패 하였습니다. 개발실에 문의 하세요.");	    					
 			}
 	});			
-});
+});*/
 function radiocheck(){
 	var radioVal = $('input[name="button"]:checked').val();
 	$('#radioVal').val(radioVal);
@@ -38,8 +38,7 @@ function radiocheck(){
 
 
 //자동 - 1 , 수동 - 0
-function savebt(frm){
-	console.log(frm);
+function savebt(frm){	
 	var radioVal = $('input[name="button"]:checked').val();
 	
 	if (radioVal == 0) {

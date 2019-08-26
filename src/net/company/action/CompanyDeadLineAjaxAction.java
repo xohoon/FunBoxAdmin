@@ -18,10 +18,12 @@ public class CompanyDeadLineAjaxAction implements Action {
 		String category = request.getParameter("category");
 		
 		CompanyDAO companydao = new CompanyDAO();
-		JSONArray auto3list = companydao.getMan3List();
+		//JSONArray auto3list = companydao.getMan3List();
 		
-		response.setContentType("application/x-json;charset=UTF-8");
-		response.getWriter().print(auto3list);
+		/*
+		 * response.setContentType("application/x-json;charset=UTF-8");
+		 * response.getWriter().print(auto3list);
+		 */
 				
 		return null;
 	}

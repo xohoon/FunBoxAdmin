@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@page import="net.company.dto.CompanyDeadLine"%>
+<%@page import="java.util.ArrayList"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +28,10 @@
 		  $('.allList').load('./compnayAllList.cp?category=3');
 		});
 	</script>
+	<%
+		ArrayList<CompanyDeadLine> companydeadline = (ArrayList<CompanyDeadLine>)request.getAttribute("companydeadline");
+		//System.out.println("test :" + companydeadline.get(0).getCp_manager());
+	%>
 </head>
 
 <body>
@@ -45,7 +53,7 @@
                   <h3>마감임박</h3>
                   <ul class="push">
                   <li>
-                  	<input type="radio" id="auto" name = "button" value="1" onclick = "radiocheck()" checked>
+                  	<input type="radio" id="auto" name = "button" value="1" onclick = "radiocheck()">
                     <label for="auto">자동</label>
                   </li>
                    <li>
@@ -58,15 +66,28 @@
                      <table>                     
                      <input type="hidden" id="radioVal" name="radioVal" value="1">
                      	<tbody id="added_table">
-	                       <tr>
+                     	  <tr>
 	                         <th>번호</th>
 	                         <th>상호명</th>
 	                         <th>아이디</th>
 	                         <th>담당자</th>
 	                         <th></th>
 	                         <th></th>
+	                       </tr>                     	
+                       
+                       <c:forEach var = "companydeadline" items="${companydeadline}" varStatus="status" >
+	                       <tr>
+	                         <td>${status.count}</td>
+	                         <td>${companydeadline.cp_name}</td>
+	                         <td>${companydeadline.mb_id}</td>
+	                         <td>${companydeadline.cp_manager}</td>
+	                         <td><button type = 'button' class='topDelBtn' onclick='removeItem(this);'>삭제</button></td>
+	                         <td><button type = 'button' class='upBtn' onclick='up(this);'><i class='fas fa-chevron-up'></i></button>
+	                         <button type = 'button' class='downBtn' onclick='down(this);'><i class='fas fa-chevron-down'></i></button></td>
+	                         <input name='cp_idx_${status.count}' class='cp_idx' type='hidden' value= "${companydeadline.cp_idx}">	                         
 	                       </tr>
-                       </tbody>                       
+	                   </c:forEach>
+	                   </tbody>                       
                      </table>                     
                    </div>                                     
 	                   <input type="button" id="modityBtn" value="수정" style="margin-top:10px;">
@@ -77,12 +98,12 @@
 		</section>
 		<footer></footer>
 	</div>
-	<script>  
-setTimeout(function () {
-  jQuery('.nav3').trigger('click');
-  jQuery('.nav37').addClass('on');
-}, 500);
-  
-	</script>
+<input type="hidden" id="auto_status" name="auto_status" value="${auto_status}">	
 </body>
+<script>  
+	setTimeout(function () {
+	  jQuery('.nav3').trigger('click');
+	  jQuery('.nav37').addClass('on');
+	}, 500);  
+</script>
 </html>

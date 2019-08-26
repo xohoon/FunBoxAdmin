@@ -1,4 +1,10 @@
 $(function(){
+	//자동 수동 초기값 설정
+	if (document.getElementById('auto_status').value == true) {
+		document.getElementById('auto').checked = true;
+	}else{
+		document.getElementById('man').checked = true;
+	}
 	
 	added_table = $('#added_table');
 	added_table_js = document.getElementById('added_table');
@@ -7,9 +13,12 @@ $(function(){
 		item.addEventListener('click',function() { addManualToList(item); all_list.removeChild(item.parentElement.parentElement); });
 	});
 	
-	
+	count = document.getElementById('added_table').childElementCount;
+	if (count < 1) {
+		count = 1;
+	}
 });
-var count = 1;
+var count;
 var test;
 var added_table;
 var added_table_js;
@@ -85,6 +94,7 @@ function swapUp(trTag){
 	trTag.children[3].id = trTag.previousSibling.children[3].id;
 	trTag.previousSibling.children[3].id = temp;
 }
+
 function swapDown(trTag){
 	var temp = trTag.children[6].name;
 	trTag.children[6].name = trTag.nextElementSibling.children[6].name;
@@ -143,9 +153,11 @@ function reloadNumbering(){
 		item.children[1].id = 'cp_name_'+i;
 		item.children[2].id = 'mb_id_'+i;
 		item.children[3].id = 'cp_manager_name_'+i;
+		item.children[6].name = 'cp_idx_'+i;
 		i++;
 	});
 };
+
 
 // 태훈 추가 - 기능 제어
 $(document).ready(function() {

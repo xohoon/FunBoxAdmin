@@ -12,9 +12,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 
-
-import com.mysql.jdbc.CallableStatement;
-//import com.mysql.cj.jdbc.CallableStatement;
+//import com.mysql.jdbc.CallableStatement;
+import com.mysql.cj.jdbc.CallableStatement;
 
 
 import net.company.dto.Company;
@@ -373,33 +372,31 @@ public class CompanyDAO {
 	}
 
 	// 마감 임박 클라이언트 수동 List 값 가져 오기(수동) 윤식 추가
-	@SuppressWarnings({ "unchecked", "unused" })
-	public JSONArray getMan3List() {
+	public ArrayList<CompanyDeadLine> getMan3List() {
 
 		String sql = "select " + "cp_idx, " + "mb_id, " + "cp_name, " + "cp_manager " + "from admin_deadLine ";
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		JSONArray jsonArr = new JSONArray();
-		System.out.println(sql);
+		ArrayList<CompanyDeadLine> companydeadline = new ArrayList<CompanyDeadLine>();
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				JSONObject jsonObj = new JSONObject();
-				jsonObj.put("cp_idx", rs.getString("cp_idx"));
-				jsonObj.put("mb_id", rs.getString("mb_id"));
-				jsonObj.put("cp_name", rs.getString("cp_name"));
-				jsonObj.put("cp_manager", rs.getString("cp_manager"));
+				CompanyDeadLine deadlineList = new CompanyDeadLine();
+				deadlineList.setCp_idx(rs.getInt("cp_idx"));
+				deadlineList.setMb_id(rs.getString("mb_id"));
+				deadlineList.setCp_name(rs.getString("cp_name"));
+				deadlineList.setCp_manager(rs.getString("cp_manager"));
 
-				jsonArr.add(jsonObj);
+				companydeadline.add(deadlineList);
 			}
-			System.out.println(jsonArr.toString());
+			System.out.println(companydeadline.toString());
 
-			return jsonArr;
+			return companydeadline;
 
 		} catch (Exception ex) {
 			System.out.println("getMan3List에러: " + ex);
@@ -591,14 +588,23 @@ public class CompanyDAO {
 		return null;
 	}
 
+<<<<<<< HEAD
 	// 실시간 수동 데이터 가져오기 c태그
 	public List<CompanyPopularityList> getCompanyPopularityInfo() {
 		String sql = "SELECT cp_idx, cp_name, manager_name, member_id "
 				+ "FROM popularityManagement_list "
 				+ "ORDER BY cp_idx DESC";
 
+=======
+	// 실시간 수동 데이터 넣기
+	public boolean insertPopularityManagement(List<Integer> cp_idx_list, List<String> cp_name_list,
+			List<String> mb_id_list, List<String> manager_name_list) {
+		String sql = "";
+		int result = 0;
+>>>>>>> branch 'master' of https://github.com/xohoon/FunBoxAdmin.git
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+<<<<<<< HEAD
 		List<CompanyPopularityList> popuList = new ArrayList<CompanyPopularityList>();
 
 		try {
@@ -640,7 +646,14 @@ public class CompanyDAO {
 		System.out.println(">>1"+cp_idx_list.toString());
 		System.out.println(">>2"+cp_idx_list.get(0));
 		ResultSet rs = null;
+=======
+		System.out.println(">>1" + cp_idx_list.toString());
+		System.out.println(">>2" + cp_name_list.toString());
+		System.out.println(">>3" + mb_id_list.toString());
+		System.out.println(">>4" + manager_name_list.toString());
+>>>>>>> branch 'master' of https://github.com/xohoon/FunBoxAdmin.git
 		try {
+<<<<<<< HEAD
 			  cstmt = (CallableStatement) conn.prepareCall("call POPULARITY(?,?,?,?,?,?,?,?,?,?,?)");
 			  
 			  cstmt.setInt(1, cp_idx_list.get(0)); 
@@ -662,14 +675,22 @@ public class CompanyDAO {
 			  }else {
 				  result = -1;
 			  }
+=======
+			pstmt = conn.prepareStatement(sql);
+
+			result = pstmt.executeUpdate();
+			if (result != 0) {
+				return true;
+			}
+>>>>>>> branch 'master' of https://github.com/xohoon/FunBoxAdmin.git
 		} catch (Exception ex) {
 			System.out.println("insertPopularityManagement 에러: " + ex);
 		} finally {
 			try {
 				if (rs != null)
 					rs.close();
-				if (cstmt != null)
-					cstmt.close();
+				if (pstmt != null)
+					pstmt.close();
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {
