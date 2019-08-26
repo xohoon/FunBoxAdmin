@@ -390,30 +390,42 @@ public class CompanyDAO {
 	}
 	
 	// 실시간 수동 데이터 넣기
-	public boolean insertPopularityManagement(List<Integer> cp_idx_list, List<String> cp_name_list, List<String> mb_id_list, List<String> manager_name_list) {
-		String sql = "";
+	public boolean insertPopularityManagement(List<Integer> cp_idx_list) {
 		int result = 0;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		CallableStatement cstmt = null;
+		// rs = cstmt.executeQuery();
 		System.out.println(">>1"+cp_idx_list.toString());
-		System.out.println(">>2"+cp_name_list.toString());
-		System.out.println(">>3"+mb_id_list.toString());
-		System.out.println(">>4"+manager_name_list.toString());
+		System.out.println(">>2"+cp_idx_list.get(0));
 		try {
-			pstmt = conn.prepareStatement(sql);
-
-			result = pstmt.executeUpdate();
-			if (result != 0) {
-				return true;
-			}
+			  cstmt = (CallableStatement) conn.prepareCall("call POPULARITY(?,?,?,?,?,?,?,?,?,?,?)");
+			  
+			  cstmt.setInt(1, cp_idx_list.get(0)); 
+			  cstmt.setInt(2, cp_idx_list.get(1)); 
+			  cstmt.setInt(3, cp_idx_list.get(2)); 
+			  cstmt.setInt(4, cp_idx_list.get(3)); 
+			  cstmt.setInt(5, cp_idx_list.get(4)); 
+			  cstmt.setInt(6, cp_idx_list.get(5)); 
+			  cstmt.setInt(7, cp_idx_list.get(6)); 
+			  cstmt.setInt(8, cp_idx_list.get(7)); 
+			  cstmt.setInt(9, cp_idx_list.get(8)); 
+			  cstmt.setInt(10, cp_idx_list.get(9)); 
+			  cstmt.registerOutParameter(11, java.sql.Types.INTEGER);
+			  
+			  cstmt.execute(); 
+			  result = cstmt.getInt("@RESULT"); 
+			  if (rs.next()) {
+				  if(result == 1) {
+					  return true;
+				  }
+			  }
 		} catch (Exception ex) {
 			System.out.println("insertPopularityManagement 에러: " + ex);
 		} finally {
 			try {
 				if (rs != null)
 					rs.close();
-				if (pstmt != null)
-					pstmt.close();
+				if (cstmt != null)
+					cstmt.close();
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {
