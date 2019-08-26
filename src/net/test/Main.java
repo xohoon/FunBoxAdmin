@@ -28,9 +28,10 @@ public class Main {
 		//System.out.println(companyDAO.getCompanyApplicationMaxPage());
 		Paging paging = new Paging();
 		List<Company> companyList = new ArrayList<Company>();
-		companyDAO.getCompanyAllList(companyList, 0, "sss");
-		
+		companyDAO.getCompanyAllList(companyList, true, "바른", 4);
 		System.out.println(companyList.size());
+		
+		
 		//companyDAO.getCompanyInvestedList(companyInvestedList, 1, "12", paging);
 		//System.out.println(companyInvestedList.size());
 		

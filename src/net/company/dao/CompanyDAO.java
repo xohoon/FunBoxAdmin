@@ -13,7 +13,6 @@ import org.json.simple.JSONObject;
 
 import com.mysql.jdbc.CallableStatement;
 
-
 import net.company.dto.Company;
 import net.company.dto.CompanyApplication;
 import net.company.dto.CompanyApplicationDetail;
@@ -268,6 +267,73 @@ public class CompanyDAO {
 		return false;
 	}
 
+	// 전체목록 들고오기
+	public boolean getCompanyAllList(List<Company> companyList,boolean _search_type, String _search_word, int _category) {
+		String sql = "";
+		switch (_category) {
+			case 1:
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM popularityManagement_list)";
+				break;
+			case 2:
+				sql = "";
+				break;
+			case 3:
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM admin_deadLine)";
+				break;			
+	
+			case 4:
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM am_banner_1)";
+				break;			
+	
+			case 5:
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM am_banner_2)";
+				break;			
+	
+			default:
+				break;
+		}
+		if (_search_type) {
+			sql += "AND cp_name LIKE  CONCAT('%',?,'%')";
+		}
+		
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			if (_search_type) {
+				pstmt.setString(1, _search_word);
+			}
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				Company company = new Company();
+				company.setCp_idx(rs.getInt("cp_idx"));
+				company.setCp_name(rs.getString("cp_name"));
+				company.setMb_id(rs.getString("mb_id"));
+				company.setCp_manager(rs.getString("cp_manager"));
+				companyList.add(company);
+			}
+			
+		} catch (Exception ex) {
+			System.out.println("getCompanyAllList 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+
+		return true;
+	}
+
 	// 자동 수동 상태 들고오기 // 박신규 추가
 	public boolean getAutoStatus(int aas_idx) {
 		String sql = "SELECT aas_auto_status FROM admin_am_setting WHERE aas_idx = ?";
@@ -347,10 +413,10 @@ public class CompanyDAO {
 
 		return null;
 	}
+
 	// 윤식 추가 - 자동, 수동 헨들러
 	public int getAuto_ManDeadLine() {
-		
-		
+
 		return 0;
 	}
 
@@ -395,17 +461,18 @@ public class CompanyDAO {
 
 		return null;
 	}
-	
+
 	// 실시간 수동 데이터 넣기
-	public boolean insertPopularityManagement(List<Integer> cp_idx_list, List<String> cp_name_list, List<String> mb_id_list, List<String> manager_name_list) {
+	public boolean insertPopularityManagement(List<Integer> cp_idx_list, List<String> cp_name_list,
+			List<String> mb_id_list, List<String> manager_name_list) {
 		String sql = "";
 		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		System.out.println(">>1"+cp_idx_list.toString());
-		System.out.println(">>2"+cp_name_list.toString());
-		System.out.println(">>3"+mb_id_list.toString());
-		System.out.println(">>4"+manager_name_list.toString());
+		System.out.println(">>1" + cp_idx_list.toString());
+		System.out.println(">>2" + cp_name_list.toString());
+		System.out.println(">>3" + mb_id_list.toString());
+		System.out.println(">>4" + manager_name_list.toString());
 		try {
 			pstmt = conn.prepareStatement(sql);
 
