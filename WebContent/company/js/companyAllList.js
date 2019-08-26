@@ -209,6 +209,7 @@ $(document).ready(function() {
 		$(".downBtn").prop("disabled", true);
 		$(".downBtn").css('backgroundColor', '#d3d3d3');
 		
+		$("#saveBtn").attr('disabled', true);
 		$("input[name='push']").attr('disabled', true);
 });
 
@@ -230,6 +231,7 @@ $("#modityBtn").on('click', function() {
 		$(".downBtn").prop("disabled", false);
 		$(".downBtn").css('backgroundColor', 'transparent');
 		
+		$("#saveBtn").attr('disabled', false);
 		$("input[name='push']").attr('disabled', false);
 		$("#modityBtn").val("비활성화");
 	}else if(BtnText == "비활성화") {
@@ -248,6 +250,7 @@ $("#modityBtn").on('click', function() {
 		$(".downBtn").prop("disabled", true);
 		$(".downBtn").css('backgroundColor', '#d3d3d3');
 		
+		$("#saveBtn").attr('disabled', true);
 		$("input[name='push']").attr('disabled', true);
 		$("#modityBtn").val("수정");
 	}

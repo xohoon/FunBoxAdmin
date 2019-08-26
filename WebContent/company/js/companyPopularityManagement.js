@@ -1,6 +1,39 @@
-/*
-
+var auto_status_value = $("#auto_status_value").val();
+	console.log("DDD:::"+auto_status_value);
 $(document).ready(function() {
+	if(auto_status_value == 1) {
+		$("#auto").attr('disabled', false);
+		$("#man").attr('disabled', true);
+	} else {
+		$("#auto").attr('disabled', true);
+		$("#man").attr('disabled', false);
+	}
+});
+
+
+//자동 - 1 , 수동 - 0
+function saveCheck(frm){
+	console.log(frm);
+	var auto_status_value = $("#auto_status_value").val();
+	
+	if (auto_status_value == 0) {
+		if(confirm("수동으로 저장하시겠습니까?") == true){
+			frm.submit();
+		}else{
+			alert("저장 취소.");
+		}
+	}else if(auto_status_value == 1){
+		if(confirm("자동으로 저장하시겠습니까?") == true){
+			frm.submit();
+		}else{
+			alert("저장 취소.");
+		}
+	}else{
+		alert("자동 수동 버튼을 확인해주세요.");
+	}
+	
+}
+/*
 	var setting = "0";	
 	alert("1212");
 	$.ajax({
@@ -31,33 +64,5 @@ $(document).ready(function() {
 				alert("데이터 통신을 실패 하였습니다. 개발실에 문의 하세요.");	    					
 			}
 	});			
-});
 
-function radiocheck(){
-	var radioVal = $('input[name="button"]:checked').val();
-	$('#radioVal').val(radioVal);
-}
-
-//자동 - 1 , 수동 - 0
-function savebt(frm){
-	console.log(frm);
-	var radioVal = $('input[name="button"]:checked').val();
-	
-	if (radioVal == 0) {
-		if(confirm("수동으로 저장하시겠습니까?") == true){
-			frm.submit();
-		}else{
-			alert("수동 저장을 취소되었습니다.");
-		}
-	}else if(radioVal == 1){
-		if(confirm("자동으로 저장하시겠습니까?") == true){
-			frm.submit();
-		}else{
-			alert("자동 저장을 취소되었습니다.");
-		}
-	}else{
-		alert("자동 수동 버튼을 클릭해주세요.");
-	}
-	
-}
-*/
+ */

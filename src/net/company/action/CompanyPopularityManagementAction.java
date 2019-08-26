@@ -1,12 +1,9 @@
 package net.company.action;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.json.simple.JSONArray;
 
 import net.common.action.Action;
 import net.common.action.ActionForward;
@@ -23,9 +20,20 @@ public class CompanyPopularityManagementAction implements Action {
 		forward.setRedirect(false);
 		System.out.println(" CompanyPopularityManagementAction 확인");
 		
+		int aas_idx = 1;
 		CompanyDAO companyDAO = new CompanyDAO();
+		boolean aas_auto_status = companyDAO.getAutoStatus(aas_idx);
+		System.out.println("boolean 반환::"+aas_auto_status);
+		companyDAO = new CompanyDAO();
 		List<CompanyPopularityList> popuInfo = companyDAO.getCompanyPopularityInfo();
-		request.setAttribute("popuInfo", popuInfo);
+		
+		if(aas_auto_status == true) {
+			request.setAttribute("auto_status", 1);
+			request.setAttribute("popuInfo", popuInfo);
+		}else {
+			request.setAttribute("auto_status", 0);
+			request.setAttribute("popuInfo", popuInfo);
+		}
 		
 		forward.setPath("./company/companyPopularityManagement.jsp");
 		return forward;	
