@@ -157,7 +157,42 @@ function reloadNumbering(){
 		i++;
 	});
 };
-var auto_status_value;
+
+function setAutoManual(){
+	var cp_idx_value_arr = new Array();
+	Array.from(document.getElementsByClassName("cp_idx")).forEach(function(item) {		
+		cp_idx_value_arr.push(item.value);
+	});
+	$.ajax({
+		url : './setAutoOrManual.cp',
+		method : "POST",
+		traditional : true,
+		data : {
+			auto_status : document.getElementById('auto').checked,
+			aas_idx : document.getElementById('aas_idx').value,
+			cp_idx_value_arr : cp_idx_value_arr			
+			},
+		type : "json"
+	}).done(function(resultData) {
+		switch (resultData.result) {
+		case 0:
+			document.getElementById('modityBtn').value='수정';
+			disableController();
+			alert(resultData.message);
+			break;
+		case 1:
+			alert(resultData.message);
+			break;	
+		default:
+			break;
+		}
+	}).fail(function() {
+		alert('서버통신 오류');
+	}).always(function() {
+	});
+};
+
+
 // 태훈 추가 - 기능 제어
 $(document).ready(function() {
 	// 수동 자동 체크 
