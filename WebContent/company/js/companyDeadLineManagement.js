@@ -15,14 +15,15 @@ $(document).ready(function() {
 					var number = i+1;
 					itemHtml += "<tr>";
 					itemHtml += "<td>"+ number + "</td>";
-					itemHtml += "<td>" + data[i].cp_name + "</td>";
-					itemHtml += "<td>" + data[i].mb_id + "</td>";
-					itemHtml += "<td>" + data[i].cp_manager + "</td>";
+					itemHtml += "<td id='cp_name_"+number+"'>" + data[i].cp_name + "</td>";
+					itemHtml += "<td id='mb_id_"+number+"'>" + data[i].mb_id + "</td>";
+					itemHtml += "<td id='cp_manager_name_"+number+"'>" + data[i].cp_manager + "</td>";					
 					itemHtml += "<td><button type = 'button' class='topDelBtn' onclick='removeItem(this);'>삭제</button></td>";
 					itemHtml += "<td><button type = 'button' class='upBtn' onclick='up(this);'>";
 					itemHtml += "<i class='fas fa-chevron-up'></i></button>";
 					itemHtml += "<button type = 'button' class='downBtn' onclick='down(this);'>";
 					itemHtml +=	"<i class='fas fa-chevron-down'></i></button></td><input name='cp_idx_"+ data[i].cp_idx +"' class='cp_idx' type='hidden' value='"+data[i].cp_idx+"'></tr>";
+					
 				}
 				 $( '#added_table' ).append( itemHtml );
 			},error:function(data){
