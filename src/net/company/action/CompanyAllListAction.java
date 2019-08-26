@@ -17,25 +17,33 @@ public class CompanyAllListAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String search_type_string = request.getParameter("search_type");
 		String search_word = request.getParameter("search_word");
+		String category_string = request.getParameter("category");
 		
-		Integer search_type = 0;
+		boolean search_type = false;
+		Integer category = 0;
 		
 		if (search_type_string != null) {
 			try {
-				search_type = Integer.parseInt(search_type_string);
+				if (Integer.parseInt(search_type_string) > 0) {
+					search_type = true;
+				}
 			} catch (NumberFormatException nfe) {
-				search_type = 0;
-			}
-			if (search_type > 1) {
-				search_type = 0;
+				search_type = false;
+			}			
+		}
+		
+		if (category_string != null) {
+			try {
+				category = Integer.parseInt(category_string);
+			} catch (NumberFormatException nfe) {
+				category = 0;
 			}
 		}
 		
 		List<Company> companyList = new ArrayList<Company>();
 		
 		CompanyDAO companyDAO = new CompanyDAO();
-		companyDAO.getCompanyAllList(companyList, search_type, search_word);
-		
+		companyDAO.getCompanyAllList(companyList, search_type, search_word, category);
 		if (companyList.size() < 1) {
 
 		}
