@@ -273,3 +273,11 @@ $("#modityBtn").on('click', function() {
 		$("#modityBtn").val("수정");
 	}
 });
+
+// 검색 기능
+$("#searchCompany").on('keyup', function() {
+	var value = $(this).val().toLowerCase();
+	$(".allGroup tr").filter(function() {
+		$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+	});
+});

@@ -1,7 +1,7 @@
 //자동 - 1 , 수동 - 0
 function saveCheck(frm){
 	if (!countLimit(10,10)) {
-		alert('');
+		alert('10개 기업을 선택해 주세요.');
 		return false;
 	}
 	console.log("autostatusvalue:::::1"+$("#auto_status").text());
