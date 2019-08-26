@@ -13,8 +13,8 @@ import org.json.simple.JSONObject;
 
 
 
-import com.mysql.jdbc.CallableStatement;
-//import com.mysql.cj.jdbc.CallableStatement;
+//import com.mysql.jdbc.CallableStatement;
+import com.mysql.cj.jdbc.CallableStatement;
 
 
 import net.company.dto.Company;
@@ -23,6 +23,7 @@ import net.company.dto.CompanyApplicationDetail;
 import net.company.dto.CompanyDeadLine;
 import net.company.dto.CompanyInvested;
 import net.company.dto.CompanyPopularityList;
+import net.finance.dto.Token;
 import net.util.Paging;
 
 public class CompanyDAO {
@@ -373,33 +374,31 @@ public class CompanyDAO {
 	}
 
 	// 마감 임박 클라이언트 수동 List 값 가져 오기(수동) 윤식 추가
-	@SuppressWarnings({ "unchecked", "unused" })
-	public JSONArray getMan3List() {
+	public ArrayList<CompanyDeadLine> getMan3List() {
 
 		String sql = "select " + "cp_idx, " + "mb_id, " + "cp_name, " + "cp_manager " + "from admin_deadLine ";
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		JSONArray jsonArr = new JSONArray();
-		System.out.println(sql);
+		ArrayList<CompanyDeadLine> companydeadline = new ArrayList<CompanyDeadLine>();
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				JSONObject jsonObj = new JSONObject();
-				jsonObj.put("cp_idx", rs.getString("cp_idx"));
-				jsonObj.put("mb_id", rs.getString("mb_id"));
-				jsonObj.put("cp_name", rs.getString("cp_name"));
-				jsonObj.put("cp_manager", rs.getString("cp_manager"));
+				CompanyDeadLine deadlineList = new CompanyDeadLine();
+				deadlineList.setCp_idx(rs.getInt("cp_idx"));
+				deadlineList.setMb_id(rs.getString("mb_id"));
+				deadlineList.setCp_name(rs.getString("cp_name"));
+				deadlineList.setCp_manager(rs.getString("cp_manager"));
 
-				jsonArr.add(jsonObj);
+				companydeadline.add(deadlineList);
 			}
-			System.out.println(jsonArr.toString());
+			System.out.println(companydeadline.toString());
 
-			return jsonArr;
+			return companydeadline;
 
 		} catch (Exception ex) {
 			System.out.println("getMan3List에러: " + ex);
