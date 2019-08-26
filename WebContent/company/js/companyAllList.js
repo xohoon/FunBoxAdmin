@@ -13,9 +13,12 @@ $(function(){
 		item.addEventListener('click',function() { addManualToList(item); all_list.removeChild(item.parentElement.parentElement); });
 	});
 	
-	
+	count = document.getElementById('added_table').childElementCount;
+	if (count < 1) {
+		count = 1;
+	}
 });
-var count = 1;
+var count;
 var test;
 var added_table;
 var added_table_js;

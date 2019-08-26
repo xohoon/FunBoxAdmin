@@ -25,6 +25,7 @@ public class CompanyDeadLineSaveAjaxAction implements Action {
 		System.out.println(" CompanyDeadLineSaveAjaxAction 확인");
 		// 자동 : 1 , 수동 : 0
 		String radioVal = request.getParameter("radioVal");
+		//String radioVal = request.getParameter("radioVal");
 		System.out.println(radioVal);
 		
 		// cp_idx 값으로 기업 찾기 
@@ -32,11 +33,13 @@ public class CompanyDeadLineSaveAjaxAction implements Action {
 		ArrayList<CompanyDeadLine> transDeadLineList = companydao.getAuto_ManDeadLineSearchList(radioVal, "11");
 		System.out.println("transDeadLineList :" + transDeadLineList.toString());
 		
-		//insert 구현
+		//insert 구현 - 테이블 insert(admin_deadLine)
 		CompanyDAO companydao1 = new CompanyDAO();
 		result = companydao1.insertAutoManDeadLineList(transDeadLineList);
 		
-		//System.out.println("transDeadLineList :" + transDeadLineList.get(0).getMb_id());
+		
+		
+			
 		
 		forward.setPath("./company/companyDeadLineManagement.jsp");
 		return forward;
