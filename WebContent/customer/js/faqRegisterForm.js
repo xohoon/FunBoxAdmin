@@ -3,6 +3,7 @@ function register(){
 	var title = $('#title').val();
 	var content = $('#content').val();
 	var category = $("#selectBox").val();
+	var uploadfile = $("#uploadfile").val();
 	
 	if(title == ''){
 		alert('제목을 입력해주세요.');
@@ -11,6 +12,9 @@ function register(){
 	}else if(content == ''){
 		alert('내용을 입력해주세요.');
 		content.focus();
+		return false;
+	}else if(uploadfile == ''){
+		alert('파일을 선택해주세요.');
 		return false;
 	}else{
 		submit(category, title, content);
