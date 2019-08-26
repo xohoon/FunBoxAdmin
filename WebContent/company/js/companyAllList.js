@@ -1,4 +1,11 @@
 $(function(){
+	//자동 수동 초기값 설정
+	alert(document.getElementById('auto_status').value);
+	if (document.getElementById('auto_status').value == true) {
+		document.getElementById('auto').checked = true;
+	}else{
+		document.getElementById('man').checked = true;
+	}
 	
 	added_table = $('#added_table');
 	added_table_js = document.getElementById('added_table');
@@ -149,6 +156,7 @@ function reloadNumbering(){
 		i++;
 	});
 };
+
 
 // 태훈 추가 - 기능 제어
 $(document).ready(function() {

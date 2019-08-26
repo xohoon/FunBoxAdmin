@@ -53,7 +53,7 @@
                   <h3>마감임박</h3>
                   <ul class="push">
                   <li>
-                  	<input type="radio" id="auto" name = "button" value="1" onclick = "radiocheck()" checked>
+                  	<input type="radio" id="auto" name = "button" value="1" onclick = "radiocheck()">
                     <label for="auto">자동</label>
                   </li>
                    <li>
@@ -98,12 +98,12 @@
 		</section>
 		<footer></footer>
 	</div>
-	<script>  
-setTimeout(function () {
-  jQuery('.nav3').trigger('click');
-  jQuery('.nav37').addClass('on');
-}, 500);
-  
-	</script>
+<input type="hidden" id="auto_status" name="auto_status" value="${auto_status}">	
 </body>
+<script>  
+	setTimeout(function () {
+	  jQuery('.nav3').trigger('click');
+	  jQuery('.nav37').addClass('on');
+	}, 500);  
+</script>
 </html>

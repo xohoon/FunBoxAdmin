@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +18,7 @@
 		  $('#gnb').load('./template/categoryTemplate.jsp');
 		  $('footer').load('./template/footer.jsp');
       	  //$('.allList').load('../company/compnayAllList.jsp');
-		  $('.allList').load('./compnayAllList.cp??category=5');
+		  $('.allList').load('./compnayAllList.cp?category=5');
 		});
 	</script>
 </head>
@@ -41,7 +42,7 @@
                   <h3>메인배너2</h3>
                   <ul class="push">
                     <li>
-                      <input type="radio" name="push" id="auto" value="자동" checked>
+                      <input type="radio" name="push" id="auto" value="자동">
                       <label for="auto">자동</label>
                     </li>
                     <li>
@@ -90,6 +91,7 @@
 		</section>
 		<footer></footer>
 	</div>
+	<input type="hidden" id="auto_status" name="auto_status" value="${auto_status}">
 	<script>  
 setTimeout(function () {
   jQuery('.nav3').trigger('click');

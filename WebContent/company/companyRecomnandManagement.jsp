@@ -41,7 +41,7 @@
                   <h3>추천기업</h3>
                   <ul class="push">
                     <li>
-                      <input type="radio" name="push" id="auto" value="자동" checked>
+                      <input type="radio" name="push" id="auto" value="자동">
                       <label for="auto">자동</label>
                     </li>
                     <li>
@@ -120,5 +120,6 @@ setTimeout(function () {
 
     
 	</script>
+<input type="hidden" id="auto_status" name="auto_status" value="${auto_status}">	
 </body>
 </html>
