@@ -157,10 +157,19 @@ function reloadNumbering(){
 		i++;
 	});
 };
-
-
+var auto_status_value;
 // 태훈 추가 - 기능 제어
 $(document).ready(function() {
+	// 수동 자동 체크 
+	var auto_status_value = $("#auto_status_value").val();
+		if(auto_status_value == "1") {
+			$('#auto').attr("checked", true);
+			$("#man").attr('checked', false); 
+		} else {
+			$("#auto").attr('checked', false); 
+			$("#man").attr('checked', true); 
+		}
+	
 		$(".topList").children().css('backgroundColor', '#d3d3d3');
 		$(".allList").children().css('backgroundColor', '#d3d3d3');
 		

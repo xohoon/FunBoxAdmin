@@ -29,6 +29,7 @@
 <%
 	ArrayList<CompanyPopularityList> popuInfo = (ArrayList<CompanyPopularityList>)request.getAttribute("popuInfo");
 	int auto_status = (Integer)request.getAttribute("auto_status");
+	System.out.println(">>>>>auto_status"+auto_status);
 %>
 </head>
 
@@ -59,8 +60,10 @@
                       <label for="man">수동</label>
                     </li>
                   </ul>
-                  <input type="hidden" value="${auto_status }" id="auto_status_value">
+                  <input type="hidden" value="<%=auto_status %>" id="auto_status_value">
                   	<form method="post" action="./companyPopularityManagementUpdate.cp">
+                  	<input type="hidden" value="1" name="ass_idx" id="ass_idx">
+                  	<input type="hidden" value="" name="auto_status" id="auto_status">
 	                   <div class="topList" id="bgColor">
 	                     <table id="test01">
 	                     	<tbody id="added_table">
@@ -100,6 +103,5 @@ setTimeout(function () {
   jQuery('.nav35').addClass('on');
 }, 500);
 	</script>
-<input type="hidden" id="auto_status" name="auto_status" value="${auto_status}">
 </body>
 </html>

@@ -1,28 +1,25 @@
-var auto_status_value = $("#auto_status_value").val();
-	console.log("DDD:::"+auto_status_value);
-$(document).ready(function() {
-	if(auto_status_value == 1) {
-		$("#auto").attr('disabled', false);
-		$("#man").attr('disabled', true);
-	} else {
-		$("#auto").attr('disabled', true);
-		$("#man").attr('disabled', false);
-	}
-});
-
-
 //자동 - 1 , 수동 - 0
 function saveCheck(frm){
-	console.log(frm);
-	var auto_status_value = $("#auto_status_value").val();
+	console.log("autostatusvalue:::::1"+$("#auto_status").text());
+	if(document.getElementById('auto').checked) {
+		$("#auto_status").text('1');
+		console.log("autostatusvalue:::::2"+$("#auto_status").text());
+	}else if(document.getElementById('man').checked) {
+		$("#auto_status").text('0');
+		console.log("autostatusvalue:::::3"+$("#auto_status").text());
+	}
 	
-	if (auto_status_value == 0) {
+	if ($("#auto_status").text() == "0") {
+		console.log("DDD:::수동"+$("#auto_status").text());
+		$('input[name=auto_status]').attr('value', "0");
 		if(confirm("수동으로 저장하시겠습니까?") == true){
 			frm.submit();
 		}else{
 			alert("저장 취소.");
 		}
-	}else if(auto_status_value == 1){
+	}else if($("#auto_status").text() == "1"){
+		console.log("DDD:::자동"+$("#auto_status").text());
+		$('input[name=auto_status]').attr('value', "1");
 		if(confirm("자동으로 저장하시겠습니까?") == true){
 			frm.submit();
 		}else{

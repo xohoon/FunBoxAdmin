@@ -26,12 +26,18 @@ public class CompanyPopularityManagementAction implements Action {
 		System.out.println("boolean 반환::"+aas_auto_status);
 		companyDAO = new CompanyDAO();
 		List<CompanyPopularityList> popuInfo = companyDAO.getCompanyPopularityInfo();
-		
+		int auto_status = 0;
 		if(aas_auto_status == true) {
-			request.setAttribute("auto_status", 1);
+			auto_status = 1;
+			System.out.println(">>>1"+auto_status);
+			System.out.println(">>>1"+aas_auto_status);
+			request.setAttribute("auto_status", auto_status);
 			request.setAttribute("popuInfo", popuInfo);
 		}else {
-			request.setAttribute("auto_status", 0);
+			auto_status = 0;
+			System.out.println(">>>2"+auto_status);
+			System.out.println(">>>2"+aas_auto_status);
+			request.setAttribute("auto_status", auto_status);
 			request.setAttribute("popuInfo", popuInfo);
 		}
 		
