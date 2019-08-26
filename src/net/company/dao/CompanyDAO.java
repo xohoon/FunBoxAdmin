@@ -499,11 +499,11 @@ public class CompanyDAO {
 				break;			
 	
 			case 4:
-				sql = "INSERT INTO am_banner_1 SELECT cp.cp_idx,cp.cp_name,cp.cp_name,concat(cp_f.cf_directory,cp_f.cf_image2) as banner_image FROM company cp JOIN company_file cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN(";
+				sql = "INSERT INTO am_banner_1 SELECT cp.cp_idx,cp.cp_name,cp.cp_branch,cp.cp_intro_content,concat(cp_f.cf_directory,cp_f.cf_image2) as banner_image FROM company cp JOIN company_file cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN(";
 				break;			
 	
 			case 5:
-				sql = "INSERT INTO am_banner_2 SELECT cp.cp_idx,cp.cp_name,cp.cp_name,cp.cp_intro_content,cp.cp_open_datetime, concat(cp_f.cf_directory,cp_f.cf_image2) as banner_image FROM company cp JOIN company_file cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN(";
+				sql = "INSERT INTO am_banner_2 SELECT cp.cp_idx,cp.cp_name,cp.cp_branch,cp.cp_intro_content,cp.cp_open_datetime, concat(cp_f.cf_directory,cp_f.cf_image2) as banner_image FROM company cp JOIN company_file cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN(";
 				break;			
 	
 			default:
