@@ -65,8 +65,10 @@
 	                       </tr>
                      	</tbody>
                      </table>
-                     </form>
                    </div>
+                   <input type="button" id="modityBtn" value="수정" style="margin-top:10px;">
+	                   <input type="submit" id="saveBtn" value="적용" style="margin-left:10px; margin-top:10px;">
+                     </form>
                 </div>
 			</div>
 		</section>
