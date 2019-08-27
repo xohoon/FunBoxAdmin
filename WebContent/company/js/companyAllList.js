@@ -76,23 +76,23 @@ function removeItem(object){
 	
 	count--;
 };
-var test;
+
 function swapUp(trTag){
 	var temp = trTag.children[6].name;
-	trTag.children[6].name = trTag.previousSibling.children[6].name;
-	trTag.previousSibling.children[6].name = temp;
+	trTag.children[6].name = trTag.previousElementSibling.children[6].name;
+	trTag.previousElementSibling.children[6].name = temp;
 	
 	temp = trTag.children[1].id;
-	trTag.children[1].id = trTag.previousSibling.children[1].id;
-	trTag.previousSibling.children[1].id = temp;
+	trTag.children[1].id = trTag.previousElementSibling.children[1].id;
+	trTag.previousElementSibling.children[1].id = temp;
 	
 	temp = trTag.children[2].id;
-	trTag.children[2].id = trTag.previousSibling.children[2].id;
-	trTag.previousSibling.children[2].id = temp;
+	trTag.children[2].id = trTag.previousElementSibling.children[2].id;
+	trTag.previousElementSibling.children[2].id = temp;
 	
 	temp = trTag.children[3].id;
-	trTag.children[3].id = trTag.previousSibling.children[3].id;
-	trTag.previousSibling.children[3].id = temp;
+	trTag.children[3].id = trTag.previousElementSibling.children[3].id;
+	trTag.previousElementSibling.children[3].id = temp;
 }
 
 function swapDown(trTag){
@@ -162,7 +162,9 @@ function reloadNumbering(){
 };
 
 function setAutoManual(){
-	
+	if (document.getElementById('modityBtn').value == "수정") {
+		return false;
+	}
 	var aas_idx = Number.parseInt(document.getElementById('aas_idx').value);
 	var min_count;
 	var max_count;
