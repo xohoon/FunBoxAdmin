@@ -316,7 +316,6 @@ public class CustomerDAO {
 		return false;
 	}
 	
-<<<<<<< HEAD
 	// 태훈 - 공지게시판
 	public ArrayList<NoticeBoard> getNotice(int startRow, int pageSize) throws Exception {
 		ArrayList<NoticeBoard> notice_list = new ArrayList<NoticeBoard>();
@@ -395,7 +394,8 @@ public class CustomerDAO {
 			}
 		}
 		return 0;
-=======
+	}
+		
 	// 유정 - 저장될 경로 가져오기
 	public String getUploadDirectory(String file_category) {
 		String sql = "SELECT file_path FROM file_path WHERE file_category = ?";
@@ -428,6 +428,5 @@ public class CustomerDAO {
 		}
 
 		return null;
->>>>>>> branch 'master' of https://github.com/xohoon/FunBoxAdmin.git
 	}
 }
