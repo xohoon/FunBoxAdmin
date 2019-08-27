@@ -1,4 +1,4 @@
-$(document).ready(function() {
+/*$(document).ready(function() {
 //	$("input[name = 'auto']").attr('disabled', true);
 //	$("input[name = 'man']").attr('disabled', true);
 	
@@ -22,7 +22,7 @@ $(document).ready(function() {
 					itemHtml += "<td><button type = 'button' class='upBtn' onclick='up(this);'>";
 					itemHtml += "<i class='fas fa-chevron-up'></i></button>";
 					itemHtml += "<button type = 'button' class='downBtn' onclick='down(this);'>";
-					itemHtml +=	"<i class='fas fa-chevron-down'></i></button></td><input name='cp_idx_"+ data[i].cp_idx +"' class='cp_idx' type='hidden' value='"+data[i].cp_idx+"'></tr>";
+					itemHtml +=	"<i class='fas fa-chevron-down'></i></button></td><input name='cp_idx_"+ number +"' class='cp_idx' type='hidden' value='"+data[i].cp_idx+"'></tr>";
 					
 				}
 				 $( '#added_table' ).append( itemHtml );
@@ -30,17 +30,21 @@ $(document).ready(function() {
 				alert("데이터 통신을 실패 하였습니다. 개발실에 문의 하세요.");	    					
 			}
 	});			
-});
-function radiocheck(){
-	var radioVal = $('input[name="button"]:checked').val();
-	$('#radioVal').val(radioVal);
+});*/
+
+function hiddenRadio(radioval){
+	$('#radioVal').val(radioval);	
 }
 
 
 //자동 - 1 , 수동 - 0
-function savebt(frm){
-	console.log(frm);
-	var radioVal = $('input[name="button"]:checked').val();
+function savebt(frm){	
+	var radioVal = $('input[name="push"]:checked').val();
+	
+	if (!countLimit(3,3)) {
+		alert('마감 임박 3개를 지정해주세요.');
+		return false;
+	}
 	
 	if (radioVal == 0) {
 		if(confirm("수동으로 저장하시겠습니까?") == true){

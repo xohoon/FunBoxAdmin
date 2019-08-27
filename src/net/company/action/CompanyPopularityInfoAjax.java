@@ -9,22 +9,24 @@ import net.common.action.Action;
 import net.common.action.ActionForward;
 import net.company.dao.CompanyDAO;
 
+// 태훈 - 실시간 수동 데이터 가져오기
+public class CompanyPopularityInfoAjax implements Action {
 
-public class CompanyDeadLineAjaxAction implements Action {
+	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		@SuppressWarnings("unused")
+		ActionForward forward = new ActionForward();
 		
-		String category = request.getParameter("category");
+		String setting = request.getParameter("setting");
 		
-		CompanyDAO companydao = new CompanyDAO();
-		//JSONArray auto3list = companydao.getMan3List();
+		CompanyDAO comapnyDAO = new CompanyDAO();
+		JSONArray realList = comapnyDAO.getCompanyPopularityList();
+		System.out.println(">>data:::"+realList.size());
 		
-		/*
-		 * response.setContentType("application/x-json;charset=UTF-8");
-		 * response.getWriter().print(auto3list);
-		 */
-				
+		response.setContentType("application/x-json;charset=UTF-8");
+		response.getWriter().print(realList);
+		
 		return null;
 	}
 

@@ -14,6 +14,7 @@
 	<script src="./js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script type="text/javascript" src="finance/js/tokenWithdrwalList.js"></script>
 	<link href="./css/common.css" rel="stylesheet">
 	<link href="./css/admin.css" rel="stylesheet">
 	<link href="./css/txaddress.css" rel="stylesheet">
@@ -31,28 +32,6 @@
 		String searchID =request.getParameter("searchID");
 		
 	%>
-	<script>
-		function category(button){
-			var selectOption = document.getElementById("selectID").value;
-			var searchID = document.getElementById("hiddensearchID").value;
-			console.log(searchID);
-			var category = button;
-			location.href='./tokenWithdrawalList.fn?category='+category+"&searchID="+searchID;
-				
-		}
-		
-		function btnIdsearch(){
-			var selectOption = document.getElementById("selectID").value;
-			var searchID =  document.getElementById("searchID").value;
-
-			if(selectOption == '0'){				
-				location.href='./tokenWithdrawalList.fn?category='+0;
-			}else{
-				location.href='./tokenWithdrawalList.fn?searchID='+searchID;
-			}
-		}
-		
-	</script>
 </head>
 
 <body>
@@ -92,10 +71,10 @@
 						</tr>
 						<c:forEach var = "tokenTransfer" items="${tokenTransfer}" varStatus="status" >
 						<tr>
-							<th>${status.count}</th>
+							<td>${status.count}</td>
 							<c:choose>
 								<c:when test="${tokenTransfer.td_to_address == 'durlsmswlrkqwnthrkemfdjrksmszksdlqslekdqmfkzpttlftlrksqhrlehwkfdksehlrhdkwnalclfrjtrkxwyejejrlfdjdirlfdlwhwjfdlehlsmswlqhftndlTtmqslek'}">								
-									<th>${tokenTransfer.mb_id}</th>
+									<td>${tokenTransfer.mb_id}</td>
 									<td>입금</td>
 									<td>${tokenTransfer.td_from_address}</td>
 									<td>${tokenTransfer.td_amount}</td>								
@@ -111,7 +90,7 @@
 									<th>${tokenTransfer.td_date_time}</th>
 								</c:when>
 								<c:otherwise>
-									<th>${tokenTransfer.mb_id}</th>
+									<td>${tokenTransfer.mb_id}</td>
 									<td>출금</td>
 									<td>${tokenTransfer.td_from_address}</td>
 									<td>${tokenTransfer.td_amount}</td>								
@@ -172,8 +151,8 @@
 						</tr>
 						<c:forEach var = "tokenTransfer" items="${tokenTransfer}" varStatus="status" >
 						<tr>
-							<th>${status.count}</th>															
-							<th>${tokenTransfer.mb_id}</th>
+							<td>${status.count}</td>															
+							<td>${tokenTransfer.mb_id}</td>
 							<td>입금</td>
 							<td>${tokenTransfer.td_from_address}</td>
 							<td>${tokenTransfer.td_amount}</td>								
@@ -231,8 +210,8 @@
 						</tr>
 						<c:forEach var = "tokenTransfer" items="${tokenTransfer}" varStatus="status" >
 						<tr>
-							<th>${status.count}</th>															
-							<th>${tokenTransfer.mb_id}</th>
+							<td>${status.count}</td>															
+							<td>${tokenTransfer.mb_id}</td>
 							<td>출금</td>
 							<td>${tokenTransfer.td_from_address}</td>
 							<td>${tokenTransfer.td_amount}</td>								
@@ -315,21 +294,7 @@
 			$('tr').show();
 		}); */
 
-			$(function(){
-			  if($('#cate_color').val() == '0'){
-				  $('.tab li').removeClass('on');
-				  	$('#button1').addClass('on');
-			  }
-			  else if($('#cate_color').val() == '1'){
-				  $('.tab li').removeClass('on');
-				  $('#button2').addClass('on');
-		 	  }
-			  else if($('#cate_color').val() == '2'){
-				  $('.tab li').removeClass('on');
-				  $('#button3').addClass('on');
-			  }
-			
-		  });
+		
       $('.incomma').each(function(){
          var incomma = $(this).text();
         $(this).text(numberWithCommas(incomma));

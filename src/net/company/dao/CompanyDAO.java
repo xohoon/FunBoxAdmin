@@ -11,10 +11,13 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+
+
 import com.mysql.jdbc.CallableStatement;
 //import com.mysql.cj.jdbc.CallableStatement;
 
 import net.company.dto.Company;
+import net.company.dto.CompanyAdded;
 import net.company.dto.CompanyApplication;
 import net.company.dto.CompanyApplicationDetail;
 import net.company.dto.CompanyDeadLine;
@@ -277,7 +280,7 @@ public class CompanyDAO {
 				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM popularityManagement_list)";
 				break;
 			case 2:
-				sql = "";
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM recommended_company)";
 				break;
 			case 3:
 				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM admin_deadLine)";
@@ -317,6 +320,7 @@ public class CompanyDAO {
 				company.setCp_manager(rs.getString("cp_manager"));
 				companyList.add(company);
 			}
+			return true;
 			
 		} catch (Exception ex) {
 			System.out.println("getCompanyAllList 에러: " + ex);
@@ -333,8 +337,71 @@ public class CompanyDAO {
 			}
 		}
 
-		return true;
+		return false;
 	}
+	
+	//해당 페이지 수동 테이블 들고오기
+	public boolean getCompanyAddedList(List<CompanyAdded> companyAddedList,int _category) {
+		String sql = "";
+		switch (_category) {
+			case 1:
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM popularityManagement_list)";
+				break;
+			case 2:
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM recommended_company)";
+				break;
+			case 3:
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM admin_deadLine)";
+				break;			
+			case 4:
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM am_banner_1)";
+				break;			
+	
+			case 5:
+				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM am_banner_2)";
+				break;			
+	
+			default:
+				break;
+		}
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				CompanyAdded companyAdded = new CompanyAdded();
+				companyAdded.setCp_idx(rs.getInt("cp_idx"));
+				companyAdded.setCp_name(rs.getString("cp_name"));
+				companyAdded.setMb_id(rs.getString("mb_id"));
+				companyAdded.setCp_manager(rs.getString("cp_manager"));
+				companyAddedList.add(companyAdded);
+			}
+			
+			return true;
+			
+		} catch (Exception ex) {
+			System.out.println("getCompanyAddedList 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+
+		return false;
+	}
+	
+	
 
 	// 자동 수동 상태 들고오기 // 박신규 추가
 	public boolean getAutoStatus(int aas_idx) {
@@ -368,35 +435,143 @@ public class CompanyDAO {
 
 		return true;
 	}
+	
+	public boolean deleteManualTable(int aas_idx) {
+		String sql = "";
+		switch (aas_idx) {
+			case 1:
+				sql = "DELETE FROM popularityManagement_list";
+				break;
+			case 2:
+				sql = "DELETE FROM recommended_company";
+				break;
+			case 3:
+				sql = "DELETE FROM admin_deadLine";
+				break;			
+	
+			case 4:
+				sql = "DELETE FROM am_banner_1";
+				break;			
+	
+			case 5:
+				sql = "DELETE FROM am_banner_2";
+				break;			
+	
+			default:
+				break;
+		}
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.executeUpdate();
+			return true;
+			
+		} catch (Exception ex) {
+			System.out.println("deleteManualTable 에러: " + ex);
+			
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+		return false;
+	}
+	
+	public boolean insertManualTable(int aas_idx,Integer[] cp_idx_value_arr) {
+		String sql = "";
+		switch (aas_idx) {
+			case 1:
+				sql = "";
+				break;
+			case 2:
+				sql = "INSERT INTO recommended_company SELECT cp.cp_idx, cp.cp_name, cp.cp_sector, cp.cp_branch, cp.cp_monthly_profit, round((cp_iv.iv_current_amount/cp_iv.iv_goal_amount*100)) as percent, cp_iv.iv_goal_amount, cp_iv.iv_current_amount, cp_iv.iv_appl_stop_date_time, concat(cp_f.cf_directory,cp_f.cf_image1) as thumbnail_image, cp.cp_recommand_count FROM company as cp JOIN company_invest as cp_iv ON cp.cp_idx = cp_iv.cp_idx JOIN company_file as cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN (";
+				break;
+			case 3:
+				sql = "";
+				break;			
+	
+			case 4:
+				sql = "INSERT INTO am_banner_1 SELECT cp.cp_idx,cp.cp_name,cp.cp_branch,cp.cp_intro_content,concat(cp_f.cf_directory,cp_f.cf_image2) as banner_image FROM company cp JOIN company_file cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN(";
+				break;			
+	
+			case 5:
+				sql = "INSERT INTO am_banner_2 SELECT cp.cp_idx,cp.cp_name,cp.cp_branch,cp.cp_intro_content,cp.cp_open_datetime, concat(cp_f.cf_directory,cp_f.cf_image2) as banner_image FROM company cp JOIN company_file cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN(";
+				break;			
+	
+			default:
+				break;
+		}
+		for (int i = 0; i < cp_idx_value_arr.length; i++) {
+			if (i + 1 == cp_idx_value_arr.length) {
+				sql += "?)";
+			}else {
+				sql += "?,";
+			}
+		}
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			for (int i = 0; i < cp_idx_value_arr.length; i++) {
+				pstmt.setInt(i+1, cp_idx_value_arr[i]);
+			}
+			pstmt.executeUpdate();
+			return true;
+			
+		} catch (Exception ex) {
+			System.out.println("insertManualTable 에러: " + ex);
+			
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+		return false;
+	}
+	
 
 	// 마감 임박 클라이언트 수동 List 값 가져 오기(수동) 윤식 추가
-	@SuppressWarnings({ "unchecked", "unused" })
-	public JSONArray getMan3List() {
+	public ArrayList<CompanyDeadLine> getMan3List() {
 
 		String sql = "select " + "cp_idx, " + "mb_id, " + "cp_name, " + "cp_manager " + "from admin_deadLine ";
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		JSONArray jsonArr = new JSONArray();
-		System.out.println(sql);
+		ArrayList<CompanyDeadLine> companydeadline = new ArrayList<CompanyDeadLine>();
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				JSONObject jsonObj = new JSONObject();
-				jsonObj.put("cp_idx", rs.getString("cp_idx"));
-				jsonObj.put("mb_id", rs.getString("mb_id"));
-				jsonObj.put("cp_name", rs.getString("cp_name"));
-				jsonObj.put("cp_manager", rs.getString("cp_manager"));
+				CompanyDeadLine deadlineList = new CompanyDeadLine();
+				deadlineList.setCp_idx(rs.getInt("cp_idx"));
+				deadlineList.setMb_id(rs.getString("mb_id"));
+				deadlineList.setCp_name(rs.getString("cp_name"));
+				deadlineList.setCp_manager(rs.getString("cp_manager"));
 
-				jsonArr.add(jsonObj);
+				companydeadline.add(deadlineList);
 			}
-			System.out.println(jsonArr.toString());
+			System.out.println(companydeadline.toString());
 
-			return jsonArr;
+			return companydeadline;
 
 		} catch (Exception ex) {
 			System.out.println("getMan3List에러: " + ex);
@@ -417,115 +592,161 @@ public class CompanyDAO {
 	}
 
 	
-	// 윤식 추가 - 자동, 수동 헨들러 //찾기
-	public ArrayList<CompanyDeadLine> getAuto_ManDeadLineSearchList(String radioVal, String id) {
+	// admin_am_setting update 자동 수동
+	public boolean setAutoStatus(int aas_idx, boolean auto_status) {
+		
+		String sql = "UPDATE admin_am_setting SET aas_auto_status ="+ auto_status +" WHERE aas_idx = "+aas_idx;  
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		System.out.println(sql);
+		
+		try {
+			pstmt = conn.prepareStatement(sql);						
+			pstmt.executeUpdate();
 
-		String sql = "select mb.mb_id, cp.cp_manager, "+"cp.cp_idx, "+"cp.cp_monthly_profit, "+"cp.cp_sector, "+"cp.cp_name, "+"cp.cp_branch, "+"cp_i.iv_current_amount, "+"cp_i.iv_goal_amount, "+"cp_i.iv_appl_stop_date_time, " 
-				+"concat(cp_f.cf_directory,cp_f.cf_image1) as thumbnail_image," 
-				+"round((iv_current_amount/iv_goal_amount)*100) as persent "
-				+"from company cp, company_file cp_f, company_invest cp_i, member mb " 
-				+"where cp.cp_open_status = true " 
-				+"AND cp.cp_idx ='"+ id +"' "
-				+"AND cp_i.cp_idx ='"+ id +"' "  
-				+"AND cp_f.cp_idx ='"+ id +"' "
-				+"AND cp.mb_id = mb.mb_id ";
+			return true;
 			
+		} catch (Exception ex) {
+			System.out.println("setAutoStatus 에러: " + ex);
+			
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
 
+		return false;
+	}
+	// 테이블 비우기
+	public boolean deletetalbe() {
+		String sql = "DELETE FROM admin_deadLine";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-	ArrayList<CompanyDeadLine> transDeadLineList = new ArrayList<CompanyDeadLine>(); 
-	
-	try {
-		if (radioVal.equals("0")) { // 수동			
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-		}else if(radioVal.equals("1")){ // 자동
-				sql = "select mb.mb_id, cp.cp_manager, "+"cp.cp_idx, "+"cp.cp_monthly_profit, "+"cp.cp_sector, "+"cp.cp_name, "+"cp.cp_branch, "+"cp_i.iv_current_amount, "+"cp_i.iv_goal_amount, "+"cp_i.iv_appl_stop_date_time, "
-					+"concat(cp_f.cf_directory,cp_f.cf_image1) as thumbnail_image, "
-					+"round((iv_current_amount/iv_goal_amount)*100) as persent from company cp, company_file cp_f, company_invest cp_i, member mb " 
-					+"where cp_i.iv_appl_stop_date_time > now() " 
-					+"AND cp.cp_open_status = true " 
-					+"AND cp.cp_idx = cp_i.cp_idx " 
-					+"AND cp.cp_idx = cp_f.cp_idx " 
-					+"order by cp_i.iv_appl_stop_date_time asc limit 3";
-			
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-		}
-		while (rs.next()) {
-			CompanyDeadLine DeadLineList = new CompanyDeadLine();
-			
-			DeadLineList.setCp_idx(rs.getInt("cp_idx"));
-			DeadLineList.setMb_id(rs.getString("mb_id"));
-			DeadLineList.setCp_manager(rs.getString("cp_manager"));
-			DeadLineList.setCp_monthly_profit(rs.getInt("cp_monthly_profit"));
-			DeadLineList.setCp_sector(rs.getString("cp_sector"));
-			DeadLineList.setCp_name(rs.getString("cp_name"));
-			DeadLineList.setCp_branch(rs.getString("cp_branch"));
-			DeadLineList.setIv_current_amount(rs.getString("iv_current_amount"));
-			DeadLineList.setIv_goal_amount(rs.getString("iv_goal_amount"));
-			DeadLineList.setAppl_stop_date_time(rs.getString("iv_appl_stop_date_time"));
-			DeadLineList.setThumbnail_image(rs.getString("thumbnail_image"));
-			DeadLineList.setPersent(rs.getString("persent"));
-			
-			transDeadLineList.add(DeadLineList);								
-		}
-		
-		return transDeadLineList;
-		
-	} catch (Exception ex) {
-		System.out.println("tokenExchangeList 에러: " + ex);
-	} finally {
 		try {
-			if (rs != null)
-				rs.close();
-			if (pstmt != null)
-				pstmt.close();
-			if (conn != null)
-				conn.close();
-		} catch (Exception e) {
-			System.out.println("해제 실패 : " + e.getMessage());
+			pstmt = conn.prepareStatement(sql);
+			pstmt.execute();
+			System.out.println("테이블 비우기 성공");
+			return true;
+			
+		}catch (Exception ex) {
+			System.out.println("deletetalbe 에러: " + ex);
+		}finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("연결 해제 실패: " + e.getMessage());
+			}
 		}
+		
+		return false;
 	}
 	
-	return null;
+	//자동 수동 체크값 가져오기
+	public int auto_mancheck() {
+		String sql = "SELECT aas_auto_status from admin_am_setting WHERE aas_idx = 3";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int aas_auto_status = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 			
-}
+			while(rs.next()) {
+				aas_auto_status = rs.getInt("aas_auto_status");
+			}
+						
+			return aas_auto_status;
+			
+		}catch (Exception ex) {
+			System.out.println("deletetalbe 에러: " + ex);
+		}finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("연결 해제 실패: " + e.getMessage());
+			}
+		}
+		
+		return aas_auto_status;
+	}
+	
 	// 마감임박 admin_deadLine 테이블에 insert
-	public boolean insertAutoManDeadLineList(ArrayList<CompanyDeadLine> transDeadLineList) {
+	public boolean insertAutoManDeadLineList(String radioVal, String id) {
+		
 		String sql = "INSERT INTO admin_deadLine("
-				+ "cp_idx, mb_id, cp_manager, cp_monthly_profit, cp_sector, cp_name, cp_branch, "
-				+ "iv_current_amount, iv_goal_amount, appl_stop_date_time, thumbnail_image, persent) "
-				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		System.out.println("insertAutoManDeadLineList :" + transDeadLineList.toString());
+					+ "cp_idx, mb_id, cp_manager, cp_monthly_profit, cp_sector, cp_name, cp_branch, "
+					+ "iv_current_amount, iv_goal_amount, appl_stop_date_time, thumbnail_image, persent) "
+					+ "select cp.cp_idx, mb.mb_id, cp.cp_manager, cp.cp_monthly_profit, cp.cp_sector, cp.cp_name, cp.cp_branch, cp_i.iv_current_amount, cp_i.iv_goal_amount, cp_i.iv_appl_stop_date_time, " 
+					+ "concat(cp_f.cf_directory,cp_f.cf_image1) as thumbnail_image," 
+					+ "round((iv_current_amount/iv_goal_amount)*100) as persent "
+					+ "from company cp, company_file cp_f, company_invest cp_i, member mb " 
+					+ "where cp.cp_idx ='"+ id +"' " 
+					+ "AND cp_i.cp_idx ='"+ id +"' "  
+					+ "AND cp_f.cp_idx ='"+ id +"' "				
+					+ "AND cp.mb_id = mb.mb_id ";
+		
 		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			for(int i =0 ; i < transDeadLineList.size() ; i++) {							
-				pstmt.setInt(1, transDeadLineList.get(i).getCp_idx());
-				pstmt.setString(2, transDeadLineList.get(i).getMb_id());
-				pstmt.setString(3, transDeadLineList.get(i).getCp_manager());
-				pstmt.setInt(4, transDeadLineList.get(i).getCp_monthly_profit());
-				pstmt.setString(5, transDeadLineList.get(i).getCp_sector());
-				pstmt.setString(6, transDeadLineList.get(i).getCp_name());
-				pstmt.setString(7, transDeadLineList.get(i).getCp_branch());			
-				pstmt.setString(8, transDeadLineList.get(i).getIv_current_amount());
-				pstmt.setString(9, transDeadLineList.get(i).getIv_goal_amount());
-				pstmt.setString(10, transDeadLineList.get(i).getAppl_stop_date_time());
-				pstmt.setString(11, transDeadLineList.get(i).getThumbnail_image());
-				pstmt.setString(12, transDeadLineList.get(i).getPersent());
-			}			
-			result = pstmt.executeUpdate();
-			System.out.println(pstmt);
-			
-			if (result != 0) {
-				return true;
+		
+		System.out.println("radioVal: "+ radioVal );
+		System.out.println("id: "+ id );
+		
+		try {		
+			if(radioVal.equals("0")){
+				pstmt = conn.prepareStatement(sql);
+				result = pstmt.executeUpdate();
+
+				if (result != 0) {
+					return true;
+				}
+				
+			}else if(radioVal.equals("1")){ // 자동
+				sql = "INSERT INTO admin_deadLine("
+						+ "cp_idx, mb_id, cp_manager, cp_monthly_profit, cp_sector, cp_name, cp_branch, "
+						+ "iv_current_amount, iv_goal_amount, appl_stop_date_time, thumbnail_image, persent) "
+						+ "select cp.cp_idx, mb.mb_id, cp.cp_manager, cp.cp_monthly_profit, cp.cp_sector, cp.cp_name, cp.cp_branch, cp_i.iv_current_amount, cp_i.iv_goal_amount, cp_i.iv_appl_stop_date_time, "
+						+ "concat(cp_f.cf_directory,cp_f.cf_image1) as thumbnail_image, "
+						+ "round((iv_current_amount/iv_goal_amount)*100) as persent from company cp, company_file cp_f, company_invest cp_i, member mb " 
+						+ "where cp_i.iv_appl_stop_date_time > now() " 
+						+ "AND cp.cp_open_status = true " 
+						+ "AND cp.cp_idx = cp_i.cp_idx " 
+						+ "AND cp.cp_idx = cp_f.cp_idx " 
+						+ "AND cp.mb_id = mb.mb_id "
+						+ "order by cp_i.iv_appl_stop_date_time asc limit 3";
+				
+				pstmt = conn.prepareStatement(sql);
+				result = pstmt.executeUpdate();
+
+				if (result != 0) {
+					return true;
+				}				
 			}
+						
 		} catch (Exception ex) {
-			System.out.println("InsertCompany 에러: " + ex);
+			System.out.println("insertAutoManDeadLineList 에러: " + ex);
 		} finally {
 			try {
 				if (rs != null)
@@ -545,31 +766,32 @@ public class CompanyDAO {
 
 
 	///////////////////////////////// 태훈시작//////////////////////////////////////////////
-	// 실시간 수동 목록 가져오기
-	public List<CompanyPopularityList> getCompanyPopularityList() {
-		String sql = "SELECT cp_idx, cp_name, manager_name, member_id " + "FROM popularityManagement_list "
-				+ "ORDER BY cp_idx DESC";
+	// 실시간 수동 목록 가져오기 ajax 버전
+	@SuppressWarnings({ "unchecked", "unused" })
+	public JSONArray getCompanyPopularityList() {
+		String sql = "SELECT cp_idx, cp_name, manager_name, member_id "
+				+ "FROM popularityManagement_list ";
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<CompanyPopularityList> realList = new ArrayList<CompanyPopularityList>();
+		JSONArray jsonArr = new JSONArray();
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				CompanyPopularityList realDAO = new CompanyPopularityList();
-				realDAO.setCp_idx(rs.getInt("cp_idx"));
-				realDAO.setCp_name(rs.getString("cp_name"));
-				realDAO.setManager_name(rs.getString("manager_name"));
-				realDAO.setMember_id(rs.getString("member_id"));
+				JSONObject jsonObj = new JSONObject();
+				jsonObj.put("cp_idx", rs.getInt("cp_idx"));
+				jsonObj.put("cp_name", rs.getString("cp_name"));
+				jsonObj.put("manager_name", rs.getString("manager_name"));
+				jsonObj.put("member_id", rs.getString("member_id"));
 
-				realList.add(realDAO);
+				jsonArr.add(jsonObj);
 			}
-			return realList;
+			return jsonArr;
 		} catch (Exception ex) {
-			System.out.println("getUploadFilePath 에러: " + ex);
+			System.out.println("getCompanyPopularityList ajax 에러: " + ex);
 		} finally {
 			try {
 				if (rs != null)
@@ -586,26 +808,30 @@ public class CompanyDAO {
 		return null;
 	}
 
-	// 실시간 수동 데이터 넣기
-	public boolean insertPopularityManagement(List<Integer> cp_idx_list, List<String> cp_name_list,
-			List<String> mb_id_list, List<String> manager_name_list) {
-		String sql = "";
-		int result = 0;
+	// 실시간 수동 데이터 가져오기 c태그
+	public List<CompanyPopularityList> getCompanyPopularityInfo() {
+		String sql = "SELECT cp_idx, cp_name, manager_name, member_id "
+				+ "FROM popularityManagement_list "
+				+ "ORDER BY popu_idx ASC";
+		List<CompanyPopularityList> popuList = new ArrayList<CompanyPopularityList>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		System.out.println(">>1" + cp_idx_list.toString());
-		System.out.println(">>2" + cp_name_list.toString());
-		System.out.println(">>3" + mb_id_list.toString());
-		System.out.println(">>4" + manager_name_list.toString());
 		try {
 			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
 
-			result = pstmt.executeUpdate();
-			if (result != 0) {
-				return true;
+			while (rs.next()) {
+				CompanyPopularityList popuVO = new CompanyPopularityList();
+				popuVO.setCp_idx(rs.getInt("cp_idx"));
+				popuVO.setCp_name(rs.getString("cp_name"));
+				popuVO.setManager_name(rs.getString("manager_name"));
+				popuVO.setMember_id(rs.getString("member_id"));
+				
+				popuList.add(popuVO);
 			}
+			return popuList;
 		} catch (Exception ex) {
-			System.out.println("insertPopularityManagement 에러: " + ex);
+			System.out.println("getCompanyPopularityList ctag 에러: " + ex);
 		} finally {
 			try {
 				if (rs != null)
@@ -615,10 +841,56 @@ public class CompanyDAO {
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+
+		return null;
+	}
+	
+	// 실시간 수동 데이터 넣기
+	public int insertPopularityManagement(List<Integer> cp_idx_list) {
+		int result = 0;
+		CallableStatement cstmt = null;
+		ResultSet rs = null;
+		try {
+			  cstmt = (CallableStatement) conn.prepareCall("call POPULARITY(?,?,?,?,?,?,?,?,?,?,?)");
+			  
+			  cstmt.setInt(1, cp_idx_list.get(0)); 
+			  cstmt.setInt(2, cp_idx_list.get(1)); 
+			  cstmt.setInt(3, cp_idx_list.get(2)); 
+			  cstmt.setInt(4, cp_idx_list.get(3)); 
+			  cstmt.setInt(5, cp_idx_list.get(4)); 
+			  cstmt.setInt(6, cp_idx_list.get(5)); 
+			  cstmt.setInt(7, cp_idx_list.get(6)); 
+			  cstmt.setInt(8, cp_idx_list.get(7)); 
+			  cstmt.setInt(9, cp_idx_list.get(8)); 
+			  cstmt.setInt(10, cp_idx_list.get(9)); 
+			  cstmt.registerOutParameter(11, java.sql.Types.INTEGER);
+			  
+			  cstmt.execute(); 
+			  result = cstmt.getInt("@RESULT"); 
+			  if(result == 1) {
+				  System.out.println("result:::"+result);
+				  return result;
+			  }else {
+				  result = -1;
+			  }
+		} catch (Exception ex) {
+			System.out.println("insertPopularityManagement 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (cstmt != null)
+					cstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
 				System.out.println("연결 해제 실패: " + e.getMessage());
 			}
 		}
-		return false;
+		return result;
 	}
 	///////////////////////////////// 태훈끝//////////////////////////////////////////////
 

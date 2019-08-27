@@ -3,6 +3,7 @@
 <%@page import="net.finance.dto.Point"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>    
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +14,7 @@
 	<title>FUNBOX ADMIN</title>
 	<script src="./js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
+	<script type="text/javascript" src="finance/js/tokenExchangeList.js"></script>
 	<link href="./css/common.css" rel="stylesheet">
 	<link href="./css/admin.css" rel="stylesheet">
 	<script>
@@ -28,29 +30,7 @@
 		String categroyFlag = request.getParameter("categroyFlag");
 		String searchID =request.getParameter("searchID");
 		
-	%>
-	<script>
-		function category(button){
-			var selectOption = document.getElementById("selectID").value;
-			var searchID = document.getElementById("hiddensearchID").value;
-			console.log(searchID);
-			var category = button;
-			location.href='./tokenExchangeList.fn?category='+category+"&searchID="+searchID;
-				
-		}
-		
-		function btnIdsearch(){
-			var selectOption = document.getElementById("selectID").value;
-			var searchID =  document.getElementById("searchID").value;
-
-			if(selectOption == '0'){				
-				location.href='./tokenExchangeList.fn?category='+0;
-			}else{
-				location.href='./tokenExchangeList.fn?searchID='+searchID;
-			}
-		}
-		
-	</script>
+	%>	
 </head>
 
 <body>
@@ -93,16 +73,16 @@
 							<c:choose>
 								<c:when test="${pointTransfer.po_category == '2'}">								
 									<td>${pointTransfer.mb_id}</td>
-									<td>환전</td>									
-									<td>${pointTransfer.tk_amount}</td>
-									<td>${pointTransfer.po_amount}</td>												
+									<td>환전</td>
+									<td><p><fmt:formatNumber value="${pointTransfer.tk_amount}" pattern="#,###" /></p></td>									
+									<td><p><fmt:formatNumber value="${pointTransfer.po_amount}" pattern="#,###" /></p></td>												
 									<th>${pointTransfer.po_date_time}</th>
 								</c:when>
 								<c:otherwise>
 									<td>${pointTransfer.mb_id}</td>
 									<td>충전</td>									
-									<td>${pointTransfer.tk_amount}</td>
-									<td>${pointTransfer.po_amount}</td>												
+									<td><p><fmt:formatNumber value="${pointTransfer.tk_amount}" pattern="#,###" /></p></td>
+									<td><p><fmt:formatNumber value="${pointTransfer.po_amount}" pattern="#,###" /></p></td>
 									<th>${pointTransfer.po_date_time}</th>
 								</c:otherwise>
 							</c:choose>
@@ -153,9 +133,9 @@
 							<td>${status.count}</td>															
 							<td>${pointTransfer.mb_id}</td>
 							<td>환전</td>									
-							<td>${pointTransfer.tk_amount}</td>
-							<td>${pointTransfer.po_amount}</td>												
-							<td>${pointTransfer.po_date_time}</td>						
+							<td><p><fmt:formatNumber value="${pointTransfer.tk_amount}" pattern="#,###" /></p></td>
+							<td><p><fmt:formatNumber value="${pointTransfer.po_amount}" pattern="#,###" /></p></td>												
+							<th>${pointTransfer.po_date_time}</th>						
 						</tr>	
 						</c:forEach>					
 					</table>
@@ -202,9 +182,9 @@
 							<td>${status.count}</td>															
 							<td>${pointTransfer.mb_id}</td>
 							<td>충전</td>									
-							<td>${pointTransfer.tk_amount}</td>
-							<td>${pointTransfer.po_amount}</td>												
-							<td>${pointTransfer.po_date_time}</td>						
+							<td><p><fmt:formatNumber value="${pointTransfer.tk_amount}" pattern="#,###" /></p></td>
+							<td><p><fmt:formatNumber value="${pointTransfer.po_amount}" pattern="#,###" /></p></td>												
+							<th>${pointTransfer.po_date_time}</th>						
 						</tr>	
 						</c:forEach>					
 					</table>
@@ -280,21 +260,7 @@
 	}); 
 		
 
-		$(function(){
-		  if($('#cate_color').val() == '0'){
-			  $('.tab li').removeClass('on');
-			  	$('#button1').addClass('on');
-		  }
-		  else if($('#cate_color').val() == '1'){
-			  $('.tab li').removeClass('on');
-			  $('#button2').addClass('on');
-	 	  }
-		  else if($('#cate_color').val() == '2'){
-			  $('.tab li').removeClass('on');
-			  $('#button3').addClass('on');
-		  }
-		
-	  });
+	
 		
 	   $('.incomma').each(function(){
 	     var incomma = $(this).text();

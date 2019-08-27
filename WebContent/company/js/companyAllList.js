@@ -1,6 +1,5 @@
 $(function(){
 	//자동 수동 초기값 설정
-	alert(document.getElementById('auto_status').value);
 	if (document.getElementById('auto_status').value == true) {
 		document.getElementById('auto').checked = true;
 	}else{
@@ -14,9 +13,12 @@ $(function(){
 		item.addEventListener('click',function() { addManualToList(item); all_list.removeChild(item.parentElement.parentElement); });
 	});
 	
-	
+	count = document.getElementById('added_table').childElementCount;
+	if (count < 1) {
+		count = 1;
+	}
 });
-var count = 1;
+var count;
 var test;
 var added_table;
 var added_table_js;
@@ -92,6 +94,7 @@ function swapUp(trTag){
 	trTag.children[3].id = trTag.previousSibling.children[3].id;
 	trTag.previousSibling.children[3].id = temp;
 }
+
 function swapDown(trTag){
 	var temp = trTag.children[6].name;
 	trTag.children[6].name = trTag.nextElementSibling.children[6].name;
@@ -150,13 +153,97 @@ function reloadNumbering(){
 		item.children[1].id = 'cp_name_'+i;
 		item.children[2].id = 'mb_id_'+i;
 		item.children[3].id = 'cp_manager_name_'+i;
+		item.children[6].name = 'cp_idx_'+i;
 		i++;
 	});
 };
 
+function setAutoManual(){
+	
+	var aas_idx = Number.parseInt(document.getElementById('aas_idx').value);
+	var min_count;
+	var max_count;
+	switch (aas_idx) {
+	case 1:
+		
+		break;
+	case 2:
+		min_count = 4;
+		max_count = 4;
+		break;
+	case 3:
+		break;
+	case 4:
+		min_count = 1;
+		max_count = 8;
+		break;
+	case 5:
+		min_count = 1;
+		max_count = 8;
+		break;		
+	default:
+		break;
+	}
+	
+	if (!countLimit(min_count,max_count)) {
+		alert('개수 제한 오류');
+		return false;
+	}
+	
+	var cp_idx_value_arr = new Array();
+	Array.from(document.getElementsByClassName("cp_idx")).forEach(function(item) {		
+		cp_idx_value_arr.push(item.value);
+	});
+	$.ajax({
+		url : './setAutoOrManual.cp',
+		method : "POST",
+		traditional : true,
+		data : {
+			auto_status : document.getElementById('auto').checked,
+			aas_idx : aas_idx,
+			cp_idx_value_arr : cp_idx_value_arr			
+			},
+		type : "json"
+	}).done(function(resultData) {
+		switch (resultData.result) {
+		case 0:
+			document.getElementById('modityBtn').value='수정';
+			disableController();
+			alert(resultData.message);
+			break;
+		case 1:
+			alert(resultData.message);
+			break;	
+		default:
+			break;
+		}
+	}).fail(function() {
+		alert('서버통신 오류');
+	}).always(function() {
+	});
+};
+
+//추가된 리스트에
+function countLimit(minCount,maxCount){
+	var count = document.getElementById('added_table').childElementCount - 1;	
+	if (minCount <= count && maxCount >= count) {
+		return true;
+	}
+	return false;
+};
 
 // 태훈 추가 - 기능 제어
 $(document).ready(function() {
+	// 수동 자동 체크 
+	var auto_status_value = $("#auto_status_value").val();
+		if(auto_status_value == "1") {
+			$('#auto').attr("checked", true);
+			$("#man").attr('checked', false); 
+		} else {
+			$("#auto").attr('checked', false); 
+			$("#man").attr('checked', true); 
+		}
+	
 		$(".topList").children().css('backgroundColor', '#d3d3d3');
 		$(".allList").children().css('backgroundColor', '#d3d3d3');
 		
@@ -172,8 +259,29 @@ $(document).ready(function() {
 		$(".downBtn").prop("disabled", true);
 		$(".downBtn").css('backgroundColor', '#d3d3d3');
 		
+		$("#saveBtn").attr('disabled', true);
 		$("input[name='push']").attr('disabled', true);
 });
+
+function disableController(){
+	$(".topList").children().css('backgroundColor', '#d3d3d3');
+	$(".allList").children().css('backgroundColor', '#d3d3d3');
+	
+	$(".allBtn").prop("disabled", true);
+	$(".allBtn").css('backgroundColor', '#d3d3d3');
+	
+	$(".topDelBtn").prop("disabled", true);
+	$(".topDelBtn").css('backgroundColor', '#d3d3d3');
+	
+	$(".upBtn").prop("disabled", true);
+	$(".upBtn").css('backgroundColor', '#d3d3d3');
+	
+	$(".downBtn").prop("disabled", true);
+	$(".downBtn").css('backgroundColor', '#d3d3d3');
+	
+	$("#saveBtn").attr('disabled', true);
+	$("input[name='push']").attr('disabled', true);
+};
 
 $("#modityBtn").on('click', function() {
 	var BtnText = $("#modityBtn").val();
@@ -193,6 +301,7 @@ $("#modityBtn").on('click', function() {
 		$(".downBtn").prop("disabled", false);
 		$(".downBtn").css('backgroundColor', 'transparent');
 		
+		$("#saveBtn").attr('disabled', false);
 		$("input[name='push']").attr('disabled', false);
 		$("#modityBtn").val("비활성화");
 	}else if(BtnText == "비활성화") {
@@ -211,7 +320,16 @@ $("#modityBtn").on('click', function() {
 		$(".downBtn").prop("disabled", true);
 		$(".downBtn").css('backgroundColor', '#d3d3d3');
 		
+		$("#saveBtn").attr('disabled', true);
 		$("input[name='push']").attr('disabled', true);
 		$("#modityBtn").val("수정");
 	}
+});
+
+// 검색 기능
+$("#searchCompany").on('keyup', function() {
+	var value = $(this).val().toLowerCase();
+	$("#all_list tr").filter(function() {
+		$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+	});
 });

@@ -22,20 +22,29 @@ public class companyPopularityManagementUpdateAction implements Action {
 		System.out.println("어디까지오니");
 		
 		List<Integer> cp_idx_list = new ArrayList<Integer>();
-		List<String> cp_name_list = new ArrayList<String>();
-		List<String> mb_id_list = new ArrayList<String>();
-		List<String> manager_name_list = new ArrayList<String>();
+		int ass_idx = Integer.parseInt(request.getParameter("ass_idx"));
+		System.out.println(">>>autovalue1"+ass_idx);
+		String auto_status_value = (String)request.getParameter("auto_status");
+		System.out.println(">>>autovalue2"+auto_status_value);
+		boolean auto_status = false;
+		if(auto_status_value.equals("1")) {
+			auto_status = true;
+		}else {
+			auto_status = false;
+		}
+		System.out.println("ass_idx ::: "+ass_idx);
+		System.out.println("auto_status ::: "+auto_status);
 		
-		int cp_idx_1 = Integer.parseInt(request.getParameter("1"));
-		int cp_idx_2 = Integer.parseInt(request.getParameter("2"));
-		int cp_idx_3 = Integer.parseInt(request.getParameter("3"));
-		int cp_idx_4 = Integer.parseInt(request.getParameter("4"));
-		int cp_idx_5 = Integer.parseInt(request.getParameter("5"));
-		int cp_idx_6 = Integer.parseInt(request.getParameter("6"));
-		int cp_idx_7 = Integer.parseInt(request.getParameter("7"));
-		int cp_idx_8 = Integer.parseInt(request.getParameter("8"));
-		int cp_idx_9 = Integer.parseInt(request.getParameter("9"));
-		int cp_idx_10 = Integer.parseInt(request.getParameter("10"));
+		int cp_idx_1 = Integer.parseInt(request.getParameter("cp_idx_1"));
+		int cp_idx_2 = Integer.parseInt(request.getParameter("cp_idx_2"));
+		int cp_idx_3 = Integer.parseInt(request.getParameter("cp_idx_3"));
+		int cp_idx_4 = Integer.parseInt(request.getParameter("cp_idx_4"));
+		int cp_idx_5 = Integer.parseInt(request.getParameter("cp_idx_5"));
+		int cp_idx_6 = Integer.parseInt(request.getParameter("cp_idx_6"));
+		int cp_idx_7 = Integer.parseInt(request.getParameter("cp_idx_7"));
+		int cp_idx_8 = Integer.parseInt(request.getParameter("cp_idx_8"));
+		int cp_idx_9 = Integer.parseInt(request.getParameter("cp_idx_9"));
+		int cp_idx_10 = Integer.parseInt(request.getParameter("cp_idx_10"));
 		cp_idx_list.add(cp_idx_1);
 		cp_idx_list.add(cp_idx_2);
 		cp_idx_list.add(cp_idx_3);
@@ -46,75 +55,15 @@ public class companyPopularityManagementUpdateAction implements Action {
 		cp_idx_list.add(cp_idx_8);
 		cp_idx_list.add(cp_idx_9);
 		cp_idx_list.add(cp_idx_10);
-		
-		String cp_name_1 = request.getParameter("cp_name_1");
-		String cp_name_2 = request.getParameter("cp_name_1");
-		String cp_name_3 = request.getParameter("cp_name_1");
-		String cp_name_4 = request.getParameter("cp_name_1");
-		String cp_name_5 = request.getParameter("cp_name_1");
-		String cp_name_6 = request.getParameter("cp_name_1");
-		String cp_name_7 = request.getParameter("cp_name_1");
-		String cp_name_8 = request.getParameter("cp_name_1");
-		String cp_name_9 = request.getParameter("cp_name_1");
-		String cp_name_10 = request.getParameter("cp_name_1");
-		cp_name_list.add(cp_name_1);
-		cp_name_list.add(cp_name_2);
-		cp_name_list.add(cp_name_3);
-		cp_name_list.add(cp_name_4);
-		cp_name_list.add(cp_name_5);
-		cp_name_list.add(cp_name_6);
-		cp_name_list.add(cp_name_7);
-		cp_name_list.add(cp_name_8);
-		cp_name_list.add(cp_name_9);
-		cp_name_list.add(cp_name_10);
-		
-		String mb_id_1 = request.getParameter("mb_id_1");
-		String mb_id_2 = request.getParameter("mb_id_1");
-		String mb_id_3 = request.getParameter("mb_id_1");
-		String mb_id_4 = request.getParameter("mb_id_1");
-		String mb_id_5 = request.getParameter("mb_id_1");
-		String mb_id_6 = request.getParameter("mb_id_1");
-		String mb_id_7 = request.getParameter("mb_id_1");
-		String mb_id_8 = request.getParameter("mb_id_1");
-		String mb_id_9 = request.getParameter("mb_id_1");
-		String mb_id_10 = request.getParameter("mb_id_1");
-		mb_id_list.add(mb_id_1);
-		mb_id_list.add(mb_id_2);
-		mb_id_list.add(mb_id_3);
-		mb_id_list.add(mb_id_4);
-		mb_id_list.add(mb_id_5);
-		mb_id_list.add(mb_id_6);
-		mb_id_list.add(mb_id_7);
-		mb_id_list.add(mb_id_8);
-		mb_id_list.add(mb_id_9);
-		mb_id_list.add(mb_id_10);
-		
-		String manager_name_1 = request.getParameter("manager_name_1");
-		String manager_name_2 = request.getParameter("manager_name_1");
-		String manager_name_3 = request.getParameter("manager_name_1");
-		String manager_name_4 = request.getParameter("manager_name_1");
-		String manager_name_5 = request.getParameter("manager_name_1");
-		String manager_name_6 = request.getParameter("manager_name_1");
-		String manager_name_7 = request.getParameter("manager_name_1");
-		String manager_name_8 = request.getParameter("manager_name_1");
-		String manager_name_9 = request.getParameter("manager_name_1");
-		String manager_name_10 = request.getParameter("manager_name_1");
-		manager_name_list.add(manager_name_1);
-		manager_name_list.add(manager_name_2);
-		manager_name_list.add(manager_name_3);
-		manager_name_list.add(manager_name_4);
-		manager_name_list.add(manager_name_5);
-		manager_name_list.add(manager_name_6);
-		manager_name_list.add(manager_name_7);
-		manager_name_list.add(manager_name_8);
-		manager_name_list.add(manager_name_9);
-		manager_name_list.add(manager_name_10);
+		System.out.println(">>>data:::"+cp_idx_list.size());
 		
 		CompanyDAO companyDAO = new CompanyDAO();
-		companyDAO.insertPopularityManagement(cp_idx_list, cp_name_list, mb_id_list, manager_name_list);
+		companyDAO.insertPopularityManagement(cp_idx_list);
+		companyDAO = new CompanyDAO();
+		companyDAO.setAutoStatus(ass_idx, auto_status);
 		
 		forward.setRedirect(false);
-		forward.setPath("./companyPopularityManagement.cp");
+		forward.setPath("/companyPopularityManagement.cp");
 		return forward;
 	}
 

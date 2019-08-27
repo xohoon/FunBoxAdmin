@@ -1,5 +1,8 @@
+<%@page import="net.company.dto.CompanyPopularityList"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +24,11 @@
 		  $('.allList').load('./compnayAllList.cp?category=1');
 		});
 	</script>
+
+<%
+	ArrayList<CompanyPopularityList> popuInfo = (ArrayList<CompanyPopularityList>)request.getAttribute("popuInfo");
+	int auto_status = (Integer)request.getAttribute("auto_status");
+%>
 </head>
 
 <body>
@@ -33,7 +41,7 @@
 				<div class="all">
                   <h3>전체목록</h3>
                   <div class="sch">
-				    <input type="text">
+				    <input type="text" id="searchCompany">
 				    <button><i class="fas fa-search"></i></button>
 			       </div>
                   <div class="allList"></div>
@@ -50,7 +58,10 @@
                       <label for="man">수동</label>
                     </li>
                   </ul>
+                  <input type="hidden" value="<%=auto_status %>" id="auto_status_value">
                   	<form method="post" action="./companyPopularityManagementUpdate.cp">
+                  	<input type="hidden" value="1" name="ass_idx" id="ass_idx">
+                  	<input type="hidden" value="" name="auto_status" id="auto_status">
 	                   <div class="topList" id="bgColor">
 	                     <table id="test01">
 	                     	<tbody id="added_table">
@@ -62,28 +73,38 @@
 		                         <th></th>
 		                         <th></th>
 		                       </tr>
+								<c:forEach var="popuInfo" items="${popuInfo}" varStatus="status">
+				                	<tr>
+				                    	<td>${status.count}</td>
+				                        <td>${popuInfo.cp_name }</td>
+				                        <td>${popuInfo.member_id }</td>
+				                        <td>${popuInfo.manager_name }</td>
+				                        <td><button type="button" class="topDelBtn" onclick="removeItem(this);">삭제</button></td>
+				                        <td><button type='button' class='upBtn' onclick='up(this);'><i class='fas fa-chevron-up'></i></button><button type='button' class='downBtn' onclick='down(this);'><i class='fas fa-chevron-down'></i></button></td>
+				                        <input name='cp_idx_${status.count}' class='cp_idx' type='hidden' value="${popuInfo.cp_idx }">
+				                   </tr>
+								</c:forEach>
 	                       </tbody>
 	                     </table>
 	                   </div>
 	                   <input type="button" id="modityBtn" value="수정" style="margin-top:10px;">
-	                   <input type="submit" id="saveBtn" value="적용" style="margin-left:10px; margin-top:10px;">
+	                   <input type="button" id="saveBtn" onclick = "saveCheck(this.form)" value="적용" style="margin-left:10px; margin-top:10px;">
                   	</form>
 	              </div>
 			</div>
 		</section>
 		<footer></footer>
 	</div>
-	<script>  
-setTimeout(function () {
-  jQuery('.nav3').trigger('click');
-  jQuery('.nav35').addClass('on');
-}, 500);
-    
-
-    
-
-    
+	<script>
+			setTimeout(function () {
+		/* 
+			jQuery('.nav3').addClass('on');
+			jQuery('.nav31').addClass('on');
+			jQuery('.nav35').addClass('on');
+		*/
+				document.getElementById("nav3").click();
+				jQuery('.nav35').addClass('on');
+		}, 500);
 	</script>
-<input type="hidden" id="auto_status" name="auto_status" value="${auto_status}">
 </body>
 </html>
