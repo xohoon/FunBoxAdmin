@@ -36,10 +36,15 @@ function hiddenRadio(radioval){
 	$('#radioVal').val(radioval);	
 }
 
+
 //자동 - 1 , 수동 - 0
 function savebt(frm){	
 	var radioVal = $('input[name="push"]:checked').val();
-	console.log(radioVal);
+	
+	if (!countLimit(3,3)) {
+		alert('마감 임박 3개를 지정해주세요.');
+		return false;
+	}
 	
 	if (radioVal == 0) {
 		if(confirm("수동으로 저장하시겠습니까?") == true){
