@@ -17,13 +17,15 @@
 
 
 <table class="allGroup">
-	<tbody id="all_list">
+	<thead>
 	    <tr>
 	      <th>선택</th>
 	      <th>상호명</th>
 	      <th>아이디</th>
 	      <th>담당자</th>
 	    </tr>
+	</thead>
+	<tbody id="all_list">
 	    <c:forEach var="company" items="${companyList }">
 	    	<tr>
 		     <td><button id="${company.cp_idx }" value="${company.cp_idx }" class="allBtn">선택</button></td>

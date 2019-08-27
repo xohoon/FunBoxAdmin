@@ -43,7 +43,7 @@
 				<div class="all">
                   <h3>전체목록</h3>
                   <div class="sch">
-				    <input type="text">
+				    <input type="text" id="searchCompany">
 				    <button><i class="fas fa-search"></i></button>
 			       </div>
                   <div class="allList"></div>
