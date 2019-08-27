@@ -3,6 +3,7 @@
 <%@page import="net.finance.dto.Invest"%>
 <%@page import="java.util.ArrayList"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +14,8 @@
 	<title>FUNBOX ADMIN</title>
 	<script src="./js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
-	<link href="./css/common.css" rel="stylesheet">
+	<script type="text/javascript" src="finance/js/memberInvestedList.js"></script>
+	<link href="./css/common.css" rel="stylesheet">	
 	<link href="./css/admin.css" rel="stylesheet">
 	<script>
 	$(function() {
@@ -28,28 +30,7 @@
 		String categroyFlag = request.getParameter("categroyFlag");
 		String searchID =request.getParameter("searchID");		
 	%>
-	<script>
-		function category(button){
-			var selectOption = document.getElementById("selectID").value;
-			var searchID = document.getElementById("hiddensearchID").value;
-			console.log(searchID);
-			var category = button;
-			location.href='./memberInvestedList.fn?category='+category+"&searchID="+searchID;
-				
-		}
-		
-		function btnIdsearch(){
-			var selectOption = document.getElementById("selectID").value;
-			var searchID =  document.getElementById("searchID").value;
 
-			if(selectOption == '0'){				
-				location.href='./memberInvestedList.fn?category='+0;
-			}else{
-				location.href='./memberInvestedList.fn?searchID='+searchID;
-			}
-		}
-		
-	</script>
 </head>
 
 <body>
@@ -94,8 +75,8 @@
 								<td>${investTransfer.mb_id}</td>
 								<td>${investTransfer.mi_category}</td>									
 								<td>${investTransfer.mi_name}</td>
-								<td>${investTransfer.mi_point}</td>												
-								<td>${investTransfer.mi_reg_date_time}</td>
+								<td><p><fmt:formatNumber value="${investTransfer.mi_point}" pattern="#,###" /></p></td>
+								<th>${investTransfer.mi_reg_date_time}</th>
 								<td>${investTransfer.mi_note}</td>						
 							</tr>	
 							</c:forEach>					
@@ -145,8 +126,8 @@
 								<td>${investTransfer.mb_id}</td>
 								<td>${investTransfer.mi_category}</td>									
 								<td>${investTransfer.mi_name}</td>
-								<td>${investTransfer.mi_point}</td>												
-								<td>${investTransfer.mi_reg_date_time}</td>
+								<td><p><fmt:formatNumber value="${investTransfer.mi_point}" pattern="#,###" /></p></td>												
+								<th>${investTransfer.mi_reg_date_time}</th>
 								<td>${investTransfer.mi_note}</td>						
 							</tr>	
 							</c:forEach>					
@@ -196,8 +177,8 @@
 								<td>${investTransfer.mb_id}</td>
 								<td>${investTransfer.mi_category}</td>									
 								<td>${investTransfer.mi_name}</td>
-								<td>${investTransfer.mi_point}</td>												
-								<td>${investTransfer.mi_reg_date_time}</td>
+								<td><p><fmt:formatNumber value="${investTransfer.mi_point}" pattern="#,###" /></p></td>												
+								<th>${investTransfer.mi_reg_date_time}</th>
 								<td>${investTransfer.mi_note}</td>						
 							</tr>	
 							</c:forEach>					
@@ -247,8 +228,8 @@
 								<td>${investTransfer.mb_id}</td>
 								<td>${investTransfer.mi_category}</td>									
 								<td>${investTransfer.mi_name}</td>
-								<td>${investTransfer.mi_point}</td>												
-								<td>${investTransfer.mi_reg_date_time}</td>
+								<td><p><fmt:formatNumber value="${investTransfer.mi_point}" pattern="#,###" /></p></td>												
+								<th>${investTransfer.mi_reg_date_time}</th>
 								<td>${investTransfer.mi_note}</td>						
 							</tr>	
 							</c:forEach>					
@@ -287,7 +268,7 @@
 		<footer></footer>
 	</div>
 	<script>
-		$(function(){
+	$(function(){
       
       var tdA = $('td:contains("투자")');
       var tdB = $('td:contains("이자")');
@@ -331,25 +312,7 @@
 			
 		});
 		
-		$(function(){
-			  if($('#cate_color').val() == '0'){
-				  $('.tab li').removeClass('on');
-				  	$('#button1').addClass('on');
-			  }
-			  else if($('#cate_color').val() == '1'){
-				  $('.tab li').removeClass('on');
-				  $('#button2').addClass('on');
-		 	  }
-			  else if($('#cate_color').val() == '2'){
-				  $('.tab li').removeClass('on');
-				  $('#button3').addClass('on');
-			  }
-			  else if($('#cate_color').val() == '3'){
-				  $('.tab li').removeClass('on');
-				  $('#button4').addClass('on');
-			  }
-			
-		  });
+	
 			
     
     function numberWithCommas(x) {
