@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import net.customer.dto.FaqBoard;
+import net.customer.dto.NoticeBoard;
 
 public class CustomerDAO {
 	private static CustomerDAO instance;
@@ -311,5 +312,85 @@ public class CustomerDAO {
 		}
 		
 		return false;
+	}
+	
+	// 태훈 - 공지게시판
+	public ArrayList<NoticeBoard> getNotice(int startRow, int pageSize) throws Exception {
+		ArrayList<NoticeBoard> notice_list = new ArrayList<NoticeBoard>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT idx, title, content, reg_date_time " 
+				+ "FROM notice " 
+				+ "ORDER BY idx desc limit "
+				+ startRow + ", " + pageSize;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				NoticeBoard notice = new NoticeBoard();
+
+				notice.setIdx(rs.getInt("idx"));
+				notice.setContent(rs.getString("content"));
+				notice.setTitle(rs.getString("title"));
+				notice.setReg_date_time(rs.getDate("reg_date_time"));
+
+				notice_list.add(notice);
+			}
+			return notice_list;
+
+		} catch (Exception ex) {
+
+			System.out.println("getFaq 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("연결 해제 실패: " + e.getMessage());
+			}
+		}
+
+		return null;
+	}
+
+	// 태훈 - notice count
+	public int noticeCount() {
+		PreparedStatement pstmt = null;
+		int count = 0;
+		ResultSet rs = null;
+		String sql = "select * from notice";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.last();
+
+			count = rs.getRow();
+
+			rs.beforeFirst();
+
+			return count;
+
+		} catch (Exception ex) {
+			System.out.println("faqCount 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+		return 0;
 	}
 }
