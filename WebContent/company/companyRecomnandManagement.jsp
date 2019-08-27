@@ -87,7 +87,7 @@
 </body>
 	<script>  
 	setTimeout(function () {
-	  jQuery('.nav3').trigger('click');
+	  document.getElementById("nav3").click();
 	  jQuery('.nav36').addClass('on');
 	}, 500);
 	</script>
