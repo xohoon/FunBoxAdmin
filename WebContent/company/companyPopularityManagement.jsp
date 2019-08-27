@@ -24,12 +24,10 @@
 		  $('.allList').load('./compnayAllList.cp?category=1');
 		});
 	</script>
-	
 
 <%
 	ArrayList<CompanyPopularityList> popuInfo = (ArrayList<CompanyPopularityList>)request.getAttribute("popuInfo");
 	int auto_status = (Integer)request.getAttribute("auto_status");
-	System.out.println(">>>>>auto_status"+auto_status);
 %>
 </head>
 
@@ -97,11 +95,16 @@
 		</section>
 		<footer></footer>
 	</div>
-	<script>  
-setTimeout(function () {
-  jQuery('.nav3').trigger('click');
-  jQuery('.nav35').addClass('on');
-}, 500);
+	<script>
+			setTimeout(function () {
+		/* 
+			jQuery('.nav3').addClass('on');
+			jQuery('.nav31').addClass('on');
+			jQuery('.nav35').addClass('on');
+		*/
+				document.getElementById("nav3").click();
+				jQuery('.nav35').addClass('on');
+		}, 500);
 	</script>
 </body>
 </html>
