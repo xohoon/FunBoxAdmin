@@ -72,7 +72,7 @@ public class CustomerController extends HttpServlet implements Servlet{
 				action = new InquiryAnswerFormAction();
 				forward = action.execute(request, response);
 				break;
-			case "/inquiryBoard.cu":
+			case "/inquiryBoard.cu": // 1:1 문의 계시판
 				action = new InquiryBoardAction();
 				forward = action.execute(request, response);
 				break;

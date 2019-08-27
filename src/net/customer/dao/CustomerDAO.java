@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import net.customer.dto.FaqBoard;
+import net.customer.dto.inquiryBoard;
+import net.finance.dto.Invest;
 
 public class CustomerDAO {
 	private static CustomerDAO instance;
@@ -312,4 +314,132 @@ public class CustomerDAO {
 		
 		return false;
 	}
+	
+	// 윤식 - 1 : 1 문의 계시판 가져오기 
+	public ArrayList<inquiryBoard> getinquiryBoard(int startRow, int pageSize, String category, String id) {
+
+		// 전체		
+		String sql = "SELECT idx, id, name, title, reg_date_time, qna_reply FROM qna "
+					+"where id like '%"+ id +"%' "
+					+"ORDER BY reg_date_time DESC limit "
+					+ startRow + ", " + pageSize;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<inquiryBoard> transinquiryBoardList = new ArrayList<inquiryBoard>(); 
+		
+		try {
+			if (category.equals("0")) { // 전체					
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+			}else if(category.equals("1")){ // 답변
+				sql = "SELECT idx, id, name, title, reg_date_time, qna_reply FROM qna "
+					+"where id like '%"+ id +"%' "
+					+"AND qna_reply IS NOT NULL "
+					+"ORDER BY reg_date_time DESC limit "
+					+ startRow + ", " + pageSize;	
+				
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+			}else if(category.equals("2")){ // 미답변
+				sql = "SELECT idx, id, name, title, reg_date_time, qna_reply FROM qna "
+					+"where id like '%"+ id +"%' "
+					+"AND qna_reply IS NULL "
+					+"ORDER BY reg_date_time DESC limit "
+					+ startRow + ", " + pageSize;					
+					
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+			}
+			
+			while (rs.next()) {
+				inquiryBoard inquiryList = new inquiryBoard();
+				inquiryList.setIdx(rs.getInt("idx"));
+				inquiryList.setId(rs.getString("id"));
+				inquiryList.setName(rs.getString("name"));
+				inquiryList.setTitle(rs.getString("title"));
+				inquiryList.setReg_date_time(rs.getString("reg_date_time"));
+				inquiryList.setQna_reply(rs.getString("qna_reply"));
+				
+				
+				transinquiryBoardList.add(inquiryList);
+			}
+			
+			return transinquiryBoardList;
+			
+		} catch (Exception ex) {
+			System.out.println("getinquiryBoard 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+		
+	return null;
+	} 
+	
+		// 1:1 카운트 개수 가져오기 - 윤식 추가
+		public int inquiryBoardCount(String category , String id) {
+			PreparedStatement pstmt = null;
+			int count = 0;
+			ResultSet rs = null;
+			
+			String sql = "SELECT idx, id, name, title, reg_date_time, qna_reply FROM qna "
+						+" where id like '%"+ id +"%' ";
+
+			try {
+				if (category.equals("0")) { // 전체
+					pstmt = conn.prepareStatement(sql);
+					rs = pstmt.executeQuery();
+					
+				}else if(category.equals("1")){ // 답변
+					sql = "SELECT idx, id, name, title, reg_date_time, qna_reply FROM qna "
+						+"where id like '%"+ id +"%' "
+						+"AND qna_reply IS NOT NULL ";
+					
+					pstmt = conn.prepareStatement(sql);
+					rs = pstmt.executeQuery();
+				}else if(category.equals("2")){ //미 답변
+					sql = "SELECT idx, id, name, title, reg_date_time, qna_reply FROM qna "
+						+"where id like '%"+ id +"%' "
+						+"AND qna_reply IS NULL ";
+					
+					pstmt = conn.prepareStatement(sql);
+					rs = pstmt.executeQuery();
+				}
+				
+				rs.last();
+				count = rs.getRow();
+				rs.beforeFirst();
+
+				return count;
+			} catch (Exception ex) {
+				System.out.println("inquiryBoardCount 에러: " + ex);
+			} finally {
+				try {
+					if (rs != null)
+						rs.close();
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (Exception e) {
+					System.out.println("해제 실패 : " + e.getMessage());
+				}
+			}
+			return 0;
+		}
+		 
+	
 }
