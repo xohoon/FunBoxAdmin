@@ -1020,6 +1020,7 @@ button.cancel{
   width:70px;
   padding-right:7px;
   margin-left:-77px;
+  margin-top:50px;
 }
 #modityBtn:hover{
   background:#73a6d6;
@@ -1032,6 +1033,8 @@ button.cancel{
   color:#ff9124;
   width:70px;
   padding-right:7px;
+  margin-left:10px;
+  margin-top:50px;
 }
 #saveBtn:hover{
   background:#ff9124;
