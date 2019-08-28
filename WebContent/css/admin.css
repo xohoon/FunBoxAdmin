@@ -1013,3 +1013,26 @@ button.cancel{
   color:#fff;
   vertical-align:top;
 }
+#modityBtn{
+  background:#fff;
+  border:1px solid #73a6d6;
+  color:#73a6d6;
+  width:70px;
+  padding-right:7px;
+}
+#modityBtn:hover{
+  background:#73a6d6;
+  color:#fff;
+}
+
+#saveBtn{
+  background:#fff;
+  border:1px solid #ff9124;
+  color:#ff9124;
+  width:70px;
+  padding-right:7px;
+}
+#saveBtn:hover{
+  background:#ff9124;
+  color:#fff;
+}
