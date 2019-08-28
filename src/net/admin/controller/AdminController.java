@@ -14,6 +14,7 @@ import net.admin.action.IndexAction;
 
 import net.admin.action.LoginCheckAction;
 import net.admin.action.LoginFormAction;
+import net.admin.action.LogoutAction;
 import net.common.action.Action;
 import net.common.action.ActionForward;
 
@@ -29,7 +30,8 @@ public class AdminController extends HttpServlet {
 		Action action = null;
 
 		try {
-			switch (command) {			
+			switch (command) {		
+			// 태훈 추가
 			case "/loginForm.ad":
 				action = new LoginFormAction();
 				forward = action.execute(request, response);
@@ -42,6 +44,11 @@ public class AdminController extends HttpServlet {
 				action = new IndexAction();
 				forward = action.execute(request, response);
 				break;
+			case "/LogoutAction.ad":
+				action = new LogoutAction();
+				forward = action.execute(request, response);
+				break;
+			// 태훈 끝
 			default:
 				break;
 			}
