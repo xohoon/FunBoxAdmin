@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+import net.admin.action.IndexAction;
+
 import net.admin.action.LoginCheckAction;
 import net.admin.action.LoginFormAction;
 import net.common.action.Action;
@@ -19,7 +22,6 @@ public class AdminController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws UnsupportedEncodingException {
-		//request.setCharacterEncoding("utf-8");
 		String RequestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = RequestURI.substring(contextPath.length());
@@ -27,13 +29,17 @@ public class AdminController extends HttpServlet {
 		Action action = null;
 
 		try {
-			switch (command) {
+			switch (command) {			
 			case "/loginForm.ad":
 				action = new LoginFormAction();
 				forward = action.execute(request, response);
 				break;
 			case "/LoginCheckAction.ad":
 				action = new LoginCheckAction();
+				forward = action.execute(request, response);
+				break;
+			case "/index.ad":
+				action = new IndexAction();
 				forward = action.execute(request, response);
 				break;
 			default:

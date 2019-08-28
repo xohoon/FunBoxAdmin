@@ -1,5 +1,15 @@
+<%@page import="net.admin.dto.IndexNeeds"%>
+<%@page import="net.admin.dao.AdminDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+	IndexNeeds indexNeeds = new IndexNeeds();
+	AdminDAO adminDAO = new AdminDAO();
+	
+	adminDAO.setIndexNeeds(indexNeeds);
+%>
+<c:set var="indexNeeds" value="<%=indexNeeds %>" scope="page" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,9 +37,9 @@
       <div>
 		    <h3><i class="fas fa-user"></i>&nbsp;&nbsp;회원관리</h3>
 		    <ul>
-		      <li onclick="location.href='./memberList.mb'">
+		      <li onclick="location.href='./memberList.mb'">		      
 		        <h4>회원리스트</h4>
-		        <p><span>1</span> / 100</p>
+		        <p><span>${indexNeeds.new_member_count }</span> / ${indexNeeds.member_count }</p>
 		        <i class="far fa-hand-pointer"> Click</i>
 		      </li>
 		      <li onclick="location.href='./memberRegisterForm.mb'">
@@ -44,7 +54,7 @@
 		    <ul>
 		      <li onclick="location.href='./companyInvestApplyList.cp'">
 		        <h4>투자기업 신청 리스트</h4>
-		        <p><span>1</span> / 100</p>
+		        <p><span>${indexNeeds.cpp_admin_checked_count }</span> / ${indexNeeds.cpp_count }</p>
 		        <i class="far fa-hand-pointer"> Click</i>
 		      </li>
 		      <li onclick="location.href='./companyRegisterForm.cp'">
@@ -54,7 +64,7 @@
 		      </li>
 		      <li onclick="location.href='./companyInvestedList.cp'">
 		      <h4>투자 기업 리스트</h4>
-          <p>100</p>
+          <p>${indexNeeds.cp_iv_count }</p>
 		        <i class="far fa-hand-pointer"> Click</i>
 		      </li><br>
 		      <li onclick="location.href='./companyPopularityManagement.cp'">
@@ -74,12 +84,12 @@
 		      </li>
 		      <li onclick="location.href='./companyMainSlideManagement1.cp'">
 		      <h4>메인배너1</h4>
-          <p>3</p>
+          <p>${indexNeeds.main_banner1_count }</p>
 		        <i class="far fa-hand-pointer"> 수정하기</i>
 		      </li>
 		      <li onclick="location.href='./companyMainSlideManagement2.cp'">
 		      <h4>메인배너2</h4>
-          <p>2</p>
+          <p>${indexNeeds.main_banner2_count }</p>
 		        <i class="far fa-hand-pointer"> 수정하기</i>
 		      </li>
 		    </ul>
@@ -106,17 +116,17 @@
 		    <ul>
 		      <li onclick="location.href='./faqBoard.cu'">
 		        <h4>FAQ 게시판</h4>
-		        <p>100</p>
+		        <p>${indexNeeds.faq_count }</p>
 		        <i class="far fa-hand-pointer"> 등록하기</i>
 		      </li>
 		      <li onclick="location.href='./inquiryBoard.cu'">
 		      <h4>1:1 문의 게시판</h4>
-            <p><span>1</span> / 100</p>
+            <p><span>${indexNeeds.qna_admin_reply_count }</span> / 100</p>
 		        <i class="far fa-hand-pointer"> 답변하기</i>
 		      </li>
 		      <li onclick="location.href='./noticeBoard.cu'">
 		        <h4>공지 게시판</h4>
-		        <p>100</p>
+		        <p>${indexNeeds.notice_count }</p>
 		        <i class="far fa-hand-pointer"> 등록하기</i>
 		      </li>
 		    </ul>

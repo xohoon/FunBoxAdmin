@@ -79,20 +79,20 @@ function removeItem(object){
 
 function swapUp(trTag){
 	var temp = trTag.children[6].name;
-	trTag.children[6].name = trTag.previousSibling.children[6].name;
-	trTag.previousSibling.children[6].name = temp;
+	trTag.children[6].name = trTag.previousElementSibling.children[6].name;
+	trTag.previousElementSibling.children[6].name = temp;
 	
 	temp = trTag.children[1].id;
-	trTag.children[1].id = trTag.previousSibling.children[1].id;
-	trTag.previousSibling.children[1].id = temp;
+	trTag.children[1].id = trTag.previousElementSibling.children[1].id;
+	trTag.previousElementSibling.children[1].id = temp;
 	
 	temp = trTag.children[2].id;
-	trTag.children[2].id = trTag.previousSibling.children[2].id;
-	trTag.previousSibling.children[2].id = temp;
+	trTag.children[2].id = trTag.previousElementSibling.children[2].id;
+	trTag.previousElementSibling.children[2].id = temp;
 	
 	temp = trTag.children[3].id;
-	trTag.children[3].id = trTag.previousSibling.children[3].id;
-	trTag.previousSibling.children[3].id = temp;
+	trTag.children[3].id = trTag.previousElementSibling.children[3].id;
+	trTag.previousElementSibling.children[3].id = temp;
 }
 
 function swapDown(trTag){
@@ -112,8 +112,11 @@ function swapDown(trTag){
 	trTag.children[3].id = trTag.nextElementSibling.children[3].id;
 	trTag.nextElementSibling.children[3].id = temp;
 }
+
+var test;
 function up(object){
 	var trTag = object.parentElement.parentElement;
+	test =trTag;
 	if (trTag.children[0].innerText <= 1) {
 		return false;
 	}
@@ -159,7 +162,9 @@ function reloadNumbering(){
 };
 
 function setAutoManual(){
-	
+	if (document.getElementById('modityBtn').value == "수정") {
+		return false;
+	}
 	var aas_idx = Number.parseInt(document.getElementById('aas_idx').value);
 	var min_count;
 	var max_count;
@@ -194,6 +199,7 @@ function setAutoManual(){
 	Array.from(document.getElementsByClassName("cp_idx")).forEach(function(item) {		
 		cp_idx_value_arr.push(item.value);
 	});
+	console.log(cp_idx_value_arr);
 	$.ajax({
 		url : './setAutoOrManual.cp',
 		method : "POST",
