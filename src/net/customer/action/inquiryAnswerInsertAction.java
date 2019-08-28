@@ -25,9 +25,6 @@ public class inquiryAnswerInsertAction implements Action {
 		CustomerDAO custonerdao = new CustomerDAO();
 		result = custonerdao.replyupdate(reply, idx);
 
-		//insert 구분 추가
-		
-		
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
 		out.println("window.close();");

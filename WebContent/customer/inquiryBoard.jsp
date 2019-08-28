@@ -43,7 +43,7 @@
 					<option value = '0'>- 전체 -</option>
 					<option value = '1'>아이디</option>
 				</select>
-				<input id = 'searchID' name = 'searchID' type="text" onkeydown='javascript:if(event.keyCode==13){func.searchEnter({}); return false;}' maxlength='10'>
+				<input id = 'searchID' name = 'searchID' type="text" onKeypress="javascript:if(event.keyCode==13) {btnIdsearch()}" maxlength='10'>
 				<button onclick = "btnIdsearch()"><i class="fas fa-search"></i></button>
 			</div>
 			<div class="con">
@@ -71,7 +71,7 @@
 							<td>${inquiryBoardList.reg_date_time}</td>															
 							<c:choose>
 								<c:when test = "${inquiryBoardList.qna_reply != null}">
-									<td>답변완료</td>
+									<td style="color:#ff9124">답변완료</td>
 								</c:when>
 								<c:otherwise>
 								<td>미답변</td>

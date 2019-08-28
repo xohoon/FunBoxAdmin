@@ -31,12 +31,12 @@ public class FinanceController extends HttpServlet implements Servlet{
 		Action action = null;
 		System.out.println(command);
 		try {
-			switch (command) { // �룷�씤�듃�솚�쟾�궡�뿭
-			case "/tokenExchangeList.fn":
+			switch (command) { // 
+			case "/tokenExchangeList.fn": // 포인트 환전 내역
 				action = new TokenExchangeListAction();
 				forward = action.execute(request, response);
 				break;
-			case "/tokenWithdrawalList.fn": //
+			case "/tokenWithdrawalList.fn": // 토큰 입출금 내역
 				action = new TokenWithdrawalListAction();
 				forward = action.execute(request, response);
 				break;

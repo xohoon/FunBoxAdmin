@@ -64,38 +64,7 @@
 	</form>	
 	</div>
 	<script>
-    $(function(){
-      $('.save').hide();
-      $('.cancel').hide();
-      
-      $('input').prop('readonly',true);
-      $('textarea').prop('readonly',true);
-      /* $('input[type=file]').hide(); */  
-        $('.rec').on('click', function(rectify){
-	          $('input').css('border','1px solid #ddd');
-	          $('input').prop('readonly',true);
-	          $('textarea').prop('readonly',true);
-	          $('#test').prop('readonly',false);
-	          $('input[type=file]').show();
-          $(this).hide();
-          $('.save').show();
-          $('.cancel').show();
-        });
-      
-        $('.save').on('click', function(){
-        	var form = document.save;
-        	
-        	if(confirm("해당 답변을 적용하시겠습니까?") == true){
-        		form.submit();
-        	}else{
-        		alert("답변을 취소 하였습니다.");
-        	}
-        }); 
-        
-        $('.cancel').on('click', function(){
-            location.reload();
-        });
-    });
+   
     
   
   </script>
