@@ -19,6 +19,7 @@ import net.customer.action.FaqModifyAction;
 import net.customer.action.FaqModifyFormAction;
 import net.customer.action.FaqRegisterFormAction;
 import net.customer.action.FaqShowAction;
+import net.customer.action.FileDownAction;
 import net.customer.action.InquiryAnswerFormAction;
 import net.customer.action.InquiryBoardAction;
 import net.customer.action.NoticeBoardAction;
@@ -88,6 +89,10 @@ public class CustomerController extends HttpServlet implements Servlet{
 				break;
 			case "/noticeRegisterForm.cu":
 				action = new NoticeRegisterFormAction();
+				forward = action.execute(request, response);
+				break;
+			case "/fileDownAction.cu":
+				action = new FileDownAction();
 				forward = action.execute(request, response);
 				break;
 			default:

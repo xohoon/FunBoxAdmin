@@ -14,7 +14,14 @@ public class FaqBoard {
 	private int status;
 	private String uploadfile;
 	private String alias_uploadfile;
-	
+	private String real_path;
+
+	public String getReal_path() {
+		return real_path;
+	}
+	public void setReal_path(String real_path) {
+		this.real_path = real_path;
+	}
 	public String getAlias_uploadfile() {
 		return alias_uploadfile;
 	}

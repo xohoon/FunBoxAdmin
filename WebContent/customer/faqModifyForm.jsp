@@ -16,12 +16,14 @@
 
 <body>
 	<div class="sec13_view">
+	
+	<form id="faqModifyForm" enctype="multipart/form-data" method="post" action="./faqModify.cu">
 	  <div>
-	  <label>제목</label><textarea class="tit" id="title">${faq.title }</textarea>
+	  <label>제목</label><textarea class="tit" id="title" name="title">${faq.title}</textarea>
     </div>
     <div>
     <label>카테고리</label>
-    <select id="selectBox">
+    <select id="selectBox" name="selectBox">
     	<c:choose>
     		<c:when test="${faq.category == 1 }">
 			    <option value="1" selected>입출금</option>
@@ -47,14 +49,15 @@
     <div>
 	    <label>날짜</label><input type="text" value="${faq.reg_date_time }">
 	  </div>
-	  <textarea id="content">${faq.content }</textarea>
+	  <textarea id="content" name="content">${faq.content }</textarea>
 	  <input type="hidden" id="faq_idx" value="${faq.idx }">
-	  <input type="file">
-	  <a href="#" download><i class="fas fa-save"></i> 첨부파일 다운로드</a>
-	  <button class="submit out" onclick="faqDel();">삭제하기</button>
-	  <button class="submit rec">수정하기</button>
-	  <button class="submit save" onclick="faqSave();">저장하기</button>
-	  <button class="submit cancel">취소</button>
+	  <input type="file" name="uploadfile" id="uploadfile">
+	  <a href="./fileDownAction.cu?idx=${faq.idx }&fileName=${faq.alias_uploadfile }"><i class="fas fa-save"></i> 첨부파일 다운로드</a>
+	  <button type="button" class="submit out" onclick="faqDel();">삭제하기</button>
+	  <button type="button" class="submit rec">수정하기</button>
+	  <button type="button" class="submit save" onclick="faqSave();">저장하기</button>
+	  <button type="button" class="submit cancel">취소</button>
+	  </form>
 	</div>
 	<script src="customer/js/faqModifyForm.js"></script>
 </body>
