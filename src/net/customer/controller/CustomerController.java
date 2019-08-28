@@ -26,7 +26,6 @@ import net.customer.action.NoticeBoardAction;
 import net.customer.action.NoticeModifyFormAction;
 import net.customer.action.NoticeRegisterFormAction;
 import net.customer.action.inquiryAnswerInsertAction;
-import net.customer.action.inquiryFormAction;
 
 @WebServlet("/CustomerController")
 @MultipartConfig(maxFileSize = 136314880)

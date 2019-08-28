@@ -50,8 +50,8 @@
 	    <label>날짜</label><input type="text" value="${faq.reg_date_time }">
 	  </div>
 	  <textarea id="content" name="content">${faq.content }</textarea>
-	  <input type="hidden" id="faq_idx" value="${faq.idx }">
-	  <input type="file" name="uploadfile" id="uploadfile">
+	  <input type="hidden" id="faq_idx" name="faq_idx" value="${faq.idx }">
+	  <input type="file" name="uploadfile" id="uploadfile">${faq.alias_uploadfile }
 	  <a href="./fileDownAction.cu?idx=${faq.idx }&fileName=${faq.alias_uploadfile }"><i class="fas fa-save"></i> 첨부파일 다운로드</a>
 	  <button type="button" class="submit out" onclick="faqDel();">삭제하기</button>
 	  <button type="button" class="submit rec">수정하기</button>

@@ -14,9 +14,43 @@ $(function() {
 	document.getElementById('search_post').addEventListener('click',function() { searchPost(); });
 	document.getElementById('check_duplication_ID').addEventListener('click',function() { checkDuplicateID(); });
 	document.getElementById('registe').addEventListener('click',function() { registeMember(); });
-	document.getElementById('mb_id').addEventListener('change',function() { 
+	
+	mb_id.addEventListener('change',function() { 
 		duplication_check_flag = false;
 		document.getElementById('check_duplication_ID').disabled = false; 
+	});
+	
+	mb_id.addEventListener('blur',function(){
+		this.value = this.value.replace(korean_regex, '' );
+		this.value = this.value.replace(special_regex, '' );
+	});
+	
+	mb_pw.addEventListener('blur',function(){
+		this.value = this.value.replace(korean_regex, '' );
+	});
+	
+	mb_pincode.addEventListener('blur',function(){
+		this.value = this.value.replace(korean_regex, '' );
+		this.value = this.value.replace(english_regex, '' );
+		this.value = this.value.replace(special_regex, '' );
+		
+	});
+	
+	mb_name.addEventListener('blur',function(){
+		this.value = this.value.replace(special_regex, '' );
+		this.value = this.value.replace(number_regex, '' );
+	});
+	
+	mb_phone.addEventListener('blur',function(){
+		this.value = this.value.replace(korean_regex, '' );
+		this.value = this.value.replace(english_regex, '' );
+		this.value = this.value.replace(special_regex, '' );
+		
+	});
+	
+	mb_recommend.addEventListener('blur',function(){
+		this.value = this.value.replace(korean_regex, '' );
+		this.value = this.value.replace(special_regex, '' );
 	});
 });
 
@@ -33,6 +67,14 @@ var pincode_regex = /\d{6}$/g; // pin code 정규식
 var email_regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 // 공백 체크
 var blank_regex = /[\s]/g;
+// 특수문자
+var special_regex = /[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi;
+// 한글
+var korean_regex = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g;
+// 영어
+var english_regex = /[a-z|A-Z]/g;
+// 숫자
+var number_regex = /[0-9]/g;
 
 var duplication_check_flag = false;
 
