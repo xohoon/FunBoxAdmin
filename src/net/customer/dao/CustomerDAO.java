@@ -144,7 +144,7 @@ public class CustomerDAO {
 	public FaqBoard faqDetail(int idx) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select f.idx,f.category,f.title,f.content,f.reg_date_time,m.mb_name from faq as f join member as m on f.mb_idx=m.mb_idx where idx=? order by reg_date_time";
+		String sql = "select f.idx,f.category,f.title,f.content,f.reg_date_time,f.alias_uploadfile,f.real_path,m.mb_name from faq as f join member as m on f.mb_idx=m.mb_idx where idx=? order by reg_date_time";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -158,6 +158,8 @@ public class CustomerDAO {
 				faq.setTitle(rs.getString("title"));
 				faq.setContent(rs.getString("content"));
 				faq.setReg_date_time(rs.getDate("reg_date_time"));
+				faq.setAlias_uploadfile(rs.getString("alias_uploadfile"));
+				faq.setReal_path(rs.getString("real_path"));
 				faq.setMb_name(rs.getString("mb_name"));
 				
 				return faq;
@@ -182,7 +184,7 @@ public class CustomerDAO {
 	
 	// 유정 - faq 게시물 등록하기
 	public boolean faqRegister(FaqBoard faq) {
-		String sql = "insert into faq(category,title,content,uploadfile,alias_uploadfile,reg_date_time) values (?,?,?,?,?,CURRENT_TIMESTAMP)";
+		String sql = "insert into faq(category,title,content,uploadfile,alias_uploadfile,real_path,reg_date_time) values (?,?,?,?,?,?,CURRENT_TIMESTAMP)";
 		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -194,9 +196,9 @@ public class CustomerDAO {
 			pstmt.setString(3, faq.getContent());
 			pstmt.setString(4, faq.getUploadfile());
 			pstmt.setString(5, faq.getAlias_uploadfile());
+			pstmt.setString(6, faq.getReal_path());
 			
 			result = pstmt.executeUpdate();
-			System.out.println(pstmt);
 			if(result != 0) {
 				return true;
 			}
@@ -254,7 +256,7 @@ public class CustomerDAO {
 	
 	// 유정 - faq 게시물 수정하기
 	public boolean faqModify(FaqBoard faq) {
-		String sql = "update faq set category=?,title=?,content=? where idx=?";
+		String sql = "update faq set category=?,title=?,content=?,uploadfile=?,alias_uploadfile=? where idx=?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
@@ -263,7 +265,9 @@ public class CustomerDAO {
 			pstmt.setInt(1, faq.getCategory());
 			pstmt.setString(2, faq.getTitle());
 			pstmt.setString(3, faq.getContent());
-			pstmt.setInt(4, faq.getIdx());
+			pstmt.setString(4, faq.getUploadfile());
+			pstmt.setString(5, faq.getAlias_uploadfile());
+			pstmt.setInt(6, faq.getIdx());
 			pstmt.executeUpdate();
 			
 			return true;
@@ -499,12 +503,13 @@ public class CustomerDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 				
-		String sql = "update qna set qna_reply=? where idx=?";		
+		String sql = "update qna set qna_reply=?, reply_check=? where idx=?";		
 
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, reply);
-			pstmt.setInt(2, idx);			
+			pstmt.setBoolean(2, true); 
+			pstmt.setInt(3, idx);			
 			pstmt.executeUpdate();
 			
 			return true;
@@ -638,6 +643,41 @@ public class CustomerDAO {
 			}
 		}
 
+		return null;
+	}
+	
+	// 유정 - 파일 다운로드 경로 가져오기
+	public String fileDownPath(int idx, String uploadfile) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select real_path from faq where idx=? and alias_uploadfile=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.setString(2, uploadfile);
+			rs = pstmt.executeQuery();
+	
+			if (rs.next()) {
+				String real_path = rs.getString("real_path");
+				return real_path;
+			}
+
+		} catch (Exception ex) {
+			System.out.println("fileDownPath 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+		
 		return null;
 	}
 }

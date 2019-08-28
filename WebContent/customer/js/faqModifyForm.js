@@ -55,9 +55,6 @@
     
     // 유정 - faq 게시물 수정하기
     function faqSave(){
-    	var faq_idx = $('#faq_idx').val();
-    	var category = $("#selectBox").val();
-    	var title = $("textarea#title").val();
     	var content = $("textarea#content").val();
 
     	if(content == ''){
@@ -69,32 +66,6 @@
     	}
     	
     	if(mod_confirm){
-    		$.ajax({
-    			url : "./faqModify.cu",
-    			data : {
-    				"faq_idx" : faq_idx,
-    				"category" : category,
-    				"title" : title,
-    				"content" : content
-    			},
-    			type : "post",
-    			dataType : "json",
-    			
-    			success : function(data){
-    				if(String(data.result) == "faqModify_success") {
-    					alert('게시물이 수정되었습니다.');
-    					opener.location.href='./faqBoard.cu';
-    					window.close();
-    				}else{
-    					alert('게시물 수정에 실패했습니다.');
-    					opener.location.href='./faqBoard.cu';
-    					window.close();
-    				}
-    			},
-    			error : function(e){
-    				alert('게시물 수정이 불가능합니다.');
-    				console.log(e.responseText);
-    			}
-    		});
+    		$('#faqModifyForm').submit();
     	}
     }
