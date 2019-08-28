@@ -1,6 +1,7 @@
 package net.customer.action;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -8,8 +9,6 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-
-import org.json.simple.JSONObject;
 
 import net.common.action.Action;
 import net.common.action.ActionForward;
@@ -20,12 +19,10 @@ import net.customer.dto.FaqBoard;
 public class FaqRegisterFormAction implements Action {
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8"); //한글처리
 		
 		FaqBoard faq = new FaqBoard();
-		JSONObject jsondata = new JSONObject();
 		
 		int category = Integer.parseInt(request.getParameter("selectBox"));
 		String title = request.getParameter("title");
@@ -41,8 +38,7 @@ public class FaqRegisterFormAction implements Action {
 		
 		CustomerDAO ct_dao2 = new CustomerDAO();
 		// company 기본경로 + 폴더 이름 -> 폴더 경로에 파일삽입위해서
-		String real_path = ct_dao2.getUploadDirectory("admin_faq_path")+"/" + company_path;
-		System.out.println("real_path>>>"+real_path);
+		String real_path = ct_dao2.getUploadDirectory("admin_faq_path") + "/" + company_path;
 
 		// 파일디렉토리
 		File fileSaveDir = new File(real_path);
@@ -68,20 +64,34 @@ public class FaqRegisterFormAction implements Action {
 		faq.setCategory(category);
 		faq.setTitle(title);
 		faq.setContent(content);
+		faq.setReal_path(real_path);
 		
 		CustomerDAO ct_dao = new CustomerDAO();
 		boolean result = ct_dao.faqRegister(faq);
 		
 		if(result) {
-			jsondata.put("result", "faqRegister_success");
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('FAQ 게시물 등록이 완료되었습니다.');");
+			out.println("opener.location.href='./faqBoard.cu';");
+			out.println("window.close();");
+			out.println("</script>");
+			out.close();
+
+			return null;
 		}else {
-			jsondata.put("result", "faqRegister_fail");
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('FAQ 게시물 등록에 실패했습니다.\n다시 시도해주세요.');");
+			out.println("opener.location.href='./faqBoard.cu';");
+			out.println("window.close();");
+			out.println("</script>");
+			out.close();
+
+			return null;
 		}
-		
-		response.setContentType("application/x-json; charset=UTF-8");
-    	response.getWriter().print(jsondata);
-    	
-		return null;
 	}
 	
 	// 파일명 얻기

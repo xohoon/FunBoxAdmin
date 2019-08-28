@@ -19,13 +19,13 @@ import net.customer.action.FaqModifyAction;
 import net.customer.action.FaqModifyFormAction;
 import net.customer.action.FaqRegisterFormAction;
 import net.customer.action.FaqShowAction;
+import net.customer.action.FileDownAction;
 import net.customer.action.InquiryAnswerFormAction;
 import net.customer.action.InquiryBoardAction;
 import net.customer.action.NoticeBoardAction;
 import net.customer.action.NoticeModifyFormAction;
 import net.customer.action.NoticeRegisterFormAction;
 import net.customer.action.inquiryAnswerInsertAction;
-import net.customer.action.inquiryFormAction;
 
 @WebServlet("/CustomerController")
 @MultipartConfig(maxFileSize = 136314880)
@@ -94,6 +94,10 @@ public class CustomerController extends HttpServlet implements Servlet{
 				break;
 			case "/noticeRegisterForm.cu":
 				action = new NoticeRegisterFormAction();
+				forward = action.execute(request, response);
+				break;
+			case "/fileDownAction.cu":
+				action = new FileDownAction();
 				forward = action.execute(request, response);
 				break;
 			default:
