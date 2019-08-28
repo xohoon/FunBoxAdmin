@@ -1019,6 +1019,7 @@ button.cancel{
   color:#73a6d6;
   width:70px;
   padding-right:7px;
+  margin-left:-77px;
 }
 #modityBtn:hover{
   background:#73a6d6;
