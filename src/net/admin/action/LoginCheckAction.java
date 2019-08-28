@@ -7,6 +7,8 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 
 import net.admin.dao.AdminDAO;
+import net.admin.function.Md5_SecretCode;
+import net.admin.function.Sha1_SecretCode;
 import net.common.action.Action;
 import net.common.action.ActionForward;
 
@@ -20,6 +22,8 @@ public class LoginCheckAction implements Action {
 		HttpSession session = request.getSession();
 		String adminIdCk = (String)request.getParameter("adminId"); 
 		String adminPwCk = (String)request.getParameter("adminPw"); 
+		adminPwCk = Sha1_SecretCode.sha1(adminPwCk);
+		adminPwCk = Md5_SecretCode.md5(adminPwCk);
 		int result = -1;
 		if(adminIdCk != null && adminPwCk != null) {
 			AdminDAO adminDAO = new AdminDAO();
