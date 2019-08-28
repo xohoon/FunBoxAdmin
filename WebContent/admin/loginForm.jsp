@@ -9,6 +9,7 @@
 	<title>FUNBOX ADMIN</title>
 	<script src="../js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
+	<script type="text/javascript" src="admin/js/login.js"></script>
 	<link href="../css/common.css" rel="stylesheet">
 	<link href="../css/admin.css" rel="stylesheet">
 	<script>
@@ -29,15 +30,15 @@
         <h3>ADMIN LOGIN</h3>
         <div>
           <label>ID</label>
-          <input type="text">
+          <input type="text" id="adminId">
         </div>
         <!--#id-->
         <div>
           <label>PASSWORD</label>
-          <input type="password">
+          <input type="password" id="adminPw" onkeyup="enterkey();">
         </div>
         <!--pw-->
-        <input type="button" class="login" value="LOGIN" onclick="location.href='./index.jsp'">
+        <input type="button" class="login" value="LOGIN" id="loginBtn">
 		  </div>
 		</section>
 		<footer></footer>
