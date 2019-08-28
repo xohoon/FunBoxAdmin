@@ -34,7 +34,7 @@
         <!--#id-->
         <div>
           <label>PASSWORD</label>
-          <input type="password">
+          <input type="password" >
         </div>
         <!--pw-->
         <input type="button" class="login" value="LOGIN" onclick="location.href='./index.jsp'">

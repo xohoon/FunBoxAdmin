@@ -19,6 +19,8 @@ function category(button){
 	}
 	
 	$(function(){
+		var searchID = document.getElementById("hiddensearchID").value;
+		
 		  if($('#cate_color').val() == '0'){
 			  $('.tab li').removeClass('on');
 			  	$('#button1').addClass('on');
@@ -31,5 +33,7 @@ function category(button){
 			  $('.tab li').removeClass('on');
 			  $('#button3').addClass('on');
 		  }
+		
+		  /*if($('#searchID').val())=*/ 
 		
 	  });
