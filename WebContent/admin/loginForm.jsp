@@ -9,7 +9,6 @@
 	<title>FUNBOX ADMIN</title>
 	<script src="js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
-
 	<script type="text/javascript" src="admin/js/login.js"></script>
 	<link href="css/common.css" rel="stylesheet">
 	<link href="css/admin.css" rel="stylesheet">
@@ -32,7 +31,7 @@
         <h3>ADMIN LOGIN</h3>
         <div>
           <label>ID</label>
-          <input type="text">
+          <input type="text" id="adminId">
         </div>
         <!--#id-->
         <div>
