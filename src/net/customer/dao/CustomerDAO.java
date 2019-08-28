@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import net.customer.dto.FaqBoard;
+import net.customer.dto.NoticeBoard;
+import net.customer.dto.inquiryAnswer;
+import net.customer.dto.inquiryBoard;
 
 public class CustomerDAO {
 	private static CustomerDAO instance;
@@ -179,7 +182,7 @@ public class CustomerDAO {
 	
 	// 유정 - faq 게시물 등록하기
 	public boolean faqRegister(FaqBoard faq) {
-		String sql = "insert into faq(category,title,content,reg_date_time) values (?,?,?,CURRENT_TIMESTAMP)";
+		String sql = "insert into faq(category,title,content,uploadfile,alias_uploadfile,reg_date_time) values (?,?,?,?,?,CURRENT_TIMESTAMP)";
 		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -189,9 +192,11 @@ public class CustomerDAO {
 			pstmt.setInt(1, faq.getCategory());
 			pstmt.setString(2, faq.getTitle());
 			pstmt.setString(3, faq.getContent());
+			pstmt.setString(4, faq.getUploadfile());
+			pstmt.setString(5, faq.getAlias_uploadfile());
 			
 			result = pstmt.executeUpdate();
-			
+			System.out.println(pstmt);
 			if(result != 0) {
 				return true;
 			}
@@ -311,5 +316,295 @@ public class CustomerDAO {
 		}
 		
 		return false;
+	}
+	
+
+	// 윤식 - 1 : 1 문의 계시판 가져오기 
+	public ArrayList<inquiryBoard> getinquiryBoard(int startRow, int pageSize, String category, String id) {
+
+		// 전체		
+		String sql = "SELECT idx, id, name, title, reg_date_time, qna_reply FROM qna "
+					+"where id like '%"+ id +"%' "
+					+"ORDER BY reg_date_time DESC limit "
+					+ startRow + ", " + pageSize;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<inquiryBoard> transinquiryBoardList = new ArrayList<inquiryBoard>(); 
+		
+		try {
+			if (category.equals("0")) { // 전체					
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+			}else if(category.equals("1")){ // 답변
+				sql = "SELECT idx, id, name, title, reg_date_time, qna_reply FROM qna "
+					+"where id like '%"+ id +"%' "
+					+"AND qna_reply IS NOT NULL "
+					+"ORDER BY reg_date_time DESC limit "
+					+ startRow + ", " + pageSize;	
+				
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+			}else if(category.equals("2")){ // 미답변
+				sql = "SELECT idx, id, name, title, reg_date_time, qna_reply FROM qna "
+					+"where id like '%"+ id +"%' "
+					+"AND qna_reply IS NULL "
+					+"ORDER BY reg_date_time DESC limit "
+					+ startRow + ", " + pageSize;					
+					
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+			}
+			
+			while (rs.next()) {
+				inquiryBoard inquiryList = new inquiryBoard();
+				inquiryList.setIdx(rs.getInt("idx"));
+				inquiryList.setId(rs.getString("id"));
+				inquiryList.setName(rs.getString("name"));
+				inquiryList.setTitle(rs.getString("title"));
+				inquiryList.setReg_date_time(rs.getString("reg_date_time"));
+				inquiryList.setQna_reply(rs.getString("qna_reply"));
+				
+				
+				transinquiryBoardList.add(inquiryList);
+			}
+			
+			return transinquiryBoardList;
+			
+		} catch (Exception ex) {
+			System.out.println("getinquiryBoard 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+		
+	return null;
+	} 
+	
+	// 1:1 카운트 개수 가져오기 - 윤식 추가
+	public int inquiryBoardCount(String category , String id) {
+		PreparedStatement pstmt = null;
+		int count = 0;
+		ResultSet rs = null;
+		
+		String sql = "SELECT idx, id, name, title, reg_date_time, qna_reply FROM qna "
+					+" where id like '%"+ id +"%' ";
+
+		try {
+			if (category.equals("0")) { // 전체
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+			}else if(category.equals("1")){ // 답변
+				sql = "SELECT idx, id, name, title, reg_date_time, qna_reply FROM qna "
+					+"where id like '%"+ id +"%' "
+					+"AND qna_reply IS NOT NULL ";
+				
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+			}else if(category.equals("2")){ //미 답변
+				sql = "SELECT idx, id, name, title, reg_date_time, qna_reply FROM qna "
+					+"where id like '%"+ id +"%' "
+					+"AND qna_reply IS NULL ";
+				
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+			}
+			
+			rs.last();
+			count = rs.getRow();
+			rs.beforeFirst();
+
+			return count;
+		} catch (Exception ex) {
+			System.out.println("inquiryBoardCount 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+		return 0;
+	}
+	// 윤식 - 1:1 title 글 선택시 해당 글 불러오기
+	public ArrayList<inquiryAnswer> getinquiryAnswer(String idx) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+				
+		String sql = "SELECT idx, title, category, id, name, reg_date_time, content, qna_reply FROM qna "  			
+				+"where idx= "+ idx;
+			
+		ArrayList<inquiryAnswer> sendList = new ArrayList<inquiryAnswer>();
+		
+		try {
+							
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			
+			while (rs.next()) {
+				inquiryAnswer getList = new inquiryAnswer(); 
+				getList.setIdx(rs.getInt("idx"));
+				getList.setTitle(rs.getString("title"));
+				getList.setCategory(rs.getString("category"));
+				getList.setId(rs.getString("id"));
+				getList.setName(rs.getString("name"));				
+				getList.setReg_date_time(rs.getString("reg_date_time"));
+				getList.setContent(rs.getString("content"));
+				getList.setQna_reply(rs.getString("qna_reply"));
+				
+				sendList.add(getList);
+			}
+		
+			return sendList;
+			
+		}catch (Exception ex) {
+		System.out.println("getinquiryAnswer 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+	
+		return null;
+	}
+	
+	// 태훈 - 공지게시판
+	public ArrayList<NoticeBoard> getNotice(int startRow, int pageSize) throws Exception {
+		ArrayList<NoticeBoard> notice_list = new ArrayList<NoticeBoard>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "SELECT idx, title, content, reg_date_time " 
+				+ "FROM notice " 
+				+ "ORDER BY idx desc limit "
+				+ startRow + ", " + pageSize;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				NoticeBoard notice = new NoticeBoard();
+
+				notice.setIdx(rs.getInt("idx"));
+				notice.setContent(rs.getString("content"));
+				notice.setTitle(rs.getString("title"));
+				notice.setReg_date_time(rs.getDate("reg_date_time"));
+
+				notice_list.add(notice);
+			}
+			return notice_list;
+
+		} catch (Exception ex) {
+
+			System.out.println("getFaq 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("연결 해제 실패: " + e.getMessage());
+			}
+		}
+
+		return null;
+	}
+
+	// 태훈 - notice count
+	public int noticeCount() {
+		PreparedStatement pstmt = null;
+		int count = 0;
+		ResultSet rs = null;
+		String sql = "select * from notice";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.last();
+
+			count = rs.getRow();
+
+			rs.beforeFirst();
+
+			return count;
+
+		} catch (Exception ex) {
+			System.out.println("faqCount 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+		return 0;
+	}
+		
+	// 유정 - 저장될 경로 가져오기
+	public String getUploadDirectory(String file_category) {
+		String sql = "SELECT file_path FROM file_path WHERE file_category = ?";
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, file_category);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				String file_path = rs.getString("file_path");
+				return file_path;
+			}
+		} catch (Exception ex) {
+			System.out.println("getUploadFilePath 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+
+		return null;
 	}
 }

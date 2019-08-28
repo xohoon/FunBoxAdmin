@@ -12,7 +12,21 @@ public class FaqBoard {
 	private Date reg_date_time;
 	private String mb_name;
 	private int status;
-		
+	private String uploadfile;
+	private String alias_uploadfile;
+	
+	public String getAlias_uploadfile() {
+		return alias_uploadfile;
+	}
+	public void setAlias_uploadfile(String alias_uploadfile) {
+		this.alias_uploadfile = alias_uploadfile;
+	}
+	public String getUploadfile() {
+		return uploadfile;
+	}
+	public void setUploadfile(String uploadfile) {
+		this.uploadfile = uploadfile;
+	}
 	public int getStatus() {
 		return status;
 	}

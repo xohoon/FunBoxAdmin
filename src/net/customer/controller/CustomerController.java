@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,8 +24,11 @@ import net.customer.action.InquiryBoardAction;
 import net.customer.action.NoticeBoardAction;
 import net.customer.action.NoticeModifyFormAction;
 import net.customer.action.NoticeRegisterFormAction;
+import net.customer.action.inquiryAnswerInsertAction;
+import net.customer.action.inquiryFormAction;
 
 @WebServlet("/CustomerController")
+@MultipartConfig(maxFileSize = 136314880)
 public class CustomerController extends HttpServlet implements Servlet{
 	private static final long serialVersionUID = 1L;
        
@@ -68,12 +72,16 @@ public class CustomerController extends HttpServlet implements Servlet{
 				action = new FaqShowAction();
 				forward = action.execute(request, response);
 				break;
-			case "/inquiryAnswerForm.cu":
+			case "/inquiryAnswerForm.cu": // 1:1 문의 수정 폼 - 윤식
 				action = new InquiryAnswerFormAction();
 				forward = action.execute(request, response);
 				break;
-			case "/inquiryBoard.cu":
+			case "/inquiryBoard.cu": // 1:1 문의 계시판 - 윤식
 				action = new InquiryBoardAction();
+				forward = action.execute(request, response);
+				break;
+			case "/answerInsert.cu": // 답글 달기 - 윤식
+				action = new inquiryAnswerInsertAction();
 				forward = action.execute(request, response);
 				break;
 			case "/noticeBoard.cu":

@@ -30,7 +30,7 @@
 	</script>
 	<%
 		ArrayList<CompanyDeadLine> companydeadline = (ArrayList<CompanyDeadLine>)request.getAttribute("companydeadline");
-		//System.out.println("test :" + companydeadline.get(0).getCp_manager());
+		// 
 	%>
 </head>
 
@@ -61,6 +61,7 @@
                       <label for="man">수동</label>
                     </li>
                   </ul>
+                  <input type="hidden" value="${aas_auto_status}" id="auto_status_value"> 
                    <form name="save" method="post" action="./CompanyDeadLineSaveAction.cp">
                    <div class="topList">                  
                      <table>                     
@@ -102,7 +103,7 @@
 </body>
 <script>  
 	setTimeout(function () {
-	  jQuery('.nav3').trigger('click');
+		document.getElementById("nav3").click();
 	  jQuery('.nav37').addClass('on');
 	}, 500);  
 </script>

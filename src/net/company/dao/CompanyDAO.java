@@ -592,84 +592,6 @@ public class CompanyDAO {
 	}
 
 	
-	// 윤식 추가 - 자동, 수동 헨들러 //찾기
-	public ArrayList<CompanyDeadLine> getAuto_ManDeadLineSearchList(String radioVal, String id) {
-
-		String sql = "select mb.mb_id, cp.cp_manager, "+"cp.cp_idx, "+"cp.cp_monthly_profit, "+"cp.cp_sector, "+"cp.cp_name, "+"cp.cp_branch, "+"cp_i.iv_current_amount, "+"cp_i.iv_goal_amount, "+"cp_i.iv_appl_stop_date_time, " 
-				+"concat(cp_f.cf_directory,cp_f.cf_image1) as thumbnail_image," 
-				+"round((iv_current_amount/iv_goal_amount)*100) as persent "
-				+"from company cp, company_file cp_f, company_invest cp_i, member mb " 
-				+"where cp.cp_open_status = true " 
-				+"AND cp.cp_idx ='"+ id +"' "
-				+"AND cp_i.cp_idx ='"+ id +"' "  
-				+"AND cp_f.cp_idx ='"+ id +"' "				
-				+"AND cp.mb_id = mb.mb_id ";
-			
-
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-	ArrayList<CompanyDeadLine> transDeadLineList = new ArrayList<CompanyDeadLine>(); 
-	
-	try {
-		if (radioVal.equals("0")) { // 수동			
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			
-		}else if(radioVal.equals("1")){ // 자동
-				sql = "select mb.mb_id, cp.cp_manager, "+"cp.cp_idx, "+"cp.cp_monthly_profit, "+"cp.cp_sector, "+"cp.cp_name, "+"cp.cp_branch, "+"cp_i.iv_current_amount, "+"cp_i.iv_goal_amount, "+"cp_i.iv_appl_stop_date_time, "
-					+"concat(cp_f.cf_directory,cp_f.cf_image1) as thumbnail_image, "
-					+"round((iv_current_amount/iv_goal_amount)*100) as persent from company cp, company_file cp_f, company_invest cp_i, member mb " 
-					+"where cp_i.iv_appl_stop_date_time > now() " 
-					+"AND cp.cp_open_status = true " 
-					+"AND cp.cp_idx = cp_i.cp_idx " 
-					+"AND cp.cp_idx = cp_f.cp_idx " 
-					+"AND cp.mb_id = mb.mb_id "
-					+"order by cp_i.iv_appl_stop_date_time asc limit 3";
-			
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-		}
-		
-		while (rs.next()) {
-			CompanyDeadLine DeadLineList = new CompanyDeadLine();
-			
-			DeadLineList.setCp_idx(rs.getInt("cp_idx"));
-			DeadLineList.setMb_id(rs.getString("mb_id"));
-			DeadLineList.setCp_manager(rs.getString("cp_manager"));
-			DeadLineList.setCp_monthly_profit(rs.getInt("cp_monthly_profit"));
-			DeadLineList.setCp_sector(rs.getString("cp_sector"));
-			DeadLineList.setCp_name(rs.getString("cp_name"));
-			DeadLineList.setCp_branch(rs.getString("cp_branch"));
-			DeadLineList.setIv_current_amount(rs.getString("iv_current_amount"));
-			DeadLineList.setIv_goal_amount(rs.getString("iv_goal_amount"));
-			DeadLineList.setAppl_stop_date_time(rs.getString("iv_appl_stop_date_time"));
-			DeadLineList.setThumbnail_image(rs.getString("thumbnail_image"));
-			DeadLineList.setPersent(rs.getString("persent"));
-			
-			transDeadLineList.add(DeadLineList);								
-		}
-		
-		return transDeadLineList;
-		
-	} catch (Exception ex) {
-		System.out.println("getAuto_ManDeadLineSearchList 에러: " + ex);
-	} finally {
-		try {
-			if (rs != null)
-				rs.close();
-			if (pstmt != null)
-				pstmt.close();
-			if (conn != null)
-				conn.close();
-		} catch (Exception e) {
-			System.out.println("해제 실패 : " + e.getMessage());
-		}
-	}
-	
-	return null;
-			
-}	
 	// admin_am_setting update 자동 수동
 	public boolean setAutoStatus(int aas_idx, boolean auto_status) {
 		
@@ -731,6 +653,43 @@ public class CompanyDAO {
 		}
 		
 		return false;
+	}
+	
+	//자동 수동 체크값 가져오기
+	public int auto_mancheck() {
+		String sql = "SELECT aas_auto_status from admin_am_setting WHERE aas_idx = 3";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int aas_auto_status = 0;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				aas_auto_status = rs.getInt("aas_auto_status");
+			}
+						
+			return aas_auto_status;
+			
+		}catch (Exception ex) {
+			System.out.println("deletetalbe 에러: " + ex);
+		}finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("연결 해제 실패: " + e.getMessage());
+			}
+		}
+		
+		return aas_auto_status;
 	}
 	
 	// 마감임박 admin_deadLine 테이블에 insert

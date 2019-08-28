@@ -88,7 +88,7 @@
 	<input type="hidden" id="aas_idx" name="aas_idx" value="${aas_idx}">
 	<script>  
 setTimeout(function () {
-  jQuery('.nav3').trigger('click');
+	document.getElementById("nav3").click();
   jQuery('.nav39').addClass('on');
 }, 500);
     
