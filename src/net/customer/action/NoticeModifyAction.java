@@ -16,7 +16,7 @@ import net.customer.dao.CustomerDAO;
 import net.customer.dto.NoticeBoard;
 
 // 유정 추가
-public class NoticeRegisterFormAction implements Action {
+public class NoticeModifyAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -24,9 +24,10 @@ public class NoticeRegisterFormAction implements Action {
 		
 		NoticeBoard notice = new NoticeBoard();
 		
+		int notice_idx = Integer.parseInt(request.getParameter("notice_idx"));
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		
+
 		// 날짜변환 기능
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		Date date = new Date();
@@ -44,13 +45,13 @@ public class NoticeRegisterFormAction implements Action {
 		if (!fileSaveDir.exists()) {
 			fileSaveDir.mkdir();
 		}
-				
+		
         Part part = request.getPart("uploadfile");
         
         String fileName = extractFileName(part);
         String alias = UUID.randomUUID().toString().substring(0, 9);
         String fileFormat = getFileFormat(part);
-		
+
         if(fileName != null && !fileName.isEmpty()){
         	notice.setUploadfile(fileName);
         	notice.setAlias_uploadfile(alias + "uploadfile" + fileFormat);
@@ -59,19 +60,21 @@ public class NoticeRegisterFormAction implements Action {
         }
                 
         response.setContentType("text/html;charset=utf-8");
-
+        
+        
+        notice.setIdx(notice_idx);
         notice.setTitle(title);
         notice.setContent(content);
         notice.setReal_path(real_path);
 		
 		CustomerDAO ct_dao = new CustomerDAO();
-		boolean result = ct_dao.noticeRegister(notice);
+		boolean result = ct_dao.noticeModify(notice);
 		
 		if(result) {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('공지 게시물이 등록되었습니다.');");
+			out.println("alert('공지 게시물 수정이 완료되었습니다.');");
 			out.println("opener.location.href='./noticeBoard.cu';");
 			out.println("window.close();");
 			out.println("</script>");
@@ -82,7 +85,7 @@ public class NoticeRegisterFormAction implements Action {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('공지 게시물 등록에 실패했습니다.\n다시 시도해주세요.');");
+			out.println("alert('공지 게시물 수정에 실패했습니다.\n다시 시도해주세요.');");
 			out.println("opener.location.href='./noticeBoard.cu';");
 			out.println("window.close();");
 			out.println("</script>");
