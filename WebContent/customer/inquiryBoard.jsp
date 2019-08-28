@@ -71,7 +71,7 @@
 							<td>${inquiryBoardList.reg_date_time}</td>															
 							<c:choose>
 								<c:when test = "${inquiryBoardList.qna_reply != null}">
-									<td>답변완료</td>
+									<td style="color:#ff9124">답변완료</td>
 								</c:when>
 								<c:otherwise>
 								<td>미답변</td>
