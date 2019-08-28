@@ -617,7 +617,7 @@ public class CustomerDAO {
 				getList.setCategory(rs.getString("category"));
 				getList.setId(rs.getString("id"));
 				getList.setName(rs.getString("name"));				
-				getList.setReg_date_time(rs.getString("reg_date_time"));
+				getList.setReg_date_time(rs.getDate("reg_date_time"));
 				getList.setContent(rs.getString("content"));
 				getList.setQna_reply(rs.getString("qna_reply"));
 				

@@ -1,5 +1,7 @@
 package net.customer.dto;
 
+import java.util.Date;
+
 public class inquiryAnswer {
 	
 	private int idx;
@@ -7,10 +9,9 @@ public class inquiryAnswer {
 	private String category;
 	private String id;
 	private String name;
-	private String reg_date_time ;
+	private Date reg_date_time ;
 	private String content ;
 	private String qna_reply;
-	
 	public int getIdx() {
 		return idx;
 	}
@@ -41,10 +42,10 @@ public class inquiryAnswer {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getReg_date_time() {
+	public Date getReg_date_time() {
 		return reg_date_time;
 	}
-	public void setReg_date_time(String reg_date_time) {
+	public void setReg_date_time(Date reg_date_time) {
 		this.reg_date_time = reg_date_time;
 	}
 	public String getContent() {
@@ -63,10 +64,10 @@ public class inquiryAnswer {
 	@Override
 	public String toString() {
 		return "inquiryAnswer [idx=" + idx + ", title=" + title + ", category=" + category + ", id=" + id + ", name="
-				+ name + ", reg_date_time=" + reg_date_time + ", content=" + content + ", qna_reply=" + qna_reply + "]";
+				+ name + ", content=" + content + ", qna_reply=" + qna_reply + "]";
 	}
 	
-	
+		
 			
 	
 }

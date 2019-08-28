@@ -92,7 +92,7 @@
                      </table>                     
                    </div>                                     
 	                   <input type="button" id="modityBtn" value="수정">
-	                   <input type="button" id="save" onclick = "savebt(this.form)" value="저장">
+	                   <input type="button" id="saveBtn" onclick = "savebt(this.form)" value="저장">
                    </form>                
                 </div>
 			</div>
