@@ -26,7 +26,6 @@
 	</script>
 
 <%
-	ArrayList<CompanyPopularityList> popuInfo = (ArrayList<CompanyPopularityList>)request.getAttribute("popuInfo");
 	int auto_status = (Integer)request.getAttribute("auto_status");
 %>
 </head>
