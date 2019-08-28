@@ -246,7 +246,7 @@ $(document).ready(function() {
 			$('#auto').attr("checked", true);
 			$("#man").attr('checked', false); 
 		} else {
-			$("#auto").attr('checked', false); 
+			$("#auto").attr('checked', false);
 			$("#man").attr('checked', true); 
 		}
 	

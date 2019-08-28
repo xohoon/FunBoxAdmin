@@ -323,7 +323,152 @@ public class CustomerDAO {
 		return false;
 	}
 	
+	// 유정 - 공지 게시물 활성화/비활성화 하기
+	public boolean NoticeShow(int status, int notice_idx) {
+		String sql = "update notice set status=? where idx=?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, status);
+			pstmt.setInt(2, notice_idx);
+			pstmt.executeUpdate();
+			
+			return true;
+			
+		} catch (Exception ex) {
+			System.out.println("NoticeShow 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+		
+		return false;
+	}
+	
+	// 유정 - 공지 게시물 등록하기
+	public boolean noticeRegister(NoticeBoard notice) {
+		String sql = "insert into notice(title,content,uploadfile,alias_uploadfile,real_path,reg_date_time) values (?,?,?,?,?,CURRENT_TIMESTAMP)";
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, notice.getTitle());
+			pstmt.setString(2, notice.getContent());
+			pstmt.setString(3, notice.getUploadfile());
+			pstmt.setString(4, notice.getAlias_uploadfile());
+			pstmt.setString(5, notice.getReal_path());
+			
+			result = pstmt.executeUpdate();
+			if(result != 0) {
+				return true;
+			}
+		}catch(Exception e) {
+			System.out.println("noticeRegister 에러: " + e);
+		}finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("연결 해제 실패: " + e.getMessage());
+			}
+		}
+		
+		return false;
+	}
+	
+	// 유정 - 공지사항 상세 불러오기
+	public NoticeBoard noticeDetail(int idx) throws Exception {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select n.idx,n.title,n.content,n.reg_date_time,n.alias_uploadfile,n.real_path,m.mb_name from notice as n join member as m on n.mb_idx=m.mb_idx where idx=? order by reg_date_time";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				NoticeBoard notice = new NoticeBoard();
+				notice.setIdx(rs.getInt("idx"));
+				notice.setTitle(rs.getString("title"));
+				notice.setContent(rs.getString("content"));
+				notice.setReg_date_time(rs.getDate("reg_date_time"));
+				notice.setAlias_uploadfile(rs.getString("alias_uploadfile"));
+				notice.setReal_path(rs.getString("real_path"));
+				notice.setMb_name(rs.getString("mb_name"));
+				
+				return notice;
+			}
+		} catch (Exception ex) {
+			System.out.println("noticeDetail 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("연결 해제 실패: " + e.getMessage());
+			}
+		}
+		
+		return null;
+	}
+	
+	// 유정 - 공지 게시물 수정하기
+	public boolean noticeModify(NoticeBoard notice) {
+		String sql = "update notice set title=?,content=?,uploadfile=?,alias_uploadfile=?,real_path=? where idx=?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, notice.getTitle());
+			pstmt.setString(2, notice.getContent());
+			pstmt.setString(3, notice.getUploadfile());
+			pstmt.setString(4, notice.getAlias_uploadfile());
+			pstmt.setString(5, notice.getReal_path());
+			pstmt.setInt(6, notice.getIdx());
+			pstmt.executeUpdate();
+			
+			return true;
+			
+		} catch (Exception ex) {
+			System.out.println("noticeModify 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+		
+		return false;
+	}
+	
 	// 윤식 - 1 : 1 문의 계시판 가져오기 
 	public ArrayList<inquiryBoard> getinquiryBoard(int startRow, int pageSize, String category, String id) {
 
@@ -538,8 +683,8 @@ public class CustomerDAO {
 		ArrayList<NoticeBoard> notice_list = new ArrayList<NoticeBoard>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT idx, title, content, reg_date_time " 
-				+ "FROM notice " 
+		String sql = "SELECT n.idx, n.title, n.content, n.reg_date_time, n.status, m.mb_name " 
+				+ "FROM notice as n join member as m on n.mb_idx=m.mb_idx " 
 				+ "ORDER BY idx desc limit "
 				+ startRow + ", " + pageSize;
 
@@ -551,9 +696,11 @@ public class CustomerDAO {
 				NoticeBoard notice = new NoticeBoard();
 
 				notice.setIdx(rs.getInt("idx"));
-				notice.setContent(rs.getString("content"));
 				notice.setTitle(rs.getString("title"));
+				notice.setContent(rs.getString("content"));
 				notice.setReg_date_time(rs.getDate("reg_date_time"));
+				notice.setStatus(rs.getInt("status"));
+				notice.setMb_name(rs.getString("mb_name"));
 
 				notice_list.add(notice);
 			}
@@ -561,7 +708,7 @@ public class CustomerDAO {
 
 		} catch (Exception ex) {
 
-			System.out.println("getFaq 에러: " + ex);
+			System.out.println("getNotice 에러: " + ex);
 		} finally {
 			try {
 				if (rs != null)

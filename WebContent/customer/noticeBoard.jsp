@@ -10,15 +10,9 @@
 	<title>FUNBOX ADMIN</title>
 	<script src="./js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
+	<script src="customer/js/noticeBoard.js"></script>
 	<link href="./css/common.css" rel="stylesheet">
 	<link href="./css/admin.css" rel="stylesheet">
-	<script>
-		$(function() {
-		  $('header').load('./template/header.jsp');
-		  $('#gnb').load('./template/categoryTemplate.jsp');
-		  $('footer').load('./template/footer.jsp');
-		});
-	</script>
 </head>
 
 <body>
@@ -28,12 +22,12 @@
 		<section id="sec15">
 			<h2>공지게시판</h2>
 			<div class="con">
-			<button class="write" onclick="window.open('./noticeRegisterForm.cu','게시물등록','width=840,height=640,top=0,left=0,scrollbars=yes');">게시물등록</button>
-			<button>비활성화</button>
-			<button>활성화</button>
+			<button class="write" onclick="window.open('./noticeRegister.cu','게시물등록','width=840,height=640,top=0,left=0,scrollbars=yes');">게시물등록</button>
+			<button id="off_status">비활성화</button>
+			<button id="on_status">활성화</button>
 				<table>
 					<tr>
-					  <th>선택</th>
+					  <th></th>
 						<th>번호</th>
 						<th>제목</th>
 						<th>글쓴이</th>
@@ -42,12 +36,17 @@
 					</tr>
 					<c:forEach var="noticeInfo" items="${noticeInfo}">
 						<tr>
-							<td><input type="checkbox"></td>
+							<td><input type="checkbox" name="status" value="${noticeInfo.idx}"></td>
 						  	<td>${noticeInfo.idx }</td>
-						  	<td onclick="window.open('./noticeModifyForm.cu','공지','width=800,height=720,top=0,left=0,scrollbars=yes');">${noticeInfo.title }</td>
-						 	 <td>관리자</td>
+						  	<td onclick="window.open('./noticeModifyForm.cu?idx=${noticeInfo.idx}','공지','width=800,height=720,top=0,left=0,scrollbars=yes');">${noticeInfo.title }</td>
+						 	<td>${noticeInfo.mb_name }</td>
 						  	<td>${noticeInfo.reg_date_time }</td>
-						  	<td>Yes</td>
+						  <c:if test="${noticeInfo.status == 1}">
+						  <td>Yes</td>
+						  </c:if>
+						  <c:if test="${noticeInfo.status == 0}">
+						  <td>No</td>
+						  </c:if>
 						</tr>
 					</c:forEach>
 				</table>

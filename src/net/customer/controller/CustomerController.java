@@ -23,8 +23,10 @@ import net.customer.action.FileDownAction;
 import net.customer.action.InquiryAnswerFormAction;
 import net.customer.action.InquiryBoardAction;
 import net.customer.action.NoticeBoardAction;
+import net.customer.action.NoticeModifyAction;
 import net.customer.action.NoticeModifyFormAction;
 import net.customer.action.NoticeRegisterFormAction;
+import net.customer.action.NoticeShowAction;
 import net.customer.action.inquiryAnswerInsertAction;
 
 @WebServlet("/CustomerController")
@@ -88,12 +90,25 @@ public class CustomerController extends HttpServlet implements Servlet{
 				action = new NoticeBoardAction();
 				forward = action.execute(request, response);
 				break;
+			case "/noticeModify.cu":
+				action = new NoticeModifyAction();
+				forward = action.execute(request, response);
+				break;
 			case "/noticeModifyForm.cu":
 				action = new NoticeModifyFormAction();
 				forward = action.execute(request, response);
 				break;
+			case "/noticeRegister.cu":
+				forward = new ActionForward();
+			    forward.setRedirect(false); 
+			    forward.setPath("./customer/noticeRegisterForm.jsp");
+			    break;
 			case "/noticeRegisterForm.cu":
 				action = new NoticeRegisterFormAction();
+				forward = action.execute(request, response);
+				break;
+			case "/noticeShow.cu":
+				action = new NoticeShowAction();
 				forward = action.execute(request, response);
 				break;
 			case "/fileDownAction.cu":
