@@ -85,6 +85,7 @@ public class InquiryBoardAction implements Action {
 			ArrayList<inquiryBoard> inquiryBoardList = new ArrayList<inquiryBoard>();
 			inquiryBoardList = customerdao.getinquiryBoard(startRow - 1, pageSize, category, searchid);
 			System.out.println("inquiryBoardList : " + inquiryBoardList.toString());		
+			
 			request.setAttribute("inquiryBoardList", inquiryBoardList);
 		}
 		

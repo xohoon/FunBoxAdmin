@@ -66,7 +66,7 @@
 						<c:forEach var = "inquiryBoardList" items="${inquiryBoardList}" varStatus="status" >
 		  				<tr>
 			  				<td>${status.count}</td>
-			  				<td>${inquiryBoardList.title}</td>															
+			  				<td onclick="window.open('./inquiryAnswerForm.cu?idx=${inquiryBoardList.idx}','자주묻는질문','width=820,height=760,top=0,left=0,scrollbars=yes');">${inquiryBoardList.title}</td>															
 							<td>${inquiryBoardList.id}<br>(${inquiryBoardList.name})</td>																
 							<td>${inquiryBoardList.reg_date_time}</td>								
 							<c:set var = "qna_reply" value = "${qna_reply}"/>							
@@ -121,7 +121,7 @@
 						<c:forEach var = "inquiryBoardList" items="${inquiryBoardList}" varStatus="status" >
 		  				<tr>
 			  				<td>${status.count}</td>
-			  				<td>${inquiryBoardList.title}</td>															
+			  				<td onclick="window.open('./inquiryAnswerForm.cu?idx=${inquiryBoardList.idx}','자주묻는질문','width=820,height=760,top=0,left=0,scrollbars=yes');">${inquiryBoardList.title}</td>															
 							<td>${inquiryBoardList.id}<br>(${inquiryBoardList.name})</td>																
 							<td>${inquiryBoardList.reg_date_time}</td>								
 							<td>답변완료</td>
@@ -168,7 +168,7 @@
 						<c:forEach var = "inquiryBoardList" items="${inquiryBoardList}" varStatus="status" >
 		  				<tr>
 			  				<td>${status.count}</td>
-			  				<td>${inquiryBoardList.title}</td>															
+			  				<td onclick="window.open('./inquiryAnswerForm.cu?idx=${inquiryBoardList.idx}','자주묻는질문','width=820,height=760,top=0,left=0,scrollbars=yes');">${inquiryBoardList.title}</td>															
 							<td>${inquiryBoardList.id}<br>(${inquiryBoardList.name})</td>																
 							<td>${inquiryBoardList.reg_date_time}</td>								
 							<td>미답변</td>

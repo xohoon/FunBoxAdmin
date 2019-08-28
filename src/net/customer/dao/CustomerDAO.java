@@ -8,8 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import net.customer.dto.FaqBoard;
-import net.customer.dto.inquiryBoard;
 import net.customer.dto.NoticeBoard;
+import net.customer.dto.inquiryAnswer;
+import net.customer.dto.inquiryBoard;
 
 public class CustomerDAO {
 	private static CustomerDAO instance;
@@ -392,58 +393,106 @@ public class CustomerDAO {
 	return null;
 	} 
 	
-		// 1:1 카운트 개수 가져오기 - 윤식 추가
-		public int inquiryBoardCount(String category , String id) {
-			PreparedStatement pstmt = null;
-			int count = 0;
-			ResultSet rs = null;
-			
-			String sql = "SELECT idx, id, name, title, reg_date_time, qna_reply FROM qna "
-						+" where id like '%"+ id +"%' ";
+	// 1:1 카운트 개수 가져오기 - 윤식 추가
+	public int inquiryBoardCount(String category , String id) {
+		PreparedStatement pstmt = null;
+		int count = 0;
+		ResultSet rs = null;
+		
+		String sql = "SELECT idx, id, name, title, reg_date_time, qna_reply FROM qna "
+					+" where id like '%"+ id +"%' ";
 
-			try {
-				if (category.equals("0")) { // 전체
-					pstmt = conn.prepareStatement(sql);
-					rs = pstmt.executeQuery();
-					
-				}else if(category.equals("1")){ // 답변
-					sql = "SELECT idx, id, name, title, reg_date_time, qna_reply FROM qna "
-						+"where id like '%"+ id +"%' "
-						+"AND qna_reply IS NOT NULL ";
-					
-					pstmt = conn.prepareStatement(sql);
-					rs = pstmt.executeQuery();
-				}else if(category.equals("2")){ //미 답변
-					sql = "SELECT idx, id, name, title, reg_date_time, qna_reply FROM qna "
-						+"where id like '%"+ id +"%' "
-						+"AND qna_reply IS NULL ";
-					
-					pstmt = conn.prepareStatement(sql);
-					rs = pstmt.executeQuery();
-				}
+		try {
+			if (category.equals("0")) { // 전체
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
 				
-				rs.last();
-				count = rs.getRow();
-				rs.beforeFirst();
-
-				return count;
-			} catch (Exception ex) {
-				System.out.println("inquiryBoardCount 에러: " + ex);
-			} finally {
-				try {
-					if (rs != null)
-						rs.close();
-					if (pstmt != null)
-						pstmt.close();
-					if (conn != null)
-						conn.close();
-				} catch (Exception e) {
-					System.out.println("해제 실패 : " + e.getMessage());
-				}
+			}else if(category.equals("1")){ // 답변
+				sql = "SELECT idx, id, name, title, reg_date_time, qna_reply FROM qna "
+					+"where id like '%"+ id +"%' "
+					+"AND qna_reply IS NOT NULL ";
+				
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+			}else if(category.equals("2")){ //미 답변
+				sql = "SELECT idx, id, name, title, reg_date_time, qna_reply FROM qna "
+					+"where id like '%"+ id +"%' "
+					+"AND qna_reply IS NULL ";
+				
+				pstmt = conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
 			}
-			return 0;
+			
+			rs.last();
+			count = rs.getRow();
+			rs.beforeFirst();
+
+			return count;
+		} catch (Exception ex) {
+			System.out.println("inquiryBoardCount 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
 		}
-		 
+		return 0;
+	}
+	// 윤식 - 1:1 title 글 선택시 해당 글 불러오기
+	public ArrayList<inquiryAnswer> getinquiryAnswer(String idx) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+				
+		String sql = "SELECT idx, title, category, id, name, reg_date_time, content, qna_reply FROM qna "  			
+				+"where idx= "+ idx;
+			
+		ArrayList<inquiryAnswer> sendList = new ArrayList<inquiryAnswer>();
+		
+		try {
+							
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			
+			while (rs.next()) {
+				inquiryAnswer getList = new inquiryAnswer(); 
+				getList.setIdx(rs.getInt("idx"));
+				getList.setTitle(rs.getString("title"));
+				getList.setCategory(rs.getString("category"));
+				getList.setId(rs.getString("id"));
+				getList.setName(rs.getString("name"));				
+				getList.setReg_date_time(rs.getString("reg_date_time"));
+				getList.setContent(rs.getString("content"));
+				getList.setQna_reply(rs.getString("qna_reply"));
+				
+				sendList.add(getList);
+			}
+		
+			return sendList;
+			
+		}catch (Exception ex) {
+		System.out.println("getinquiryAnswer 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+	
+		return null;
+	}
 	
 	// 태훈 - 공지게시판
 	public ArrayList<NoticeBoard> getNotice(int startRow, int pageSize) throws Exception {
