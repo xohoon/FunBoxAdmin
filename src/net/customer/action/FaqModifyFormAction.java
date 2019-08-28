@@ -18,8 +18,8 @@ public class FaqModifyFormAction implements Action {
 
 		int faq_idx = Integer.parseInt(request.getParameter("idx"));
 		
-		CustomerDAO customer_dao = new CustomerDAO();
-		FaqBoard faq = customer_dao.faqDetail(faq_idx);
+		CustomerDAO ct_dao = new CustomerDAO();
+		FaqBoard faq = ct_dao.faqDetail(faq_idx);
 		
 		request.setAttribute("faq", faq);
 		
