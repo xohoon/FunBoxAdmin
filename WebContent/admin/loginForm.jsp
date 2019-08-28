@@ -35,10 +35,10 @@
         <!--#id-->
         <div>
           <label>PASSWORD</label>
-          <input type="password" id="adminPw" onkeyup="enterkey();">
+          <input type="password" id="adminPw" onKeyUp="press_event()">
         </div>
         <!--pw-->
-        <input type="button" class="login" value="LOGIN" id="loginBtn">
+        <input type="button" class="login" value="LOGIN" onClick="loginAjax()">
 		  </div>
 		</section>
 		<footer></footer>
