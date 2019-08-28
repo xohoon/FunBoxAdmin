@@ -494,6 +494,39 @@ public class CustomerDAO {
 		return null;
 	}
 	
+	
+	public boolean replyupdate(String reply, int idx) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+				
+		String sql = "update qna set qna_reply=? where idx=?";		
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, reply);
+			pstmt.setInt(2, idx);			
+			pstmt.executeUpdate();
+			
+			return true;
+			
+		} catch (Exception ex) {
+			System.out.println("replyupdate 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+		
+		return false;
+	}
+	
 	// 태훈 - 공지게시판
 	public ArrayList<NoticeBoard> getNotice(int startRow, int pageSize) throws Exception {
 		ArrayList<NoticeBoard> notice_list = new ArrayList<NoticeBoard>();

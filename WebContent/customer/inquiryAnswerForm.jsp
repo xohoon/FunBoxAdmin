@@ -23,6 +23,7 @@
 	<div class="sec14_view">
 	<form name="save" method="post" action="./answerInsert.cu">
 		<c:forEach var = "Answer" items="${Answer}">
+		<input type="hidden" id="idx" name="idx" value="${Answer.idx}">
 		  <div>
 		  <label>제목</label><textarea class="tit">${Answer.title}</textarea>
 	    </div>
