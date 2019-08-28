@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.admin.action.IndexAction;
 import net.common.action.Action;
 import net.common.action.ActionForward;
 import net.company.action.CompanyMainSlideManagement2Action;
@@ -17,7 +18,6 @@ public class AdminController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws UnsupportedEncodingException {
-		//request.setCharacterEncoding("utf-8");
 		String RequestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = RequestURI.substring(contextPath.length());
@@ -25,9 +25,13 @@ public class AdminController extends HttpServlet {
 		Action action = null;
 
 		try {
-			switch (command) {
+			switch (command) {			
 			case "/loginForm.ad":
 				action = new CompanyMainSlideManagement2Action();
+				forward = action.execute(request, response);
+				break;
+			case "/index.ad":
+				action = new IndexAction();
 				forward = action.execute(request, response);
 				break;
 			default:
