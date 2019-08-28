@@ -50,8 +50,6 @@
                       <label for="man">수동</label>
                     </li>
                   </ul>
-                  <input type="button" value="+" class="addBan">
-                  <input type="button" value="-" class="subBan">
                    <div class="topList">
                      <table>
                      	<tbody id="added_table">
