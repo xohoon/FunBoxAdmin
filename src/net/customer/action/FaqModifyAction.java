@@ -25,13 +25,9 @@ public class FaqModifyAction implements Action {
 		FaqBoard faq = new FaqBoard();
 		
 		int faq_idx = Integer.parseInt(request.getParameter("faq_idx"));
-		int category = Integer.parseInt(request.getParameter("category"));
+		int category = Integer.parseInt(request.getParameter("selectBox"));
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		System.out.println(faq_idx);
-		System.out.println(category);
-		System.out.println(title);
-		System.out.println(content);
 
 		// 날짜변환 기능
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
@@ -44,20 +40,19 @@ public class FaqModifyAction implements Action {
 		CustomerDAO ct_dao2 = new CustomerDAO();
 		// company 기본경로 + 폴더 이름 -> 폴더 경로에 파일삽입위해서
 		String real_path = ct_dao2.getUploadDirectory("admin_faq_path") + "/" + company_path;
-		System.out.println(real_path);
 
 		// 파일디렉토리
 		File fileSaveDir = new File(real_path);
 		if (!fileSaveDir.exists()) {
 			fileSaveDir.mkdir();
 		}
-
+		
         Part part = request.getPart("uploadfile");
         
         String fileName = extractFileName(part);
         String alias = UUID.randomUUID().toString().substring(0, 9);
         String fileFormat = getFileFormat(part);
-		System.out.println(fileName);
+
         if(fileName != null && !fileName.isEmpty()){
         	faq.setUploadfile(fileName);
 			faq.setAlias_uploadfile(alias + "uploadfile" + fileFormat);
@@ -72,6 +67,7 @@ public class FaqModifyAction implements Action {
 		faq.setCategory(category);
 		faq.setTitle(title);
 		faq.setContent(content);
+		faq.setReal_path(real_path);
 		
 		CustomerDAO ct_dao = new CustomerDAO();
 		boolean result = ct_dao.faqModify(faq);
@@ -104,7 +100,6 @@ public class FaqModifyAction implements Action {
 	// 파일명 얻기
 	private String extractFileName(Part part) {
 		String contentDisp = part.getHeader("content-disposition");
-		System.out.println("part.getHeader>>>"+part.getHeader("content-disposition"));
 		String[] items = contentDisp.split(";");
 		
 		for (String s : items) {

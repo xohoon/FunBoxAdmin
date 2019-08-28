@@ -256,7 +256,7 @@ public class CustomerDAO {
 	
 	// 유정 - faq 게시물 수정하기
 	public boolean faqModify(FaqBoard faq) {
-		String sql = "update faq set category=?,title=?,content=?,uploadfile=?,alias_uploadfile=? where idx=?";
+		String sql = "update faq set category=?,title=?,content=?,uploadfile=?,alias_uploadfile=?,real_path=? where idx=?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
@@ -267,7 +267,8 @@ public class CustomerDAO {
 			pstmt.setString(3, faq.getContent());
 			pstmt.setString(4, faq.getUploadfile());
 			pstmt.setString(5, faq.getAlias_uploadfile());
-			pstmt.setInt(6, faq.getIdx());
+			pstmt.setString(6, faq.getReal_path());
+			pstmt.setInt(7, faq.getIdx());
 			pstmt.executeUpdate();
 			
 			return true;
