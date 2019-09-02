@@ -57,7 +57,7 @@ public class CompanyDAO {
 		}
 	}
 
-	// �����û�� ����Ʈ
+	// 또신규씨!!!
 	public boolean getCompanyApplicationList(List<CompanyApplication> companyApplicationList, int _page,
 			int _search_type, String _search_word, Paging paging) {
 		CallableStatement cstmt = null;

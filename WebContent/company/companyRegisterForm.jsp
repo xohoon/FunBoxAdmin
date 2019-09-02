@@ -20,6 +20,7 @@
 	</script>
 </head>
 
+
 <body>
 	<div id="wrap">
 		<header></header>
@@ -63,31 +64,42 @@
 					<h3>사진등록</h3>
 					<p><span>썸네일</span><input type="file">
           <span>910px * 780px :: 상호나 간판이 정중앙에 오도록 편집 후 업로드 ::</span></p>
-					<p><span>매장사진1</span><input type="file">
-          <span>930px * 310px</span></p>
-					<p><span>매장사진2</span><input type="file">
-          <span>930px * 310px</span></p>
-					<p><span>매장사진3</span><input type="file">
-          <span>445px * 310px</span></p>
-					<p><span>매장사진4</span><input type="file">
-          <span>445px * 310px</span></p>
+          <p><span>매장사진</span><input type="file" multiple="true"></p>
+        </div>
+        <div>
+          <h3>리워드</h3><div class="checkBox"><input type="checkbox" id="reward"><label for="reward">선택</label></div>
+          <p><span>메인타이틀</span><input type="text" readonly="true"></p>
+          <p><span>서브타이틀</span><input type="text" readonly="true"></p>
+          <p><span>내용</span><textarea readonly="true"></textarea></p>
+        </div>
+        <div>
+        <h3>기업소개</h3>
 					<p><span>기업PR배경</span><input type="file">
           <span>930px * 780px</span></p>
           <p><span>매장PR타이틀</span><input type="text"></p>
-					<span>매장PR내용</span>
-          <p><textarea></textarea>
-          <span>250자 내외</span></p>
+					<p><span style="width:auto; margin-right:0;">매장PR내용</span><span style="width:auto;color:#999; margin-right:0; margin-left:8px;">(200자 내외)</span>
+          <textarea></textarea>
+          </p>
 				</div>
-				<div class="plan">
-					<h3>사업계획서</h3>
-					<p><input type="file"><input type="button" class="add add1" value="+"></p>
+				<div class="fundingNote">
+					<h3>투자노트</h3>
+					<span>투자포인트</span>
+					<button type="button" class="add"><i></i></button>
+					<button type="button" class="del"><i></i></button>
+					<div class="fundingPoint">
+					  <h4>1.</h4>
+					  <div>
+					  <input type="text">
+					  <textarea></textarea>
+					  </div>
+					</div>
+					<p><span>사업게획서</span><input type="file" multiple><span>사업계획서 이미지파일</span></p>
 				</div>
 			  <div>
           <h3>참고자료</h3>
-          <p><span>재무제표</span><input type="file"></p>
-          <p><span>해당 업종 자격증 사본</span><input type="file"></p>
-          <p><span>부동산 임대차 계약서 사본</span><input type="file"></p>
-          <p><span>사업자 등록증 사본</span><input type="file"></p>
+          <p><span>사업계획서</span><input type="file"></p>
+          <p><span>펀딩계약서</span><input type="file"></p>
+          <p><span>기타자료</span><input type="file" multiple></p>
 			  </div>
 			  <div class="table1">
 			  	<h3>손익상세</h3>
@@ -230,18 +242,36 @@
             <input type="button" class="add add2" value="+">
             <input type="button" class="del del2" value="-">
 			  </div>
+         <div class="warning">
+           <h3>투자 시 유의사항</h3>
+           <button type="button" class="add"><i></i></button>
+					<button type="button" class="del"><i></i></button>
+					<div class="warn">
+					  <h4>1.</h4>
+					  <div>
+					  <input type="text">
+					  <textarea></textarea>
+					  </div>
+					</div>
+         </div>
+          <button class="submit">등록하기</button>
         </form>
-			  <button class="submit">등록하기</button>
-			</div>
-		</section>
-		<footer></footer>
-	</div>
-	<script>
-      setTimeout(function () {
-        jQuery('.nav3').trigger('click');
-        jQuery('.nav33').addClass('on');
-      }, 500);
-      
+      </div>
+	</section>
+	<footer></footer>
+  </div>
+  <script>
+	  $(function() {
+		  $('header').load('./header.html')
+		  $('#gnb').load('./gnb.html',function(){
+        $('.nav3').addClass('on');
+        $('.nav31').addClass('on');
+        $('.nav33').addClass('on');
+      })
+		  $('footer').load('./footer.html')
+		});	
+	</script>
+	<script>      
       $(function(){
         $('table input').on('keyup input', function(){
           corCalculate();
@@ -271,26 +301,51 @@
         })
         
         
-        //사업계획서추가
-          $('.add1').click(function(){
-            $(".plan").append("<p><input type='file'><input type='button' value='-' class='del del1'></p>");
-          });
         //지급스케쥴 행추가
           $('.add2').click(function(){
             var cln = $('.sum').prev('tr').clone();
                 cln.find('input').val('');
+            cln.addClass('addTr');
             $('.sum').before(cln);
           });
         //지급스케쥴 행삭제
          $('.del2').click(function(){
-            $('.sum').prev('tr').remove();
+            $('.sum').prev('.addTr').remove();
           });
+        
+        //투자포인트추가삭제
+        var h4 = 2;
+        $('.fundingNote').find('.add').on('click', function(){
+          var noteCln = $('.fundingPoint').clone();
+          noteCln.find('input').val('');
+          noteCln.find('textarea').val('');
+          noteCln.addClass('addNote');
+          noteCln.removeClass('fundingPoint');
+          noteCln.find('h4').text(h4++ + '.');
+          $('.fundingNote > p').before(noteCln);
+        });
+        $('.fundingNote').find('.del').on('click',function(){
+          $('.fundingNote > p').prev('.addNote').remove();
+        });
+        
+        //투자유의사항
+        $('.warning').find('.add').on('click', function(){
+          var noteCln = $('.warn').clone();
+          noteCln.find('input').val('');
+          noteCln.find('textarea').val('');
+          noteCln.addClass('addWarn');
+          noteCln.removeClass('warn');
+          noteCln.find('h4').text(h4++ + '.');
+          $('.warning').append(noteCln);
+        });
+        $('.warning').find('.del').on('click',function(){
+          $('.warning').find('.addWarn').last().remove();
+        });
+        
+        
+        
       });
       
-      //사업계획서삭제
-      $(document).on('click', '.del1', function(){
-        $(this).parent('p').remove();
-      });
       
       function corCalculate(){
         calA = Number(corForm.calA.value.replace(/\,/g, "") || 0);
@@ -376,6 +431,13 @@
 
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    
+    function editTitle(){
+      var sel = window.getSelection(),
+          str = sel.getRangeAt(0),
+          span = document.createElement('span');
+      str.surroundContents(span);
     }
 	</script>
 </body>

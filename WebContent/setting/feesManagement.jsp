@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +10,7 @@
 	<title>FUNBOX ADMIN</title>
 	<script src="./js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
+	<script type="text/javascript" src="setting/js/fees_update.js"></script>
 	<link href="./css/common.css" rel="stylesheet">
 	<link href="./css/admin.css" rel="stylesheet">
 	<script>
@@ -17,11 +19,6 @@
 		  $('#gnb').load('./template/categoryTemplate.jsp');
 		  $('footer').load('./template/footer.jsp');
 		});
-	</script>
-	<script>
-		function feemodify(){
-			location.href = './feesManagement.st';
-		}
 	</script>
 </head>
 	
@@ -36,13 +33,13 @@
 			    <h4>플랫폼 이용료</h4>
           <p>
             <label>현재</label>
-            <input type="text" value="10.5"><span>%</span>
+            <input type="text" id="now_fees" value="<c:out value="${fees}"/>"><span>%</span>
           </p>
           <p>
             <label>변경</label>
-            <input type="text"><span>%</span>
+            <input type="text" id="update_fees" name="feesValue" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span>%</span>
           </p>
-          <input type="button" value="수정하기" onclick = "feemodify()">
+          <input type="button" value="수정하기" onclick ="feemodify()">
 			  </div>
 			</div>
 		</section>

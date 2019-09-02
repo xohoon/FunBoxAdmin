@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.common.action.Action;
 import net.common.action.ActionForward;
 import net.setting.action.feesManagementAciton;
+import net.setting.action.feesUpdateAction;
 
 
 @WebServlet("/SettingController")
@@ -31,6 +32,10 @@ public class SettingController extends HttpServlet {
 			switch (command) {
 			case "/feesManagement.st":
 				action = new feesManagementAciton(); // �닔�닔猷� �쑄�떇 異붽�
+				forward = action.execute(request, response);
+				break;
+			case "/FeesUpdateActipn.st":
+				action = new feesUpdateAction();
 				forward = action.execute(request, response);
 				break;
 			default:
