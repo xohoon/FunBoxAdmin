@@ -36,13 +36,13 @@ public class CompanyInvesteApplyFileDownload extends HttpServlet {
 		CompanyDAO compnayDao = new CompanyDAO();
 		
 		// ② 경로 가져오기
-		String saveDir = compnayDao.getDownloadPath(app_cp_idx);
+		String filePath = compnayDao.getFileDirectory(app_cp_idx);
 
 		//local 경로
 		//String saveDir = "C:/Users/user/Desktop/download_test";
 		
 		
-		File file = new File(saveDir + fileName);
+		File file = new File(filePath + fileName);
 		// ③ MIMETYPE 설정하기
 		String mimeType = getServletContext().getMimeType(file.toString());
 		if (mimeType == null) {
