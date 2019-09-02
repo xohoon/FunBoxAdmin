@@ -30,7 +30,6 @@
 	</script>
 	<%
 		ArrayList<CompanyDeadLine> companydeadline = (ArrayList<CompanyDeadLine>)request.getAttribute("companydeadline");
-		// 
 	%>
 </head>
 
@@ -101,7 +100,7 @@
 	</div>
 <input type="hidden" id="auto_status" name="auto_status" value="${auto_status}">	
 </body>
-<script>  
+<script>
 	setTimeout(function () {
 		document.getElementById("nav3").click();
 	  jQuery('.nav37').addClass('on');
