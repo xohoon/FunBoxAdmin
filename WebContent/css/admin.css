@@ -1,8 +1,16 @@
 @charset "utf-8";
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&display=swap&subset=korean');
+@font-face{
+  font-family:xeicon;
+  src:url(../font/xeicon.woff2);
+}
 
 body{
 	font-family: 'Nanum Gothic', sans-serif;
+}
+i{
+  font-family:xeicon;
+  font-style:normal;
 }
 .cf{}
 .cf:after{
@@ -12,7 +20,7 @@ body{
 }
 #wrap{
 	width:100%;
-	min-width:1200px;
+	min-width:1240px;
 	font-size:0;
 	background:#fff;
 	color:#333;
@@ -48,7 +56,7 @@ header button{
 }
 
 nav{
-	width:240px;
+	width:248px;
 	min-height:90vh;
 	font-size:16px;
 }
@@ -95,12 +103,12 @@ nav a span{
 	display:inline-block;
 }
 section{
-	width:calc(100% - 240px);
+	width:calc(100% - 248px);
 	background:#f7f7f7;
 	display:inline-block;
 	min-height:90vh;
 	vertical-align:top;
-	padding:40px;
+	padding:44px;
 	font-size:16px;
 	border-left:1px solid #ddd;
 }
@@ -547,41 +555,77 @@ button.out{
 /*sec06*/
 
 #sec06 h3{
+  display:block;
   font-size:20px;
   font-weight:600;
   margin-bottom:8px;
 }
 #sec06 input{
-  width:320px;
+  width:100%;
+  max-width:calc((100% - 264px)/3 + 72px);
 }
 #sec06 .con div{
   margin-bottom:32px;
 }
+#sec06 form > div:nth-child(5) h3{
+  display:inline-block;
+  margin-right:16px;
+  vertical-align:top;
+}
+#sec06 form > div:nth-child(5) input, #sec06 form > div:nth-child(5) textarea{
+  background:#efefef;
+}
+#sec06 .con .checkBox{
+  display:inline-block;
+  margin-bottom:0;
+  line-height:20px;
+  vertical-align:middle;;
+}
+.checkBox label{
+  font-size:14px;
+  cursor:pointer;
+  margin-left:8px;
+  line-height:20px;
+}
+.checkBox i{
+  font-size:20px;
+  line-height:20px;
+  vertical-align:middle;
+  color:#999;
+}
+#sec06 input[type=checkbox]{
+  outline:0;
+    display:inline-block;
+  width:14px;
+  height:14px;
+  background:#fff;
+  border:1px solid #999;
+  cursor:pointer;
+}
 #sec06 p{
   margin-bottom:8px;
-  font-size:14px;
+  font-size:0;
   position:relative;
 }
 #sec06 span{
   display:inline-block;
-  width:120px;
+  width:calc((100% - 264px)/6 + 24px);
   font-size:14px;
   line-height:32px;
   color:#73a6d6;
   vertical-align:bottom;
+  margin-right:24px;
 }
 #sec06 p span:last-child{
   color:#999;
   width:auto;
+  margin-left:8px;
+  margin-right:0;
 }
 #sec06 .con div:nth-child(3) input[type="text"]{
   text-align:right;
-  max-width:320px;
   text-indent:0;
   padding:0 4px;
-}
-#sec06 .con div:nth-child(6) span{
-  width:184px;
 }
 #sec06 table{
   width:640px;
@@ -610,7 +654,7 @@ button.out{
   padding:0;
   position:absolute;
 }
-#sec06 input.del{
+#sec06 input.del, .del{
   width:24px;
   height:24px;
   background:#fff;
@@ -621,7 +665,7 @@ button.out{
   line-height:22px;
   position:absolute;
 }
-.add1, .del1{
+.del1{
   top:4px;
   left:328px;
 }
@@ -652,14 +696,55 @@ button.out{
   text-align:right;
 }
 textarea{
-  width:50%;
+  display:block;
+  width:calc(50% - 12px);
   height:100px;
   resize:none;
   line-height:1.6em;
   padding:8px;
   border:1px solid #ddd;
 }
-
+.fundingNote h4, .warning h4{
+  display:inline-block;
+  width:40px;
+  line-height:32px;
+  vertical-align:middle;
+  margin-bottom:8px;
+}
+#sec06 .fundingNote > div, #sec06 .warning > div{
+  margin-bottom:0;
+}
+.fundingNote > div > div, .warning > div > div{
+  display:inline-block;
+  width:calc(100% - 48px);
+}
+#sec06 .fundingNote input[type="text"], #sec06 .warning input[type="text"]{
+  max-width:calc(50% - 28px);
+  margin-bottom:8px;
+}
+.fundingNote textarea, .warning textarea{
+  width:calc(50% - 28px);
+}
+.fundingNote .add{
+  left:50%;
+  top:65px;
+  z-index:10;
+}
+.fundingNote .del{
+  top:65px;
+  left:calc(50% + 32px);
+  z-index:10;
+}
+.warning .add{
+  left:50%;
+  top:34px;
+   z-index:10;
+}
+.warning .del{
+  left:calc(50% + 32px);
+  top:34px;
+   z-index:10;
+}
 /*sec07*/
 .con .ingGroup, .con .doneGroup{
   text-align:center;
@@ -722,6 +807,21 @@ button.cancel{
   background:#73a6d6;
   color:#fff;
 }
+.onOffBtn{
+  float:right;
+  margin-right:6%;
+  margin-top:16px;
+}
+.onOffBtn input[type="button"]{
+  background: #fff;
+  border: 1px solid #73a6d6;
+  color: #73a6d6;
+  text-indent:0;
+  padding:0 8px;
+}
+.onOffBtn input:first-child{
+  margin-right:8px;
+}
 
 /*sec08*/
 #sec08 h3{
@@ -763,7 +863,6 @@ button.cancel{
   overflow:auto;
   padding:16px 20px 16px 16px;
 }
-
 .push li{
   display:inline-block;
   margin-left:16px;
@@ -1012,31 +1111,4 @@ button.cancel{
   border:0;
   color:#fff;
   vertical-align:top;
-}
-#modityBtn{
-  background:#fff;
-  border:1px solid #73a6d6;
-  color:#73a6d6;
-  width:70px;
-  padding-right:7px;
-  margin-left:-77px;
-  margin-top:50px;
-}
-#modityBtn:hover{
-  background:#73a6d6;
-  color:#fff;
-}
-
-#saveBtn{
-  background:#fff;
-  border:1px solid #ff9124;
-  color:#ff9124;
-  width:70px;
-  padding-right:7px;
-  margin-left:10px;
-  margin-top:50px;
-}
-#saveBtn:hover{
-  background:#ff9124;
-  color:#fff;
 }
