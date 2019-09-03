@@ -34,19 +34,19 @@
 	        <c:choose>
 	        	<c:when test="${funding_status eq '12'}">
 	        		<!-- <li class="on"><a href="./companyInvestedList.cp?page=1&funding_status=12">펀딩진행</a></li>
-	        		<li><a href="./companyInvestedList.cp?page=1&funding_status=11">펀딩완료</a></li>	 -->
+	        		<li><a href="./companyInvestedList.cp?page=1&funding_status=11">펀딩완료</a></li> -->
 	        		<li class="on">펀딩진행</li>
-	        		<li>펀딩완료</li>
+	        		<li>펀딩완료</li> 
 	        	</c:when>
 	          	<c:otherwise>
 	          		<!-- <li><a href="./companyInvestedList.cp?page=1&funding_status=12">펀딩진행</a></li>
-	        		<li class="on"><a href="./companyInvestedList.cp?page=1&funding_status=11">펀딩완료</a></li> -->
+	        		<li class="on"><a href="./companyInvestedList.cp?page=1&funding_status=11"></a>펀딩완료</li> -->
 	        		<li>펀딩진행</li>
 	        		<li class="on">펀딩완료</li>
 	          	</c:otherwise>
 	        </c:choose>
         </ul>
-			  <div class="ingGroup">
+		<div class="ingGroup">
           <table>
             <tr>
               <th>상호명</th>
@@ -96,17 +96,20 @@
     }, 500);
     
     $(function(){
+    	console.log("test");
       $('.tab li').click(function(){
 				$('.tab li').removeClass('on');
 				$(this).addClass('on');
 			});
       
       $('.tab li').eq(0).click(function(){
+    	  console.log("test2");  
     	  window.location.href="./companyInvestedList.cp?page=1&funding_status=12";
         //$('.ingGroup').show();
         //$('.doneGroup').hide();
       });
       $('.tab li').eq(1).click(function(){
+    	  console.log("test3");
     	  window.location.href="./companyInvestedList.cp?page=1&funding_status=11";
         //$('.doneGroup').show();
         //$('.ingGroup').hide();

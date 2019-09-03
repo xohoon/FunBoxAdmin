@@ -90,8 +90,9 @@
 	                   </tbody>                       
                      </table>                     
                    </div>                                     
-	                   <input type="button" id="modityBtn" value="수정">
-	                   <input type="button" id="saveBtn" onclick = "savebt(this.form)" value="저장">
+	                   <input type="button" id="modityBtn" value="수정" style="margin-top:10px;">
+	                   <input type="button" id=saveBtn onclick = "saveBtn(this.form)" value="저장" style="margin-left:10px; margin-top:10px;">
+
                    </form>                
                 </div>
 			</div>
