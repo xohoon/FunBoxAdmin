@@ -144,7 +144,7 @@ public class CustomerDAO {
 	public FaqBoard faqDetail(int idx) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select f.idx,f.category,f.title,f.content,f.reg_date_time,f.alias_uploadfile,f.real_path,m.mb_name from faq as f join member as m on f.mb_idx=m.mb_idx where idx=? order by reg_date_time";
+		String sql = "select f.idx,f.category,f.title,f.content,f.reg_date_time,f.uploadfile,f.alias_uploadfile,f.real_path,m.mb_name from faq as f join member as m on f.mb_idx=m.mb_idx where idx=? order by reg_date_time";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -158,6 +158,7 @@ public class CustomerDAO {
 				faq.setTitle(rs.getString("title"));
 				faq.setContent(rs.getString("content"));
 				faq.setReg_date_time(rs.getDate("reg_date_time"));
+				faq.setUploadfile(rs.getString("uploadfile"));
 				faq.setAlias_uploadfile(rs.getString("alias_uploadfile"));
 				faq.setReal_path(rs.getString("real_path"));
 				faq.setMb_name(rs.getString("mb_name"));
@@ -396,7 +397,7 @@ public class CustomerDAO {
 	public NoticeBoard noticeDetail(int idx) throws Exception {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select n.idx,n.title,n.content,n.reg_date_time,n.alias_uploadfile,n.real_path,m.mb_name from notice as n join member as m on n.mb_idx=m.mb_idx where idx=? order by reg_date_time";
+		String sql = "select n.idx,n.title,n.content,n.reg_date_time,n.uploadfile,n.alias_uploadfile,n.real_path,m.mb_name from notice as n join member as m on n.mb_idx=m.mb_idx where idx=? order by reg_date_time";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -409,6 +410,7 @@ public class CustomerDAO {
 				notice.setTitle(rs.getString("title"));
 				notice.setContent(rs.getString("content"));
 				notice.setReg_date_time(rs.getDate("reg_date_time"));
+				notice.setUploadfile(rs.getString("uploadfile"));
 				notice.setAlias_uploadfile(rs.getString("alias_uploadfile"));
 				notice.setReal_path(rs.getString("real_path"));
 				notice.setMb_name(rs.getString("mb_name"));

@@ -43,7 +43,7 @@
 			<div class="con">
 				<table>
 					<tr>
-						<th>순번</th>
+						<th>idx</th>
 						<th>아이디</th>
 						<th>E-mail</th>
 						<th>이름</th>

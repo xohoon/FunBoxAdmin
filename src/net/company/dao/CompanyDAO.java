@@ -968,8 +968,8 @@ public class CompanyDAO {
 	}
 	///////////////////////////////// 태훈끝//////////////////////////////////////////////
 
-	public String getDownloadPath(int app_cp_idx) {
-		String sql = "SELECT app_cp_real_path FROM company_application WHERE app_cp_idx = ?";
+	public String getFileDirectory(int app_cp_idx) {
+		String sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 2), (SELECT cf_folder FROM company_file WHERE cp_idx = ?),(SELECT file_path FROM file_path WHERE idx = 4)) AS company_file_folder";
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -980,7 +980,7 @@ public class CompanyDAO {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				return rs.getString("app_cp_real_path");
+				return rs.getString("company_file_folder");
 			}
 		} catch (Exception ex) {
 			System.out.println("getUploadFilePath 에러: " + ex);

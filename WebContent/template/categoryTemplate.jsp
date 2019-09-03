@@ -5,7 +5,7 @@
 	<ul class="nav11">
 		<li class="nav12" onclick="location.href='./memberList.mb'">회원
 			리스트</li>
-		<li class="nav13" onclick="location.href='./memberRegister.mb'">회원
+		<li class="nav13" onclick="location.href='./memberRegisterForm.mb'">회원
 			등록</li>
 	</ul>
 	<a href="#" class="nav2"><i class="fas fa-coins"></i>&nbsp;&nbsp;재정관리<span>+</span></a>

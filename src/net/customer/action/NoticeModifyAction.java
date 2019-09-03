@@ -57,6 +57,12 @@ public class NoticeModifyAction implements Action {
         	notice.setAlias_uploadfile(alias + "uploadfile" + fileFormat);
 			//System.out.println(real_path + "/" + alias+"app_cp_registrantion"+fileFormat);
 			part.write(real_path + "/" + alias + "uploadfile" + fileFormat);
+        }else {
+        	CustomerDAO ct_dao3 = new CustomerDAO();
+        	NoticeBoard notice2 = ct_dao3.noticeDetail(notice_idx);
+        	notice.setUploadfile(notice2.getUploadfile());
+        	notice.setAlias_uploadfile(notice2.getAlias_uploadfile());
+        	notice.setReal_path(notice2.getReal_path());
         }
                 
         response.setContentType("text/html;charset=utf-8");
@@ -90,7 +96,7 @@ public class NoticeModifyAction implements Action {
 			out.println("window.close();");
 			out.println("</script>");
 			out.close();
-
+ 
 			return null;
 		}
 	}
