@@ -50,8 +50,6 @@
                       <label for="man">수동</label>
                     </li>
                   </ul>
-                  <input type="button" value="+" class="addBan">
-                  <input type="button" value="-" class="subBan">
                    <div class="topList">
                      <table>
                      	<tbody id="added_table">
@@ -77,8 +75,8 @@
 	                   	</tbody>
                      </table>
                    </div>
-                   <input type="button" id="modityBtn" value="수정" style="margin-top:10px;">
-	               <input type="button" id="saveBtn" value="적용" style="margin-left:10px; margin-top:10px;" onclick="setAutoManual();">
+                   <input type="button" id="modityBtn" value="수정">
+	               <input type="button" id="saveBtn" value="적용" onclick="setAutoManual();">
                 </div>
 			</div>
 		</section>

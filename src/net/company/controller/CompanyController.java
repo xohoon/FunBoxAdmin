@@ -100,6 +100,10 @@ public class CompanyController extends HttpServlet {
 				action = new CompanyPopularityInfoAjax();
 				forward = action.execute(request, response);
 				break;
+			case "/companyRegisterAction.cp":
+				action = new CompanyRegisterAction();
+				forward = action.execute(request, response);
+				break;
 				//태훈끝//
 			default:
 				break;

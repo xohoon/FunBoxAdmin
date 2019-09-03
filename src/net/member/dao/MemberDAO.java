@@ -230,7 +230,7 @@ public class MemberDAO {
 
 			return member;
 		} catch (Exception ex) {
-			System.out.println("getMember ����: " + ex);
+			System.out.println("getMember error: " + ex);
 		} finally {
 			try {
 				if (rs != null)

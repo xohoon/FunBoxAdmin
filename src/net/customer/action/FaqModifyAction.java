@@ -28,7 +28,7 @@ public class FaqModifyAction implements Action {
 		int category = Integer.parseInt(request.getParameter("selectBox"));
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-
+		
 		// 날짜변환 기능
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
 		Date date = new Date();
@@ -47,8 +47,8 @@ public class FaqModifyAction implements Action {
 			fileSaveDir.mkdir();
 		}
 		
-        Part part = request.getPart("uploadfile");
-        
+		Part part = request.getPart("uploadfile");
+		
         String fileName = extractFileName(part);
         String alias = UUID.randomUUID().toString().substring(0, 9);
         String fileFormat = getFileFormat(part);
@@ -58,6 +58,12 @@ public class FaqModifyAction implements Action {
 			faq.setAlias_uploadfile(alias + "uploadfile" + fileFormat);
 			//System.out.println(real_path + "/" + alias+"app_cp_registrantion"+fileFormat);
 			part.write(real_path + "/" + alias + "uploadfile" + fileFormat);
+        }else {
+        	CustomerDAO ct_dao3 = new CustomerDAO();
+        	FaqBoard faq2 = ct_dao3.faqDetail(faq_idx);
+        	faq.setUploadfile(faq2.getUploadfile());
+        	faq.setAlias_uploadfile(faq2.getAlias_uploadfile());
+        	faq.setReal_path(faq2.getReal_path());
         }
                 
         response.setContentType("text/html;charset=utf-8");

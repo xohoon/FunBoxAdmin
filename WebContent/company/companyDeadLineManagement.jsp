@@ -30,7 +30,6 @@
 	</script>
 	<%
 		ArrayList<CompanyDeadLine> companydeadline = (ArrayList<CompanyDeadLine>)request.getAttribute("companydeadline");
-		// 
 	%>
 </head>
 
@@ -93,6 +92,7 @@
                    </div>                                     
 	                   <input type="button" id="modityBtn" value="수정" style="margin-top:10px;">
 	                   <input type="button" id=saveBtn onclick = "saveBtn(this.form)" value="저장" style="margin-left:10px; margin-top:10px;">
+
                    </form>                
                 </div>
 			</div>
@@ -101,7 +101,7 @@
 	</div>
 <input type="hidden" id="auto_status" name="auto_status" value="${auto_status}">	
 </body>
-<script>  
+<script>
 	setTimeout(function () {
 		document.getElementById("nav3").click();
 	  jQuery('.nav37').addClass('on');
