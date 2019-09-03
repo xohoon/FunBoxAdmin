@@ -185,7 +185,8 @@ public class CompanyRegisterAction implements Action {
 		String now = format.format(date);
 		
 		// 폴더이름 변수
-		String cp_folder = cp_manager + "_" + cp_name + "_" + now + "/";
+		String rand_num = UUID.randomUUID().toString().substring(0, 17);
+		String cp_folder = rand_num + "_" + now + "/";
 		// company 기본경로 + 폴더 이름 -> 폴더 경로에 파일삽입위해서
 		CompnayFilePath companyFilePath = new CompnayFilePath();
 		companyDAO.getUploadFilePath(companyFilePath, cp_folder);
