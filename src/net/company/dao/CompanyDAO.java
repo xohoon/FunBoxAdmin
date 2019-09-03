@@ -930,17 +930,66 @@ public class CompanyDAO {
 		return false;
 	}
 	
-	// 관리자 페이지 기업등록
-	public int ComapnyRegister(CompanyRegister register, ArrayList<String> cf_store_images, ArrayList<String> cf_alias_store_images, ArrayList<String> cf_business_plan_images, ArrayList<String> cf_alias_business_plan_images, ArrayList<String> cf_etc_files, ArrayList<String> cf_alias_etc_files, ArrayList<String> cf_info_banner, ArrayList<String> cf_alias_info_banner, List<String> notice_title, List<String> notice_content, List<String> pay_count, List<String> pat_expected, List<String> pay_principal, List<String> pay_interest_paid, List<String> pay_fees, List<String> pay_actual_apyment, List<String> pay_actual_rate, List<String> point_title, List<String> point_comment) {
+	// 태훈추가 - 관리자 페이지 기업등록
+	public int ComapnyRegister(CompanyRegister register) {
 		int result = 0;
 		CallableStatement cstmt = null;
 		ResultSet rs = null;
 		try {
-			cstmt = (CallableStatement)conn.prepareCall("call COMPANY_REGISTER(?,?,?,?,?,?,?,?,?,?");
+			cstmt = (CallableStatement)conn.prepareCall("call COMPANY_REGISTER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
-//			cstmt.setInt(1, cp_idx_list.get(0));
-//			cstmt.setInt(2, cp_idx_list.get(1));
-			cstmt.registerOutParameter(11, java.sql.Types.INTEGER);
+			// company insert data
+			cstmt.setString(1, register.getCp_sector());
+			cstmt.setString(2, register.getCp_name());
+			cstmt.setString(3, register.getCp_branch());
+			cstmt.setString(4, register.getCp_manager());
+			cstmt.setString(5, register.getCp_number());
+			cstmt.setString(6, register.getCp_capital());
+			cstmt.setString(7, register.getCp_address());
+			cstmt.setString(8, register.getCp_add_ch());
+			cstmt.setString(9, register.getCp_add_more());
+			cstmt.setString(10, register.getCp_add_num());
+			cstmt.setString(11, register.getCp_monthly_profit());
+			cstmt.setString(12, register.getCp_reward_main_title());
+			cstmt.setString(13, register.getCp_reward_sub_title());
+			cstmt.setString(14, register.getCp_reward_content());
+			cstmt.setString(15, register.getCp_intro_headline());
+			cstmt.setString(16, register.getCp_intro_content());
+			// company_invest insert data
+			cstmt.setString(17, register.getIv_contraction_during());
+			cstmt.setString(18, register.getIv_min_amount());
+			cstmt.setString(19, register.getIv_appl_stock());
+			cstmt.setString(20, register.getIv_goal_amount());
+			cstmt.setString(21, register.getIv_appl_day());
+			cstmt.setString(22, register.getPl_year());
+			cstmt.setString(23, register.getPl_month());
+			cstmt.setString(24, register.getPl_sales());
+			cstmt.setString(25, register.getPl_material());
+			cstmt.setString(26, register.getPl_person_pay());
+			cstmt.setString(27, register.getPl_rent_building());
+			cstmt.setString(28, register.getPl_operating_pay());
+			cstmt.setString(29, register.getPl_net_revenue());
+			cstmt.setString(30, register.getMa_odds_percent());
+			cstmt.setString(31, register.getMa_odds_money());
+			cstmt.setString(32, register.getMa_share_percent());
+			cstmt.setString(33, register.getMa_share_money());
+			cstmt.setString(34, register.getMa_platform_pay());
+			cstmt.setString(35, register.getMa_estimated_revenue());
+			cstmt.setString(36, register.getMa_monthly_average());
+			// company_content insert data
+			cstmt.setString(37, register.getPoint_title_string());
+			cstmt.setString(38, register.getPoint_content_string());
+			cstmt.setString(39, register.getNotice_title_string());
+			cstmt.setString(40, register.getNotice_content_string());
+			// company_scheduler insert data
+			cstmt.setString(41, register.getPay_count_string());
+			cstmt.setString(42, register.getPay_payment_date_string());
+			cstmt.setString(43, register.getPay_principal_string());
+			cstmt.setString(44, register.getPay_interest_string());
+			cstmt.setString(45, register.getPay_fees_string());
+			cstmt.setString(46, register.getPay_actual_payment_string());
+			cstmt.setString(47, register.getPay_actual_rate_string());
+			cstmt.registerOutParameter(48, java.sql.Types.INTEGER);
 
 			cstmt.execute();
 			result = cstmt.getInt("@RESULT");
@@ -951,7 +1000,7 @@ public class CompanyDAO {
 				result = -1;
 			}
 		} catch (Exception ex) {
-			System.out.println("insertPopularityManagement 에러: " + ex);
+			System.out.println("ComapnyRegister 에러: " + ex);
 		} finally {
 			try {
 				if (rs != null)

@@ -40,7 +40,21 @@ public class CompanyRegister {
 	private String ma_estimated_revenue;
 	private String ma_monthly_average;
 	
-	// files
+	// String /**/ 구분 데이터
+	private String point_title_string;
+	private String point_content_string;
+	private String pay_count_string;
+	private String pay_payment_date_string;
+	private String pay_principal_string;
+	private String pay_interest_string;
+	private String pay_fees_string;
+	private String pay_actual_payment_string;
+	private String pay_actual_rate_string;
+	private String notice_title_string;
+	private String notice_content_string;
+	
+	
+	// file
 	private String cf_thumbnail;
 	private String cf_alias_thumbnail;
 	private String cf_pr_background;
@@ -51,8 +65,96 @@ public class CompanyRegister {
 	private String cf_alias_funding_contract;
 	private String cf_info_banner;
 	private String cf_alias_info_banner;
+	// files
+	private String store_images;
+	private String business_plan;
+	private String etc_files;
 	
 	
+	public String getPay_actual_payment_string() {
+		return pay_actual_payment_string;
+	}
+	public void setPay_actual_payment_string(String pay_actual_payment_string) {
+		this.pay_actual_payment_string = pay_actual_payment_string;
+	}
+	public String getPay_count_string() {
+		return pay_count_string;
+	}
+	public void setPay_count_string(String pay_count_string) {
+		this.pay_count_string = pay_count_string;
+	}
+	public String getPay_payment_date_string() {
+		return pay_payment_date_string;
+	}
+	public void setPay_payment_date_string(String pay_payment_date_string) {
+		this.pay_payment_date_string = pay_payment_date_string;
+	}
+	public String getPay_principal_string() {
+		return pay_principal_string;
+	}
+	public void setPay_principal_string(String pay_principal_string) {
+		this.pay_principal_string = pay_principal_string;
+	}
+	public String getPay_interest_string() {
+		return pay_interest_string;
+	}
+	public void setPay_interest_string(String pay_interest_string) {
+		this.pay_interest_string = pay_interest_string;
+	}
+	public String getPay_fees_string() {
+		return pay_fees_string;
+	}
+	public void setPay_fees_string(String pay_fees_string) {
+		this.pay_fees_string = pay_fees_string;
+	}
+	public String getPay_actual_rate_string() {
+		return pay_actual_rate_string;
+	}
+	public void setPay_actual_rate_string(String pay_actual_rate_string) {
+		this.pay_actual_rate_string = pay_actual_rate_string;
+	}
+	public String getNotice_title_string() {
+		return notice_title_string;
+	}
+	public void setNotice_title_string(String notice_title_string) {
+		this.notice_title_string = notice_title_string;
+	}
+	public String getNotice_content_string() {
+		return notice_content_string;
+	}
+	public void setNotice_content_string(String notice_content_string) {
+		this.notice_content_string = notice_content_string;
+	}
+	public String getStore_images() {
+		return store_images;
+	}
+	public void setStore_images(String store_images) {
+		this.store_images = store_images;
+	}
+	public String getBusiness_plan() {
+		return business_plan;
+	}
+	public void setBusiness_plan(String business_plan) {
+		this.business_plan = business_plan;
+	}
+	public String getEtc_files() {
+		return etc_files;
+	}
+	public void setEtc_files(String etc_files) {
+		this.etc_files = etc_files;
+	}
+	public String getPoint_title_string() {
+		return point_title_string;
+	}
+	public void setPoint_title_string(String point_title_string) {
+		this.point_title_string = point_title_string;
+	}
+	public String getPoint_content_string() {
+		return point_content_string;
+	}
+	public void setPoint_content_string(String point_content_string) {
+		this.point_content_string = point_content_string;
+	}
 	public String getCp_address() {
 		return cp_address;
 	}
@@ -345,12 +447,12 @@ public class CompanyRegister {
 				+ ", ma_odds_percent=" + ma_odds_percent + ", ma_odds_money=" + ma_odds_money + ", ma_share_percent="
 				+ ma_share_percent + ", ma_share_money=" + ma_share_money + ", ma_platform_pay=" + ma_platform_pay
 				+ ", ma_estimated_revenue=" + ma_estimated_revenue + ", ma_monthly_average=" + ma_monthly_average
-				+ ", cf_thumbnail=" + cf_thumbnail + ", cf_alias_thumbnail=" + cf_alias_thumbnail
-				+ ", cf_pr_background=" + cf_pr_background + ", cf_alias_pr_background=" + cf_alias_pr_background
-				+ ", cf_business_plan=" + cf_business_plan + ", cf_alias_business_plan=" + cf_alias_business_plan
-				+ ", cf_funding_contract=" + cf_funding_contract + ", cf_alias_funding_contract="
-				+ cf_alias_funding_contract + ", cf_info_banner=" + cf_info_banner + ", cf_alias_info_banner="
-				+ cf_alias_info_banner + "]";
+				+ ", cf_thumbnail=" + cf_thumbnail
+				+ ", cf_alias_thumbnail=" + cf_alias_thumbnail + ", cf_pr_background=" + cf_pr_background
+				+ ", cf_alias_pr_background=" + cf_alias_pr_background + ", cf_business_plan=" + cf_business_plan
+				+ ", cf_alias_business_plan=" + cf_alias_business_plan + ", cf_funding_contract=" + cf_funding_contract
+				+ ", cf_alias_funding_contract=" + cf_alias_funding_contract + ", cf_info_banner=" + cf_info_banner
+				+ ", cf_alias_info_banner=" + cf_alias_info_banner + "]";
 	}
 	
 	

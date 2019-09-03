@@ -28,6 +28,7 @@ public class CompanyRegisterAction implements Action {
 		ActionForward forward = new ActionForward();
 		CompanyRegister register = new CompanyRegister();
 		CompanyDAO companyDAO = new CompanyDAO();
+		char comma = ',';
 		
 		//기업 이름
 		String cp_sector = request.getParameter("cp_sector");
@@ -83,16 +84,34 @@ public class CompanyRegisterAction implements Action {
 		
 		// 투자노트
 		String cp_point_title[] = request.getParameterValues("cp_point_title");
-		String cp_point_comment[] = request.getParameterValues("cp_point_comment");
+		String cp_point_content[] = request.getParameterValues("cp_point_content");
 		List<String> point_title = new ArrayList<String>();
-		List<String> point_comment = new ArrayList<String>();
+		List<String> point_content = new ArrayList<String>();
+		String point_title_string = "";
+		String point_content_string = "";
 		
+		// point title , 구분 data isnert
 		for(int i=0; i<cp_point_title.length; i++) {
 			point_title.add(cp_point_title[i]);
 		}
-		for(int i=0; i<cp_point_comment.length; i++) {
-			point_comment.add(cp_point_comment[i]);
+		for(int i = 0; i<point_title.size(); i++) {
+			point_title_string += point_title.get(i) + "/**/";
 		}
+		if (point_title_string.charAt(point_title_string.length()-1) == comma) {
+			point_title_string.substring(0, point_title_string.length()-2); 
+		}
+		// point content , 구분 data isnert
+		for(int i=0; i<cp_point_content.length; i++) {
+			point_content.add(cp_point_content[i]);
+		}
+		for(int i = 0; i<point_content.size(); i++) {
+			point_content_string += point_content.get(i) + "/**/";
+		}
+		if (point_content_string.charAt(point_content_string.length()-1) == comma) {
+			point_content_string.substring(0, point_content_string.length()-2); 
+		}
+		register.setPoint_content_string("point_content_string");
+		register.setPoint_title_string("point_title_string");
 		
 		// 손익상세
 		String pl_year = request.getParameter("pl_year");		//기준년
@@ -137,18 +156,19 @@ public class CompanyRegisterAction implements Action {
 		String cp_pay_actual_payment_amout[] = request.getParameterValues("sum6");	//실 지급금액
 		String cp_pay_actual_rate_return[] = request.getParameterValues("sum7");	//실 수익률
 		List<String> pay_count = new ArrayList<String>();
-		List<String> pat_expected = new ArrayList<String>();
+		List<String> pay_expected = new ArrayList<String>();
 		List<String> pay_principal = new ArrayList<String>();
 		List<String> pay_interest_paid = new ArrayList<String>();
 		List<String> pay_fees = new ArrayList<String>();
-		List<String> pay_actual_apyment = new ArrayList<String>();
+		List<String> pay_actual_payment = new ArrayList<String>();
 		List<String> pay_actual_rate = new ArrayList<String>();
 		
+		// 예상지급스케줄 String[] 을 List에 insert
 		for(int i=0; i<cp_pay_count.length; i++) {
 			pay_count.add(cp_pay_count[i]);
 		}
 		for(int i=0; i<cp_pay_expected_payment_date.length; i++) {
-			pat_expected.add(cp_pay_expected_payment_date[i]);
+			pay_expected.add(cp_pay_expected_payment_date[i]);
 		}
 		for(int i=0; i<cp_pay_principal.length; i++) {
 			pay_principal.add(cp_pay_principal[i]);
@@ -160,23 +180,88 @@ public class CompanyRegisterAction implements Action {
 			pay_fees.add(cp_pay_fees[i]);
 		}
 		for(int i=0; i<cp_pay_actual_payment_amout.length; i++) {
-			pay_actual_apyment.add(cp_pay_actual_payment_amout[i]);
+			pay_actual_payment.add(cp_pay_actual_payment_amout[i]);
 		}
 		for(int i=0; i<cp_pay_actual_rate_return.length; i++) {
 			pay_actual_rate.add(cp_pay_actual_rate_return[i]);
 		}
-		
+		// 예상지급스케줄 List를 String 으로 insert
+		String pay_count_string = "";
+		for(int i = 0; i<pay_count.size(); i++) {
+			pay_count_string += pay_count.get(i) + "/**/";
+		}
+		if (pay_count_string.charAt(pay_count_string.length()-1) == comma) {
+			pay_count_string.substring(0, pay_count_string.length()-2); 
+		}
+		String pay_payment_date_string = "";
+		for(int i = 0; i<pay_expected.size(); i++) {
+			pay_payment_date_string += pay_expected.get(i) + "/**/";
+		}
+		if (pay_payment_date_string.charAt(pay_payment_date_string.length()-1) == comma) {
+			pay_payment_date_string.substring(0, pay_payment_date_string.length()-2); 
+		}
+		String pay_principal_string = "";
+		for(int i = 0; i<pay_principal.size(); i++) {
+			pay_principal_string += pay_principal.get(i) + "/**/";
+		}
+		if (pay_principal_string.charAt(pay_principal_string.length()-1) == comma) {
+			pay_principal_string.substring(0, pay_principal_string.length()-2); 
+		}
+		String pay_interest_string = "";
+		for(int i = 0; i<pay_interest_paid.size(); i++) {
+			pay_interest_string += pay_interest_paid.get(i) + "/**/";
+		}
+		if (pay_interest_string.charAt(pay_interest_string.length()-1) == comma) {
+			pay_interest_string.substring(0, pay_interest_string.length()-2); 
+		}
+		String pay_fees_string = "";
+		for(int i = 0; i<pay_fees.size(); i++) {
+			pay_fees_string += pay_fees.get(i) + "/**/";
+		}
+		if (pay_fees_string.charAt(pay_fees_string.length()-1) == comma) {
+			pay_fees_string.substring(0, pay_fees_string.length()-2); 
+		}
+		String pay_actual_apyment_string = "";
+		for(int i = 0; i<pay_actual_payment.size(); i++) {
+			pay_actual_apyment_string += pay_actual_payment.get(i) + "/**/";
+		}
+		if (pay_actual_apyment_string.charAt(pay_actual_apyment_string.length()-1) == comma) {
+			pay_actual_apyment_string.substring(0, pay_actual_apyment_string.length()-2); 
+		}
+		String pay_actual_rate_string = "";
+		for(int i = 0; i<pay_actual_rate.size(); i++) {
+			pay_actual_rate_string += pay_actual_rate.get(i) + "/**/";
+		}
+		if (pay_actual_rate_string.charAt(pay_actual_rate_string.length()-1) == comma) {
+			pay_actual_rate_string.substring(0, pay_actual_rate_string.length()-2); 
+		}
 		
 		// 유의사항
 		String cp_notice_title[] = request.getParameterValues("notice_title");
 		String cp_notice_content[] = request.getParameterValues("notice_content");
 		List<String> notice_title = new ArrayList<String>();
 		List<String> notice_content = new ArrayList<String>();
+		// 유의사항 String[] -> List insert
 		for(int i=0; i<cp_notice_title.length; i++) {
 			notice_title.add(cp_notice_title[i]);
 		}
 		for(int i=0; i<cp_notice_content.length; i++) {
 			notice_content.add(cp_notice_content[i]);
+		}
+		// 유의사항 List -> String insert
+		String notice_title_string = "";
+		for(int i = 0; i<notice_title.size(); i++) {
+			notice_title_string += notice_title.get(i) + "/**/";
+		}
+		if (notice_title_string.charAt(notice_title_string.length()-1) == comma) {
+			notice_title_string.substring(0, notice_title_string.length()-2); 
+		}
+		String notice_content_string = "";
+		for(int i = 0; i<notice_content.size(); i++) {
+			notice_content_string += notice_content.get(i) + "/**/";
+		}
+		if (notice_content_string.charAt(notice_content_string.length()-1) == comma) {
+			notice_content_string.substring(0, notice_content_string.length()-2); 
 		}
 		
 		// 날짜변환 기능
@@ -209,42 +294,44 @@ public class CompanyRegisterAction implements Action {
 		ArrayList<String> cf_info_banner = new ArrayList<String>();
 		ArrayList<String> cf_alias_info_banner = new ArrayList<String>();
 		
-		int store_count = 0;
-		int business_count = 0;
-		int etc_count = 0;
+		String store_images = "";
+		String business_plan = "";
+		String etc_files = "";
+		
 		for(Part part : request.getParts()) {
 			if (part.getContentType() != null) {
 				String fileName = extractFileName(part);
 				String alias = UUID.randomUUID().toString().substring(0, 9);
 				String fileFormat = getFileFormat(part);
-
+				
+				
 				switch(part.getName()) {
 				case "cf_thumbnail":
 					register.setCf_thumbnail(fileName);
 					register.setCf_alias_thumbnail(alias + "cf_thumbnail" + fileFormat);
-					part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_thumbnail" + fileFormat);
+					part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_thumbnail" + fileFormat);
 					break;
 				case "cf_info_banner":
 					register.setCf_info_banner(fileName);
 					register.setCf_alias_info_banner(alias + "cf_info_banner" + fileFormat);
-					part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_info_banner" + fileFormat);
+					part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_info_banner" + fileFormat);
 					break;
 				case "cf_store_images":
-					store_count++;
 					cf_store_images.add(fileName);
-					cf_alias_store_images.add(alias + "cf_store_images" + store_count + fileFormat);
-					part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_store_images" + store_count + fileFormat);
+					store_images += fileName + ",";
+					cf_alias_store_images.add(alias + "cf_store_images" + fileFormat);
+					part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_store_images" + fileFormat);
 					break;
 				case "cf_pr_background":
 					register.setCf_pr_background(fileName);
 					register.setCf_alias_pr_background(alias + "cf_pr_background" + fileFormat);
-					part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_pr_background" + fileFormat);
+					part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_pr_background" + fileFormat);
 					break;
 				case "cf_business_plan_images":
-					business_count++;
 					cf_business_plan_images.add(fileName);
-					cf_alias_business_plan_images.add(alias + "cf_business_plan_images" + business_count + fileFormat);
-					part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_business_plan_images" + business_count + fileFormat);
+					business_plan += fileName + ",";
+					cf_alias_business_plan_images.add(alias + "cf_business_plan_images" + fileFormat);
+					part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_business_plan_images" + fileFormat);
 					break;
 				case "cf_business_plan":
 					register.setCf_business_plan(fileName);
@@ -257,20 +344,30 @@ public class CompanyRegisterAction implements Action {
 					part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_funding_contract" + fileFormat);
 					break;
 				case "cf_etc_files":
-					etc_count++;
 					cf_etc_files.add(fileName);
-					cf_alias_etc_files.add(alias + "cf_etc_files" + store_count + fileFormat);
-					part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_etc_files" + etc_count + fileFormat);
+					etc_files += fileName + ",";
+					cf_alias_etc_files.add(alias + "cf_etc_files" + fileFormat);
+					part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_etc_files" + fileFormat);
 					break;
 				default:
 					break;
 				}
 			}
 		}
+		
+		if (store_images.charAt(store_images.length()-1) == comma) {
+			store_images.substring(0, store_images.length()-2); 
+		}
+		
+		if (business_plan.charAt(business_plan.length()-1) == comma) {
+			business_plan.substring(0, business_plan.length()-2); 
+		}
+		if (etc_files.charAt(etc_files.length()-1) == comma) {
+			etc_files.substring(0, etc_files.length()-2); 
+		}
+		
 		int result = -1;
-		result = companyDAO.ComapnyRegister(register, cf_store_images, cf_alias_store_images, cf_business_plan_images, cf_alias_business_plan_images, 
-				cf_etc_files, cf_alias_etc_files, cf_info_banner, cf_alias_info_banner, notice_title, notice_content, pay_count, pat_expected, 
-				pay_principal, pay_interest_paid, pay_fees, pay_actual_apyment, pay_actual_rate, point_title, point_comment);
+		result = companyDAO.ComapnyRegister(register);
 		
 		// return null;
 		if (result == 0) {
@@ -278,7 +375,7 @@ public class CompanyRegisterAction implements Action {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('기업신청에 실패했습니다.\n다시 시도해주세요.');");
-			out.println("location.href='./Application1.cp';");
+			out.println("location.href='./companyRegisterForm.cp';");
 			out.println("</script>");
 			out.close();
 			return null;
@@ -287,7 +384,7 @@ public class CompanyRegisterAction implements Action {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('기업신청이 완료되었습니다.');");
-			out.println("location.href='./Index.mb';");
+			out.println("location.href='./index.jsp';");
 			out.println("</script>");
 			out.close();
 		}
