@@ -5,13 +5,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import com.mysql.jdbc.CallableStatement;
-
+//import com.mysql.cj.jdbc.CallableStatement;
 import net.admin.dto.IndexNeeds;
-import net.company.dto.CompanyApplication;
-import net.util.Paging;
 
 public class AdminDAO {
 

@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.mysql.jdbc.CallableStatement;
 //import com.mysql.cj.jdbc.CallableStatement;
+
 import net.member.dto.Member;
 import net.member.dto.MemberLateInvested;
 import net.util.Paging;
@@ -77,7 +78,7 @@ public class MemberDAO {
 			}
 			return true;
 		} catch (Exception ex) {
-			System.out.println("SelectMemberList ����: " + ex);
+			System.out.println("SelectMemberList error: " + ex);
 		} finally {
 			try {
 				if (rs != null)
