@@ -96,6 +96,11 @@ nav li:hover{
 nav li.on{
 	color:#ff9124;
 }
+nav a i{
+  font-size:18px;
+  vertical-align:top;
+  line-height:56px;
+}
 nav a span{
 	float:right;
 }
@@ -145,7 +150,18 @@ div{
     position:relative;
 }
 button{
+  font-size:14px;
+  padding:0 8px;
+  height:32px;
+  background:#fff;
+  border:1px solid #73a6d6;
+  color:#73a6d6;
   outline:none;
+  float:right;
+}
+button:hover{
+  border:1px solid #ff9124;
+  color:#ff9124;
 }
 input{
 	height:32px;
@@ -165,7 +181,7 @@ input[type="button"]{
 }
 table{
 	width:100%;
-	margin-bottom:24px;
+	margin:16px 0 24px;
   font-size:16px;
 }
 th, td{
@@ -190,6 +206,21 @@ select{
 textarea{
   outline:0;
   
+}
+.tab{
+  float:left;
+	text-align:left;
+}
+.tab li{
+	display:inline-block;
+	padding:0 8px;
+	font-weight:600;
+	color:#777;
+	cursor:pointer;
+  font-size:16px;
+}
+.tab li.on{
+	color:#ff9124;
 }
 
 /*login*/
@@ -422,7 +453,7 @@ button.out{
 }
 
 /*sec02*/
-#sec02 .con, #sec05 .con, #sec07 .con{
+#sec02 .con, #sec05 .con, #sec06 .con,#sec07 .con{
 	margin-top:0;
 }
 .con > div{
@@ -456,22 +487,6 @@ button.out{
 }
 
 /*sec03*/
-.tab{
-	width:100%;
-	text-align:left;
-	margin-bottom:16px;
-}
-.tab li{
-	display:inline-block;
-	padding:0 8px;
-	font-weight:600;
-	color:#777;
-	cursor:pointer;
-  font-size:16px;
-}
-.tab li.on{
-	color:#ff9124;
-}
 #sec03 th:nth-child(n+1):nth-child(-n+3){
 	width:80px;
 }
@@ -496,27 +511,36 @@ button.out{
 
 /*sec05*/
 
+#sec05 table{
+  margin-top:8px;
+}
+.new{
+  background:rgba(255,145,36,0.3);
+}
 #sec05 td{
   width:auto;
 }
-#sec05 td:first-child{
+#sec05 td:nth-child(2){
   cursor:pointer;
 }
-
-#sec05 td:first-child:hover{
+#sec05 td:nth-child(2):hover{
   color:#73a6d6;
 }
-#sec05 th:last-child{
-  width:64px;
+#sec05 th:first-child,#sec05 th:last-child{
+  width:56px;
+}
+#sec05 th:nth-child(4), #sec05 th:nth-child(7){
+  width:10%;
 }
 #sec05 td button{
-  background:#fff;
+  background:none;
   color:#ff9124;
   padding:0;
   border:0;
   width:100%;
   height:100%;
-  font-size:14px;
+  font-size:24px;
+  line-height:24px;
 }
 #sec05 td button:hover{
   background:#ff9124;
@@ -575,6 +599,9 @@ button.out{
 #sec06 form > div:nth-child(5) input, #sec06 form > div:nth-child(5) textarea{
   background:#efefef;
 }
+#sec06 form > div:nth-child(5).on input, #sec06 form > div:nth-child(5).on textarea{
+  background:#fff;
+}
 #sec06 .con .checkBox{
   display:inline-block;
   margin-bottom:0;
@@ -626,6 +653,14 @@ button.out{
   text-align:right;
   text-indent:0;
   padding:0 4px;
+}
+#sec06 .api input[type=text]:nth-child(2){
+  max-width:calc((100% - 264px)/3 - 32px);
+}
+#sec06 .api input[type=text]:nth-child(n+4):nth-child(-n+6){
+  display:block;
+  margin-left:calc((100% - 264px)/6 + 48px);
+  margin-top:8px;
 }
 #sec06 table{
   width:640px;
@@ -952,6 +987,7 @@ button.cancel{
 #sec13 td:nth-child(4), #sec13 th:nth-child(4), #sec14 th:nth-child(2), #sec14 td:nth-child(2){
   text-align:left;
 }
+/*
 #sec13 button, #sec15 button{
   display:block;
   float:right;
@@ -968,6 +1004,7 @@ button.cancel{
   color:#ff9124;
   border:1px solid #ff9124;
 }
+*/
 .sec13_new, .sec13_view, .sec14_view, .sec15_new{
   padding:40px;
   width:800px;

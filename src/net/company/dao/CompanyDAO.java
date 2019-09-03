@@ -23,6 +23,8 @@ import net.company.dto.CompanyApplicationDetail;
 import net.company.dto.CompanyDeadLine;
 import net.company.dto.CompanyInvested;
 import net.company.dto.CompanyPopularityList;
+import net.company.dto.CompanyRegister;
+import net.company.dto.CompnayFilePath;
 import net.util.Paging;
 
 public class CompanyDAO {
@@ -876,6 +878,78 @@ public class CompanyDAO {
 			  }else {
 				  result = -1;
 			  }
+		} catch (Exception ex) {
+			System.out.println("insertPopularityManagement 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (cstmt != null)
+					cstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("연결 해제 실패: " + e.getMessage());
+			}
+		}
+		return result;
+	}
+	// 저장될 경로 가져오기
+	public Boolean getUploadFilePath(CompnayFilePath companyApplicationFilePath, String companyFolder) {
+		String sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 2),? ,(SELECT file_path FROM file_path WHERE idx = 3)) AS app_cp_image_path,CONCAT((SELECT file_path FROM file_path WHERE idx = 2), ?,(SELECT file_path FROM file_path WHERE idx = 4)) AS app_cp_file_path";
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, companyFolder);
+			pstmt.setString(2, companyFolder);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				companyApplicationFilePath.setApp_cp_file_path(rs.getString("app_cp_image_path"));
+				companyApplicationFilePath.setApp_cp_image_path(rs.getString("app_cp_file_path"));
+				return true;
+			}
+		} catch (Exception ex) {
+			System.out.println("getUploadFilePath 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+
+		return false;
+	}
+	
+	// 관리자 페이지 기업등록
+	public int ComapnyRegister(CompanyRegister register, ArrayList<String> cf_store_images, ArrayList<String> cf_alias_store_images, ArrayList<String> cf_business_plan_images, ArrayList<String> cf_alias_business_plan_images, ArrayList<String> cf_etc_files, ArrayList<String> cf_alias_etc_files, ArrayList<String> cf_info_banner, ArrayList<String> cf_alias_info_banner, List<String> notice_title, List<String> notice_content, List<String> pay_count, List<String> pat_expected, List<String> pay_principal, List<String> pay_interest_paid, List<String> pay_fees, List<String> pay_actual_apyment, List<String> pay_actual_rate, List<String> point_title, List<String> point_comment) {
+		int result = 0;
+		CallableStatement cstmt = null;
+		ResultSet rs = null;
+		try {
+			cstmt = (CallableStatement)conn.prepareCall("call COMPANY_REGISTER(?,?,?,?,?,?,?,?,?,?");
+
+//			cstmt.setInt(1, cp_idx_list.get(0));
+//			cstmt.setInt(2, cp_idx_list.get(1));
+			cstmt.registerOutParameter(11, java.sql.Types.INTEGER);
+
+			cstmt.execute();
+			result = cstmt.getInt("@RESULT");
+			if (result == 1) {
+				System.out.println("result:::" + result);
+				return result;
+			} else {
+				result = -1;
+			}
 		} catch (Exception ex) {
 			System.out.println("insertPopularityManagement 에러: " + ex);
 		} finally {
