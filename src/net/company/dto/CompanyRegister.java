@@ -39,6 +39,7 @@ public class CompanyRegister {
 	private String ma_platform_pay;
 	private String ma_estimated_revenue;
 	private String ma_monthly_average;
+	private String cf_folder;
 	
 	// String /**/ 구분 데이터
 	private String point_title_string;
@@ -67,10 +68,37 @@ public class CompanyRegister {
 	private String cf_alias_info_banner;
 	// files
 	private String store_images;
+	private String alias_store_images;
 	private String business_plan;
+	private String alias_business_plan;
 	private String etc_files;
+	private String alias_etc_files;
 	
 	
+	public String getCf_folder() {
+		return cf_folder;
+	}
+	public void setCf_folder(String cf_folder) {
+		this.cf_folder = cf_folder;
+	}
+	public String getAlias_store_images() {
+		return alias_store_images;
+	}
+	public void setAlias_store_images(String alias_store_images) {
+		this.alias_store_images = alias_store_images;
+	}
+	public String getAlias_business_plan() {
+		return alias_business_plan;
+	}
+	public void setAlias_business_plan(String alias_business_plan) {
+		this.alias_business_plan = alias_business_plan;
+	}
+	public String getAlias_etc_files() {
+		return alias_etc_files;
+	}
+	public void setAlias_etc_files(String alias_etc_files) {
+		this.alias_etc_files = alias_etc_files;
+	}
 	public String getPay_actual_payment_string() {
 		return pay_actual_payment_string;
 	}

@@ -1,6 +1,6 @@
 package net.company.dto;
 
-public class CompnayFilePath {
+public class CompanyFilePath {
 	private String app_cp_image_path;
 	private String app_cp_file_path;
 	public String getApp_cp_image_path() {

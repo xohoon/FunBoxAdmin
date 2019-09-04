@@ -22,7 +22,7 @@ import net.company.dto.CompanyDeadLine;
 import net.company.dto.CompanyInvested;
 import net.company.dto.CompanyPopularityList;
 import net.company.dto.CompanyRegister;
-import net.company.dto.CompnayFilePath;
+import net.company.dto.CompanyFilePath;
 import net.util.Paging;
 
 public class CompanyDAO {
@@ -893,7 +893,7 @@ public class CompanyDAO {
 		return result;
 	}
 	// 저장될 경로 가져오기
-	public Boolean getUploadFilePath(CompnayFilePath companyApplicationFilePath, String companyFolder) {
+	public Boolean getUploadFilePath(CompanyFilePath companyApplicationFilePath, String companyFolder) {
 		String sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 2),? ,(SELECT file_path FROM file_path WHERE idx = 3)) AS app_cp_image_path,CONCAT((SELECT file_path FROM file_path WHERE idx = 2), ?,(SELECT file_path FROM file_path WHERE idx = 4)) AS app_cp_file_path";
 
 		PreparedStatement pstmt = null;
@@ -934,8 +934,7 @@ public class CompanyDAO {
 		CallableStatement cstmt = null;
 		ResultSet rs = null;
 		try {
-			cstmt = (CallableStatement)conn.prepareCall("call COMPANY_REGISTER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-
+			cstmt = (CallableStatement)conn.prepareCall("call COMPANY_REGISTER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			// company insert data
 			cstmt.setString(1, register.getCp_sector());
 			cstmt.setString(2, register.getCp_name());
@@ -987,7 +986,26 @@ public class CompanyDAO {
 			cstmt.setString(45, register.getPay_fees_string());
 			cstmt.setString(46, register.getPay_actual_payment_string());
 			cstmt.setString(47, register.getPay_actual_rate_string());
-			cstmt.registerOutParameter(48, java.sql.Types.INTEGER);
+			cstmt.setString(48, register.getStore_images());
+			cstmt.setString(49, register.getAlias_store_images());
+			cstmt.setString(50, register.getCf_info_banner());
+			cstmt.setString(51, register.getCf_alias_info_banner());
+			cstmt.setString(52, null);
+			cstmt.setString(53, null);
+			cstmt.setString(54, register.getCf_folder());
+			cstmt.setString(55, register.getBusiness_plan());
+			cstmt.setString(56, register.getAlias_business_plan());
+			cstmt.setString(57, register.getEtc_files());
+			cstmt.setString(58, register.getAlias_etc_files());
+			cstmt.setString(59, register.getCf_thumbnail());
+			cstmt.setString(60, register.getCf_alias_thumbnail());
+			cstmt.setString(61, register.getCf_pr_background());
+			cstmt.setString(62, register.getCf_alias_pr_background());
+			cstmt.setString(63, register.getCf_funding_contract());
+			cstmt.setString(64, register.getCf_alias_funding_contract());
+			cstmt.setString(65, register.getCf_business_plan());
+			cstmt.setString(66, register.getCf_alias_business_plan());
+			cstmt.registerOutParameter(67, java.sql.Types.INTEGER);
 
 			cstmt.execute();
 			result = cstmt.getInt("@RESULT");
