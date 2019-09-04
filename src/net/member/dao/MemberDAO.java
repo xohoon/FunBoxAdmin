@@ -294,14 +294,8 @@ public class MemberDAO {
 	public boolean remonveupdate(int idx) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-<<<<<<< HEAD
 				
 		String sql = "UPDATE member SET remove_check= true, secession_date_time = now() WHERE mb_idx = ?";		
-=======
-
-		String sql = "UPDATE member SET remove_check= true WHERE mb_idx = ?";
->>>>>>> branch 'master' of https://github.com/xohoon/FunBoxAdmin.git
-
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
