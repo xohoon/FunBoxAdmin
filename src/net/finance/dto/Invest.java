@@ -1,12 +1,14 @@
 package net.finance.dto;
 
+import java.util.Date;
+
 public class Invest {
 	
 	private String mb_id;
 	private String mi_category;
 	private String mi_name;
 	private String mi_point;
-	private String mi_reg_date_time;
+	private Date mi_reg_date_time;
 	private String mi_note;
 	
 	public String getMb_id() {
@@ -33,10 +35,10 @@ public class Invest {
 	public void setMi_point(String mi_point) {
 		this.mi_point = mi_point;
 	}
-	public String getMi_reg_date_time() {
+	public Date getMi_reg_date_time() {
 		return mi_reg_date_time;
 	}
-	public void setMi_reg_date_time(String mi_reg_date_time) {
+	public void setMi_reg_date_time(Date mi_reg_date_time) {
 		this.mi_reg_date_time = mi_reg_date_time;
 	}
 	public String getMi_note() {

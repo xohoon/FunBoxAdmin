@@ -57,6 +57,7 @@
 						<input type="hidden" id="hiddensearchID" name="hiddensearchID" value="${searchID}">
 					</ul>
 				</ul>
+				<br>
 				<c:if test = "${category == '0'}">
 					<table>
 						<tr>						
@@ -76,14 +77,14 @@
 									<td>환전</td>
 									<td><p><fmt:formatNumber value="${pointTransfer.tk_amount}" pattern="#,###" /></p></td>									
 									<td><p><fmt:formatNumber value="${pointTransfer.po_amount}" pattern="#,###" /></p></td>												
-									<th>${pointTransfer.po_date_time}</th>
+									<td>${pointTransfer.po_date_time}</td>
 								</c:when>
 								<c:otherwise>
 									<td>${pointTransfer.mb_id}</td>
 									<td>충전</td>									
 									<td><p><fmt:formatNumber value="${pointTransfer.tk_amount}" pattern="#,###" /></p></td>
 									<td><p><fmt:formatNumber value="${pointTransfer.po_amount}" pattern="#,###" /></p></td>
-									<th>${pointTransfer.po_date_time}</th>
+									<td>${pointTransfer.po_date_time}</td>
 								</c:otherwise>
 							</c:choose>
 							
@@ -135,7 +136,7 @@
 							<td>환전</td>									
 							<td><p><fmt:formatNumber value="${pointTransfer.tk_amount}" pattern="#,###" /></p></td>
 							<td><p><fmt:formatNumber value="${pointTransfer.po_amount}" pattern="#,###" /></p></td>												
-							<th>${pointTransfer.po_date_time}</th>						
+							<td>${pointTransfer.po_date_time}</td>						
 						</tr>	
 						</c:forEach>					
 					</table>
@@ -184,7 +185,7 @@
 							<td>충전</td>									
 							<td><p><fmt:formatNumber value="${pointTransfer.tk_amount}" pattern="#,###" /></p></td>
 							<td><p><fmt:formatNumber value="${pointTransfer.po_amount}" pattern="#,###" /></p></td>												
-							<th>${pointTransfer.po_date_time}</th>						
+							<td>${pointTransfer.po_date_time}</td>						
 						</tr>	
 						</c:forEach>					
 					</table>

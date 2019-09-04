@@ -25,6 +25,7 @@
 			<button class="write" onclick="window.open('./noticeRegister.cu','게시물등록','width=840,height=640,top=0,left=0,scrollbars=yes');">게시물등록</button>
 			<button id="off_status">비활성화</button>
 			<button id="on_status">활성화</button>
+			<br>
 				<table>
 					<tr>
 					  <th></th>
