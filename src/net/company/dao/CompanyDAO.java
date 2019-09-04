@@ -894,7 +894,10 @@ public class CompanyDAO {
 	}
 	// 저장될 경로 가져오기
 	public Boolean getUploadFilePath(CompanyFilePath companyApplicationFilePath, String companyFolder) {
-		String sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 2),? ,(SELECT file_path FROM file_path WHERE idx = 3)) AS app_cp_image_path,CONCAT((SELECT file_path FROM file_path WHERE idx = 2), ?,(SELECT file_path FROM file_path WHERE idx = 4)) AS app_cp_file_path";
+		String sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 2),? ,(SELECT file_path FROM file_path WHERE idx = 3)) "
+				+ "AS app_cp_image_path,"
+				+ "CONCAT((SELECT file_path FROM file_path WHERE idx = 2), ?,(SELECT file_path FROM file_path WHERE idx = 4)) "
+				+ "AS app_cp_file_path";
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
