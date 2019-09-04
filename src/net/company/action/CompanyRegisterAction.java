@@ -329,7 +329,7 @@ public class CompanyRegisterAction implements Action {
 				case "cf_info_banner":
 					register.setCf_info_banner(fileName);
 					register.setCf_alias_info_banner(alias + "cf_info_banner" + fileFormat);
-					part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_info_banner" + fileFormat);
+					part.write(companyFilePath.getApp_cp_image_path() +  alias + "cf_info_banner" + fileFormat);
 					break;
 				case "cf_store_images":
 					store_images += fileName + ",";
