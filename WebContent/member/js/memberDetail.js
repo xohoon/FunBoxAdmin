@@ -41,3 +41,16 @@ $(function() {
 		});
 	});
 });
+
+function remonveId(){
+	var transMb_idx = $('#mb_idx').val();
+	console.log(transMb_idx);
+	
+	if (confirm("탈퇴 하시겠습니까?") == true){
+		location.href = './memberRemove.mb?mb_idx=' + transMb_idx;
+	}else{
+		alert("취소 하였습니다.");
+	}
+	
+		
+}
