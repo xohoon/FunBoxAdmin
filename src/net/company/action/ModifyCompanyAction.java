@@ -23,8 +23,9 @@ public class ModifyCompanyAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = new ActionForward();
 		CompanyDetail companyDetail = new CompanyDetail();
-		int cp_idx;
-		String cp_sector;
+		int cp_idx = 13;
+		String cp_sector = request.getParameter("cp_sector");
+		System.out.println("test : " + cp_sector);
 		String cp_name;
 		String cp_branch;
 		String cp_manager;
