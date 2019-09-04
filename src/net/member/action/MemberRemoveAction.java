@@ -35,10 +35,11 @@ public class MemberRemoveAction implements Action {
 		MemberDAO memberdao = new MemberDAO();
 		result = memberdao.remonveupdate(mb_idx);
 		System.out.println("result : " + result);
-		
+		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
 		out.println("window.close();");
+		out.println("alert('탈퇴가 완료 되었습니다.');");
 		out.println("opener.location.replace('memberList.mb')");
 		out.println("</script>");		
 		out.close();
