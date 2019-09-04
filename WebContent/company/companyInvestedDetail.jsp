@@ -71,6 +71,7 @@
 						<p><span>매장사진4</span><input type="file"><a href="#" download>1.jpg</a>
 	          <span>445px * 310px</span></p> -->
           			</div>
+          			<p id="multi_cf_store_images"></p>
 					<p><span>기업PR배경</span><input type="file" name="cf_pr_background"><a href="/CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName=${companyDetail.cf_alias_pr_background}" download>${companyDetail.cf_pr_background }</a>
           <span>930px * 780px</span></p>
           <p><span>매장PR타이틀</span><input type="text" name="cp_point_title" value="${companyDetail.cp_intro_headline}"></p>
@@ -78,11 +79,17 @@
           <p><textarea name="cp_point_content">${companyDetail.cp_intro_content}</textarea>
           <span>250자 내외</span></p>
 				</div>
-				<div class="plan" id="plan">
-					<h3>사업계획서</h3>
+				<div class="plan">
+					<h3>사업계획서 파일</h3>
+					<p><span>사업계획서</span><input type="file" name="cf_business_plan"><a href="/CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=1&fileName=${companyDetail.cf_alias_business_plan}" download>${companyDetail.cf_business_plan }</a></p>
 				</div>
-			  <div id="cf_etc_files">
-          <h3>참고자료</h3>
+				<div class="plan" id="plan_images">
+					<h3>사업계획서 사진</h3>
+					<div id="plan"></div>
+				</div>
+			  <div id="etc">
+         		<h3>참고자료</h3>
+         		<div id="cf_etc_files"></div>
 			  </div>
 			  <div class="table1">
 			  	<h3>손익상세</h3>
@@ -173,14 +180,27 @@
             <input type="button" class="add add2" value="+">
             <input type="button" class="del del2" value="-">
 			  </div>
-			  <input type="text" name="cp_idx" value="${companyDetail.cp_idx }">
+			  <input type="hidden" name="cp_idx" value="${companyDetail.cp_idx }">
         </form>
-        <button class="submit rec">수정하기</button>
+        <button class="submit rec" id="modify">수정하기</button>
 			  <button class="submit save" id="submit" onclick = "save();">저장하기</button>
 			  <button class="submit cancel">취소</button>
 			</div>
 		</section>
 	<script type="text/javascript">
+	$(function(){
+		$('input[type=file]').hide();
+	});
+	document.getElementById('modify').addEventListener('click',function(){
+		//박신규
+	    $('#cf_store_images').hide();
+	    $('#plan').hide();
+	    $('#multi_cf_store_images').append('<span>매장 사진</span><input type=file multiple name="cf_store_images"><span></span>');
+	    $('#plan').hide();
+	    $('#plan_images').append('<p><span>사업 계획서 사진</span><input type=file multiple name="cf_business_plan_images"><span></span>');
+	    $('#cf_etc_files').hide();
+	    $('#etc').append('<p><span>참고 자료</span><input type=file multiple name="cf_etc_files"><span></span>');
+	});
 	
 	function save(){
 		var form = document.corForm;
@@ -219,7 +239,7 @@
 	var store_images_html = "";
 	
 	for (var i = 0; i < cf_alias_store_images.length; i++) {
-		store_images_html += "<p><span>매장사진"+(i+1)+"</span><input type='file' name='cf_store_images'><a href='/CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName="+cf_alias_store_images[i]+"' download>"
+		store_images_html += "<p><span>매장사진"+(i+1)+"</span><input type='file'><a href='/CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName="+cf_alias_store_images[i]+"' download>"
 		store_images_html += cf_store_images[i];
 		if (i < 2) {
 			store_images_html += "</a><span>930px * 310px</span></p>"
@@ -242,7 +262,6 @@
 		var pTag = document.createElement('p');
 		var inputTag = document.createElement('input');
 		inputTag.type = 'file';
-		inputTag.name = 'cf_business_plan_images';
 		var aTage = document.createElement('a');
 		aTage.href = '/CompanyFileDownload?cp_idx='+cp_idx+'&kindOfFile=2&fileName='+cf_alias_business_plan_images[i]+'';
 		//수정해줘야함
@@ -265,7 +284,7 @@
 		var pTag = document.createElement('p');
 		var inputTag = document.createElement('input');
 		inputTag.type = 'file';
-		inputTag.name = 'cf_etc_files';
+		//inputTag.name = 'cf_etc_files';
 		var aTage = document.createElement('a');
 		aTage.href = '/CompanyFileDownload?cp_idx='+cp_idx+'&kindOfFile=1&fileName='+cf_etc_files[i]+'';
 		aTage.text = cf_etc_files[i];
@@ -452,6 +471,9 @@
           $('input').prop('readonly',false);
           $('textarea').prop('readonly',false);
           $('input[type=file]').show();
+          
+          
+          
           $(this).hide();
           $('.save').show();
           $('.cancel').show();
