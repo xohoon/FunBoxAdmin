@@ -896,7 +896,7 @@ public class CompanyDAO {
 	}
 	// 저장될 경로 가져오기
 	public Boolean getUploadFilePath(CompanyFilePath companyApplicationFilePath, String companyFolder) {
-		String sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 2),? ,(SELECT file_path FROM file_path WHERE idx = 3)) AS app_cp_image_path,CONCAT((SELECT file_path FROM file_path WHERE idx = 2), ?,(SELECT file_path FROM file_path WHERE idx = 4)) AS app_cp_file_path";
+		String sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 2),? ,(SELECT file_path FROM file_path WHERE idx = 3)) AS app_cp_file_path,CONCAT((SELECT file_path FROM file_path WHERE idx = 2), ?,(SELECT file_path FROM file_path WHERE idx = 4)) AS app_cp_image_path";
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -1114,10 +1114,10 @@ public class CompanyDAO {
 			cstmt.execute();
 			result = cstmt.getInt("@RESULT");
 			if (result == 1) {
-				System.out.println("result:::" + result);
 				return result;
 			} else {
 				result = -1;
+				System.out.println("Database :: data size check please :)");
 			}
 		} catch (Exception ex) {
 			System.out.println("ComapnyRegister 에러: " + ex);

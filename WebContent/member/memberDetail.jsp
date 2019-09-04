@@ -69,11 +69,11 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<button class="submit out">탈퇴하기</button>
+		<button class="submit out" onclick= "remonveId();">탈퇴하기</button>
 		<button class="submit rec">수정하기</button>
     	<button id="save" class="submit save">저장하기</button>
 		<button class="submit cancel">취소</button>
-		<input type="hidden" id="mb_idx" value="${mb_idx }" />
+		<input type="hidden" id="mb_idx" value="${mb_idx}" />
 	</div><!--.sec01_1-->
 	<script>
 		$(function(){
