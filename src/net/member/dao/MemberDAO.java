@@ -8,8 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-//import com.mysql.jdbc.CallableStatement;
-import com.mysql.cj.jdbc.CallableStatement;
+
+import com.mysql.jdbc.CallableStatement;
+//import com.mysql.cj.jdbc.CallableStatement;
+
 
 import net.member.dto.Member;
 import net.member.dto.MemberLateInvested;
@@ -292,16 +294,21 @@ public class MemberDAO {
 	public boolean remonveupdate(int idx) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+<<<<<<< HEAD
 				
 		String sql = "UPDATE member SET remove_check= true, secession_date_time = now() WHERE mb_idx = ?";		
+=======
+
+		String sql = "UPDATE member SET remove_check= true WHERE mb_idx = ?";
+>>>>>>> branch 'master' of https://github.com/xohoon/FunBoxAdmin.git
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, idx); 				
+			pstmt.setInt(1, idx);
 			pstmt.executeUpdate();
-			
+
 			return true;
-			
+
 		} catch (Exception ex) {
 			System.out.println("replyupdate 에러: " + ex);
 		} finally {
@@ -316,7 +323,7 @@ public class MemberDAO {
 				System.out.println("해제 실패 : " + e.getMessage());
 			}
 		}
-		
+
 		return false;
 	}
 }
