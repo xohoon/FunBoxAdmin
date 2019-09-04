@@ -87,7 +87,7 @@
 									<c:if test="${tokenTransfer.td_status == '2'}">
 										<td>취소</td>
 									</c:if>
-									<th>${tokenTransfer.td_date_time}</th>
+									<td>${tokenTransfer.td_date_time}</td>
 								</c:when>
 								<c:otherwise>
 									<td>${tokenTransfer.mb_id}</td>
@@ -103,7 +103,7 @@
 									<c:if test="${tokenTransfer.td_status == '2'}">
 										<td>취소</td>
 									</c:if>
-									<th>${tokenTransfer.td_date_time}</th>
+									<td>${tokenTransfer.td_date_time}</td>
 								</c:otherwise>
 							</c:choose>
 							
@@ -165,7 +165,7 @@
 							<c:if test="${tokenTransfer.td_status == '2'}">
 								<td>취소</td>
 							</c:if>
-							<th>${tokenTransfer.td_date_time}</th>							
+							<td>${tokenTransfer.td_date_time}</td>							
 						</tr>	
 						</c:forEach>					
 					</table>
@@ -224,7 +224,7 @@
 							<c:if test="${tokenTransfer.td_status == '2'}">
 								<td>취소</td>
 							</c:if>
-							<th>${tokenTransfer.td_date_time}</th>							
+							<td>${tokenTransfer.td_date_time}</td>							
 						</tr>	
 						</c:forEach>					
 					</table>

@@ -79,7 +79,7 @@ public class FinanceDAO {
 				tokenList.setTd_to_address(rs.getString("td_to_address"));
 				tokenList.setTd_amount(rs.getString("td_amount"));
 				tokenList.setTd_status(rs.getString("td_status"));
-				tokenList.setTd_date_time(rs.getString("td_date_time"));
+				tokenList.setTd_date_time(rs.getDate("td_date_time"));
 				transTokenList.add(tokenList);								
 			}
 			
@@ -190,7 +190,7 @@ public class FinanceDAO {
 				pointList.setMb_id(rs.getString("mb_id"));
 				pointList.setPo_category(rs.getString("po_category"));
 				pointList.setPo_amount(rs.getString("po_amount"));
-				pointList.setPo_date_time(rs.getString("po_date_time"));
+				pointList.setPo_date_time(rs.getDate("po_date_time"));
 				pointList.setTk_amount(rs.getString("tk_amount"));
 				
 				transPointList.add(pointList);								
@@ -319,7 +319,7 @@ public class FinanceDAO {
 					investList.setMi_category(rs.getString("mi_category"));
 					investList.setMi_name(rs.getString("mi_name"));
 					investList.setMi_point(rs.getString("mi_point"));
-					investList.setMi_reg_date_time(rs.getString("mi_reg_date_time"));
+					investList.setMi_reg_date_time(rs.getDate("mi_reg_date_time"));
 					investList.setMi_note(rs.getString("mi_note"));
 					
 					transInvestList.add(investList);

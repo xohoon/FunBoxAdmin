@@ -1,12 +1,15 @@
 package net.finance.dto;
 
+import java.util.Date;
+
 public class Point {
 
 	private String mb_id;
 	private String po_category;
 	private String po_amount;
-	private String po_date_time;
+	private Date po_date_time;
 	private String tk_amount;
+	
 	public String getMb_id() {
 		return mb_id;
 	}
@@ -25,10 +28,10 @@ public class Point {
 	public void setPo_amount(String po_amount) {
 		this.po_amount = po_amount;
 	}
-	public String getPo_date_time() {
+	public Date getPo_date_time() {
 		return po_date_time;
 	}
-	public void setPo_date_time(String po_date_time) {
+	public void setPo_date_time(Date po_date_time) {
 		this.po_date_time = po_date_time;
 	}
 	public String getTk_amount() {
