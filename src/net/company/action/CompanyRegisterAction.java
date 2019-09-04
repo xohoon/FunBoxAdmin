@@ -273,16 +273,20 @@ public class CompanyRegisterAction implements Action {
 		// 폴더이름 변수
 		String rand_num = UUID.randomUUID().toString().substring(0, 17);
 		String cf_folder = rand_num + "_" + now + "/";
+
 		// company 기본경로 + 폴더 이름 -> 폴더 경로에 파일삽입위해서
 		CompanyFilePath companyFilePath = new CompanyFilePath();
 		companyDAO.getUploadFilePath(companyFilePath, cf_folder);
 		register.setCf_folder(cf_folder);
-		
+		System.out.println("file_path>>>"+companyFilePath.getApp_cp_file_path());
+		System.out.println("image_path>>>"+companyFilePath.getApp_cp_image_path());
+	
 		// 파일디렉토리
 		File fileFolder = new File(companyFilePath.getApp_cp_file_path());
 		if (!fileFolder.exists()) {
 			fileFolder.mkdirs();
 		}
+	
 		File imageFolder = new File(companyFilePath.getApp_cp_image_path());
 		if (!imageFolder.exists()) {
 			imageFolder.mkdirs();
@@ -318,45 +322,44 @@ public class CompanyRegisterAction implements Action {
 				case "cf_thumbnail":
 					register.setCf_thumbnail(fileName);
 					register.setCf_alias_thumbnail(alias + "cf_thumbnail" + fileFormat);
-					//part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_thumbnail" + fileFormat);
+					part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_thumbnail" + fileFormat);
 					break;
 				case "cf_info_banner":
 					register.setCf_info_banner(fileName);
 					register.setCf_alias_info_banner(alias + "cf_info_banner" + fileFormat);
-					//part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_info_banner" + fileFormat);
+					part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_info_banner" + fileFormat);
 					break;
 				case "cf_store_images":
 					store_images += fileName + ",";
 					alias_store_images += alias + "cf_store_images" + fileFormat + ",";
-					//cf_alias_store_images.add(alias + "cf_store_images" + fileFormat);
-					//part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_store_images" + fileFormat);
+					part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_store_images" + fileFormat);
 					break;
 				case "cf_pr_background":
 					register.setCf_pr_background(fileName);
 					register.setCf_alias_pr_background(alias + "cf_pr_background" + fileFormat);
-					//part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_pr_background" + fileFormat);
+					part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_pr_background" + fileFormat);
 					break;
 				case "cf_business_plan_images":
 					business_plan += fileName + ",";
 					alias_business_plan += alias + "cf_business_plan_images" + fileFormat + ",";
 					//cf_alias_business_plan_images.add(alias + "cf_business_plan_images" + fileFormat);
-					//part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_business_plan_images" + fileFormat);
+					part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_business_plan_images" + fileFormat);
 					break;
 				case "cf_business_plan":
 					register.setCf_business_plan(fileName);
 					register.setCf_alias_business_plan(alias + "cf_business_plan" + fileFormat);
-					//part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_business_plan" + fileFormat);
+					part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_business_plan" + fileFormat);
 					break;
 				case "cf_funding_contract":
 					register.setCf_funding_contract(fileName);
 					register.setCf_alias_funding_contract(alias + "cf_funding_contract" + fileFormat);
-					//part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_funding_contract" + fileFormat);
+					part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_funding_contract" + fileFormat);
 					break;
 				case "cf_etc_files":
 					etc_files += fileName + ",";
 					alias_etc_files += alias + "cf_etc_files" + fileFormat + ",";
 					//cf_alias_etc_files.add(alias + "cf_etc_files" + fileFormat);
-					//part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_etc_files" + fileFormat);
+					part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_etc_files" + fileFormat);
 					break;
 				default:
 					break;
