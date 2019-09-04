@@ -54,6 +54,7 @@
 				<input type="hidden" id="cate_color" name="cate_color" value="${category}">
 				<input type="hidden" id="hiddensearchID" name="hiddensearchID" value="${searchID}">
 			  </ul>
+			  <br>
 			  	<c:if test = "${category == '0'}">
 			  		<table>
 				  		<tr>

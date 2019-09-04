@@ -46,6 +46,7 @@
 	          	</c:otherwise>
 	        </c:choose>
         </ul>
+        <br>
 		<div class="ingGroup">
           <table>
             <tr>

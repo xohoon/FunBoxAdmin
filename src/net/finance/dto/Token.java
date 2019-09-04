@@ -1,5 +1,6 @@
 package net.finance.dto;
 
+import java.util.Date;
 
 public class Token {
 	
@@ -8,7 +9,7 @@ public class Token {
 	private String td_from_address;
 	private String td_amount;
 	private String td_status;
-	private String td_date_time;
+	private Date td_date_time;
 	
 	public String getMb_id() {
 		return mb_id;
@@ -40,10 +41,10 @@ public class Token {
 	public void setTd_status(String td_status) {
 		this.td_status = td_status;
 	}
-	public String getTd_date_time() {
+	public Date getTd_date_time() {
 		return td_date_time;
 	}
-	public void setTd_date_time(String td_date_time) {
+	public void setTd_date_time(Date td_date_time) {
 		this.td_date_time = td_date_time;
 	}
 	@Override

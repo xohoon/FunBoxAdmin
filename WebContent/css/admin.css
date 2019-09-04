@@ -147,7 +147,6 @@ h2{
 div{
 	text-align:left;
 	margin-bottom:8px;
-    position:relative;
 }
 button{
   font-size:14px;
@@ -157,7 +156,7 @@ button{
   border:1px solid #73a6d6;
   color:#73a6d6;
   outline:none;
-  float:right;
+  float:right;  
 }
 button:hover{
   border:1px solid #ff9124;
@@ -181,7 +180,7 @@ input[type="button"]{
 }
 table{
 	width:100%;
-	margin:16px 0 24px;
+	margin:40px 0 24px;
   font-size:16px;
 }
 th, td{
@@ -197,7 +196,7 @@ select{
 	width:120px;
 	height:32px;
 	padding:0 24px 0 8px;
-	background:#fff url(../img/arrow_down.svg) no-repeat right 8px center/12px auto;
+	background:#fff url(../img/arrow_down.svg) no-repeat right 8px center/10px auto;
 	outline:none;
 	margin-right:8px;
 	border:1px solid #ddd;
@@ -218,9 +217,24 @@ textarea{
 	color:#777;
 	cursor:pointer;
   font-size:16px;
+  line-height:32px;
 }
 .tab li.on{
 	color:#ff9124;
+}
+.modal{
+  padding:8px;
+  position:fixed;
+  top:80%;
+  left:50%;
+  transform:translateX(-50%);
+  background:#fff;
+  border-radius:4px;
+  margin:0;
+  box-shadow:5px 5px 5px rgba(0,0,0,0.1);
+  font-size:14px;
+  opacity:0;
+  z-index:1000;
 }
 
 /*login*/
@@ -349,6 +363,7 @@ textarea{
 	border:0;
 	font-size:20px;
 	padding:0;
+  margin:0;
 }
 #sec01 td:first-child, #sec01 th:first-child{
 	width:80px;
@@ -491,12 +506,18 @@ button.out{
 	width:80px;
 }
 #sec03 th:nth-child(4){
-	width:45%;
+	width:50%;
 }
 #sec03 th:nth-child(n+6):nth-child(-n+7){
 	width:10%;
 }
-
+#sec03 td:nth-child(4),#sec04 td:nth-child(4){
+  word-break:break-all;
+  padding:0 8px;
+  line-height:1.6em;
+  text-align:left;
+  letter-spacing:0.01em;
+}
 /*sec04*/
 
 #sec04 th:nth-child(n+1):nth-child(-n+3), #sec17 th:nth-child(n+1):nth-child(-n+3){
@@ -511,11 +532,8 @@ button.out{
 
 /*sec05*/
 
-#sec05 table{
-  margin-top:8px;
-}
 .new{
-  background:rgba(255,145,36,0.3);
+  background:rgba(255,145,36,0.1);
 }
 #sec05 td{
   width:auto;
@@ -590,6 +608,7 @@ button.out{
 }
 #sec06 .con div{
   margin-bottom:32px;
+  position:relative;
 }
 #sec06 form > div:nth-child(5) h3{
   display:inline-block;
@@ -700,10 +719,6 @@ button.out{
   line-height:22px;
   position:absolute;
 }
-.del1{
-  top:4px;
-  left:328px;
-}
 #sec06 input.add2{
   top:67px;
   left:1208px;
@@ -781,8 +796,25 @@ textarea{
    z-index:10;
 }
 /*sec07*/
-.con .ingGroup, .con .doneGroup{
+.con .ingGroup{
   text-align:center;
+}
+.ctg{
+  float:right;
+}
+.ctg > div{
+  height:20;
+  margin:0;
+  text-align:right
+}
+.ctg label{
+  width:auto;
+  margin-right:16px;
+  line-height:20px;
+  font-size:14px;
+}
+#sec07 table{
+  margin:32px 0 16px;
 }
 #sec07 td{
   width:auto;
@@ -794,9 +826,27 @@ textarea{
 #sec07 td:first-child:hover{
   color:#73a6d6;
 }
-.doneGroup{
-  display:none;
+#sec07 td select{
+  width:100%;
+  height:100%;
+  padding:0 8px;
+  margin:0;
+  border:0;
+  outline:0;
+  font-size:14px;
 }
+#sec07 th:last-child{
+  width:48px;
+}
+#sec07 td:last-child{
+  color:#73a6d6;
+  cursor:pointer;
+}
+#sec07 td:last-child:hover{
+  color:#fff;
+  background:#73a6d6;
+}
+
 #sec06.sec07_1{
   width:100%;
   display:block;
@@ -814,12 +864,28 @@ textarea{
 .sec07_1 input[type=text]{
   border:0;
 }
+.sec07_1 input[type=file]{
+  margin-right:8px;
+}
 .sec07_1 a{
   line-height:32px;
+  color:#4d6b89;
 }
-.sec07_1 input[type=file]{
-  display:none;
-  margin-right:16px;
+.sec07_1 a:nth-child(n+4){
+  margin-left:212px;
+}
+.sec07_1.on a:nth-child(n+4){
+  margin-left:620px;
+}
+.sec07_1 a i{
+  vertical-align:middle;
+  margin-right:8px;
+}
+.sec07_1 a:hover{
+  color:#73a6d6;
+}
+.sec07_1 textarea{
+  font-size:14px;
 }
 button.cancel{
   background:#fff;
@@ -827,7 +893,16 @@ button.cancel{
   color:#ff9124;
   margin-right:8px;
 }
-
+button.cancel:hover{
+  color:#ff9124;
+  border:1px solid #ff9124;
+}
+#sec06.sec07_1 .add, #sec06.sec07_1 .del{
+  display:none;
+}
+#sec06.sec07_1.on .add, #sec06.sec07_1.on .del{
+  display:block;
+}
 /*allList*/
 
 .allGroup th:first-child{
@@ -837,11 +912,9 @@ button.cancel{
   background:#fff;
   border:1px solid #73a6d6;
   color:#73a6d6;
+  float:none;
+  height:24px;
  }
-.allBtn:hover{
-  background:#73a6d6;
-  color:#fff;
-}
 .onOffBtn{
   float:right;
   margin-right:6%;
@@ -910,19 +983,22 @@ button.cancel{
   background:#fff;
   border:1px solid #ff9124;
   color:#ff9124;
+  float:none;
+  height:24px;
 }
 .topDelBtn:hover{
   background:#ff9124;
   color:#fff;
 }
 .upBtn, .downBtn{
+  height:24px;
+  width:24px;
+  padding:0;
   background:#fff;
   border:1px solid #73a6d6;
   color:#73a6d6;
-}
-.upBtn:hover, .downBtn:hover{
-  background:#73a6d6;
-  color:#fff;
+  float:none;
+  
 }
 #sec08 td:nth-child(2){
   cursor:pointer;
@@ -961,6 +1037,12 @@ button.cancel{
   margin:0 0 8px 0;
   width:160px;
 }
+#sec13 button{
+  margin-right:8px;
+}
+#sec13 button:nth-child(2){
+  margin-right:0;
+}
 #sec13 td:nth-child(4){
   cursor:pointer;
 }
@@ -987,27 +1069,9 @@ button.cancel{
 #sec13 td:nth-child(4), #sec13 th:nth-child(4), #sec14 th:nth-child(2), #sec14 td:nth-child(2){
   text-align:left;
 }
-/*
-#sec13 button, #sec15 button{
-  display:block;
-  float:right;
-  width:120px;
-  height:32px;
-  padding:0;
-  background:#fff;
-  border:1px solid #73a6d6;
-  color:#73a6d6;
-  margin-left:8px;
-  margin-bottom:8px;
-}
-#sec13 button:hover, #sec15 button:hover{
-  color:#ff9124;
-  border:1px solid #ff9124;
-}
-*/
 .sec13_new, .sec13_view, .sec14_view, .sec15_new{
   padding:40px;
-  width:800px;
+  width:840px;
   margin:0 auto;
   text-align:right;
 }
@@ -1020,6 +1084,7 @@ button.cancel{
   margin-right:8px;
 }
 .sec13_new .tit, .sec13_view .tit, .sec14_view .tit, .sec15_new .tit{
+  display:inline-block;
   width:480px;
   height:32px;
   padding:0;
@@ -1087,6 +1152,13 @@ button.cancel{
 #sec15 .con{
   margin:0;
 }
+#sec15 button{
+  margin-right:8px;
+  margin-bottom:8px;
+}
+#sec15 button:first-child{
+  margin-right:0;
+}
 #sec15 th:first-child{
   width:40px;
 }
@@ -1148,33 +1220,4 @@ button.cancel{
   border:0;
   color:#fff;
   vertical-align:top;
-}
-
-#modityBtn{
-  background:#fff;
-  border:1px solid #73a6d6;
-  color:#73a6d6;
-  width:70px;
-  padding-right:7px;
-  margin-left:-77px;
-  margin-top:50px;
-}
-#modityBtn:hover{
-  background:#73a6d6;
-  color:#fff;
-}
-#saveBtn{
-  background:#fff;
-  border:1px solid #ff9124;
-  color:#ff9124;
-  width:70px;
-  padding-right:7px;
-  margin-top:50px;
-  margin-left:10px;
-}
-#saveBtn:hover{
-  background:#ff9124;
-  color:#fff;
-  margin-left:10px;
-  margin-top:50px;
 }

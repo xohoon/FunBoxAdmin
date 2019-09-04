@@ -58,6 +58,7 @@
 						<input type="hidden" id="hiddensearchID" name="hiddensearchID" value="${searchID}">
 					</ul>
 				</ul>
+				<br>
 					<c:if test = "${category == '0'}">
 						<table>
 							<tr>						
@@ -76,7 +77,7 @@
 								<td>${investTransfer.mi_category}</td>									
 								<td>${investTransfer.mi_name}</td>
 								<td><p><fmt:formatNumber value="${investTransfer.mi_point}" pattern="#,###" /></p></td>
-								<th>${investTransfer.mi_reg_date_time}</th>
+								<td>${investTransfer.mi_reg_date_time}</td>
 								<td>${investTransfer.mi_note}</td>						
 							</tr>	
 							</c:forEach>					
@@ -127,7 +128,7 @@
 								<td>${investTransfer.mi_category}</td>									
 								<td>${investTransfer.mi_name}</td>
 								<td><p><fmt:formatNumber value="${investTransfer.mi_point}" pattern="#,###" /></p></td>												
-								<th>${investTransfer.mi_reg_date_time}</th>
+								<td>${investTransfer.mi_reg_date_time}</td>
 								<td>${investTransfer.mi_note}</td>						
 							</tr>	
 							</c:forEach>					
@@ -178,7 +179,7 @@
 								<td>${investTransfer.mi_category}</td>									
 								<td>${investTransfer.mi_name}</td>
 								<td><p><fmt:formatNumber value="${investTransfer.mi_point}" pattern="#,###" /></p></td>												
-								<th>${investTransfer.mi_reg_date_time}</th>
+								<td>${investTransfer.mi_reg_date_time}</td>
 								<td>${investTransfer.mi_note}</td>						
 							</tr>	
 							</c:forEach>					
@@ -229,7 +230,7 @@
 								<td>${investTransfer.mi_category}</td>									
 								<td>${investTransfer.mi_name}</td>
 								<td><p><fmt:formatNumber value="${investTransfer.mi_point}" pattern="#,###" /></p></td>												
-								<th>${investTransfer.mi_reg_date_time}</th>
+								<td>${investTransfer.mi_reg_date_time}</td>
 								<td>${investTransfer.mi_note}</td>						
 							</tr>	
 							</c:forEach>					
