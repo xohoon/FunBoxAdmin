@@ -933,6 +933,7 @@ public class CompanyDAO {
 		int result = 0;
 		CallableStatement cstmt = null;
 		ResultSet rs = null;
+		System.out.println("DAO"+register.toString());
 		try {
 			cstmt = (CallableStatement)conn.prepareCall("call COMPANY_REGISTER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			// company insert data
@@ -1008,6 +1009,7 @@ public class CompanyDAO {
 			cstmt.registerOutParameter(67, java.sql.Types.INTEGER);
 
 			cstmt.execute();
+			System.out.println("DAO result ::: "+cstmt.getInt("@RESULT"));
 			result = cstmt.getInt("@RESULT");
 			if (result == 1) {
 				System.out.println("result:::" + result);

@@ -475,13 +475,22 @@ public class CompanyRegister {
 				+ ", ma_odds_percent=" + ma_odds_percent + ", ma_odds_money=" + ma_odds_money + ", ma_share_percent="
 				+ ma_share_percent + ", ma_share_money=" + ma_share_money + ", ma_platform_pay=" + ma_platform_pay
 				+ ", ma_estimated_revenue=" + ma_estimated_revenue + ", ma_monthly_average=" + ma_monthly_average
-				+ ", cf_thumbnail=" + cf_thumbnail
-				+ ", cf_alias_thumbnail=" + cf_alias_thumbnail + ", cf_pr_background=" + cf_pr_background
-				+ ", cf_alias_pr_background=" + cf_alias_pr_background + ", cf_business_plan=" + cf_business_plan
-				+ ", cf_alias_business_plan=" + cf_alias_business_plan + ", cf_funding_contract=" + cf_funding_contract
-				+ ", cf_alias_funding_contract=" + cf_alias_funding_contract + ", cf_info_banner=" + cf_info_banner
-				+ ", cf_alias_info_banner=" + cf_alias_info_banner + "]";
+				+ ", cf_folder=" + cf_folder + ", point_title_string=" + point_title_string + ", point_content_string="
+				+ point_content_string + ", pay_count_string=" + pay_count_string + ", pay_payment_date_string="
+				+ pay_payment_date_string + ", pay_principal_string=" + pay_principal_string + ", pay_interest_string="
+				+ pay_interest_string + ", pay_fees_string=" + pay_fees_string + ", pay_actual_payment_string="
+				+ pay_actual_payment_string + ", pay_actual_rate_string=" + pay_actual_rate_string
+				+ ", notice_title_string=" + notice_title_string + ", notice_content_string=" + notice_content_string
+				+ ", cf_thumbnail=" + cf_thumbnail + ", cf_alias_thumbnail=" + cf_alias_thumbnail
+				+ ", cf_pr_background=" + cf_pr_background + ", cf_alias_pr_background=" + cf_alias_pr_background
+				+ ", cf_business_plan=" + cf_business_plan + ", cf_alias_business_plan=" + cf_alias_business_plan
+				+ ", cf_funding_contract=" + cf_funding_contract + ", cf_alias_funding_contract="
+				+ cf_alias_funding_contract + ", cf_info_banner=" + cf_info_banner + ", cf_alias_info_banner="
+				+ cf_alias_info_banner + ", store_images=" + store_images + ", alias_store_images=" + alias_store_images
+				+ ", business_plan=" + business_plan + ", alias_business_plan=" + alias_business_plan + ", etc_files="
+				+ etc_files + ", alias_etc_files=" + alias_etc_files + "]";
 	}
+	
 	
 	
 	
