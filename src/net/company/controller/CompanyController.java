@@ -28,9 +28,9 @@ import net.company.action.CompanyRecomnandManagementAction;
 import net.company.action.CompanyRegisterAction;
 import net.company.action.CompanyRegisterFormAction;
 import net.company.action.DeleteCompanyInvestApply;
+import net.company.action.ModifyCompanyAction;
 import net.company.action.SetAutoOrManualAction;
 import net.company.action.companyPopularityManagementUpdateAction;
-import net.member.action.ModifyMemberAction;
 
 @MultipartConfig(maxFileSize = 136314880)
 public class CompanyController extends HttpServlet {
@@ -126,7 +126,7 @@ public class CompanyController extends HttpServlet {
 				break;
 				//태훈끝//
 			case "/modifyCompany.cp":
-				action = new ModifyMemberAction();
+				action = new ModifyCompanyAction();
 				forward = action.execute(request, response);
 				break;
 			default:

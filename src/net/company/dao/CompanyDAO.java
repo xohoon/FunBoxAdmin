@@ -11,8 +11,8 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.mysql.jdbc.CallableStatement;
-//import com.mysql.cj.jdbc.CallableStatement;
+//import com.mysql.jdbc.CallableStatement;
+import com.mysql.cj.jdbc.CallableStatement;
 
 import net.company.dto.Company;
 import net.company.dto.CompanyAdded;
@@ -1135,6 +1135,93 @@ public class CompanyDAO {
 		}
 		return result;
 	}
+	
+	// 태훈추가 - 관리자 페이지 기업 수정
+	public int CompanyUpdate(CompanyDetail detail) {
+		int result = 0;
+		CallableStatement cstmt = null;
+		ResultSet rs = null;
+		try {
+			cstmt = (CallableStatement) conn.prepareCall(
+					"call COMPANY_UPDATE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			// company insert data
+			cstmt.setString(1, detail.getCp_sector());
+			cstmt.setString(2, detail.getCp_name());
+			cstmt.setString(3, detail.getCp_branch());
+			cstmt.setString(4, detail.getCp_manager());
+			cstmt.setString(5, detail.getCp_number());
+			cstmt.setString(6, detail.getCp_capital());
+			cstmt.setString(7, detail.getCp_address());
+			cstmt.setString(8, detail.getCp_add_ch());
+			cstmt.setString(9, detail.getCp_add_more());
+			cstmt.setString(10, detail.getCp_add_num());
+			cstmt.setString(11, detail.getCp_monthly_profit());
+			cstmt.setString(12, detail.getCp_reward_main_title());
+			cstmt.setString(13, detail.getCp_reward_sub_title());
+			cstmt.setString(14, detail.getCp_reward_content());
+			cstmt.setString(15, detail.getCp_intro_headline());
+			cstmt.setString(16, detail.getCp_intro_content());
+			// company_invest insert data
+			cstmt.setString(17, detail.getIv_contraction_during());
+			cstmt.setString(18, detail.getIv_min_amount());
+			cstmt.setString(19, detail.getIv_appl_stock());
+			cstmt.setString(20, detail.getIv_goal_amount());
+			cstmt.setString(21, detail.getIv_appl_day());
+			cstmt.setString(22, detail.getPl_year());
+			cstmt.setString(23, detail.getPl_month());
+			cstmt.setString(24, detail.getPl_sales());
+			cstmt.setString(25, detail.getPl_material());
+			cstmt.setString(26, detail.getPl_person_pay());
+			cstmt.setString(27, detail.getPl_rent_building());
+			cstmt.setString(28, detail.getPl_operating_pay());
+			cstmt.setString(29, detail.getPl_net_revenue());
+			cstmt.setString(30, detail.getMa_odds_percent());
+			cstmt.setString(31, detail.getMa_odds_money());
+			cstmt.setString(32, detail.getMa_share_percent());
+			cstmt.setString(33, detail.getMa_share_money());
+			cstmt.setString(34, detail.getMa_platform_pay());
+			cstmt.setString(35, detail.getMa_estimated_revenue());
+			cstmt.setString(36, detail.getMa_monthly_average());
+			// company_content insert data
+			cstmt.setString(37, detail.getCp_pay_count());
+			cstmt.setString(38, detail.getCp_pay_expected_payment_date());
+			cstmt.setString(39, detail.getCp_pay_principal());
+			cstmt.setString(40, detail.getCp_pay_interest_paid());
+			cstmt.setString(41, detail.getCp_pay_fees());
+			cstmt.setString(42, detail.getCp_pay_actual_payment_amout());
+			cstmt.setString(43, detail.getCp_pay_actual_rate_return());
+			cstmt.setString(44, detail.getPoint_title_string());
+			cstmt.setString(45, detail.getPoint_content_string());
+			cstmt.setString(46, detail.getNotice_title_string());
+			cstmt.setString(47, detail.getNotice_content_string());
+			cstmt.setInt(48, detail.getCp_idx());
+			cstmt.registerOutParameter(49, java.sql.Types.INTEGER);
+
+			cstmt.execute();
+			result = cstmt.getInt("@RESULT");
+			if (result == 1) {
+				return result;
+			} else {
+				result = -1;
+				System.out.println("Database :: data size check please :)");
+			}
+		} catch (Exception ex) {
+			System.out.println("CompanyUpdate 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (cstmt != null)
+					cstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("연결 해제 실패: " + e.getMessage());
+			}
+		}
+		return result;
+	}
+	
 	///////////////////////////////// 태훈끝//////////////////////////////////////////////
 
 	public String getFileDirectory(int cp_idx,int kindOfFile) {

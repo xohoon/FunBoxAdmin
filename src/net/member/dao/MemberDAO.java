@@ -11,7 +11,6 @@ import java.util.List;
 import com.mysql.jdbc.CallableStatement;
 //import com.mysql.cj.jdbc.CallableStatement;
 
-import net.customer.dto.inquiryAnswer;
 import net.member.dto.Member;
 import net.member.dto.MemberLateInvested;
 import net.util.Paging;
@@ -293,16 +292,16 @@ public class MemberDAO {
 	public boolean remonveupdate(int idx) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-				
-		String sql = "UPDATE member SET remove_check= true WHERE mb_idx = ?";		
+
+		String sql = "UPDATE member SET remove_check= true WHERE mb_idx = ?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, idx); 				
+			pstmt.setInt(1, idx);
 			pstmt.executeUpdate();
-			
+
 			return true;
-			
+
 		} catch (Exception ex) {
 			System.out.println("replyupdate 에러: " + ex);
 		} finally {
@@ -317,7 +316,7 @@ public class MemberDAO {
 				System.out.println("해제 실패 : " + e.getMessage());
 			}
 		}
-		
+
 		return false;
 	}
 }

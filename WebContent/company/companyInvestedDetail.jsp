@@ -176,11 +176,22 @@
 			  <input type="text" name="cp_idx" value="${companyDetail.cp_idx }">
         </form>
         <button class="submit rec">수정하기</button>
-			  <button class="submit save" id="submit">저장하기</button>
+			  <button class="submit save" id="submit" onclick = "save();">저장하기</button>
 			  <button class="submit cancel">취소</button>
 			</div>
 		</section>
 	<script type="text/javascript">
+	
+	function save(){
+		var form = document.corForm;
+		
+		if(confirm("해당 내용을 수정하시겠습니까?") == true){
+    		form.submit();
+    	}else{
+    		alert("답변을 취소 하였습니다.");
+    	}
+	}
+	
 	$(function(){
 		var cp_sector = '${companyDetail.cp_sector }';
 		var select_cp_sector = document.getElementById('cp_sector')
