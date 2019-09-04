@@ -30,14 +30,14 @@
 		<section id="sec06">
 			<h2>기업등록</h2>
 			<div class="con">
-			<form name="corForm" id="company_form" action="./companyRegisterAction.cp" method="post">
+			<form name="corForm" id="company_form" action="./companyRegisterAction.cp" enctype="multipart/form-data" method="post">
 				<div>
 					<h3>기업이름</h3>
 					<select name="cp_sector">
 						<option>- 구분 -</option>
-						<option>일반음식점</option>
-						<option>카페</option>
-						<option>등등</option>
+						<option value="일반음식점">일반음식점</option>
+						<option value="카페">카페</option>
+						<option value="등등">등등</option>
 					</select>
 					<input type="text" placeholder="브랜드명" name="cp_name">
 					<input type="text" placeholder="지점" name="cp_branch">
@@ -101,7 +101,7 @@
 					  <h4>1.</h4>
 					  <div>
 					  <input type="text" name="cp_point_title">
-					  <textarea name="cp_point_comment"></textarea>
+					  <textarea name="cp_point_content"></textarea>
 					  </div>
 					</div>
 					<p><span>사업계획서</span><input type="file" multiple name="cf_business_plan_images"><span>사업계획서 이미지파일</span></p>

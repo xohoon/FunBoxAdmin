@@ -39,6 +39,7 @@ public class CompanyRegister {
 	private String ma_platform_pay;
 	private String ma_estimated_revenue;
 	private String ma_monthly_average;
+	private String cf_folder;
 	
 	// String /**/ 구분 데이터
 	private String point_title_string;
@@ -67,10 +68,37 @@ public class CompanyRegister {
 	private String cf_alias_info_banner;
 	// files
 	private String store_images;
+	private String alias_store_images;
 	private String business_plan;
+	private String alias_business_plan;
 	private String etc_files;
+	private String alias_etc_files;
 	
 	
+	public String getCf_folder() {
+		return cf_folder;
+	}
+	public void setCf_folder(String cf_folder) {
+		this.cf_folder = cf_folder;
+	}
+	public String getAlias_store_images() {
+		return alias_store_images;
+	}
+	public void setAlias_store_images(String alias_store_images) {
+		this.alias_store_images = alias_store_images;
+	}
+	public String getAlias_business_plan() {
+		return alias_business_plan;
+	}
+	public void setAlias_business_plan(String alias_business_plan) {
+		this.alias_business_plan = alias_business_plan;
+	}
+	public String getAlias_etc_files() {
+		return alias_etc_files;
+	}
+	public void setAlias_etc_files(String alias_etc_files) {
+		this.alias_etc_files = alias_etc_files;
+	}
 	public String getPay_actual_payment_string() {
 		return pay_actual_payment_string;
 	}
@@ -447,13 +475,22 @@ public class CompanyRegister {
 				+ ", ma_odds_percent=" + ma_odds_percent + ", ma_odds_money=" + ma_odds_money + ", ma_share_percent="
 				+ ma_share_percent + ", ma_share_money=" + ma_share_money + ", ma_platform_pay=" + ma_platform_pay
 				+ ", ma_estimated_revenue=" + ma_estimated_revenue + ", ma_monthly_average=" + ma_monthly_average
-				+ ", cf_thumbnail=" + cf_thumbnail
-				+ ", cf_alias_thumbnail=" + cf_alias_thumbnail + ", cf_pr_background=" + cf_pr_background
-				+ ", cf_alias_pr_background=" + cf_alias_pr_background + ", cf_business_plan=" + cf_business_plan
-				+ ", cf_alias_business_plan=" + cf_alias_business_plan + ", cf_funding_contract=" + cf_funding_contract
-				+ ", cf_alias_funding_contract=" + cf_alias_funding_contract + ", cf_info_banner=" + cf_info_banner
-				+ ", cf_alias_info_banner=" + cf_alias_info_banner + "]";
+				+ ", cf_folder=" + cf_folder + ", point_title_string=" + point_title_string + ", point_content_string="
+				+ point_content_string + ", pay_count_string=" + pay_count_string + ", pay_payment_date_string="
+				+ pay_payment_date_string + ", pay_principal_string=" + pay_principal_string + ", pay_interest_string="
+				+ pay_interest_string + ", pay_fees_string=" + pay_fees_string + ", pay_actual_payment_string="
+				+ pay_actual_payment_string + ", pay_actual_rate_string=" + pay_actual_rate_string
+				+ ", notice_title_string=" + notice_title_string + ", notice_content_string=" + notice_content_string
+				+ ", cf_thumbnail=" + cf_thumbnail + ", cf_alias_thumbnail=" + cf_alias_thumbnail
+				+ ", cf_pr_background=" + cf_pr_background + ", cf_alias_pr_background=" + cf_alias_pr_background
+				+ ", cf_business_plan=" + cf_business_plan + ", cf_alias_business_plan=" + cf_alias_business_plan
+				+ ", cf_funding_contract=" + cf_funding_contract + ", cf_alias_funding_contract="
+				+ cf_alias_funding_contract + ", cf_info_banner=" + cf_info_banner + ", cf_alias_info_banner="
+				+ cf_alias_info_banner + ", store_images=" + store_images + ", alias_store_images=" + alias_store_images
+				+ ", business_plan=" + business_plan + ", alias_business_plan=" + alias_business_plan + ", etc_files="
+				+ etc_files + ", alias_etc_files=" + alias_etc_files + "]";
 	}
+	
 	
 	
 	

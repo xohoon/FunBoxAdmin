@@ -12,7 +12,7 @@ import net.company.dao.CompanyDAO;
 import net.company.dto.Company;
 
 public class CompanyAllListAction implements Action {
-
+/////
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String search_type_string = request.getParameter("search_type");

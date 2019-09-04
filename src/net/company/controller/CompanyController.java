@@ -5,14 +5,33 @@ import java.io.UnsupportedEncodingException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.common.action.*;
-import net.company.action.*;
+import net.common.action.Action;
+import net.common.action.ActionForward;
+import net.company.action.CompanyAllListAction;
+import net.company.action.CompanyDeadLineAction;
+import net.company.action.CompanyDeadLineSaveAction;
+import net.company.action.CompanyInvestApplyDetailAction;
+import net.company.action.CompanyInvestApplyListAction;
+import net.company.action.CompanyInvestedDetailAction;
+import net.company.action.CompanyInvestedDoneListAction;
+import net.company.action.CompanyInvestedListAction;
+import net.company.action.CompanyMainSlideManagement1Action;
+import net.company.action.CompanyMainSlideManagement2Action;
+import net.company.action.CompanyPopularityInfoAjax;
+import net.company.action.CompanyPopularityManagementAction;
+import net.company.action.CompanyRecomnandManagementAction;
+import net.company.action.CompanyRegisterAction;
+import net.company.action.CompanyRegisterFormAction;
+import net.company.action.DeleteCompanyInvestApply;
+import net.company.action.SetAutoOrManualAction;
+import net.company.action.companyPopularityManagementUpdateAction;
 
-
+@MultipartConfig(maxFileSize = 136314880)
 public class CompanyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
