@@ -93,12 +93,12 @@
   </filter-mapping>
   
   <servlet>
-    <servlet-name>CompanyInvesteApplyFileDownload</servlet-name>
-    <servlet-class>net.filedownload.CompanyInvesteApplyFileDownload</servlet-class>
+    <servlet-name>CompanyFileDownload</servlet-name>
+    <servlet-class>net.filedownload.CompanyFileDownload</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>CompanyInvesteApplyFileDownload</servlet-name>
-    <url-pattern>/CompanyInvesteApplyFileDownload</url-pattern>
+    <servlet-name>CompanyFileDownload</servlet-name>
+    <url-pattern>/CompanyFileDownload</url-pattern>
   </servlet-mapping>
   
 </web-app>
