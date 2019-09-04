@@ -33,14 +33,10 @@
         <ul class="tab">
 	        <c:choose>
 	        	<c:when test="${funding_status eq '12'}">
-	        		<!-- <li class="on"><a href="./companyInvestedList.cp?page=1&funding_status=12">펀딩진행</a></li>
-	        		<li><a href="./companyInvestedList.cp?page=1&funding_status=11">펀딩완료</a></li> -->
 	        		<li class="on">펀딩진행</li>
 	        		<li>펀딩완료</li> 
 	        	</c:when>
 	          	<c:otherwise>
-	          		<!-- <li><a href="./companyInvestedList.cp?page=1&funding_status=12">펀딩진행</a></li>
-	        		<li class="on"><a href="./companyInvestedList.cp?page=1&funding_status=11"></a>펀딩완료</li> -->
 	        		<li>펀딩진행</li>
 	        		<li class="on">펀딩완료</li>
 	          	</c:otherwise>
@@ -60,7 +56,7 @@
             </tr>
             <c:forEach var="companyInvested" items="${companyInvestedList }">
             	<tr>
-            		<td onclick="window.open('./companyInvestedDetail.cp','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">${companyInvested.cp_name }</td>
+            		<td onclick="window.open('./companyInvestedDetail.cp?cp_idx=${companyInvested.cp_idx}','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">${companyInvested.cp_name }</td>
 					<td>${companyInvested.mb_id }</td>
 					<td>${companyInvested.cp_manager }</td>
 					<td>${companyInvested.cp_phone }</td>

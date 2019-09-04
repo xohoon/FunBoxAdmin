@@ -1,6 +1,7 @@
 package net.company.dto;
 
 public class CompanyInvested {
+	private int cp_idx;
 	private String cp_name;
 	private String mb_id;
 	private String cp_manager;
@@ -8,6 +9,16 @@ public class CompanyInvested {
 	private int cp_pre_net_profit_ratio;
 	private int d_day;
 	private String iv_balance_stock;
+	
+	
+	
+	public int getCp_idx() {
+		return cp_idx;
+	}
+
+	public void setCp_idx(int cp_idx) {
+		this.cp_idx = cp_idx;
+	}
 
 	public String getCp_name() {
 		return cp_name;

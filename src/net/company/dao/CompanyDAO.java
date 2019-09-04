@@ -19,6 +19,7 @@ import net.company.dto.CompanyAdded;
 import net.company.dto.CompanyApplication;
 import net.company.dto.CompanyApplicationDetail;
 import net.company.dto.CompanyDeadLine;
+import net.company.dto.CompanyDetail;
 import net.company.dto.CompanyInvested;
 import net.company.dto.CompanyPopularityList;
 import net.company.dto.CompanyRegister;
@@ -133,6 +134,7 @@ public class CompanyDAO {
 
 			while (rs.next()) {
 				CompanyInvested companyInvested = new CompanyInvested();
+				companyInvested.setCp_idx(rs.getInt("cp_idx"));
 				companyInvested.setCp_name(rs.getString("cp_name"));
 				companyInvested.setMb_id(rs.getString("mb_id"));
 				companyInvested.setMb_id(rs.getString("cp_manager"));
@@ -928,6 +930,108 @@ public class CompanyDAO {
 		return false;
 	}
 	
+	public Boolean getCompanyDetail(CompanyDetail companyDetail,int cp_idx) {
+		String sql = "SELECT * FROM company cp JOIN company_invest cp_iv ON cp.cp_idx = cp_iv.cp_idx JOIN company_content cp_ct ON cp.cp_idx = cp_ct.cp_idx JOIN company_file cf ON cf.cp_idx JOIN company_pay_schedule cp_sh ON cp_sh.cp_idx WHERE cp.cp_idx = ? AND cp.cp_idx =  cp_iv.cp_idx AND cp_ct.cp_idx = cp.cp_idx AND cf.cp_idx = cp.cp_idx  AND cp_sh.cp_idx = cp.cp_idx";
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cp_idx);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				companyDetail.setCp_idx(rs.getInt("cp_idx"));
+				companyDetail.setCp_sector(rs.getString("cp_sector"));
+				companyDetail.setCp_name(rs.getString("cp_name"));
+				companyDetail.setCp_branch(rs.getString("cp_branch"));
+				companyDetail.setCp_manager(rs.getString("cp_manager"));
+				companyDetail.setCp_number(rs.getString("cp_number"));
+				companyDetail.setCp_capital(rs.getString("cp_capital"));
+				companyDetail.setCp_address(rs.getString("cp_address"));
+				companyDetail.setCp_add_ch(rs.getString("cp_add_ch"));
+				companyDetail.setCp_add_more(rs.getString("cp_add_more"));
+				companyDetail.setCp_add_num(rs.getString("cp_add_num"));
+				companyDetail.setCp_monthly_profit(rs.getString("cp_monthly_profit"));
+				companyDetail.setCp_reward_main_title(rs.getString("cp_reward_main_title"));
+				companyDetail.setCp_reward_sub_title(rs.getString("cp_reward_sub_title"));
+				companyDetail.setCp_reward_content(rs.getString("cp_reward_content"));
+				companyDetail.setCp_intro_headline(rs.getString("cp_intro_headline"));
+				companyDetail.setCp_intro_content(rs.getString("cp_intro_content"));
+				// company_invest insert data
+				companyDetail.setIv_contraction_during(rs.getString("iv_contraction_during"));
+				companyDetail.setIv_min_amount(rs.getString("iv_min_amount"));
+				companyDetail.setIv_appl_stock(rs.getString("iv_appl_stock"));
+				companyDetail.setIv_goal_amount(rs.getString("iv_goal_amount"));
+				companyDetail.setIv_appl_day(rs.getString("iv_appl_day"));
+				companyDetail.setPl_year(rs.getString("pl_year"));
+				companyDetail.setPl_month(rs.getString("pl_month"));
+				companyDetail.setPl_sales(rs.getString("pl_sales"));
+				companyDetail.setPl_material(rs.getString("pl_material"));
+				companyDetail.setPl_person_pay(rs.getString("pl_person_pay"));
+				companyDetail.setPl_rent_building(rs.getString("pl_rent_building"));
+				companyDetail.setPl_operating_pay(rs.getString("pl_operating_pay"));
+				companyDetail.setPl_net_revenue(rs.getString("pl_net_revenue"));
+				companyDetail.setMa_odds_percent(rs.getString("ma_odds_percent"));
+				companyDetail.setMa_odds_money(rs.getString("ma_odds_money"));
+				companyDetail.setMa_share_percent(rs.getString("ma_share_percent"));
+				companyDetail.setMa_share_money(rs.getString("ma_share_money"));
+				companyDetail.setMa_platform_pay(rs.getString("ma_platform_pay"));
+				companyDetail.setMa_estimated_revenue(rs.getString("ma_estimated_revenue"));
+				companyDetail.setMa_monthly_average(rs.getString("ma_monthly_average"));
+				// company_content insert data
+				companyDetail.setPoint_title_string(rs.getString("cp_point_title"));
+				companyDetail.setPoint_content_string(rs.getString("cp_point_content"));
+				companyDetail.setNotice_title_string(rs.getString("cp_notice_title"));
+				companyDetail.setNotice_content_string(rs.getString("cp_notice_content"));
+				// company_scheduler insert data
+				companyDetail.setCp_pay_count(rs.getString("cp_pay_count"));
+				companyDetail.setCp_pay_expected_payment_date(rs.getString("cp_pay_expected_payment_date"));
+				companyDetail.setCp_pay_principal(rs.getString("cp_pay_principal"));
+				companyDetail.setCp_pay_interest_paid(rs.getString("cp_pay_interest_paid"));
+				companyDetail.setCp_pay_fees(rs.getString("cp_pay_fees"));
+				companyDetail.setCp_pay_actual_payment_amout(rs.getString("cp_pay_actual_payment_amout"));
+				companyDetail.setCp_pay_actual_rate_return(rs.getString("cp_pay_actual_rate_return"));
+				companyDetail.setCf_store_images(rs.getString("cf_store_images"));
+				companyDetail.setCf_alias_store_images(rs.getString("cf_alias_store_images"));
+				companyDetail.setCf_info_banner(rs.getString("cf_corporation_icon"));
+				companyDetail.setCf_alias_info_banner(rs.getString("cf_alias_corporation_icon"));
+				companyDetail.setCf_folder(rs.getString("cf_folder"));
+				companyDetail.setCf_business_plan(rs.getString("cf_business_plan"));
+				companyDetail.setCf_alias_business_plan(rs.getString("cf_alias_business_plan"));
+				companyDetail.setCf_etc_files(rs.getString("cf_etc_files"));
+				companyDetail.setCf_alias_etc_files(rs.getString("cf_alias_etc_files"));
+				companyDetail.setCf_thumbnail(rs.getString("cf_thumbnail"));
+				companyDetail.setCf_alias_thumbnail(rs.getString("cf_alias_thumbnail"));
+				companyDetail.setCf_pr_background(rs.getString("cf_pr_background"));
+				companyDetail.setCf_alias_pr_background(rs.getString("cf_alias_pr_background"));
+				companyDetail.setCf_funding_contract(rs.getString("cf_funding_contract"));
+				companyDetail.setCf_alias_funding_contract(rs.getString("cf_alias_funding_contract"));
+				companyDetail.setCf_business_plan(rs.getString("cf_business_plan"));
+				companyDetail.setCf_alias_business_plan(rs.getString("cf_alias_business_plan"));
+				companyDetail.setCf_business_plan_images(rs.getString("cf_business_plan_images"));
+				companyDetail.setCf_alias_business_plan_images(rs.getString("cf_alias_business_plan_images"));
+				return true;
+			}
+		} catch (Exception ex) {
+			System.out.println("getCompanyDetail 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+
+		return false;
+	};
+	
 	// 태훈추가 - 관리자 페이지 기업등록
 	public int ComapnyRegister(CompanyRegister register) {
 		int result = 0;
@@ -1033,19 +1137,36 @@ public class CompanyDAO {
 	}
 	///////////////////////////////// 태훈끝//////////////////////////////////////////////
 
-	public String getFileDirectory(int app_cp_idx) {
-		String sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 2), (SELECT cf_folder FROM company_file WHERE cp_idx = ?),(SELECT file_path FROM file_path WHERE idx = 4)) AS company_file_folder";
-
+	public String getFileDirectory(int cp_idx,int kindOfFile) {
+		String sql = "";
+		
+		switch (kindOfFile) {
+		case 1:
+			sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 2), (SELECT cf_folder FROM company_file WHERE cp_idx = ?),(SELECT file_path FROM file_path WHERE idx = 4)) AS company_file_folder";
+		case 2:
+			sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 2), (SELECT cf_folder FROM company_file WHERE cp_idx = ?),(SELECT file_path FROM file_path WHERE idx = 3)) AS company_image_folder";
+		default:
+			break;
+		}
+		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, app_cp_idx);
+			pstmt.setInt(1, cp_idx);
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				return rs.getString("company_file_folder");
+				switch (kindOfFile) {
+				case 1:
+					return rs.getString("company_file_folder");
+				case 2:
+					return rs.getString("company_image_folder");
+				default:
+					break;
+				}
+				
 			}
 		} catch (Exception ex) {
 			System.out.println("getUploadFilePath 에러: " + ex);
