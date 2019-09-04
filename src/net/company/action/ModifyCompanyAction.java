@@ -24,6 +24,7 @@ public class ModifyCompanyAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = new ActionForward();
 		CompanyDetail companyDetail = new CompanyDetail();
+		int result = 0;
 		
 		int cp_idx = 13;
 		companyDetail.setCp_idx(cp_idx);
@@ -143,6 +144,10 @@ public class ModifyCompanyAction implements Action {
 		String tot5 = request.getParameter("tot5");
 		companyDetail.setCp_pay_actual_rate_return(tot5);
 		
+		CompanyDAO companydao = new CompanyDAO();
+		System.out.println(companyDetail.toString());
+		result = companydao.CompanyUpdate(companyDetail);
+		System.out.println("result : " + result);
 		/*
 		 * List<CompanyDetail> companydetail = new ArrayList<CompanyDetail>();
 		 * CompanyDAO companyDAO = new CompanyDAO();
