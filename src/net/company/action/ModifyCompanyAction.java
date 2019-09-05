@@ -261,7 +261,7 @@ public class ModifyCompanyAction implements Action {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('기업수정에 실패했습니다.\n다시 시도해주세요.');");
-			out.println("location.href='./companycompanyDetailForm.cp';");
+			out.println("location.href='./companyInvestedDetail.cp?"+cp_idx+"';");
 			out.println("</script>");
 			out.close();
 			return null;
@@ -270,7 +270,7 @@ public class ModifyCompanyAction implements Action {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('기업수정이 완료되었습니다.');");
-			out.println("location.href='./index.jsp';");
+			out.println("window.close();");
 			out.println("</script>");
 			out.close();
 		}
