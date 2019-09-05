@@ -59,7 +59,7 @@
 			  </div>
 				<div>
 					<h3>사진등록</h3>
-					<p><span>썸네일</span><input type="file" name="cf_thumbnail"><a href="/CompanyFileDownload?cp_idx=${companyDetail.cp_idx }&kindOfFile=2&fileName=${companyDetail.cf_alias_thumbnail}" download>${companyDetail.cf_thumbnail }</a>
+					<p><span>썸네일</span><input type="file" name="cf_thumbnail"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx }&kindOfFile=2&fileName=${companyDetail.cf_alias_thumbnail}" download>${companyDetail.cf_thumbnail }</a>
           <span>910px * 780px :: 상호나 간판이 정중앙에 오도록 편집 후 업로드 ::</span></p>
           			<div id="cf_store_images">
           				<!-- <p><span>매장사진1</span><input type="file"><a href="#" download>1.jpg</a>
@@ -72,7 +72,7 @@
 	          <span>445px * 310px</span></p> -->
           			</div>
           			<p id="multi_cf_store_images"></p>
-					<p><span>기업PR배경</span><input type="file" name="cf_pr_background"><a href="/CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName=${companyDetail.cf_alias_pr_background}" download>${companyDetail.cf_pr_background }</a>
+					<p><span>기업PR배경</span><input type="file" name="cf_pr_background"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName=${companyDetail.cf_alias_pr_background}" download>${companyDetail.cf_pr_background }</a>
           <span>930px * 780px</span></p>
           <p><span>매장PR타이틀</span><input type="text" name="cp_point_title" value="${companyDetail.cp_intro_headline}"></p>
 					<span>매장PR내용</span>
@@ -81,7 +81,7 @@
 				</div>
 				<div class="plan">
 					<h3>사업계획서 파일</h3>
-					<p><span>사업계획서</span><input type="file" name="cf_business_plan"><a href="/CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=1&fileName=${companyDetail.cf_alias_business_plan}" download>${companyDetail.cf_business_plan }</a></p>
+					<p><span>사업계획서</span><input type="file" name="cf_business_plan"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=1&fileName=${companyDetail.cf_alias_business_plan}" download>${companyDetail.cf_business_plan }</a></p>
 				</div>
 				<div class="plan" id="plan_images">
 					<h3>사업계획서 사진</h3>
@@ -239,7 +239,7 @@
 	var store_images_html = "";
 	
 	for (var i = 0; i < cf_alias_store_images.length; i++) {
-		store_images_html += "<p><span>매장사진"+(i+1)+"</span><input type='file'><a href='/CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName="+cf_alias_store_images[i]+"' download>"
+		store_images_html += "<p><span>매장사진"+(i+1)+"</span><input type='file'><a href='./CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName="+cf_alias_store_images[i]+"' download>"
 		store_images_html += cf_store_images[i];
 		if (i < 2) {
 			store_images_html += "</a><span>930px * 310px</span></p>"
@@ -262,7 +262,7 @@
 		var inputTag = document.createElement('input');
 		inputTag.type = 'file';
 		var aTage = document.createElement('a');
-		aTage.href = '/CompanyFileDownload?cp_idx='+cp_idx+'&kindOfFile=2&fileName='+cf_alias_business_plan_images[i]+'';
+		aTage.href = './CompanyFileDownload?cp_idx='+cp_idx+'&kindOfFile=2&fileName='+cf_alias_business_plan_images[i]+'';
 		//수정해줘야함
 		aTage.text = cf_business_plan_images[0];
 		
@@ -273,7 +273,7 @@
 		
 	} 
 	
-	//참고 자료
+	//참고자료
 	var div_cf_etc_files = document.getElementById('cf_etc_files');
 	
 	var cf_etc_files = '${companyDetail.cf_etc_files}'.split(',');
@@ -285,7 +285,7 @@
 		//inputTag.type = 'file';
 		//inputTag.name = 'cf_etc_files';
 		var aTage = document.createElement('a');
-		aTage.href = '/CompanyFileDownload?cp_idx='+cp_idx+'&kindOfFile=1&fileName='+cf_etc_files[i]+'';
+		aTage.href = './CompanyFileDownload?cp_idx='+cp_idx+'&kindOfFile=1&fileName='+cf_alias_etc_files[i]+'';
 		aTage.text = cf_etc_files[i];
 		
 		//pTag.append(inputTag);

@@ -1241,8 +1241,10 @@ public class CompanyDAO {
 		switch (kindOfFile) {
 		case 1:
 			sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 2), (SELECT cf_folder FROM company_file WHERE cp_idx = ?),(SELECT file_path FROM file_path WHERE idx = 4)) AS company_file_folder";
+			break;
 		case 2:
 			sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 2), (SELECT cf_folder FROM company_file WHERE cp_idx = ?),(SELECT file_path FROM file_path WHERE idx = 3)) AS company_image_folder";
+			break;
 		default:
 			break;
 		}
@@ -1258,8 +1260,10 @@ public class CompanyDAO {
 			if (rs.next()) {
 				switch (kindOfFile) {
 				case 1:
+					System.out.println("return company_file_folder");
 					return rs.getString("company_file_folder");
 				case 2:
+					System.out.println("return company_image_folder");
 					return rs.getString("company_image_folder");
 				default:
 					break;
