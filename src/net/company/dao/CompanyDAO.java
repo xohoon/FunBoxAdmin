@@ -12,6 +12,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.mysql.jdbc.CallableStatement;
+//import com.mysql.cj.jdbc.CallableStatement;
 
 
 import net.company.dto.Company;
@@ -196,11 +197,12 @@ public class CompanyDAO {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
+				companyApplicationDetail.setApp_cp_idx(rs.getInt("app_cp_idx"));
 				companyApplicationDetail.setApp_cp_name(rs.getString("app_cp_name"));
 				companyApplicationDetail.setMb_id(rs.getString("mb_id"));
 				companyApplicationDetail.setApp_cp_manager(rs.getString("app_cp_manager"));
 				companyApplicationDetail.setApp_cp_hp(rs.getString("app_cp_hp"));
-				companyApplicationDetail.setApp_cp_num(rs.getString("mb_add_num"));
+				companyApplicationDetail.setApp_cp_num(rs.getString("app_cp_num"));
 				companyApplicationDetail.setApp_cp_ch(rs.getString("app_cp_ch"));
 				companyApplicationDetail.setApp_cp_more(rs.getString("app_cp_more"));
 				companyApplicationDetail.setApp_cp_extra(rs.getString("app_cp_extra"));
@@ -219,9 +221,36 @@ public class CompanyDAO {
 				companyApplicationDetail.setApp_cp_purpose(rs.getString("app_cp_purpose"));
 				companyApplicationDetail.setApp_cp_point(rs.getString("app_cp_point"));
 				// 파일
+				
+				companyApplicationDetail.setApp_cp_registrantion(rs.getString("app_cp_registrantion"));
+				companyApplicationDetail.setApp_cp_financial(rs.getString("app_cp_financial"));
+				companyApplicationDetail.setApp_cp_estate_contract(rs.getString("app_cp_estate_contract"));
+				companyApplicationDetail.setApp_cp_alias_registrantion(rs.getString("app_cp_alias_registrantion"));
+				companyApplicationDetail.setApp_cp_alias_financial(rs.getString("app_cp_alias_financial"));
+				companyApplicationDetail.setApp_cp_alias_estate_contract(rs.getString("app_cp_alias_estate_contract"));
+				companyApplicationDetail.setApp_cp_image1(rs.getString("app_cp_image1"));
+				companyApplicationDetail.setApp_cp_image2(rs.getString("app_cp_image2"));
+				companyApplicationDetail.setApp_cp_image3(rs.getString("app_cp_image3"));
+				companyApplicationDetail.setApp_cp_image4(rs.getString("app_cp_image4"));
+				companyApplicationDetail.setApp_cp_image5(rs.getString("app_cp_image5"));
+				companyApplicationDetail.setApp_cp_alias_image1(rs.getString("app_cp_alias_image1"));
+				companyApplicationDetail.setApp_cp_alias_image2(rs.getString("app_cp_alias_image2"));
+				companyApplicationDetail.setApp_cp_alias_image3(rs.getString("app_cp_alias_image3"));
+				companyApplicationDetail.setApp_cp_alias_image4(rs.getString("app_cp_alias_image4"));
+				companyApplicationDetail.setApp_cp_alias_image5(rs.getString("app_cp_alias_image5"));
+				companyApplicationDetail.setApp_cp_other_document1(rs.getString("app_cp_other_document1"));
+				companyApplicationDetail.setApp_cp_other_document2(rs.getString("app_cp_other_document2"));
+				companyApplicationDetail.setApp_cp_other_document3(rs.getString("app_cp_other_document3"));
+				companyApplicationDetail.setApp_cp_other_document4(rs.getString("app_cp_other_document4"));
+				companyApplicationDetail.setApp_cp_other_document5(rs.getString("app_cp_other_document5"));
+				companyApplicationDetail.setApp_cp_alias_other_document1(rs.getString("app_cp_alias_other_document1"));
+				companyApplicationDetail.setApp_cp_alias_other_document2(rs.getString("app_cp_alias_other_document2"));
+				companyApplicationDetail.setApp_cp_alias_other_document3(rs.getString("app_cp_alias_other_document3"));
+				companyApplicationDetail.setApp_cp_alias_other_document4(rs.getString("app_cp_alias_other_document4"));
+				companyApplicationDetail.setApp_cp_alias_other_document5(rs.getString("app_cp_alias_other_document5"));
 			}
 		} catch (Exception ex) {
-			System.out.println("getMember ����: " + ex);
+			System.out.println("CompanyApplicationDetail error: " + ex);
 		} finally {
 			try {
 				if (rs != null)
@@ -231,7 +260,7 @@ public class CompanyDAO {
 				if (conn != null)
 					conn.close();
 			} catch (Exception e) {
-				System.out.println("���� ���� ����: " + e.getMessage());
+				System.out.println("CompanyApplicationDetail 연결 해제 실패: " + e.getMessage());
 			}
 		}
 		return companyApplicationDetail;
@@ -699,9 +728,8 @@ public class CompanyDAO {
 		
 		String sql = "INSERT INTO admin_deadLine("
 					+ "cp_idx, mb_id, cp_manager, cp_monthly_profit, cp_sector, cp_name, cp_branch, "
-					+ "iv_current_amount, iv_goal_amount, appl_stop_date_time, thumbnail_image, persent) "
+					+ "iv_current_amount, iv_goal_amount, appl_stop_date_time, persent) "
 					+ "select cp.cp_idx, mb.mb_id, cp.cp_manager, cp.cp_monthly_profit, cp.cp_sector, cp.cp_name, cp.cp_branch, cp_i.iv_current_amount, cp_i.iv_goal_amount, cp_i.iv_appl_stop_date_time, " 
-					+ "concat(cp_f.cf_directory,cp_f.cf_image1) as thumbnail_image," 
 					+ "round((iv_current_amount/iv_goal_amount)*100) as persent "
 					+ "from company cp, company_file cp_f, company_invest cp_i, member mb " 
 					+ "where cp.cp_idx ='"+ id +"' " 
@@ -728,9 +756,8 @@ public class CompanyDAO {
 			}else if(radioVal.equals("1")){ // 자동
 				sql = "INSERT INTO admin_deadLine("
 						+ "cp_idx, mb_id, cp_manager, cp_monthly_profit, cp_sector, cp_name, cp_branch, "
-						+ "iv_current_amount, iv_goal_amount, appl_stop_date_time, thumbnail_image, persent) "
+						+ "iv_current_amount, iv_goal_amount, appl_stop_date_time, persent) "
 						+ "select cp.cp_idx, mb.mb_id, cp.cp_manager, cp.cp_monthly_profit, cp.cp_sector, cp.cp_name, cp.cp_branch, cp_i.iv_current_amount, cp_i.iv_goal_amount, cp_i.iv_appl_stop_date_time, "
-						+ "concat(cp_f.cf_directory,cp_f.cf_image1) as thumbnail_image, "
 						+ "round((iv_current_amount/iv_goal_amount)*100) as persent from company cp, company_file cp_f, company_invest cp_i, member mb " 
 						+ "where cp_i.iv_appl_stop_date_time > now() " 
 						+ "AND cp.cp_open_status = true " 
@@ -1240,10 +1267,20 @@ public class CompanyDAO {
 		
 		switch (kindOfFile) {
 		case 1:
+			//Client Company File File
 			sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 2), (SELECT cf_folder FROM company_file WHERE cp_idx = ?),(SELECT file_path FROM file_path WHERE idx = 4)) AS company_file_folder";
 			break;
 		case 2:
+			//Client Company File Image
 			sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 2), (SELECT cf_folder FROM company_file WHERE cp_idx = ?),(SELECT file_path FROM file_path WHERE idx = 3)) AS company_image_folder";
+			break;
+		case 3:
+			//Client Company application File
+			sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 1), (SELECT app_cp_folder FROM company_application WHERE app_cp_idx = ?),(SELECT file_path FROM file_path WHERE idx = 4)) AS company_file_folder";
+			break;
+		case 4:
+			//Client Company application Image
+			sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 1), (SELECT app_cp_folder FROM company_application WHERE app_cp_idx = ?),(SELECT file_path FROM file_path WHERE idx = 3)) AS company_image_folder";
 			break;
 		default:
 			break;
@@ -1260,10 +1297,12 @@ public class CompanyDAO {
 			if (rs.next()) {
 				switch (kindOfFile) {
 				case 1:
-					System.out.println("return company_file_folder");
 					return rs.getString("company_file_folder");
 				case 2:
-					System.out.println("return company_image_folder");
+					return rs.getString("company_image_folder");
+				case 3:
+					return rs.getString("company_file_folder");
+				case 4:
 					return rs.getString("company_image_folder");
 				default:
 					break;

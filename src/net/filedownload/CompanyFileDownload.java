@@ -20,7 +20,6 @@ public class CompanyFileDownload extends HttpServlet {
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("Sss");
 		// TODO Auto-generated method stub
 		// ① 파일명 가져오기
 		String cp_idx_string = request.getParameter("cp_idx");
@@ -47,7 +46,8 @@ public class CompanyFileDownload extends HttpServlet {
 
 		// ② 경로 가져오기
 		String filePath = compnayDao.getFileDirectory(cp_idx,kindOfFile);
-
+		System.out.println(filePath);
+		System.out.println(fileName);
 		//local 경로
 		//String saveDir = "C:/Users/user/Desktop/download_test";
 
