@@ -4,7 +4,7 @@ function hiddenRadio(radioval){
 
 
 //자동 - 1 , 수동 - 0
-function saveBtn(frm){	
+function savebtn(frm){	
 	var radioVal = $('input[name="push"]:checked').val();
 	
 	if (!countLimit(3,3)) {
