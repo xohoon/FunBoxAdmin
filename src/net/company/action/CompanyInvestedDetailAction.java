@@ -25,7 +25,7 @@ public class CompanyInvestedDetailAction implements Action {
 		CompanyDAO companyDAO = new CompanyDAO();
 		CompanyDetail companyDetail = new CompanyDetail();
 		
-		companyDAO.getCompanyDetail(companyDetail, 13);
+		companyDAO.getCompanyDetail(companyDetail, cp_idx);
 		
 		ActionForward forward = new ActionForward();
 		

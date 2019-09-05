@@ -20,10 +20,17 @@ public class CompanyFileDownload extends HttpServlet {
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("Sss");
 		// TODO Auto-generated method stub
 		// ① 파일명 가져오기
 		String cp_idx_string = request.getParameter("cp_idx");
 		Integer cp_idx = 0;
+		
+		try {
+			cp_idx = Integer.parseInt(cp_idx_string);
+		} catch (NumberFormatException nfe) {
+			//error processing
+		}
 		
 		String kindOfFile_string = request.getParameter("kindOfFile");
 		Integer kindOfFile = 0;
@@ -37,15 +44,16 @@ public class CompanyFileDownload extends HttpServlet {
 		String fileName = request.getParameter("fileName");
 		//int cp_idx = Integer.parseInt(request.getParameter("cp_idx"));
 		CompanyDAO compnayDao = new CompanyDAO();
-		
+
 		// ② 경로 가져오기
 		String filePath = compnayDao.getFileDirectory(cp_idx,kindOfFile);
 
 		//local 경로
 		//String saveDir = "C:/Users/user/Desktop/download_test";
-		
-		
+
 		File file = new File(filePath + fileName);
+		
+		
 		// ③ MIMETYPE 설정하기
 		String mimeType = getServletContext().getMimeType(file.toString());
 		if (mimeType == null) {
@@ -89,3 +97,5 @@ public class CompanyFileDownload extends HttpServlet {
 	}
 
 }
+
+
