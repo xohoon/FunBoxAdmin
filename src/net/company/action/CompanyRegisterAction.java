@@ -148,6 +148,23 @@ public class CompanyRegisterAction implements Action {
 		register.setMa_estimated_revenue(ma_estimated_revenue);
 		register.setMa_monthly_average(ma_monthly_average);
 		
+		// 예상지급 스케줄 합계
+		String cp_total_sum_pay_principal = request.getParameter("tot1");
+		String cp_total_sum_pay_interest_paid = request.getParameter("tot2");
+		String cp_total_sum_pay_fees = request.getParameter("tot3");
+		String cp_total_sum_pay_actual_payment_amout = request.getParameter("tot4");
+		String cp_total_sum_actual_rate_return = request.getParameter("tot5");
+		register.setCp_total_sum_pay_principal(cp_total_sum_pay_principal);
+		register.setCp_total_sum_pay_fees(cp_total_sum_pay_fees);
+		register.setCp_total_sum_pay_actual_payment_amout(cp_total_sum_pay_actual_payment_amout);
+		register.setCp_total_sum_pay_interest_paid(cp_total_sum_pay_interest_paid);
+		register.setCp_total_sum_actual_rate_return(cp_total_sum_actual_rate_return);
+		System.out.println(":::1"+cp_total_sum_pay_principal);
+		System.out.println(":::2"+cp_total_sum_pay_interest_paid);
+		System.out.println(":::3"+cp_total_sum_pay_fees);
+		System.out.println(":::4"+cp_total_sum_pay_actual_payment_amout);
+		System.out.println(":::5"+cp_total_sum_actual_rate_return);
+		
 		// 예상지급 스케줄
 		String cp_pay_count[] = request.getParameterValues("sum1");					//지급회차
 		String cp_pay_expected_payment_date[] = request.getParameterValues("sum2"); //예상지급일
