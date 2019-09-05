@@ -75,6 +75,7 @@ public class CompanyDetail {
 	private String cf_alias_business_plan;
 	private String cf_etc_files;
 	private String cf_alias_etc_files;
+	
 	public int getCp_idx() {
 		return cp_idx;
 	}

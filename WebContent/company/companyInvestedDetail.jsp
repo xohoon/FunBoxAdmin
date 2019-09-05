@@ -25,7 +25,7 @@
 	<section id="sec06" class="sec07_1">
 			<h2>기업정보</h2>
 			<div class="con">
-			<form name="corForm" action="./modifyCompany.cp" method="post">
+			<form name="corForm" action="./modifyCompany.cp" enctype="multipart/form-data" method="post">
 				<div>
 					<h3>기업이름</h3>
 					<select name="cp_sector" id="cp_sector">
@@ -59,7 +59,7 @@
 			  </div>
 				<div>
 					<h3>사진등록</h3>
-					<p><span>썸네일</span><input type="file" name="cf_thumbnail"><a href="/CompanyFileDownload?cp_idx=${companyDetail.cp_idx }&kindOfFile=2&fileName=${companyDetail.cf_alias_thumbnail}" download>${companyDetail.cf_thumbnail }</a>
+					<p><span>썸네일</span><input type="file" name="cf_thumbnail"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx }&kindOfFile=2&fileName=${companyDetail.cf_alias_thumbnail}" download>${companyDetail.cf_thumbnail }</a>
           <span>910px * 780px :: 상호나 간판이 정중앙에 오도록 편집 후 업로드 ::</span></p>
           			<div id="cf_store_images">
           				<!-- <p><span>매장사진1</span><input type="file"><a href="#" download>1.jpg</a>
@@ -71,18 +71,25 @@
 						<p><span>매장사진4</span><input type="file"><a href="#" download>1.jpg</a>
 	          <span>445px * 310px</span></p> -->
           			</div>
-					<p><span>기업PR배경</span><input type="file" name="cf_pr_background"><a href="/CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName=${companyDetail.cf_alias_pr_background}" download>${companyDetail.cf_pr_background }</a>
+          			<p id="multi_cf_store_images"></p>
+					<p><span>기업PR배경</span><input type="file" name="cf_pr_background"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName=${companyDetail.cf_alias_pr_background}" download>${companyDetail.cf_pr_background }</a>
           <span>930px * 780px</span></p>
           <p><span>매장PR타이틀</span><input type="text" name="cp_point_title" value="${companyDetail.cp_intro_headline}"></p>
 					<span>매장PR내용</span>
           <p><textarea name="cp_point_content">${companyDetail.cp_intro_content}</textarea>
           <span>250자 내외</span></p>
 				</div>
-				<div class="plan" id="plan">
-					<h3>사업계획서</h3>
+				<div class="plan">
+					<h3>사업계획서 파일</h3>
+					<p><span>사업계획서</span><input type="file" name="cf_business_plan"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=1&fileName=${companyDetail.cf_alias_business_plan}" download>${companyDetail.cf_business_plan }</a></p>
 				</div>
-			  <div id="cf_etc_files">
-          <h3>참고자료</h3>
+				<div class="plan" id="plan_images">
+					<h3>사업계획서 사진</h3>
+					<div id="plan"></div>
+				</div>
+			  <div id="etc">
+         		<h3>참고자료</h3>
+         		<div id="cf_etc_files"></div>
 			  </div>
 			  <div class="table1">
 			  	<h3>손익상세</h3>
@@ -173,14 +180,27 @@
             <input type="button" class="add add2" value="+">
             <input type="button" class="del del2" value="-">
 			  </div>
-			  <input type="text" name="cp_idx" value="${companyDetail.cp_idx }">
+			  <input type="hidden" name="cp_idx" value="${companyDetail.cp_idx }">
         </form>
-        <button class="submit rec">수정하기</button>
+        <button class="submit rec" id="modify">수정하기</button>
 			  <button class="submit save" id="submit" onclick = "save();">저장하기</button>
 			  <button class="submit cancel">취소</button>
 			</div>
 		</section>
 	<script type="text/javascript">
+	$(function(){
+		$('input[type=file]').hide();
+	});
+	document.getElementById('modify').addEventListener('click',function(){
+		//박신규
+	    $('#cf_store_images').hide();
+	    $('#plan').hide();
+	    $('#multi_cf_store_images').append('<span>매장 사진</span><input type=file multiple name="cf_store_images"><span></span>');
+	    $('#plan').hide();
+	    $('#plan_images').append('<p><span>사업 계획서 사진</span><input type=file multiple name="cf_business_plan_images"><span></span>');
+	    $('#cf_etc_files').hide();
+	    $('#etc').append('<p><span>참고 자료</span><input type=file multiple name="cf_etc_files"><span></span>');
+	});
 	
 	function save(){
 		var form = document.corForm;
@@ -219,7 +239,7 @@
 	var store_images_html = "";
 	
 	for (var i = 0; i < cf_alias_store_images.length; i++) {
-		store_images_html += "<p><span>매장사진"+(i+1)+"</span><input type='file' name='cf_store_images'><a href='/CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName="+cf_alias_store_images[i]+"' download>"
+		store_images_html += "<p><span>매장사진"+(i+1)+"</span><input type='file'><a href='./CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName="+cf_alias_store_images[i]+"' download>"
 		store_images_html += cf_store_images[i];
 		if (i < 2) {
 			store_images_html += "</a><span>930px * 310px</span></p>"
@@ -237,14 +257,12 @@
 	
 	var cf_business_plan_images = '${companyDetail.cf_business_plan_images}'.split(',');
 	var cf_alias_business_plan_images = '${companyDetail.cf_alias_business_plan_images}'.split(',');
-
 	for (var i = 0; i < cf_alias_business_plan_images.length; i++) {
 		var pTag = document.createElement('p');
 		var inputTag = document.createElement('input');
 		inputTag.type = 'file';
-		inputTag.name = 'cf_business_plan_images';
 		var aTage = document.createElement('a');
-		aTage.href = '/CompanyFileDownload?cp_idx='+cp_idx+'&kindOfFile=2&fileName='+cf_alias_business_plan_images[i]+'';
+		aTage.href = './CompanyFileDownload?cp_idx='+cp_idx+'&kindOfFile=2&fileName='+cf_alias_business_plan_images[i]+'';
 		//수정해줘야함
 		aTage.text = cf_business_plan_images[0];
 		
@@ -255,7 +273,7 @@
 		
 	} 
 	
-	//참고 자료
+	//참고자료
 	var div_cf_etc_files = document.getElementById('cf_etc_files');
 	
 	var cf_etc_files = '${companyDetail.cf_etc_files}'.split(',');
@@ -263,14 +281,14 @@
 	
 	for (var i = 0; i < cf_alias_etc_files.length; i++) {
 		var pTag = document.createElement('p');
-		var inputTag = document.createElement('input');
-		inputTag.type = 'file';
-		inputTag.name = 'cf_etc_files';
+		//var inputTag = document.createElement('input');
+		//inputTag.type = 'file';
+		//inputTag.name = 'cf_etc_files';
 		var aTage = document.createElement('a');
-		aTage.href = '/CompanyFileDownload?cp_idx='+cp_idx+'&kindOfFile=1&fileName='+cf_etc_files[i]+'';
+		aTage.href = './CompanyFileDownload?cp_idx='+cp_idx+'&kindOfFile=1&fileName='+cf_alias_etc_files[i]+'';
 		aTage.text = cf_etc_files[i];
 		
-		pTag.append(inputTag);
+		//pTag.append(inputTag);
 		pTag.append(aTage);
 		
 		div_cf_etc_files.append(pTag);
@@ -431,7 +449,6 @@
             var numFix = Number(num.replace(/\,/g, "") || 0);
                 numFix = numFix.toFixed(2);
             var numDate = num.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
-
             if($(this).hasClass('per')){
               $(this).val(numFix)
             }else if($(this).hasClass('date')){
@@ -452,6 +469,9 @@
           $('input').prop('readonly',false);
           $('textarea').prop('readonly',false);
           $('input[type=file]').show();
+          
+          
+          
           $(this).hide();
           $('.save').show();
           $('.cancel').show();
@@ -469,7 +489,6 @@
           var numDate = num.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
             var numFix = Number(num.replace(/\,/g, "") || 0);
                 numFix = numFix.toFixed(2);
-
             if($(this).hasClass('per')){
               $(this).val(numFix)
             }else if($(this).hasClass('date')){
@@ -514,9 +533,7 @@
         calD = Number(corForm.calD.value.replace(/\,/g, "") || 0);
         calE = Number(corForm.calE.value.replace(/\,/g, "") || 0);
         calT = Number(corForm.calT.value.replace(/\,/g, "") || 0);
-
         corForm.calT.value = calA - (calB+calC+calD+calE);
-
         cal1 = Number(corForm.cal1.value.replace(/\,/g, "") || 0);
         cal2 = Number(corForm.cal2.value.replace(/\,/g, "") || 0);
         cal3 = Number(corForm.cal3.value.replace(/\,/g, "") || 0);
@@ -526,7 +543,6 @@
         cal7 = Number(corForm.cal7.value.replace(/\,/g, "") || 0);
         tot1 = Number(corForm.tot1.value.replace(/\,/g, "") || 0);
         
-
         corForm.cal2.value = (calT*cal1)/100;
         corForm.cal4.value = (cal2*cal3)/100;
         corForm.cal5.value = cal4*0.105;
@@ -588,7 +604,6 @@
         
           
    }
-
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }

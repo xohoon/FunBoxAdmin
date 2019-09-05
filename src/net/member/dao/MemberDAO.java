@@ -8,8 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import com.mysql.jdbc.CallableStatement;
 //import com.mysql.cj.jdbc.CallableStatement;
+
 
 import net.member.dto.Member;
 import net.member.dto.MemberLateInvested;
@@ -292,9 +294,8 @@ public class MemberDAO {
 	public boolean remonveupdate(int idx) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
-		String sql = "UPDATE member SET remove_check= true WHERE mb_idx = ?";
-
+				
+		String sql = "UPDATE member SET remove_check= true, secession_date_time = now() WHERE mb_idx = ?";		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
