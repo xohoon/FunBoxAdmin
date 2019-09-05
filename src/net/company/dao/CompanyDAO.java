@@ -699,9 +699,8 @@ public class CompanyDAO {
 		
 		String sql = "INSERT INTO admin_deadLine("
 					+ "cp_idx, mb_id, cp_manager, cp_monthly_profit, cp_sector, cp_name, cp_branch, "
-					+ "iv_current_amount, iv_goal_amount, appl_stop_date_time, thumbnail_image, persent) "
+					+ "iv_current_amount, iv_goal_amount, appl_stop_date_time, persent) "
 					+ "select cp.cp_idx, mb.mb_id, cp.cp_manager, cp.cp_monthly_profit, cp.cp_sector, cp.cp_name, cp.cp_branch, cp_i.iv_current_amount, cp_i.iv_goal_amount, cp_i.iv_appl_stop_date_time, " 
-					+ "concat(cp_f.cf_directory,cp_f.cf_image1) as thumbnail_image," 
 					+ "round((iv_current_amount/iv_goal_amount)*100) as persent "
 					+ "from company cp, company_file cp_f, company_invest cp_i, member mb " 
 					+ "where cp.cp_idx ='"+ id +"' " 
@@ -728,9 +727,8 @@ public class CompanyDAO {
 			}else if(radioVal.equals("1")){ // 자동
 				sql = "INSERT INTO admin_deadLine("
 						+ "cp_idx, mb_id, cp_manager, cp_monthly_profit, cp_sector, cp_name, cp_branch, "
-						+ "iv_current_amount, iv_goal_amount, appl_stop_date_time, thumbnail_image, persent) "
+						+ "iv_current_amount, iv_goal_amount, appl_stop_date_time, persent) "
 						+ "select cp.cp_idx, mb.mb_id, cp.cp_manager, cp.cp_monthly_profit, cp.cp_sector, cp.cp_name, cp.cp_branch, cp_i.iv_current_amount, cp_i.iv_goal_amount, cp_i.iv_appl_stop_date_time, "
-						+ "concat(cp_f.cf_directory,cp_f.cf_image1) as thumbnail_image, "
 						+ "round((iv_current_amount/iv_goal_amount)*100) as persent from company cp, company_file cp_f, company_invest cp_i, member mb " 
 						+ "where cp_i.iv_appl_stop_date_time > now() " 
 						+ "AND cp.cp_open_status = true " 
