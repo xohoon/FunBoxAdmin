@@ -281,8 +281,13 @@
 	
 	for (var i = 0; i < cf_alias_etc_files.length; i++) {
 		var pTag = document.createElement('p');
+<<<<<<< HEAD
 		//var inputTag = document.createElement('input');
 		//inputTag.type = 'file';
+=======
+		var inputTag = document.createElement('input');
+		inputTag.type = 'file';
+>>>>>>> branch 'master' of https://github.com/xohoon/FunBoxAdmin.git
 		//inputTag.name = 'cf_etc_files';
 		var aTage = document.createElement('a');
 		aTage.href = '/CompanyFileDownload?cp_idx='+cp_idx+'&kindOfFile=1&fileName='+cf_etc_files[i]+'';
