@@ -19,7 +19,6 @@ public class CompanyDeadLineSaveAction implements Action {
 		boolean result = false;
 		boolean transval = false;
 		boolean states = false;
-		// 조건문 달아주기 DAO 너무 많음
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);

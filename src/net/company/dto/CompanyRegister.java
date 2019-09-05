@@ -80,7 +80,16 @@ public class CompanyRegister {
 	private String cp_total_sum_pay_actual_payment_amout;
 	private String cp_total_sum_actual_rate_return;
 	
+	private String cp_total_sum_pay_principal;
+	private String cp_total_sum_pay_interest_paid;
+	private String cp_total_sum_pay_fees;
+	private String cp_total_sum_pay_actual_payment_amout;
+	private String cp_total_sum_actual_rate_return;
 	
+<<<<<<< HEAD
+=======
+	
+>>>>>>> branch 'master' of https://github.com/xohoon/FunBoxAdmin.git
 	public String getCp_total_sum_pay_principal() {
 		return cp_total_sum_pay_principal;
 	}

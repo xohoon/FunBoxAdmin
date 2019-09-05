@@ -10,9 +10,8 @@ public class Main {
 		CompanyDAO companyDAO = new CompanyDAO();
 		CompanyDetail companyDetail = new CompanyDetail();
 		
-		companyDAO.getCompanyDetail(companyDetail, 13);
 		
-		System.out.println(companyDetail);
+		System.out.println(companyDAO.getFileDirectory(37,3));
 	}
 
 }
