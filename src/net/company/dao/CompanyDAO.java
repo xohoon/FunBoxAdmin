@@ -11,8 +11,8 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-//import com.mysql.jdbc.CallableStatement;
-import com.mysql.cj.jdbc.CallableStatement;
+import com.mysql.jdbc.CallableStatement;
+//import com.mysql.cj.jdbc.CallableStatement;
 
 import net.company.dto.Company;
 import net.company.dto.CompanyAdded;
@@ -1009,8 +1009,6 @@ public class CompanyDAO {
 				companyDetail.setCf_funding_contract(rs.getString("cf_funding_contract"));
 				companyDetail.setCf_alias_funding_contract(rs.getString("cf_alias_funding_contract"));
 				companyDetail.setCf_business_plan(rs.getString("cf_business_plan"));
-				companyDetail.setCf_alias_business_plan(rs.getString("cf_alias_business_plan"));
-				companyDetail.setCf_business_plan_images(rs.getString("cf_business_plan_images"));
 				companyDetail.setCf_alias_business_plan_images(rs.getString("cf_alias_business_plan_images"));
 				return true;
 			}
@@ -1143,7 +1141,7 @@ public class CompanyDAO {
 		ResultSet rs = null;
 		try {
 			cstmt = (CallableStatement) conn.prepareCall(
-					"call COMPANY_UPDATE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+					"call COMPANY_UPDATE(?,?,?,?,?,?,?,?,?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			// company insert data
 			cstmt.setString(1, detail.getCp_sector());
 			cstmt.setString(2, detail.getCp_name());
@@ -1196,6 +1194,19 @@ public class CompanyDAO {
 			cstmt.setString(47, detail.getNotice_content_string());
 			cstmt.setInt(48, detail.getCp_idx());
 			cstmt.registerOutParameter(49, java.sql.Types.INTEGER);
+			
+			//파일
+			cstmt.setString(50, detail.getCf_thumbnail());
+			cstmt.setString(51, detail.getCf_pr_background());
+			cstmt.setString(52, detail.getCf_store_images());
+			cstmt.setString(53, detail.getCf_business_plan_images());
+			cstmt.setString(54, detail.getCf_etc_files ());
+			cstmt.setString(55, detail.getCf_alias_store_images ());
+			cstmt.setString(56, detail.getCf_alias_business_plan_images());
+			cstmt.setString(57, detail.getCf_alias_etc_files ());
+			cstmt.setString(58, detail.getCf_business_plan());
+			cstmt.setString(59, detail.getCf_alias_business_plan());
+			
 
 			cstmt.execute();
 			result = cstmt.getInt("@RESULT");
@@ -1274,3 +1285,4 @@ public class CompanyDAO {
 	}
 
 }
+

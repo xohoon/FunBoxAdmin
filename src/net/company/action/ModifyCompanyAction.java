@@ -1,11 +1,6 @@
 package net.company.action;
 
-import java.io.File;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,18 +10,29 @@ import javax.servlet.http.Part;
 import net.common.action.Action;
 import net.common.action.ActionForward;
 import net.company.dao.CompanyDAO;
-import net.company.dto.CompanyApplication;
 import net.company.dto.CompanyDetail;
-import net.company.dto.CompanyFilePath;
 
 // 태훈 추가 - 기업등록
 public class ModifyCompanyAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ActionForward forward = new ActionForward();
-		CompanyDetail companyDetail = new CompanyDetail();
-		int result = 0;
+		char comma = ',';
+		char remark = '/';
 		
-		int cp_idx = 13;
+		CompanyDetail companyDetail = new CompanyDetail();
+		
+		int result = 0;
+		String cp_idx_string = request.getParameter("cp_idx");
+		Integer cp_idx = 0;
+		
+		try {
+			cp_idx = Integer.parseInt(cp_idx_string);
+		} catch (NumberFormatException nfe) {
+			//error 처리
+		}
+		
+		
+		
 		companyDetail.setCp_idx(cp_idx);
 		
 		String cp_sector = request.getParameter("cp_sector");
@@ -68,21 +74,11 @@ public class ModifyCompanyAction implements Action {
 		String iv_appl_day = request.getParameter("iv_appl_day");
 		companyDetail.setIv_appl_day(iv_appl_day);
 		
-		String cf_thumbnail = request.getParameter("cf_thumbnail");
-		companyDetail.setCf_thumbnail(cf_thumbnail);
-				
-		//String[] cf_store_images;
-		
-		String cf_pr_background = request.getParameter("cf_pr_background");
-		companyDetail.setCf_pr_background(cf_pr_background);
-		
 		String cp_point_title = request.getParameter("cp_point_title");
 		companyDetail.setPoint_title_string(cp_point_title);
 		
 		String cp_point_content = request.getParameter("cp_point_content");
 		companyDetail.setPoint_content_string(cp_point_content);
-		
-		//String[] cf_business_plan_images;
 		
 		String pl_year = request.getParameter("pl_year");
 		companyDetail.setPl_year(pl_year);
@@ -144,22 +140,127 @@ public class ModifyCompanyAction implements Action {
 		String tot5 = request.getParameter("tot5");
 		companyDetail.setCp_pay_actual_rate_return(tot5);
 		
-		CompanyDAO companydao = new CompanyDAO();
-		System.out.println(companyDetail.toString());
-		result = companydao.CompanyUpdate(companyDetail);
-		System.out.println("result : " + result);
-		/*
-		 * List<CompanyDetail> companydetail = new ArrayList<CompanyDetail>();
-		 * CompanyDAO companyDAO = new CompanyDAO();
-		 */
+		//파일들//
+		String cf_thumbnail = "";
+		String cf_alias_thumbnail = "";
 		
-		// return null;
-		/*
+		String cf_business_plan="";
+		String cf_alias_business_plan="";
+		
+		String cf_pr_background = "";
+		String cf_alias_pr_background = "";
+		
+		String cf_store_images = "";
+		String cf_business_plan_images = "";
+		String cf_etc_files = "";
+		
+		String cf_alias_store_images = "";
+		String cf_alias_business_plan_images = "";
+		String cf_alias_etc_files = "";
+		
+		CompanyDAO companydao = new CompanyDAO();
+		String companyFileFolder = companydao.getFileDirectory(cp_idx, 1);
+		companydao = new CompanyDAO();
+		String companyImageFolder = companydao.getFileDirectory(cp_idx, 2);
+		
+		for(Part part : request.getParts()) {
+			if (part.getContentType() != null) {
+				String fileName = extractFileName(part);
+				if (fileName.equals("")) {
+					continue;
+				}
+				String alias = UUID.randomUUID().toString().substring(0, 9);
+				String fileFormat = getFileFormat(part);
+				switch(part.getName()) {
+				case "cf_business_plan":
+					cf_business_plan = fileName;
+					cf_alias_business_plan += alias + "cf_business_plan" + fileFormat;
+					companyDetail.setCf_business_plan(cf_business_plan);
+					companyDetail.setCf_alias_business_plan(cf_alias_business_plan);
+					part.write(companyFileFolder + cf_alias_business_plan);
+					break;
+				case "cf_pr_background":
+					cf_pr_background = fileName;
+					cf_alias_pr_background += alias + "cf_pr_background" + fileFormat;
+					companyDetail.setCf_pr_background(cf_pr_background);
+					companyDetail.setCf_alias_pr_background(cf_alias_pr_background);
+					part.write(companyImageFolder + cf_alias_pr_background);
+					break;
+				case "cf_thumbnail":
+					cf_thumbnail = fileName;
+					cf_alias_thumbnail += alias + "cf_thumbnail" + fileFormat;
+					companyDetail.setCf_alias_thumbnail(cf_alias_thumbnail);
+					companyDetail.setCf_thumbnail(cf_thumbnail);
+					part.write(companyImageFolder + cf_alias_thumbnail);
+					break;
+				case "cf_store_images":
+					cf_store_images += fileName;
+					cf_alias_store_images += alias + "cf_store_images" + fileFormat + ",";
+					part.write(companyImageFolder + cf_alias_store_images);
+					break;
+				case "cf_business_plan_images":
+					cf_business_plan_images += fileName;
+					cf_alias_business_plan_images += alias + "cf_business_plan_images" + fileFormat + ",";
+					part.write(companyImageFolder + cf_alias_business_plan_images);
+					break;
+				case "cf_etc_files":
+					cf_etc_files += fileName;
+					cf_alias_etc_files += alias + "cf_etc_files" + fileFormat + ",";
+					part.write(companyFileFolder + cf_alias_etc_files);
+					break;
+				default:
+					break;
+					
+				}
+			}
+		}
+		
+		if (!cf_store_images.equals("") && cf_store_images.charAt(cf_store_images.length()-1) == comma) {
+			cf_store_images = cf_store_images.substring(0, cf_store_images.length()-1); 
+			companyDetail.setCf_store_images(cf_store_images);
+		}
+		if (!cf_alias_store_images.equals("") &&cf_alias_store_images.charAt(cf_alias_store_images.length()-1) == comma) {
+			cf_alias_store_images = cf_alias_store_images.substring(0, cf_alias_store_images.length()-1); 
+			companyDetail.setCf_alias_store_images(cf_alias_store_images);
+		}
+		if (!cf_business_plan_images.equals("") &&cf_business_plan_images.charAt(cf_business_plan_images.length()-1) == comma) {
+			cf_business_plan_images = cf_business_plan_images.substring(0, cf_business_plan_images.length()-1); 
+			companyDetail.setCf_business_plan(cf_business_plan_images);
+		}
+		if (!cf_alias_business_plan_images.equals("") &&cf_alias_business_plan_images.charAt(cf_alias_business_plan_images.length()-1) == comma) {
+			cf_alias_business_plan_images = cf_alias_business_plan_images.substring(0, cf_alias_business_plan_images.length()-1); 
+			companyDetail.setCf_alias_business_plan(cf_alias_business_plan_images);
+		}
+		if (!cf_etc_files.equals("") &&cf_etc_files.charAt(cf_etc_files.length()-1) == comma) {
+			cf_etc_files = cf_etc_files.substring(0, cf_etc_files.length()-1); 
+			companyDetail.setCf_etc_files(cf_etc_files);
+		}
+		if (!cf_alias_etc_files.equals("") &&cf_alias_etc_files.charAt(cf_alias_etc_files.length()-1) == comma) {
+			cf_alias_etc_files = cf_alias_etc_files.substring(0, cf_alias_etc_files.length()-1); 
+			companyDetail.setCf_alias_etc_files(cf_alias_etc_files);
+		}
+		
+
+		
+		companyDetail.setCf_store_images(cf_store_images);
+		companyDetail.setCf_alias_store_images(cf_alias_store_images);
+		
+		companyDetail.setCf_business_plan_images(cf_business_plan_images); 
+		companyDetail.setCf_alias_business_plan_images(cf_alias_business_plan_images);
+		
+		
+		companyDetail.setCf_etc_files(cf_etc_files);
+		companyDetail.setCf_alias_etc_files(cf_alias_etc_files);
+		
+		
+		companydao = new CompanyDAO();
+		result = companydao.CompanyUpdate(companyDetail);
+		
 		if (result == 0) {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('기업신청에 실패했습니다.\n다시 시도해주세요.');");
+			out.println("alert('기업수정에 실패했습니다.\n다시 시도해주세요.');");
 			out.println("location.href='./companycompanyDetailForm.cp';");
 			out.println("</script>");
 			out.close();
@@ -168,11 +269,11 @@ public class ModifyCompanyAction implements Action {
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('기업신청이 완료되었습니다.');");
+			out.println("alert('기업수정이 완료되었습니다.');");
 			out.println("location.href='./index.jsp';");
 			out.println("</script>");
 			out.close();
-		}*/
+		}
 		return null;	
 	}
 	
@@ -185,7 +286,7 @@ public class ModifyCompanyAction implements Action {
 				return s.substring(s.indexOf("=") + 2, s.length() - 1);
 			}
 		}
-		return "NULL";
+		return "";
 	}
 
 	private String getFileFormat(Part part) {
@@ -200,3 +301,4 @@ public class ModifyCompanyAction implements Action {
 	}
 
 }
+
