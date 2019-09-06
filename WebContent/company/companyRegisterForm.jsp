@@ -33,25 +33,25 @@
 			<form name="corForm" id="company_form" action="./companyRegisterAction.cp" enctype="multipart/form-data" method="post">
 				<div>
 					<h3>기업이름</h3>
-					<select name="cp_sector">
-						<option>- 구분 -</option>
+					<select id = "cp_sector" name="cp_sector" >
+						<option value = "0">- 구분 -</option>
 						<option value="일반음식점">일반음식점</option>
 						<option value="카페">카페</option>
 						<option value="등등">등등</option>
 					</select>
-					<input type="text" placeholder="브랜드명" name="cp_name">
-					<input type="text" placeholder="지점" name="cp_branch">
+					<input type="text" placeholder="브랜드명 (예시: 바른생선회, 바른목장)" name="cp_name">
+					<input type="text" placeholder="지점 (예시: 동래점, 해운대점)" name="cp_branch">
 			   </div>
 			   <div>
 					<h3>기본정보</h3>
-					<p><span>대표자</span>
-            <input type="text" name="cp_manager"></p>
+					<p><span >대표자</span>
+            <input type="text" name="cp_manager" placeholder="(예시 : 홍길동)"></p>
 					<p><span>사업자등록번호</span>
-            <input type="text" name="cp_number"></p>
+            <input type="text" name="cp_number" placeholder="(예시 : 000-00-00000)"></p>
 					<p><span>자본금</span>
-            <input type="text" name="cp_capital"></p>
+            <input type="number" name="cp_capital" placeholder="(예시 : 10000000)"></p>
 					<p><span>본사주소</span>
-			<input type="text" name="cp_address"></p>
+			<input type="text" name="cp_address" placeholder="시 /지점  (예시 :부산 동래점)"></p>
 					<p class="api">
 					  <span>위치</span>
 					  <input type="text" id="cp_add_num" name="cp_add_num" placeholder="우편번호" readonly="true">
@@ -63,12 +63,12 @@
 			  </div>
 			  <div>
 					<h3>투자정보</h3>
-            <p><span>월수익률</span><input type="text" name="cp_monthly_profit"> %</p>
-            <p><span>투자계약기간</span><input type="text" name="iv_contraction_during"> 개월</p>
-            <p><span>최소투자금액</span><input type="text" name="iv_min_amount"> Point</p>
-            <p><span>모집구좌</span><input type="text" name="iv_appl_stock"> 구좌</p>
-            <p><span>총모집금액</span><input type="text" name="iv_goal_amount"> Point</p>
-            <p><span>모집기간</span><input type="text" name="iv_appl_day"> 일</p>
+            <p><span>월수익률</span><input type="text" name="cp_monthly_profit" placeholder="(예시 : 10)"><span>%</span></p>
+            <p><span>투자계약기간</span><input type="text" name="iv_contraction_during" placeholder="(예시 : 12)"><span>개월</span></p>
+            <p><span>최소투자금액</span><input type="text" name="iv_min_amount" placeholder="(예시 : 10000000)"><span>Point</span></p>
+            <p><span>모집구좌</span><input type="text" name="iv_appl_stock" placeholder="(예시 : 12)"><span>구좌</span></p>
+            <p><span>총모집금액</span><input type="text" name="iv_goal_amount" placeholder="(예시 : 10000000)"><span>Point</span></p>
+            <p><span>모집기간</span><input type="text" name="iv_appl_day" placeholder="(예시 : 30)"><span>일</span></p>
 			  </div>
 				<div>
 					<h3>사진등록</h3>
@@ -94,7 +94,7 @@
 				</div>
 				<div class="fundingNote">
 					<h3>투자노트</h3>
-					<span>투자포인트</span>
+					<span>투자 핵심</span>
 					<button type="button" class="add"><i></i></button>
 					<button type="button" class="del"><i></i></button>
 					<div class="fundingPoint">
@@ -265,7 +265,7 @@
 					  </div>
 					</div>
          </div>
-          <button class="submit" onClick="">등록하기</button>
+          <button type="button" class="submit" onClick="company_register()">등록하기</button>
         </form>
       </div>
 	</section>
