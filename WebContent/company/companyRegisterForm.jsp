@@ -49,7 +49,7 @@
 					<p><span>사업자등록번호</span>
             <input type="text" name="cp_number" placeholder="(예시 : 000-00-00000)"></p>
 					<p><span>자본금</span>
-            <input type="number" name="cp_capital" placeholder="(예시 : 10000000)"></p>
+            <input type="number" name="cp_capital" placeholder="(예시 : 10000000)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></p>
 					<p><span>본사주소</span>
 			<input type="text" name="cp_address" placeholder="시 /지점  (예시 :부산 동래점)"></p>
 					<p class="api">
