@@ -12,8 +12,6 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import com.mysql.jdbc.CallableStatement;
-//import com.mysql.cj.jdbc.CallableStatement;
-
 
 import net.company.dto.Company;
 import net.company.dto.CompanyAdded;
@@ -1063,7 +1061,7 @@ public class CompanyDAO {
 		CallableStatement cstmt = null;
 		ResultSet rs = null;
 		try {
-			cstmt = (CallableStatement)conn.prepareCall("call COMPANY_REGISTER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			cstmt = (CallableStatement)conn.prepareCall("call COMPANY_REGISTER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?    ,?,?,?,?,?)");
 			// company insert data
 			cstmt.setString(1, register.getCp_sector());
 			cstmt.setString(2, register.getCp_name());
@@ -1136,7 +1134,13 @@ public class CompanyDAO {
 			cstmt.setString(66, register.getCf_alias_business_plan());
 			
 			cstmt.registerOutParameter(67, java.sql.Types.INTEGER);
-
+			// 예상지급 스케줄 합계
+			cstmt.setString(68, register.getCp_total_sum_pay_principal());
+			cstmt.setString(69, register.getCp_total_sum_pay_interest_paid());
+			cstmt.setString(70, register.getCp_total_sum_pay_fees());
+			cstmt.setString(71, register.getCp_total_sum_pay_actual_payment_amout());
+			cstmt.setString(72, register.getCp_total_sum_actual_rate_return());
+			
 			cstmt.execute();
 			result = cstmt.getInt("@RESULT");
 			if (result == 1) {

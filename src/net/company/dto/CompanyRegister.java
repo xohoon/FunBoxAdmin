@@ -73,8 +73,43 @@ public class CompanyRegister {
 	private String alias_business_plan;
 	private String etc_files;
 	private String alias_etc_files;
+	//total
+	private String cp_total_sum_pay_principal;
+	private String cp_total_sum_pay_interest_paid;
+	private String cp_total_sum_pay_fees;
+	private String cp_total_sum_pay_actual_payment_amout;
+	private String cp_total_sum_actual_rate_return;
 	
-	
+	public String getCp_total_sum_pay_principal() {
+		return cp_total_sum_pay_principal;
+	}
+	public void setCp_total_sum_pay_principal(String cp_total_sum_pay_principal) {
+		this.cp_total_sum_pay_principal = cp_total_sum_pay_principal;
+	}
+	public String getCp_total_sum_pay_interest_paid() {
+		return cp_total_sum_pay_interest_paid;
+	}
+	public void setCp_total_sum_pay_interest_paid(String cp_total_sum_pay_interest_paid) {
+		this.cp_total_sum_pay_interest_paid = cp_total_sum_pay_interest_paid;
+	}
+	public String getCp_total_sum_pay_fees() {
+		return cp_total_sum_pay_fees;
+	}
+	public void setCp_total_sum_pay_fees(String cp_total_sum_pay_fees) {
+		this.cp_total_sum_pay_fees = cp_total_sum_pay_fees;
+	}
+	public String getCp_total_sum_pay_actual_payment_amout() {
+		return cp_total_sum_pay_actual_payment_amout;
+	}
+	public void setCp_total_sum_pay_actual_payment_amout(String cp_total_sum_pay_actual_payment_amout) {
+		this.cp_total_sum_pay_actual_payment_amout = cp_total_sum_pay_actual_payment_amout;
+	}
+	public String getCp_total_sum_actual_rate_return() {
+		return cp_total_sum_actual_rate_return;
+	}
+	public void setCp_total_sum_actual_rate_return(String cp_total_sum_actual_rate_return) {
+		this.cp_total_sum_actual_rate_return = cp_total_sum_actual_rate_return;
+	}
 	public String getCf_folder() {
 		return cf_folder;
 	}
