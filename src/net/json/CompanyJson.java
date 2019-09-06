@@ -14,14 +14,14 @@ public class CompanyJson {
 		try {
 			if (app_cp_idx < 0) {
 				jsonObject.put("result", 2);
-				jsonObject.put("message", "Ȯ�ε��� ���� ����");
+				jsonObject.put("message", "잘 못 된 접근입니다.");
 			}else {
 				if (companyDAO.deleteCompanyApply(app_cp_idx)) {
 					jsonObject.put("result", 0);
-					jsonObject.put("message", app_cp_idx + "�� ��û�� ���� ����");
+					jsonObject.put("message", app_cp_idx + "가 성공적으로 삭제되었습니다.");
 				}else{
 					jsonObject.put("result", 1);
-					jsonObject.put("message", app_cp_idx + "�� ��û�� ���� ����");
+					jsonObject.put("message", app_cp_idx + "의 삭제 실패");
 				}
 			}			
 		} catch (Exception e) {
