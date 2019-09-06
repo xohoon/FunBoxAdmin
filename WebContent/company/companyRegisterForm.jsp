@@ -63,12 +63,12 @@
 			  </div>
 			  <div>
 					<h3>투자정보</h3>
-            <p><span>월수익률</span><input type="text" name="cp_monthly_profit" placeholder="(예시 : 10)"><span>%</span></p>
-            <p><span>투자계약기간</span><input type="text" name="iv_contraction_during" placeholder="(예시 : 12)"><span>개월</span></p>
-            <p><span>최소투자금액</span><input type="text" name="iv_min_amount" placeholder="(예시 : 10000000)"><span>Point</span></p>
-            <p><span>모집구좌</span><input type="text" name="iv_appl_stock" placeholder="(예시 : 12)"><span>구좌</span></p>
-            <p><span>총모집금액</span><input type="text" name="iv_goal_amount" placeholder="(예시 : 10000000)"><span>Point</span></p>
-            <p><span>모집기간</span><input type="text" name="iv_appl_day" placeholder="(예시 : 30)"><span>일</span></p>
+            <p><span>월수익률</span><input type="text" name="cp_monthly_profit" placeholder="(예시 : 10)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span>%</span></p>
+            <p><span>투자계약기간</span><input type="text" name="iv_contraction_during" placeholder="(예시 : 12)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span>개월</span></p>
+            <p><span>최소투자금액</span><input type="text" name="iv_min_amount" placeholder="(예시 : 10000000)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span>Point</span></p>
+            <p><span>모집구좌</span><input type="text" name="iv_appl_stock" placeholder="(예시 : 12)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span>구좌</span></p>
+            <p><span>총모집금액</span><input type="text" name="iv_goal_amount" placeholder="(예시 : 10000000)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span>Point</span></p>
+            <p><span>모집기간</span><input type="text" name="iv_appl_day" placeholder="(예시 : 30)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span>일</span></p>
 			  </div>
 				<div>
 					<h3>사진등록</h3>
@@ -117,31 +117,31 @@
 			  	<table>
             <tr>
               <td>기준년월</td>
-              <td><input type="text" size="4" placeholder="19" maxlength="2" name="pl_year"> 년 <input type="text" size="1" name="pl_month"> 월</td>
+              <td><input type="text" size="4" placeholder="19" maxlength="2" name="pl_year"> 년 <input type="text" size="1" name="pl_month" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 월</td>
             </tr>
 			  	  <tr>
 			  	    <td>매출</td>
-			  	    <td><input type="text" size="13" name="calA"> 원</td>
+			  	    <td><input type="text" size="13" name="calA" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
 			  	  </tr>
 			  	  <tr>
 			  	    <td>원재료</td>
-			  	    <td><input type="text" size="13" name="calB" > 원</td>
+			  	    <td><input type="text" size="13" name="calB"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
 			  	  </tr>
 			  	  <tr>
 			  	    <td>인건비</td>
-			  	    <td><input type="text" size="13" name="calC" > 원</td>
+			  	    <td><input type="text" size="13" name="calC"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
 			  	  </tr>
 			  	  <tr>
 			  	    <td>임대비</td>
-			  	    <td><input type="text" size="13" name="calD" > 원</td>
+			  	    <td><input type="text" size="13" name="calD"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
 			  	  </tr>
 			  	  <tr>
 			  	    <td>운영비</td>
-			  	    <td><input type="text" size="13" name="calE" > 원</td>
+			  	    <td><input type="text" size="13" name="calE"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
 			  	  </tr>
 			  	  <tr>
 			  	    <td>순수익</td>
-			  	    <td><input type="text" size="13" name="calT"> 원</td>
+			  	    <td><input type="text" size="13" name="calT" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
 			  	  </tr>
 			  	</table>
 			  </div>
@@ -150,27 +150,27 @@
 			    <table>
 			      <tr>
 			  	    <td>현금배당률</td>
-			  	    <td>순수익의 <input type="text" size="1" name = "cal1" class="per"> %</td>
-			  	     <td><input type="text" size="13" name = "cal2"> 원</td>
+			  	    <td>순수익의 <input type="text" size="1" name = "cal1" class="per" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> %</td>
+			  	     <td><input type="text" size="13" name = "cal2" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
 			  	  </tr>
 			  	  <tr>
 			  	    <td>지분</td>
-			  	    <td><input type="text" size="1" name = "cal3" class="per"> %</td>
-			  	    <td><input type="text" size="13" name = "cal4"> 원</td>
+			  	    <td><input type="text" size="1" name = "cal3" class="per" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> %</td>
+			  	    <td><input type="text" size="13" name = "cal4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
 			  	  </tr>
 			  	  <tr>
 			  	    <td>플랫폼이용료</td>
 			  	    <td>지분의 10.5%</td>
-			  	    <td><input type="text" size="13" name = "cal5"> 원</td>
+			  	    <td><input type="text" size="13" name = "cal5" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
 			  	  </tr>
 			  	  <tr>
 			  	    <td>예상수익금</td>
 			  	    <td>지분 - 플랫폼이용료</td>
-			  	    <td><input type="text" size="13" name = "cal6"> 원</td>
+			  	    <td><input type="text" size="13" name = "cal6" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
 			  	  </tr>
 			  	  <tr>
 			  	    <td colspan="2">월평균</td>
-			  	    <td><input type="text" size="13" name = "cal7"> 원</td>
+			  	    <td><input type="text" size="13" name = "cal7" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
 			  	  </tr>
 			    </table>
 			  </div>
@@ -187,67 +187,67 @@
                 <th>실 수익률</th>
               </tr>
               <tr>
-                <td><input type="text" size="1" name="sum1"> 회차</td>
-                <td><input type="text" size="13" class="date" name="sum2"></td>
-                <td><input type="text" size="13" name="sum3"> 원</td>
-                <td><input type="text" size="13" name="sum4"> 원</td>
-                <td><input type="text" size="13" name="sum5"> 원</td>
-                <td><input type="text" size="13" name="sum6"> 원</td>
-                <td><input type="text" size="2" name="sum7" class="per"> %</td>
+                <td><input type="text" size="1" name="sum1" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 회차</td>
+                <td><input type="text" size="13" class="date" name="sum2" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
+                <td><input type="text" size="13" name="sum3" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="sum4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="sum5" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="sum6" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="2" name="sum7" class="per" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> %</td>
               </tr>
               <tr>
-                <td><input type="text" size="1" name="sum1"> 회차</td>
-                <td><input type="text" size="13" class="date" name="sum2"></td>
-                <td><input type="text" size="13" name="sum3"> 원</td>
-                <td><input type="text" size="13" name="sum4"> 원</td>
-                <td><input type="text" size="13" name="sum5"> 원</td>
-                <td><input type="text" size="13" name="sum6"> 원</td>
-                <td><input type="text" size="2" name="sum7" class="per"> %</td>
+                <td><input type="text" size="1" name="sum1" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 회차</td>
+                <td><input type="text" size="13" class="date" name="sum2" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
+                <td><input type="text" size="13" name="sum3" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="sum4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="sum5" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="sum6" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="2" name="sum7" class="per" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> %</td>
               </tr>
               <tr>
-                <td><input type="text" size="1" name="sum1"> 회차</td>
-                <td><input type="text" size="13" class="date" name="sum2"></td>
-                <td><input type="text" size="13" name="sum3"> 원</td>
-                <td><input type="text" size="13" name="sum4"> 원</td>
-                <td><input type="text" size="13" name="sum5"> 원</td>
-                <td><input type="text" size="13" name="sum6"> 원</td>
-                <td><input type="text" size="2" name="sum7" class="per"> %</td>
+                <td><input type="text" size="1" name="sum1" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 회차</td>
+                <td><input type="text" size="13" class="date" name="sum2" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
+                <td><input type="text" size="13" name="sum3" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="sum4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="sum5" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="sum6" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="2" name="sum7" class="per" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> %</td>
               </tr>
               <tr>
-                <td><input type="text" size="1" name="sum1"> 회차</td>
-                <td><input type="text" size="13" class="date" name="sum2"></td>
-                <td><input type="text" size="13" name="sum3"> 원</td>
-                <td><input type="text" size="13" name="sum4"> 원</td>
-                <td><input type="text" size="13" name="sum5"> 원</td>
-                <td><input type="text" size="13" name="sum6"> 원</td>
-                <td><input type="text" size="2" name="sum7" class="per"> %</td>
+                <td><input type="text" size="1" name="sum1" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 회차</td>
+                <td><input type="text" size="13" class="date" name="sum2" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
+                <td><input type="text" size="13" name="sum3" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="sum4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="sum5" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="sum6" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="2" name="sum7" class="per" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> %</td>
               </tr>
               <tr>
-                <td><input type="text" size="1" name="sum1"> 회차</td>
-                <td><input type="text" size="13" class="date" name="sum2"></td>
-                <td><input type="text" size="13" name="sum3"> 원</td>
-                <td><input type="text" size="13" name="sum4"> 원</td>
-                <td><input type="text" size="13" name="sum5"> 원</td>
-                <td><input type="text" size="13" name="sum6"> 원</td>
-                <td><input type="text" size="2" name="sum7" class="per"> %</td>
+                <td><input type="text" size="1" name="sum1" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 회차</td>
+                <td><input type="text" size="13" class="date" name="sum2" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
+                <td><input type="text" size="13" name="sum3" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="sum4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="sum5" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="sum6" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="2" name="sum7" class="per" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> %</td>
               </tr>
               <tr>
-                <td><input type="text" size="1" name="sum1"> 회차</td>
-                <td><input type="text" size="13" class="date" name="sum2"></td>
-                <td><input type="text" size="13" name="sum3"> 원</td>
-                <td><input type="text" size="13" name="sum4"> 원</td>
-                <td><input type="text" size="13" name="sum5"> 원</td>
-                <td><input type="text" size="13" name="sum6"> 원</td>
-                <td><input type="text" size="2" name="sum7" class="per"> %</td>
+                <td><input type="text" size="1" name="sum1" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 회차</td>
+                <td><input type="text" size="13" class="date" name="sum2" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
+                <td><input type="text" size="13" name="sum3" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="sum4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="sum5" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="sum6" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="2" name="sum7" class="per" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> %</td>
               </tr>
               <tr class="sum">
                 <td>총 합계</td>
                 <td>-</td>
-                <td><input type="text" size="13"name="tot1"> 원</td>
-                <td><input type="text" size="13" name="tot2"> 원</td>
-                <td><input type="text" size="13" name="tot3"> 원</td>
-                <td><input type="text" size="13" name="tot4"> 원</td>
-                <td><input type="text" size="2" name="tot5" class="per"> %</td>
+                <td><input type="text" size="13"name="tot1" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="tot2" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="tot3" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="13" name="tot4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+                <td><input type="text" size="2" name="tot5" class="per" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> %</td>
               </tr>
             </table>
             <input type="button" class="add add2" value="+">
