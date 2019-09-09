@@ -123,6 +123,14 @@ public class CompanyRegisterAction implements Action {
 		String pl_rent_building = request.getParameter("calD");	//임대비
 		String pl_operating_pay = request.getParameter("calE");	//운영비
 		String pl_net_revenue = request.getParameter("calT");	//손수익
+		pl_month = pl_month.replaceAll(",", "");
+		pl_sales = pl_sales.replaceAll(",", "");
+		pl_material = pl_material.replaceAll(",", "");
+		pl_person_pay = pl_person_pay.replaceAll(",", "");
+		pl_rent_building = pl_rent_building.replaceAll(",", "");
+		pl_operating_pay = pl_operating_pay.replaceAll(",", "");
+		pl_net_revenue = pl_net_revenue.replaceAll(",", "");
+		
 		register.setPl_year(pl_year);
 		register.setPl_month(pl_month);
 		register.setPl_sales(pl_sales);
@@ -140,12 +148,21 @@ public class CompanyRegisterAction implements Action {
 		String ma_platform_pay = request.getParameter("cal5");		//플랫폼 이용료
 		String ma_estimated_revenue = request.getParameter("cal6");	//예상수익금
 		String ma_monthly_average = request.getParameter("cal7");	//월평균
+		ma_odds_percent = ma_odds_percent.replaceAll(",", "");
+		ma_share_percent = ma_share_percent.replaceAll(",", "");
+		ma_odds_money = ma_odds_money.replaceAll(",", "");
+		ma_share_money = ma_share_money.replaceAll(",", "");
+		ma_platform_pay = ma_platform_pay.replaceAll(",", "");
+		ma_estimated_revenue = ma_estimated_revenue.replaceAll(",", "");
+		ma_monthly_average = ma_monthly_average.replaceAll(",", "");
+		
 		register.setMa_odds_percent(ma_odds_percent);
 		register.setMa_odds_money(ma_odds_money);
 		register.setMa_share_percent(ma_share_percent);
 		register.setMa_share_money(ma_share_money);
 		register.setMa_platform_pay(ma_platform_pay);
 		register.setMa_estimated_revenue(ma_estimated_revenue);
+		register.setMa_monthly_average(ma_monthly_average);
 		register.setMa_monthly_average(ma_monthly_average);
 		
 		// 예상지급 스케줄 합계
@@ -154,6 +171,13 @@ public class CompanyRegisterAction implements Action {
 		String cp_total_sum_pay_fees = request.getParameter("tot3");
 		String cp_total_sum_pay_actual_payment_amout = request.getParameter("tot4");
 		String cp_total_sum_actual_rate_return = request.getParameter("tot5");
+		
+		cp_total_sum_pay_principal = cp_total_sum_pay_principal.replaceAll(",", "");
+		cp_total_sum_pay_interest_paid = cp_total_sum_pay_interest_paid.replaceAll(",", "");
+		cp_total_sum_pay_fees = cp_total_sum_pay_fees.replaceAll(",", "");
+		cp_total_sum_pay_actual_payment_amout = cp_total_sum_pay_actual_payment_amout.replaceAll(",", "");
+		cp_total_sum_actual_rate_return = cp_total_sum_actual_rate_return.replaceAll(",", "");
+		
 		register.setCp_total_sum_pay_principal(cp_total_sum_pay_principal);
 		register.setCp_total_sum_pay_fees(cp_total_sum_pay_fees);
 		register.setCp_total_sum_pay_actual_payment_amout(cp_total_sum_pay_actual_payment_amout);
@@ -209,7 +233,8 @@ public class CompanyRegisterAction implements Action {
 			pay_count_string += pay_count.get(i) + "/**/";
 		}
 		if (pay_count_string.charAt(pay_count_string.length()-1) == remark) {
-			pay_count_string = pay_count_string.substring(0, pay_count_string.length()-4); 
+			pay_count_string = pay_count_string.substring(0, pay_count_string.length()-4);
+			pay_count_string = pay_count_string.replaceAll(",", "");
 			register.setPay_count_string(pay_count_string);
 		}
 		
@@ -219,6 +244,7 @@ public class CompanyRegisterAction implements Action {
 		}
 		if (pay_payment_date_string.charAt(pay_payment_date_string.length()-1) == remark) {
 			pay_payment_date_string = pay_payment_date_string.substring(0, pay_payment_date_string.length()-4);
+			pay_payment_date_string = pay_payment_date_string.replaceAll(",", "");
 			register.setPay_payment_date_string(pay_payment_date_string);
 		}
 		
@@ -226,9 +252,9 @@ public class CompanyRegisterAction implements Action {
 		for(int i = 0; i<pay_principal.size(); i++) {
 			pay_principal_string += pay_principal.get(i) + "/**/";
 		}
-		
 		if (pay_principal_string.charAt(pay_principal_string.length()-1) == remark) {
 			pay_principal_string = pay_principal_string.substring(0, pay_principal_string.length()-4);
+			pay_principal_string = pay_principal_string.replaceAll(",", "");
 			register.setPay_principal_string(pay_principal_string);
 		}
 		
@@ -238,6 +264,7 @@ public class CompanyRegisterAction implements Action {
 		}
 		if (pay_interest_string.charAt(pay_interest_string.length()-1) == remark) {
 			pay_interest_string = pay_interest_string.substring(0, pay_interest_string.length()-4); 
+			pay_interest_string = pay_interest_string.replaceAll(",", "");
 			register.setPay_interest_string(pay_interest_string);
 		}
 		
@@ -247,6 +274,7 @@ public class CompanyRegisterAction implements Action {
 		}
 		if (pay_fees_string.charAt(pay_fees_string.length()-1) == remark) {
 			pay_fees_string = pay_fees_string.substring(0, pay_fees_string.length()-4);
+			pay_fees_string = pay_fees_string.replaceAll(",", "");
 			register.setPay_fees_string(pay_fees_string);
 		}
 		
@@ -256,6 +284,7 @@ public class CompanyRegisterAction implements Action {
 		}
 		if (pay_actual_payment_string.charAt(pay_actual_payment_string.length()-1) == remark) {
 			pay_actual_payment_string = pay_actual_payment_string.substring(0, pay_actual_payment_string.length()-4);
+			pay_actual_payment_string = pay_actual_payment_string.replaceAll(",", "");
 			register.setPay_actual_payment_string(pay_actual_payment_string);
 		}
 		
@@ -265,6 +294,7 @@ public class CompanyRegisterAction implements Action {
 		}
 		if (pay_actual_rate_string.charAt(pay_actual_rate_string.length()-1) == remark) {
 			pay_actual_rate_string = pay_actual_rate_string.substring(0, pay_actual_rate_string.length()-4);
+			pay_actual_rate_string = pay_actual_rate_string.replaceAll(",", "");
 			register.setPay_actual_rate_string(pay_actual_rate_string);
 		}
 		

@@ -84,45 +84,57 @@ public class ModifyCompanyAction implements Action {
 		companyDetail.setPl_year(pl_year);
 		
 		String pl_month = request.getParameter("pl_month");
+		pl_month = pl_month.replaceAll(",", "");
 		companyDetail.setPl_month(pl_month);
 		
 		String calA = request.getParameter("calA");
+		calA = calA.replaceAll(",", "");
 		companyDetail.setPl_sales(calA);
 		
 		String calB = request.getParameter("calB");
+		calB = calB.replaceAll(",", "");
 		companyDetail.setPl_material(calB);
 		
 		String calC = request.getParameter("calC");
+		calC = calC.replaceAll(",", "");
 		companyDetail.setPl_person_pay(calC);
 		
 		String calD = request.getParameter("calD");
+		calD = calD.replaceAll(",", "");
 		companyDetail.setPl_rent_building(calD);
 		
 		String calE = request.getParameter("calE");
+		calE = calE.replaceAll(",", "");
 		companyDetail.setPl_operating_pay(calE);
 		
 		String calT = request.getParameter("calT");
+		calT = calT.replaceAll(",", "");
 		companyDetail.setPl_net_revenue(calT);
 		
 		String cal1 = request.getParameter("cal1");
 		companyDetail.setMa_odds_percent(cal1);
 		
 		String cal2 = request.getParameter("cal2");
+		cal2 = cal2.replaceAll(",", "");
 		companyDetail.setMa_odds_money(cal2);
 		
 		String cal3 = request.getParameter("cal3");
 		companyDetail.setMa_share_percent(cal3);
 		
 		String cal4 = request.getParameter("cal4");
+		cal4 = cal4.replaceAll(",", "");
 		companyDetail.setMa_share_money(cal4);
 		
 		String cal5 = request.getParameter("cal5");
+		cal5 = cal5.replaceAll(",", "");
 		companyDetail.setMa_platform_pay(cal5);
 		
 		String cal6 = request.getParameter("cal6");
+		cal6 = cal6.replaceAll(",", "");
 		companyDetail.setMa_estimated_revenue(cal6);
 		
 		String cal7 = request.getParameter("cal7");
+		cal7 = cal7.replaceAll(",", "");
 		companyDetail.setMa_monthly_average(cal7);
 		
 		String tot1 = request.getParameter("tot1");
