@@ -40,57 +40,125 @@
 			   <div>
 					<h3>기본정보</h3>
 					<p><span>대표자</span>
-            <input type="text" name="cp_manager" value="${companyDetail.cp_manager }"></p>
+           				<input type="text" name="cp_manager" value="${companyDetail.cp_manager }"></p>
+           			<p><span>ID</span>
+            			<input type="text" value="수정 해야 됨(추가)"></p>  
 					<p><span>사업자등록번호</span>
-            <input type="text" name="cp_number" value="${companyDetail.cp_number }"></p>
+            			<input type="text" name="cp_number" value="${companyDetail.cp_number }"></p>
+            		<p><span>오픈날짜</span>
+            			<input type="text" value="수정 해야 됨(추가)"></p>  
 					<p><span>자본금</span>
-            <input type="text" name="cp_capital" value="${companyDetail.cp_capital }"></p>
+            			<input type="text" name="cp_capital" value="${companyDetail.cp_capital }"></p>
 					<p><span>본사주소</span>
-					<input type="text" name="cp_address" value="${companyDetail.cp_address }"></p>
+						<input type="text" name="cp_address" value="${companyDetail.cp_address }"></p>
+							<p class="api">
+					<span>위치</span>
+					  <input type="text" placeholder="우편번호" readonly="true" value="우편번호 - 수정 해야됨(추가)">
+					  <input type="button" value="주소검색">
+					  <input type="text" placeholder="주소" readonly="true" value="주소 - 수정 해야됨(추가)">
+					  <input type="text" placeholder="상세주소" readonly="true" value="상세주소 - 수정 해야됨(추가)">
+					  <input type="text" placeholder="참조" readonly="true" value="참조 - 수정 해야됨(추가)">
+					</p>
 			  </div>
 			  <div>
-					<h3>투자정보</h3>
-            <p><span>월수익률</span><input type="text" name="cp_monthly_profit" value="${companyDetail.cp_monthly_profit }"> %</p>
-            <p><span>투자계약기간</span><input type="text" name="iv_contraction_during" value="${companyDetail.iv_contraction_during }"> 개월</p>
-            <p><span>최소투자금액</span><input type="text" name="iv_min_amount" value="${companyDetail.iv_min_amount }"> Point</p>
-            <p><span>모집구좌</span><input type="text" name="iv_appl_stock" value="${companyDetail.iv_appl_stock }"> 구좌</p>
-            <p><span>총모집금액</span><input type="text" name="iv_goal_amount" value="${companyDetail.iv_goal_amount }"> Point</p>
-            <p><span>모집기간</span><input type="text" name="iv_appl_day" value="${companyDetail.iv_appl_day }"> 일</p>
+			<h3>투자정보</h3>
+            <p><span>월수익률</span><input type="text" name="cp_monthly_profit" value="${companyDetail.cp_monthly_profit } %"></p>
+            <p><span>투자계약기간</span><input type="text" name="iv_contraction_during" value="${companyDetail.iv_contraction_during } 개월"></p>
+            <p><span>최소투자금액</span><input type="text" name="iv_min_amount" value="${companyDetail.iv_min_amount } Point"></p>
+            <p><span>모집구좌</span><input type="text" name="iv_appl_stock" value="${companyDetail.iv_appl_stock } 구좌"></p>
+            <p><span>총모집금액</span><input type="text" name="iv_goal_amount" value="${companyDetail.iv_goal_amount } Point"></p>
+            <%-- <p><span>모집기간</span><input type="text" name="iv_appl_day" value="${companyDetail.iv_appl_day } 일"></p> --%>
+            <p><span>모집기간</span><input type="date" style="width:calc((100% - 264px)/6 + 27px)" value="2019-09-05"> ~ <input type="date" style="width:calc((100% - 264px)/6 + 27px)" value="2019-10-05"></p>
 			  </div>
 				<div>
 					<h3>사진등록</h3>
+					<p><span>로고</span><input type="file"><a href="./img/arrow_down.svg" download>수정 해야함 (추가)</a></p>
 					<p><span>썸네일</span><input type="file" name="cf_thumbnail"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx }&kindOfFile=2&fileName=${companyDetail.cf_alias_thumbnail}" download>${companyDetail.cf_thumbnail }</a>
-          <span>910px * 780px :: 상호나 간판이 정중앙에 오도록 편집 후 업로드 ::</span></p>
-          			<div id="cf_store_images">
-          				<!-- <p><span>매장사진1</span><input type="file"><a href="#" download>1.jpg</a>
+          				<span>910px * 780px :: 상호나 간판이 정중앙에 오도록 편집 후 업로드 ::</span></p>
+          			<p><span>매장사진</span><input type="file" multiple>수정 해야함 (추가)</p>
+          			<!--<div id="cf_store_images">
+          				 <p><span>매장사진1</span><input type="file"><a href="#" download>1.jpg</a>
 	          <span>930px * 310px</span></p>
 						<p><span>매장사진2</span><input type="file"><a href="#" download>1.jpg</a>
 	          <span>930px * 310px</span></p>
 						<p><span>매장사진3</span><input type="file"><a href="#" download>1.jpg</a>
 	          <span>445px * 310px</span></p>
 						<p><span>매장사진4</span><input type="file"><a href="#" download>1.jpg</a>
-	          <span>445px * 310px</span></p> -->
-          			</div>
-          			<p id="multi_cf_store_images"></p>
-					<p><span>기업PR배경</span><input type="file" name="cf_pr_background"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName=${companyDetail.cf_alias_pr_background}" download>${companyDetail.cf_pr_background }</a>
+	          <span>445px * 310px</span></p> 
+          			</div>-->
+          			<!-- <p id="multi_cf_store_images"></p> -->
+					<%-- <p><span>기업PR배경</span><input type="file" name="cf_pr_background"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName=${companyDetail.cf_alias_pr_background}" download>${companyDetail.cf_pr_background }</a>
           <span>930px * 780px</span></p>
           <p><span>매장PR타이틀</span><input type="text" name="cp_point_title" value="${companyDetail.cp_intro_headline}"></p>
 					<span>매장PR내용</span>
           <p><textarea name="cp_point_content">${companyDetail.cp_intro_content}</textarea>
-          <span>250자 내외</span></p>
+          <span>250자 내외</span></p> --%>
 				</div>
-				<div class="plan">
-					<h3>사업계획서 파일</h3>
+				<div>
+	        	  <h3>리워드</h3><div class="checkBox"><input type="checkbox" id="reward"><label for="reward">선택</label></div>
+		          <p><span>메인타이틀</span><input type="text" readonly="true" value="펀딩에 참여하시는 모든분들께 1만원 상당의 식사권을 드립니다 !"></p>
+		          <p><span>서브타이틀</span><input type="text" readonly="true" value="배송일 : 2019년 12월 1일"></p>
+		          <p><span>내용</span><textarea readonly="true">
+		회원 가입 시 정확한 주소를 등록해주세요.
+		잘못 등록된 주소로 인한 오배송 문제는 당사에서 책임지지 않습니다.
+		          </textarea></p>		          
+			    </div>
+			    <div>
+        <h3>기업소개</h3>
+					<p><span>기업PR배경</span><input type="file"><a href="./img/arrow_down.svg" download></a></p>
+          <p><span>매장PR타이틀</span><input type="text" value="싱싱한 회 한 접시에 소주 한 잔?"></p>
+					<p><span style="width:auto; margin-right:0;">매장PR내용</span><span style="width:auto;color:#999; margin-right:0; margin-left:8px;">(200자 내외)</span>
+          <textarea>
+			'바른생선횟집'은 생선회가 비싸다는 편견을 파괴하며 다양한 해산물 및 밑찬제공으로 퀄리티 있는 서비스를 제공합니다.
+			수족관을 관림함으로써 드는 비용절감, 생선의 관리 미필요로 인한 인건비 절감, 수족관에서 생선재고 관리가 없어짐으로서
+			생선관리 비용 절감이 가능합니다.저렴한 가격으로 깨끗한 식사 환경으로 만족도 상승하여 누구나 즐길 수 있습니다!
+			매장네 포장판매 및 배달로 집에서도 싱싱한 회를 즐겨보세요.
+          </textarea>
+          </p>
+				</div>
+				<div class="fundingNote">
+					<h3>투자노트</h3>
+					<span>투자포인트</span>
+					<button type="button" class="add"><i></i></button>
+					<button type="button" class="del"><i></i></button>
+					<div class="fundingPoint">
+					  <h4>1.</h4>
+					  <div>
+					  <input type="text" value="수요가 많은 원룸 밀집 지역!">
+					  <textarea>
+					    - ㅇ년간 안정적인 매출로 원금손실의 위험부담이 적습니다.<br>
+          - 6개월 분할 상환으로 빠른 원금회수가 가능합니다.
+					  </textarea>
+					  </div>
+					</div>
+					<div class="addNote">
+					  <h4>2.</h4>
+					  <div>
+					  <input type="text" value="수요가 많은 원룸 밀집 지역!">
+					  <textarea>
+					    - ㅇ년간 안정적인 매출로 원금손실의 위험부담이 적습니다.<br>
+          - 6개월 분할 상환으로 빠른 원금회수가 가능합니다.
+					  </textarea>
+					  </div>
+					</div>
+					<div class="addNote">
+					  <h4>3.</h4>
+					  <div>
+					  <input type="text" value="수요가 많은 원룸 밀집 지역!">
+					  <textarea>
+					    - ㅇ년간 안정적인 매출로 원금손실의 위험부담이 적습니다.<br>
+          - 6개월 분할 상환으로 빠른 원금회수가 가능합니다.
+					  </textarea>
+					  </div>
+					</div>
 					<p><span>사업계획서</span><input type="file" name="cf_business_plan"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=1&fileName=${companyDetail.cf_alias_business_plan}" download>${companyDetail.cf_business_plan }</a></p>
 				</div>
-				<div class="plan" id="plan_images">
-					<h3>사업계획서 사진</h3>
-					<div id="plan"></div>
-				</div>
-			  <div id="etc">
-         		<h3>참고자료</h3>
-         		<div id="cf_etc_files"></div>
-			  </div>
+				<div>
+		          <h3>참고자료</h3>
+		          <p><span>사업계획서</span><input type="file"><a href="img/arrow_down.svg"></a></p>
+		          <p><span>펀딩계약서</span><input type="file"><a href="img/arrow_down.svg"></a></p>
+		          <p id="colFile"><span>기타자료</span><input type="file" multiple></p>
+			  </div>	
 			  <div class="table1">
 			  	<h3>손익상세</h3>
 			  	<table>
@@ -181,6 +249,32 @@
             <input type="button" class="del del2" value="-">
 			  </div>
 			  <input type="hidden" name="cp_idx" value="${companyDetail.cp_idx }">
+			   <div class="warning">
+           <h3>투자 시 유의사항</h3>
+           <button type="button" class="add"><i></i></button>
+					<button type="button" class="del"><i></i></button>
+					<div class="warn">
+					  <h4>1.</h4>
+					  <div>
+					  <input type="text" value="사업위험">
+					  <textarea>[자연재해] 태풍의 직접적인 영향권에 있는 서귀표 외해에 위치하여 외해수중 가두리 자체의 손상 및 참다랑어의 피해 가능성이 있습니다. 매출이 발생하지 않거나 천재지변으로 인한 양식장 손실 시 연간 최대 손실은 약 4~5억이 예상됩니다. (2021년 당기 순이익 -5억 발생 시 -12.5%손실)</textarea>
+					  </div>
+					</div>
+        <div class="addWarn">
+					  <h4>2.</h4>
+					  <div>
+					  <input type="text" value="사업위험">
+					  <textarea>[자연재해] 태풍의 직접적인 영향권에 있는 서귀표 외해에 위치하여 외해수중 가두리 자체의 손상 및 참다랑어의 피해 가능성이 있습니다. 매출이 발생하지 않거나 천재지변으로 인한 양식장 손실 시 연간 최대 손실은 약 4~5억이 예상됩니다. (2021년 당기 순이익 -5억 발생 시 -12.5%손실)</textarea>
+					  </div>
+					</div>
+        <div class="addWarn">
+					  <h4>3.</h4>
+					  <div>
+					  <input type="text" value="사업위험">
+					  <textarea>[자연재해] 태풍의 직접적인 영향권에 있는 서귀표 외해에 위치하여 외해수중 가두리 자체의 손상 및 참다랑어의 피해 가능성이 있습니다. 매출이 발생하지 않거나 천재지변으로 인한 양식장 손실 시 연간 최대 손실은 약 4~5억이 예상됩니다. (2021년 당기 순이익 -5억 발생 시 -12.5%손실)</textarea>
+					  </div>
+					</div>
+         </div>
         </form>
         <button class="submit rec" id="modify">수정하기</button>
 			  <button class="submit save" id="submit" onclick = "save();">저장하기</button>

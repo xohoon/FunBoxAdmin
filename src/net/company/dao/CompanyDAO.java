@@ -11,7 +11,8 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.mysql.jdbc.CallableStatement;
+//import com.mysql.jdbc.CallableStatement;
+import com.mysql.cj.jdbc.CallableStatement;
 
 import net.company.dto.Company;
 import net.company.dto.CompanyAdded;
@@ -138,7 +139,7 @@ public class CompanyDAO {
 				companyInvested.setMb_id(rs.getString("mb_id"));
 				companyInvested.setMb_id(rs.getString("cp_manager"));
 				companyInvested.setMb_id(rs.getString("cp_phone"));
-				companyInvested.setCp_pre_net_profit_ratio(rs.getInt("cp_pre_net_profit_ratio"));
+				//companyInvested.setCp_pre_net_profit_ratio(rs.getInt("cp_pre_net_profit_ratio")); Column 'cp_pre_net_profit_ratio' not found. 에러
 				companyInvested.setD_day(rs.getInt("d_day"));
 				companyInvested.setMb_id(rs.getString("iv_balance_stock"));
 				companyInvestedList.add(companyInvested);
