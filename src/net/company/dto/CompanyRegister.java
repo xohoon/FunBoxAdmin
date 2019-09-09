@@ -1,5 +1,7 @@
 package net.company.dto;
 
+import java.sql.Date;
+
 // 태훈 추가 - 기업등록
 public class CompanyRegister {
 	
@@ -80,6 +82,31 @@ public class CompanyRegister {
 	private String cp_total_sum_pay_actual_payment_amout;
 	private String cp_total_sum_actual_rate_return;
 	
+	//2019-09-09 추가
+	private Date cp_open_datetime;
+	private Date iv_appl_start_date_time;
+	private Date iv_appl_stop_date_time;
+	
+	
+	
+	public Date getCp_open_datetime() {
+		return cp_open_datetime;
+	}
+	public void setCp_open_datetime(Date cp_open_datetime) {
+		this.cp_open_datetime = cp_open_datetime;
+	}
+	public Date getIv_appl_start_date_time() {
+		return iv_appl_start_date_time;
+	}
+	public void setIv_appl_start_date_time(Date iv_appl_start_date_time) {
+		this.iv_appl_start_date_time = iv_appl_start_date_time;
+	}
+	public Date getIv_appl_stop_date_time() {
+		return iv_appl_stop_date_time;
+	}
+	public void setIv_appl_stop_date_time(Date iv_appl_stop_date_time) {
+		this.iv_appl_stop_date_time = iv_appl_stop_date_time;
+	}
 	public String getCp_total_sum_pay_principal() {
 		return cp_total_sum_pay_principal;
 	}

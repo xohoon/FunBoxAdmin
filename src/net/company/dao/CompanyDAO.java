@@ -1,6 +1,7 @@
 package net.company.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -138,7 +139,7 @@ public class CompanyDAO {
 				companyInvested.setMb_id(rs.getString("mb_id"));
 				companyInvested.setMb_id(rs.getString("cp_manager"));
 				companyInvested.setMb_id(rs.getString("cp_phone"));
-				companyInvested.setCp_pre_net_profit_ratio(rs.getInt("cp_pre_net_profit_ratio"));
+				companyInvested.setMa_estimated_revenue(rs.getString("ma_estimated_revenue"));
 				companyInvested.setD_day(rs.getInt("d_day"));
 				companyInvested.setMb_id(rs.getString("iv_balance_stock"));
 				companyInvestedList.add(companyInvested);
@@ -545,7 +546,7 @@ public class CompanyDAO {
 				sql += "?,";
 			}
 		}
-		
+		System.out.println(sql);
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -1061,7 +1062,7 @@ public class CompanyDAO {
 		CallableStatement cstmt = null;
 		ResultSet rs = null;
 		try {
-			cstmt = (CallableStatement)conn.prepareCall("call COMPANY_REGISTER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?    ,?,?,?,?,?)");
+			cstmt = (CallableStatement)conn.prepareCall("call COMPANY_REGISTER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?    ,?,?,?,?,?)");
 			// company insert data
 			cstmt.setString(1, register.getCp_sector());
 			cstmt.setString(2, register.getCp_name());
@@ -1140,6 +1141,12 @@ public class CompanyDAO {
 			cstmt.setString(70, register.getCp_total_sum_pay_fees());
 			cstmt.setString(71, register.getCp_total_sum_pay_actual_payment_amout());
 			cstmt.setString(72, register.getCp_total_sum_actual_rate_return());
+			
+			//2019-09-09
+			cstmt.setDate(73, (Date) register.getCp_open_datetime());
+			cstmt.setDate(74, (Date) register.getIv_appl_start_date_time());
+			cstmt.setDate(75, (Date) register.getIv_appl_stop_date_time());
+			
 			
 			cstmt.execute();
 			result = cstmt.getInt("@RESULT");

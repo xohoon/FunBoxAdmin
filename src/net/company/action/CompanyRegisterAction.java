@@ -29,6 +29,9 @@ public class CompanyRegisterAction implements Action {
 		ActionForward forward = new ActionForward();
 		CompanyRegister register = new CompanyRegister();
 		CompanyDAO companyDAO = new CompanyDAO();
+		
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
 		char comma = ',';
 		char remark = '/';
 		//기업 이름
@@ -42,6 +45,11 @@ public class CompanyRegisterAction implements Action {
 		// 기본 정보
 		String cp_manager = request.getParameter("cp_manager");
 		String cp_number = request.getParameter("cp_number");
+		//2019-09-09 추가
+		String cp_open_datetime = request.getParameter("cp_open_datetime");
+		register.setCp_open_datetime(new java.sql.Date(transFormat.parse(cp_open_datetime).getTime()));
+		//
+		
 		String cp_capital = request.getParameter("cp_capital");
 		String cp_address = request.getParameter("cp_address");
 		String cp_add_ch = request.getParameter("cp_add_ch");
@@ -61,13 +69,20 @@ public class CompanyRegisterAction implements Action {
 		String iv_min_amount = request.getParameter("iv_min_amount");
 		String iv_appl_stock = request.getParameter("iv_appl_stock");
 		String iv_goal_amount = request.getParameter("iv_goal_amount");
-		String iv_appl_day = request.getParameter("iv_appl_day");
+		//String iv_appl_day = request.getParameter("iv_appl_day");
+		//2019-09-09 추가
+		String iv_appl_start_date_time = request.getParameter("iv_appl_start_date_time");
+		String iv_appl_stop_date_time = request.getParameter("iv_appl_stop_date_time");
+		
+		register.setIv_appl_start_date_time(new java.sql.Date(transFormat.parse(iv_appl_start_date_time).getTime()));
+		register.setIv_appl_stop_date_time(new java.sql.Date(transFormat.parse(iv_appl_stop_date_time).getTime()));
+		//
 		register.setCp_monthly_profit(cp_monthly_profit);
 		register.setIv_contraction_during(iv_contraction_during);
 		register.setIv_min_amount(iv_min_amount);
 		register.setIv_appl_stock(iv_appl_stock);
 		register.setIv_goal_amount(iv_goal_amount);
-		register.setIv_appl_day(iv_appl_day);
+		register.setIv_appl_day("이거 수정해야함");
 		
 		// 리워드
 		String cp_reward_main_title = request.getParameter("cp_reward_main_title");
@@ -341,7 +356,7 @@ public class CompanyRegisterAction implements Action {
 				case "cf_thumbnail":
 					register.setCf_thumbnail(fileName);
 					register.setCf_alias_thumbnail(alias + "cf_thumbnail" + fileFormat);
-					//part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_thumbnail" + fileFormat);
+					////part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_thumbnail" + fileFormat);
 					break;
 				case "cf_info_banner":
 					register.setCf_info_banner(fileName);

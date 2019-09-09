@@ -45,13 +45,15 @@
 			   <div>
 					<h3>기본정보</h3>
 					<p><span >대표자</span>
-            <input type="text" name="cp_manager" placeholder="(예시 : 홍길동)"></p>
+            			<input type="text" name="cp_manager" placeholder="(예시 : 홍길동)"></p>
 					<p><span>사업자등록번호</span>
-            <input type="text" name="cp_number" placeholder="(예시 : 000-00-00000)"></p>
+          			  	<input type="text" name="cp_number" placeholder="(예시 : 000-00-00000)"></p>
+          			<p><span>오픈(예정) 날짜</span>
+            			<input type="date" style="width:calc((100% - 264px)/6 + 27px)" name="cp_open_datetime" id="cp_open_datetime">   
 					<p><span>자본금</span>
-            <input type="number" name="cp_capital" placeholder="(예시 : 10000000)"></p>
+            			<input type="number" name="cp_capital" placeholder="(예시 : 10000000)"></p>
 					<p><span>본사주소</span>
-			<input type="text" name="cp_address" placeholder="시 /지점  (예시 :부산 동래점)"></p>
+						<input type="text" name="cp_address" placeholder="시 /지점  (예시 :부산 동래점)"></p>
 					<p class="api">
 					  <span>위치</span>
 					  <input type="text" id="cp_add_num" name="cp_add_num" placeholder="우편번호" readonly="true">
@@ -68,30 +70,33 @@
             <p><span>최소투자금액</span><input type="text" name="iv_min_amount" placeholder="(예시 : 10000000)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span>Point</span></p>
             <p><span>모집구좌</span><input type="text" name="iv_appl_stock" placeholder="(예시 : 12)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span>구좌</span></p>
             <p><span>총모집금액</span><input type="text" name="iv_goal_amount" placeholder="(예시 : 10000000)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span>Point</span></p>
-            <p><span>모집기간</span><input type="text" name="iv_appl_day" placeholder="(예시 : 30)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span>일</span></p>
+            <!-- <p><span>모집기간</span><input type="text" name="iv_appl_day" placeholder="(예시 : 30)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span>일</span></p> -->
+            <p><span>모집기간</span><input type="date" style="width:calc((100% - 264px)/6 + 27px)" name="iv_appl_start_date_time" id="iv_appl_start_date_time"> ~ <input type="date" style="width:calc((100% - 264px)/6 + 27px)" name="iv_appl_stop_date_time" id="iv_appl_stop_date_time"></p>
 			  </div>
 				<div>
 					<h3>사진등록</h3>
 					<p><span>상세 배너사진</span><input type="file" name="cf_info_banner"><span>가로 350px 이상</span></p>
-					<p><span>썸네일</span><input type="file" name="cf_thumbnail">
-          <span>910px * 780px :: 상호나 간판이 정중앙에 오도록 편집 후 업로드 ::</span></p>
-          <p><span>매장사진</span><input type="file" multiple="true" name="cf_store_images"></p>
-        </div>
-        <div>
-          <h3>리워드</h3><div class="checkBox"><input type="checkbox" id="reward"><label for="reward">선택</label></div>
-          <p><span>메인타이틀</span><input type="text" readonly="true" name="cp_reward_main_title"></p>
-          <p><span>서브타이틀</span><input type="text" readonly="true" name="cp_reward_sub_title"></p>
-          <p><span>내용</span><textarea readonly="true" name="cp_reward_content"></textarea></p>
-        </div>
-        <div>
-        <h3>기업소개</h3>
-					<p><span>기업PR배경</span><input type="file" name="cf_pr_background">
-          <span>930px * 780px</span></p>
-          <p><span>매장PR타이틀</span><input type="text" name="cp_intro_headline"></p>
-					<p><span style="width:auto; margin-right:0;">매장PR내용</span><span style="width:auto;color:#999; margin-right:0; margin-left:8px;">(200자 내외)</span>
-          <textarea name="cp_intro_content"></textarea>
-          </p>
+					<p><span>썸네일</span><input type="file" name="cf_thumbnail"><span>910px * 780px :: 상호나 간판이 정중앙에 오도록 편집 후 업로드 ::</span></p>
+         			<p><span>매장사진</span><input type="file" multiple="true" name="cf_store_images"></p>
+         		</div>
+         		
+		        <div>
+		          <h3>리워드</h3><div class="checkBox"><input type="checkbox" id="reward"><label for="reward">선택</label></div>
+		          <p><span>메인타이틀</span><input type="text" readonly="true" name="cp_reward_main_title"></p>
+		          <p><span>서브타이틀</span><input type="text" readonly="true" name="cp_reward_sub_title"></p>
+		          <p><span>내용</span><textarea readonly="true" name="cp_reward_content"></textarea></p>
+		        </div>
+		        
+       			<div>
+			        <h3>기업소개</h3>
+								<p><span>기업PR배경</span><input type="file" name="cf_pr_background">
+			          <span>930px * 780px</span></p>
+			          <p><span>매장PR타이틀</span><input type="text" name="cp_intro_headline"></p>
+								<p><span style="width:auto; margin-right:0;">매장PR내용</span><span style="width:auto;color:#999; margin-right:0; margin-left:8px;">(200자 내외)</span>
+			          <textarea name="cp_intro_content"></textarea>
+			          </p>
 				</div>
+				
 				<div class="fundingNote">
 					<h3>투자노트</h3>
 					<span>투자 핵심</span>
@@ -106,19 +111,21 @@
 					</div>
 					<p><span>사업계획서</span><input type="file" multiple name="cf_business_plan_images"><span>사업계획서 이미지파일</span></p>
 				</div>
+				
 			  <div>
-          <h3>참고자료</h3>
-          <p><span>사업계획서</span><input type="file" name="cf_business_plan"></p>
-          <p><span>펀딩계약서</span><input type="file" name="cf_funding_contract"></p>
-          <p><span>기타자료</span><input type="file" multiple name="cf_etc_files"></p>
+		          <h3>참고자료</h3>
+		          <p><span>사업계획서</span><input type="file" name="cf_business_plan"></p>
+		          <p><span>펀딩계약서</span><input type="file" name="cf_funding_contract"></p>
+		          <p><span>기타자료</span><input type="file" multiple name="cf_etc_files"></p>
 			  </div>
+			  
 			  <div class="table1">
 			  	<h3>손익상세</h3>
 			  	<table>
-            <tr>
-              <td>기준년월</td>
-              <td><input type="text" size="4" placeholder="19" maxlength="2" name="pl_year"> 년 <input type="text" size="1" name="pl_month" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 월</td>
-            </tr>
+		            <tr>
+		              <td>기준년월</td>
+		              <td><input type="text" size="4" placeholder="19" maxlength="2" name="pl_year"> 년 <input type="text" size="1" name="pl_month" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 월</td>
+		            </tr>
 			  	  <tr>
 			  	    <td>매출</td>
 			  	    <td><input type="text" size="13" name="calA" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
@@ -145,6 +152,7 @@
 			  	  </tr>
 			  	</table>
 			  </div>
+			  
 			  <div class="table2">
 			    <h3>월 평균 수익금(1구좌당)</h3>
 			    <table>
@@ -174,6 +182,7 @@
 			  	  </tr>
 			    </table>
 			  </div>
+			  
 			  <div class="table3">
 			    <h3>예상지급스케쥴</h3>
 			    <table>
@@ -250,9 +259,10 @@
                 <td><input type="text" size="2" name="tot5" class="per" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> %</td>
               </tr>
             </table>
-            <input type="button" class="add add2" value="+">
-            <input type="button" class="del del2" value="-">
-			  </div>
+	            <input type="button" class="add add2" value="+">
+	            <input type="button" class="del del2" value="-">
+				</div>
+				
          <div class="warning">
            <h3>투자 시 유의사항</h3>
            <button type="button" class="add"><i></i></button>

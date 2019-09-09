@@ -40,58 +40,88 @@
 			   <div>
 					<h3>기본정보</h3>
 					<p><span>대표자</span>
-            <input type="text" name="cp_manager" value="${companyDetail.cp_manager }"></p>
+            			<input type="text" name="cp_manager" value="${companyDetail.cp_manager }"></p>
+            		<p><span>ID</span>
+            			<input type="text" value="" name="mb_id" id="mb_id"></p>  
 					<p><span>사업자등록번호</span>
-            <input type="text" name="cp_number" value="${companyDetail.cp_number }"></p>
+            			<input type="text" name="cp_number" value="${companyDetail.cp_number }"></p>
+            		<p><span>오픈(예정) 날짜</span>
+            			<input type="date" style="width:calc((100% - 264px)/6 + 27px)" name="cp_open_datetime" id="cp_open_datetime">
 					<p><span>자본금</span>
-            <input type="text" name="cp_capital" value="${companyDetail.cp_capital }"></p>
+           				<input type="text" name="cp_capital" value="${companyDetail.cp_capital }"></p>
 					<p><span>본사주소</span>
-					<input type="text" name="cp_address" value="${companyDetail.cp_address }"></p>
+						<input type="text" name="cp_address" placeholder="시 /지점  (예시 :부산 동래점)"></p>
+					<p class="api">
+					  <span>위치</span>
+					  <input type="text" id="cp_add_num" name="cp_add_num" placeholder="우편번호" readonly="true">
+					  <input type="button" value="주소검색" onclick="address_search();">
+					  <input type="text" id="cp_add_ch" name="cp_add_ch" placeholder="주소" readonly="true">
+					  <input type="text" id="cp_add_more" name="cp_add_more" placeholder="상세주소">
+					  <input type="text" id="app4_3" name="app4_3" placeholder="참조">
+					</p>
 			  </div>
 			  <div>
-					<h3>투자정보</h3>
-            <p><span>월수익률</span><input type="text" name="cp_monthly_profit" value="${companyDetail.cp_monthly_profit }"> %</p>
-            <p><span>투자계약기간</span><input type="text" name="iv_contraction_during" value="${companyDetail.iv_contraction_during }"> 개월</p>
-            <p><span>최소투자금액</span><input type="text" name="iv_min_amount" value="${companyDetail.iv_min_amount }"> Point</p>
-            <p><span>모집구좌</span><input type="text" name="iv_appl_stock" value="${companyDetail.iv_appl_stock }"> 구좌</p>
-            <p><span>총모집금액</span><input type="text" name="iv_goal_amount" value="${companyDetail.iv_goal_amount }"> Point</p>
-            <p><span>모집기간</span><input type="text" name="iv_appl_day" value="${companyDetail.iv_appl_day }"> 일</p>
+				<h3>투자정보</h3>
+		            <p><span>월수익률</span><input type="text" name="cp_monthly_profit" value="${companyDetail.cp_monthly_profit }"> %</p>
+		            <p><span>투자계약기간</span><input type="text" name="iv_contraction_during" value="${companyDetail.iv_contraction_during }"> 개월</p>
+		            <p><span>최소투자금액</span><input type="text" name="iv_min_amount" value="${companyDetail.iv_min_amount }"> Point</p>
+		            <p><span>모집구좌</span><input type="text" name="iv_appl_stock" value="${companyDetail.iv_appl_stock }"> 구좌</p>
+		            <p><span>총모집금액</span><input type="text" name="iv_goal_amount" value="${companyDetail.iv_goal_amount }"> Point</p>
+		            <p><span>모집기간</span><input type="text" name="iv_appl_day" value="${companyDetail.iv_appl_day }"> 일</p>
 			  </div>
-				<div>
-					<h3>사진등록</h3>
-					<p><span>썸네일</span><input type="file" name="cf_thumbnail"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx }&kindOfFile=2&fileName=${companyDetail.cf_alias_thumbnail}" download>${companyDetail.cf_thumbnail }</a>
-          <span>910px * 780px :: 상호나 간판이 정중앙에 오도록 편집 후 업로드 ::</span></p>
-          			<div id="cf_store_images">
-          				<!-- <p><span>매장사진1</span><input type="file"><a href="#" download>1.jpg</a>
-	          <span>930px * 310px</span></p>
-						<p><span>매장사진2</span><input type="file"><a href="#" download>1.jpg</a>
-	          <span>930px * 310px</span></p>
-						<p><span>매장사진3</span><input type="file"><a href="#" download>1.jpg</a>
-	          <span>445px * 310px</span></p>
-						<p><span>매장사진4</span><input type="file"><a href="#" download>1.jpg</a>
-	          <span>445px * 310px</span></p> -->
-          			</div>
-          			<p id="multi_cf_store_images"></p>
-					<p><span>기업PR배경</span><input type="file" name="cf_pr_background"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName=${companyDetail.cf_alias_pr_background}" download>${companyDetail.cf_pr_background }</a>
+			  <div>
+				<h3>사진등록</h3>
+				<%-- <p><span>로고</span><input type="file"><a href="./img/arrow_down.svg" download></a></p>
+				<p><span>썸네일</span><input type="file" name="cf_thumbnail"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx }&kindOfFile=2&fileName=${companyDetail.cf_alias_thumbnail}" download>${companyDetail.cf_thumbnail }</a><span>910px * 780px :: 상호나 간판이 정중앙에 오도록 편집 후 업로드 ::</span></p>
+				<p><span>기업PR배경</span><input type="file" name="cf_pr_background"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName=${companyDetail.cf_alias_pr_background}" download>${companyDetail.cf_pr_background }</a>
           <span>930px * 780px</span></p>
           <p><span>매장PR타이틀</span><input type="text" name="cp_point_title" value="${companyDetail.cp_intro_headline}"></p>
 					<span>매장PR내용</span>
           <p><textarea name="cp_point_content">${companyDetail.cp_intro_content}</textarea>
-          <span>250자 내외</span></p>
-				</div>
-				<div class="plan">
-					<h3>사업계획서 파일</h3>
-					<p><span>사업계획서</span><input type="file" name="cf_business_plan"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=1&fileName=${companyDetail.cf_alias_business_plan}" download>${companyDetail.cf_business_plan }</a></p>
-				</div>
-				<div class="plan" id="plan_images">
-					<h3>사업계획서 사진</h3>
-					<div id="plan"></div>
-				</div>
-			  <div id="etc">
-         		<h3>참고자료</h3>
-         		<div id="cf_etc_files"></div>
+          <span>250자 내외</span></p> --%>
+          			<p><span>로고</span><input type="file" name="cf_logo"><a href="./img/arrow_down.svg" download></a></p>
+					<p><span>썸네일</span><input type="file" name="cf_thumbnail"><a href="./img/arrow_down.svg" download></a></p>
+          			<p><span>매장사진</span><input type="file" multiple name="cf_store_images"></p>
 			  </div>
-			  <div class="table1">
+			  
+			  <div>
+		          <h3>리워드</h3><div class="checkBox"><input type="checkbox" id="reward"><label for="reward">선택</label></div>
+		          <p><span>메인타이틀</span><input type="text" readonly="true" name="cp_reward_main_title"></p>
+		          <p><span>서브타이틀</span><input type="text" readonly="true" name="cp_reward_sub_title"></p>
+		          <p><span>내용</span><textarea readonly="true" name="cp_reward_content"></textarea></p>
+		     </div>
+		     
+		     <div>
+		     	<h3>기업소개</h3>
+				  <p><span>기업PR배경</span><input type="file" name="cf_pr_background"><span>930px * 780px</span></p>
+			      <p><span>매장PR타이틀</span><input type="text" name="cp_intro_headline"></p>
+			      <p><span style="width:auto; margin-right:0;">매장PR내용</span><span style="width:auto;color:#999; margin-right:0; margin-left:8px;">(200자 내외)</span>
+			    <textarea name="cp_intro_content"></textarea></p>
+			</div>
+			
+			<div class="fundingNote">
+				<h3>투자노트</h3>
+				<span>투자 핵심</span>
+				<button type="button" class="add"><i></i></button>
+				<button type="button" class="del"><i></i></button>
+				<div class="fundingPoint">
+				  <h4>1.</h4>
+				  <div>
+				  <input type="text" name="cp_point_title">
+				  <textarea name="cp_point_content"></textarea>
+				  </div>
+				</div>
+				<p id="planImg"><span>사업계획서</span><input type="file" multiple name="cf_business_plan_images"><span>사업계획서 이미지파일</span></p>
+			</div>
+				
+			<div>
+		      <h3>참고자료</h3>
+		      <p><span>사업계획서</span><input type="file" name="cf_business_plan"></p>
+		      <p><span>펀딩계약서</span><input type="file" name="cf_funding_contract"></p>
+		      <p id="colFile"><span>기타자료</span><input type="file" multiple name="cf_etc_files"></p>
+			</div>
+			
+			<div class="table1">
 			  	<h3>손익상세</h3>
 			  	<table>
 					<tr>
@@ -124,6 +154,7 @@
 					</tr>
 			  	</table>
 			  </div>
+			  
 			  <div class="table2">
 			    <h3>월 평균 수익금(1구좌당)</h3>
 			    <table>
@@ -153,6 +184,7 @@
 			  	  </tr>
 			    </table>
 			  </div>
+			  
 			  <div class="table3">
 			    <h3>예상지급스케쥴</h3>
 			    <table>
@@ -179,37 +211,41 @@
             	</table>
             <input type="button" class="add add2" value="+">
             <input type="button" class="del del2" value="-">
-			  </div>
+			</div>
+			
+			<div class="warning">
+	           <h3>투자 시 유의사항</h3>
+	           <button type="button" class="add"><i></i></button>
+			   <button type="button" class="del"><i></i></button>
+			   <div class="warn">
+				 <h4>1.</h4>
+				 <div>
+				 <input type="text" name="notice_title">
+				 <textarea name="notice_content"></textarea>
+				 </div>
+				</div>
+         	</div>
+
 			  <input type="hidden" name="cp_idx" value="${companyDetail.cp_idx }">
-        </form>
-        <button class="submit rec" id="modify">수정하기</button>
+        	  </form>
+        	  <button class="submit rec" id="modify">수정하기</button>
 			  <button class="submit save" id="submit" onclick = "save();">저장하기</button>
 			  <button class="submit cancel">취소</button>
 			</div>
 		</section>
-	<script type="text/javascript">
+</body>
+<script type="text/javascript">
 	$(function(){
 		$('input[type=file]').hide();
 	});
-	document.getElementById('modify').addEventListener('click',function(){
-		//박신규
-	    $('#cf_store_images').hide();
-	    $('#plan').hide();
-	    $('#multi_cf_store_images').append('<span>매장 사진</span><input type=file multiple name="cf_store_images"><span></span>');
-	    $('#plan').hide();
-	    $('#plan_images').append('<p><span>사업 계획서 사진</span><input type=file multiple name="cf_business_plan_images"><span></span>');
-	    $('#cf_etc_files').hide();
-	    $('#etc').append('<p><span>참고 자료</span><input type=file multiple name="cf_etc_files"><span></span>');
-	});
-	
 	function save(){
 		var form = document.corForm;
 		
 		if(confirm("해당 내용을 수정하시겠습니까?") == true){
-    		form.submit();
-    	}else{
-    		alert("답변을 취소 하였습니다.");
-    	}
+			form.submit();
+		}else{
+			alert("답변을 취소 하였습니다.");
+		}
 	}
 	
 	$(function(){
@@ -228,73 +264,57 @@
 		}
 	})
 	var cp_idx = '${companyDetail.cp_idx }';
-	
-	
-	//매장사진
-	var cf_store_images = '${companyDetail.cf_store_images}'.split(',');
-	var cf_alias_store_images = '${companyDetail.cf_alias_store_images}'.split(',');
-	
-	var div_cf_store_images = $('#cf_store_images');
-	
-	var store_images_html = "";
-	
-	for (var i = 0; i < cf_alias_store_images.length; i++) {
-		store_images_html += "<p><span>매장사진"+(i+1)+"</span><input type='file'><a href='./CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName="+cf_alias_store_images[i]+"' download>"
-		store_images_html += cf_store_images[i];
-		if (i < 2) {
-			store_images_html += "</a><span>930px * 310px</span></p>"
-		}else if (i < 4) {
-			store_images_html += "</a><span>445px * 310px</span></p>"
-		}else{
-			store_images_html += "</a><span>자유</span></p>"
-		}
-	}
-	
-	$('#cf_store_images').html(store_images_html);
-	
-	//사업계획서
-	var div_plan = document.getElementById('plan');
-	
-	var cf_business_plan_images = '${companyDetail.cf_business_plan_images}'.split(',');
-	var cf_alias_business_plan_images = '${companyDetail.cf_alias_business_plan_images}'.split(',');
-	for (var i = 0; i < cf_alias_business_plan_images.length; i++) {
-		var pTag = document.createElement('p');
-		var inputTag = document.createElement('input');
-		inputTag.type = 'file';
-		var aTage = document.createElement('a');
-		aTage.href = './CompanyFileDownload?cp_idx='+cp_idx+'&kindOfFile=2&fileName='+cf_alias_business_plan_images[i]+'';
-		//수정해줘야함
-		aTage.text = cf_business_plan_images[0];
-		
-		pTag.append(inputTag);
-		pTag.append(aTage);
-		
-		div_plan.append(pTag);
-		
-	} 
-	
-	//참고자료
-	var div_cf_etc_files = document.getElementById('cf_etc_files');
-	
-	var cf_etc_files = '${companyDetail.cf_etc_files}'.split(',');
-	var cf_alias_etc_files = '${companyDetail.cf_alias_etc_files}'.split(',');
-	
-	for (var i = 0; i < cf_alias_etc_files.length; i++) {
-		var pTag = document.createElement('p');
-		//var inputTag = document.createElement('input');
-		//inputTag.type = 'file';
-		//inputTag.name = 'cf_etc_files';
-		var aTage = document.createElement('a');
-		aTage.href = './CompanyFileDownload?cp_idx='+cp_idx+'&kindOfFile=1&fileName='+cf_alias_etc_files[i]+'';
-		aTage.text = cf_etc_files[i];
-		
-		//pTag.append(inputTag);
-		pTag.append(aTage);
-		
-		div_cf_etc_files.append(pTag);
-		
-	}
-	
+</script>
+<script>
+    //사업계획서
+    $(function(){
+      var planImg,
+          planImgArr = ['data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EC%82%AC%EC%97%85%EA%B3%84%ED%9A%8D%EC%84%9C.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%ED%8E%80%EB%94%A9%EA%B3%84%EC%95%BD%EC%84%9C.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EC%82%AC%EC%97%85%EC%9E%90%EB%93%B1%EB%A1%9D%EC%A6%9D.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EC%9E%84%EB%8C%80%EC%B0%A8%EA%B3%84%EC%95%BD%EC%84%9C.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EA%B0%80%EB%A7%B9%ED%97%88%EA%B0%80%EC%9E%90%EB%A3%8C.txt'],
+          planL = planImgArr.length,
+          $planImg = $('#planImg');
+      for(planImg=0;planImg<planL;planImg++){
+        var addImg = document.createElement('a'),
+            br = document.createElement('br');
+        addImg.setAttribute('href',planImgArr[planImg]);
+        addImg.className = 'plani';
+        $planImg.append(addImg).append(br);
+
+      var fileUrl = planImgArr[planImg].split('/'),
+          fileUrlLeng =fileUrl.length,
+          fileNameFull = fileUrl[fileUrlLeng-1],
+          fileNameDec = decodeURI(fileNameFull);
+        addImg.setAttribute('download',fileNameDec);
+        addImg.innerHTML = '<i></i>' + fileNameDec;
+      }
+
+    });
+  </script>
+	<script>
+    //참고자료
+    $(function(){
+      var corFile,
+          corFileArr = ['data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EC%82%AC%EC%97%85%EA%B3%84%ED%9A%8D%EC%84%9C.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%ED%8E%80%EB%94%A9%EA%B3%84%EC%95%BD%EC%84%9C.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EC%82%AC%EC%97%85%EC%9E%90%EB%93%B1%EB%A1%9D%EC%A6%9D.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EC%9E%84%EB%8C%80%EC%B0%A8%EA%B3%84%EC%95%BD%EC%84%9C.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EA%B0%80%EB%A7%B9%ED%97%88%EA%B0%80%EC%9E%90%EB%A3%8C.txt'],
+          corL = corFileArr.length,
+          $colFile = $('#colFile');
+      for(corFile=0;corFile<corL;corFile++){
+        var addFile = document.createElement('a'),
+            br = document.createElement('br');
+        addFile.setAttribute('href',corFileArr[corFile]);
+        addFile.className = 'corFile';
+        $colFile.append(addFile).append(br);
+
+      var fileUrl = corFileArr[corFile].split('/'),
+          fileUrlLeng =fileUrl.length,
+          fileNameFull = fileUrl[fileUrlLeng-1],
+          fileNameDec = decodeURI(fileNameFull);
+        addFile.setAttribute('download',fileNameDec);
+        addFile.innerHTML = '<i></i>' + fileNameDec;
+
+      }
+
+    });
+  </script>
+  <script type="text/javascript">
 	//예상지급스케쥴
 	var div_company_pay_schedule = document.getElementById('company_pay_schedule');
 	
@@ -392,7 +412,7 @@
 		div_company_pay_schedule.append(trTag);
 	}
 	$('#company_pay_schedule').append($('#sum'));
-	/* var trTag = document.createElement('tr');
+	 var trTag = document.createElement('tr');
 	var tdTag = document.createElement('td');
 	var inputTag = document.createElement('input');
 	
@@ -411,7 +431,7 @@
 		tdTag = document.createElement('td');
 		inputTag = document.createElement('input');
 		
-		nputTag.type ="text";
+		inputTag.type ="text";
 		inputTag.size='13';
 		inputTag.name='tot'+i;
 		inputTag.innerText = '원';
@@ -423,7 +443,7 @@
 	tdTag = document.createElement('td');
 	inputTag = document.createElement('input');
 	
-	nputTag.type ="text";
+	inputTag.type ="text";
 	inputTag.size='2';
 	inputTag.name='tot5';
 	inputTag.className = 'per';
@@ -431,9 +451,9 @@
 	
 	tdTag.append(inputTag);
 	trTag.append(tdTag);
-	div_company_pay_schedule.append(trTag); */
-	</script>	
-	<script>
+	div_company_pay_schedule.append(trTag);
+  </script>
+  <script>
       $(function(){
         $('table input').on('keyup input', function(){
           corCalculate();
@@ -608,5 +628,4 @@
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 	</script>
-</body>
 </html>

@@ -50,7 +50,7 @@
               <th>아이디</th>
               <th>담당자</th>
               <th>연락처</th>
-              <th>수익률</th>
+              <th>워 평균 예상 수익금</th>
               <th>마감</th>
               <th>잔여구좌</th>
             </tr>
@@ -60,7 +60,7 @@
 					<td>${companyInvested.mb_id }</td>
 					<td>${companyInvested.cp_manager }</td>
 					<td>${companyInvested.cp_phone }</td>
-					<td>${companyInvested.cp_pre_net_profit_ratio }%</td>
+					<td>${companyInvested.ma_estimated_revenue }</td>
 					<td>D-${companyInvested.d_day }</td>
 					<td>${companyInvested.iv_balance_stock }</td>
             	</tr>
