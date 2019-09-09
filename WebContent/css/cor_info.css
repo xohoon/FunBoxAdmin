@@ -1,0 +1,276 @@
+@charset "utf-8";
+@font-face{
+  font-family:xeicon;
+  src:url(../font/xeicon.woff2);
+}
+i{
+  font-family:xeicon;
+  font-style:normal;
+}
+
+section{
+  width:100%;
+  padding:40px;
+  background:#efefef;
+}
+input[type="button"]{
+	background:none;
+	height:32px;
+	outline:0;
+	cursor:pointer;
+	transition:all 0.2s;
+	color:#555;
+}
+table{
+	font-size:16px;
+	margin:24px 0;
+}
+section h5{
+	text-align:left;
+  font-size:24px;
+	color:#555;
+	margin-bottom:24px;
+}
+tr{
+	height:48px;
+	text-align:center;
+	border-bottom:1px solid #efefef;
+}
+td{
+	color:#555;
+	line-height:1.6em;
+}
+tr:first-child{
+	background:#f9f9f9;
+}
+tr:first-child td{
+	font-weight:600;
+}
+.con{
+	font-size:0;
+	color:#999;
+  position:relative;
+  background:#fff;
+  border-radius:4px;
+  padding:24px 24px 80px;
+  width:100%;
+  max-width:1200px;
+  margin:0 auto;
+}
+.con > div ul{
+  width:100%;
+	font-size:0;
+	margin-bottom:16px;
+}
+.con > div:first-child li{
+	width:calc((100% - 32px)/5);
+	height:160px;
+	text-align:center;
+	border:1px solid #efefef;
+	display:inline-block;
+	vertical-align:top;
+	margin-right:8px;
+}
+.con > div:first-child li:last-child{
+	margin-right:0;
+}
+.con > div:first-child li img{
+	margin:20px 0 8px;;
+	height:40px;
+	width:auto;
+}
+.con > div:first-child li p{
+	font-size:16px;
+}
+.con > div:first-child li span{
+	display:block;
+	font-size:24px;
+	line-height:24px;
+	margin:8px 0;
+	font-weight:600;
+	color:#ff9124;
+}
+.con > div:first-child li span span{
+	display:block;
+	font-size:16px;
+	color:#999;
+	font-weight:400;
+}
+.con select{
+	width:240px;
+	height:48px;
+	border-radius:4px;
+	border:1px solid #999;
+	outline:none;
+	padding:0 16px;
+	font-size:16px;
+	background:url(../img/ico_arrow.png) no-repeat center right 16px/auto 10px;
+}
+.cor_info{
+  width:100%;
+	border:1px solid #efefef;
+  min-height:400px;
+	padding:16px;
+  position:relative;
+}
+.cor_info > div:nth-child(-n+3){
+	width:calc(50% - 8px);
+	display:inline-block;
+	vertical-align:top;
+	margin-bottom:32px;
+}
+.cor_info > div:nth-child(2){
+	margin-right:16px;
+}
+.cor_info > div:nth-child(3) > div{
+  border:1px solid #efefef;
+}
+.cor_info h6{
+	font-size:16px;
+	margin-bottom:24px;
+	color:#73a6d6;
+	line-height:16px;
+}
+table{
+	margin:0;
+}
+.cor_info a span{
+  font-size:20px;
+  display:inline-block;
+  vertical-align:bottom;
+  padding:0 8px;
+}
+tr{
+	height:32px;
+}
+tr:last-child td{
+	background:#ff9124;
+	color:#fff;
+}
+.root_daum_roughmap a:active, .root_daum_roughmap a:link, .root_daum_roughmap a:visited{
+  background:none;
+}
+.os_mac .roughmap_maker_label .roughmap_lebel_text{
+  background:none;
+}
+.roughmap_maker_label{
+  border:0!important;
+}
+.pay{
+  margin-top:16px;
+  padding:16px;
+  border:1px solid #efefef;
+}
+.file{
+  padding:16px;
+  margin-top:16px;
+  border:1px solid #efefef;
+}
+.file > a{
+  display:inline-block;
+  width:50%;
+  height:48px;
+  padding:0 24px;
+  font-size:16px;
+  font-weight:700;
+  line-height:48px;
+}
+.file > a:hover{
+  background:#efefef;
+}
+.file > a:active{
+  color:#73a6d6;
+}
+.file i{
+  font-size:24px;
+  line-height:48px;
+  vertical-align:top;
+  font-weight:400;
+}
+.file i:first-child{
+  margin-right:8px;
+}
+.file i:last-child{
+  float:right;
+}
+form{
+  border:1px solid #efefef;
+  margin-top:16px;
+  padding:16px;
+}
+form > div{
+  position:relative;
+}
+form h6{
+  font-size:16px;
+  color:#73a6d6;
+  margin-bottom:16px;
+}
+form input[type=file]{
+  margin-bottom:24px;
+}
+.cor_info > div:nth-child(2) tr:last-child td ,form tr:last-child td{
+  background:#fff;
+  color:#333;
+}
+form table input{
+  width:auto;
+  max-width:80%;
+  text-align:right;
+  height:24px;
+  text-indent:0;
+  padding:0 4px 0 0;
+}
+input.add{
+  width:24px;
+  height:24px;
+  background:#73a6d6;
+  color:#fff;
+  font-size:20px;
+  line-height:24px;
+  padding:0;
+  position:absolute;
+  border:0;
+  outline:0;
+  top:152px;
+  right:32px;
+}
+input.del{
+  width:24px;
+  height:24px;
+  background:#fff;
+  color:#ff9124;
+  font-size:22px;
+  padding:0;
+  border:1px solid #ff9124;
+  line-height:22px;
+  position:absolute;
+  outline:0;
+  top:152px;
+  right:0px;
+}
+.submit{
+	width:120px;
+	height:32px;
+	font-size:14px;
+	padding:0;
+	background:#73a6d6;
+	color:#fff;
+	letter-spacing:1px;
+	float:right;
+  margin-top:16px;
+}
+.submit:hover{
+  border:0;
+  color:#fff;
+}
+button.cancel{
+  background:#fff;
+  border:1px solid #ff9124;
+  color:#ff9124;
+  margin-right:8px;
+}
+button.cancel:hover{
+  color:#ff9124;
+  border:1px solid #ff9124;
+}

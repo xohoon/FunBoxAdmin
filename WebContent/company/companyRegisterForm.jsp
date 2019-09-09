@@ -51,7 +51,7 @@
           			<p><span>오픈(예정) 날짜</span>
             			<input type="date" style="width:calc((100% - 264px)/6 + 27px)" name="cp_open_datetime" id="cp_open_datetime">   
 					<p><span>자본금</span>
-            			<input type="number" name="cp_capital" placeholder="(예시 : 10000000)"></p>
+            			<input type="number" name="cp_capital" placeholder="(예시 : 10000000)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></p>
 					<p><span>본사주소</span>
 						<input type="text" name="cp_address" placeholder="시 /지점  (예시 :부산 동래점)"></p>
 					<p class="api">
@@ -453,10 +453,6 @@
 			}
 			corForm.tot5.value = res5;
 
-		}
-
-		function numberWithCommas(x) {
-			return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		}
 
 		function editTitle() {

@@ -31,21 +31,29 @@
 			<h2>투자기업목록</h2>
 			<div class="con">
         <ul class="tab">
-	        <c:choose>
+	      <c:choose>
 	        	<c:when test="${funding_status eq '12'}">
+	        		<li>전체 </li>
 	        		<li class="on">펀딩진행</li>
-	        		<li>펀딩완료</li> 
+	        		<li>펀딩완료</li>
+	        		<li>대기</li> 
 	        	</c:when>
 	          	<c:otherwise>
+	          		<li>전체 </li>
 	        		<li>펀딩진행</li>
 	        		<li class="on">펀딩완료</li>
+	        		<li>대기</li>
 	          	</c:otherwise>
 	        </c:choose>
+	          <!-- <li class="on">전체</li>
+	          <li>펀딩진행</li>
+	          <li>펀딩완료</li>
+	          <li>대기</li> -->
         </ul>
         <br>
 		<div class="ingGroup">
           <table>
-            <tr>
+              <tr>
               <th>상호명</th>
               <th>아이디</th>
               <th>담당자</th>
@@ -53,6 +61,9 @@
               <th>워 평균 예상 수익금</th>
               <th>마감</th>
               <th>잔여구좌</th>
+              <th>펀딩상태</th>
+              <th>지급상태</th>
+              <th></th>
             </tr>
             <c:forEach var="companyInvested" items="${companyInvestedList }">
             	<tr>
@@ -63,6 +74,23 @@
 					<td>${companyInvested.ma_estimated_revenue }</td>
 					<td>D-${companyInvested.d_day }</td>
 					<td>${companyInvested.iv_balance_stock }</td>
+					<td>
+	                <select>
+	                  <option>- 펀딩상태 -</option>
+	                  <option>대기중</option>
+	                  <option>펀딩중</option>
+	                  <option>펀딩완료</option>
+	                </select>
+	              </td>
+	              <td>
+	                <select>
+	                  <option>- 지급상태 - </option>
+	                  <option>수익분배중</option>
+	                  <option>분배완료</option>
+	                  <option>연체중</option>
+	                </select>
+              	  </td>
+              	  <td class="selfix">수정</td>
             	</tr>
             </c:forEach>
           </table>
@@ -100,14 +128,25 @@
 			});
       
       $('.tab li').eq(0).click(function(){
-    	  console.log("test2");  
-    	  window.location.href="./companyInvestedList.cp?page=1&funding_status=12";
+    	  //window.location.href="./companyInvestedList.cp?page=1&funding_status=12";
         //$('.ingGroup').show();
         //$('.doneGroup').hide();
       });
+      
       $('.tab li').eq(1).click(function(){
-    	  console.log("test3");
+    	  window.location.href="./companyInvestedList.cp?page=1&funding_status=12";
+        //$('.doneGroup').show();
+        //$('.ingGroup').hide();
+      });
+      
+      $('.tab li').eq(2).click(function(){
     	  window.location.href="./companyInvestedList.cp?page=1&funding_status=11";
+        //$('.doneGroup').show();
+        //$('.ingGroup').hide();
+      });
+      
+      $('.tab li').eq(3).click(function(){
+    	  //window.location.href="./companyInvestedList.cp?page=1&funding_status=11";
         //$('.doneGroup').show();
         //$('.ingGroup').hide();
       });

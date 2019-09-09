@@ -43,12 +43,13 @@
             			<input type="text" name="cp_manager" value="${companyDetail.cp_manager }"></p>
             		<p><span>ID</span>
             			<input type="text" value="" name="mb_id" id="mb_id"></p>  
-					<p><span>사업자등록번호</span>
-            			<input type="text" name="cp_number" value="${companyDetail.cp_number }"></p>
+           				<input type="text" name="cp_manager" value="${companyDetail.cp_manager }"></p>
+           			<p><span>ID</span>
+            			<input type="text" value="수정 해야 됨(추가)"></p>  
             		<p><span>오픈(예정) 날짜</span>
             			<input type="date" style="width:calc((100% - 264px)/6 + 27px)" name="cp_open_datetime" id="cp_open_datetime">
 					<p><span>자본금</span>
-           				<input type="text" name="cp_capital" value="${companyDetail.cp_capital }"></p>
+            			<input type="text" name="cp_capital" value="${companyDetail.cp_capital }"></p>
 					<p><span>본사주소</span>
 						<input type="text" name="cp_address" placeholder="시 /지점  (예시 :부산 동래점)"></p>
 					<p class="api">
@@ -60,36 +61,29 @@
 					  <input type="text" id="app4_3" name="app4_3" placeholder="참조">
 					</p>
 			  </div>
-			  <div>
+			<div>
 				<h3>투자정보</h3>
-		            <p><span>월수익률</span><input type="text" name="cp_monthly_profit" value="${companyDetail.cp_monthly_profit }"> %</p>
-		            <p><span>투자계약기간</span><input type="text" name="iv_contraction_during" value="${companyDetail.iv_contraction_during }"> 개월</p>
-		            <p><span>최소투자금액</span><input type="text" name="iv_min_amount" value="${companyDetail.iv_min_amount }"> Point</p>
-		            <p><span>모집구좌</span><input type="text" name="iv_appl_stock" value="${companyDetail.iv_appl_stock }"> 구좌</p>
-		            <p><span>총모집금액</span><input type="text" name="iv_goal_amount" value="${companyDetail.iv_goal_amount }"> Point</p>
-		            <p><span>모집기간</span><input type="text" name="iv_appl_day" value="${companyDetail.iv_appl_day }"> 일</p>
-			  </div>
-			  <div>
+	            <p><span>월수익률</span><input type="text" name="cp_monthly_profit" value="${companyDetail.cp_monthly_profit } %"></p>
+	            <p><span>투자계약기간</span><input type="text" name="iv_contraction_during" value="${companyDetail.iv_contraction_during } 개월"></p>
+	            <p><span>최소투자금액</span><input type="text" name="iv_min_amount" value="${companyDetail.iv_min_amount } Point"></p>
+	            <p><span>모집구좌</span><input type="text" name="iv_appl_stock" value="${companyDetail.iv_appl_stock } 구좌"></p>
+	            <p><span>총모집금액</span><input type="text" name="iv_goal_amount" value="${companyDetail.iv_goal_amount } Point"></p>
+	            <%-- <p><span>모집기간</span><input type="text" name="iv_appl_day" value="${companyDetail.iv_appl_day } 일"></p> --%>
+	            <p><span>모집기간</span><input type="date" style="width:calc((100% - 264px)/6 + 27px)" value="2019-09-05"> ~ <input type="date" style="width:calc((100% - 264px)/6 + 27px)" value="2019-10-05"></p>
+			</div>
+			<div>
 				<h3>사진등록</h3>
-				<%-- <p><span>로고</span><input type="file"><a href="./img/arrow_down.svg" download></a></p>
-				<p><span>썸네일</span><input type="file" name="cf_thumbnail"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx }&kindOfFile=2&fileName=${companyDetail.cf_alias_thumbnail}" download>${companyDetail.cf_thumbnail }</a><span>910px * 780px :: 상호나 간판이 정중앙에 오도록 편집 후 업로드 ::</span></p>
-				<p><span>기업PR배경</span><input type="file" name="cf_pr_background"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName=${companyDetail.cf_alias_pr_background}" download>${companyDetail.cf_pr_background }</a>
-          <span>930px * 780px</span></p>
-          <p><span>매장PR타이틀</span><input type="text" name="cp_point_title" value="${companyDetail.cp_intro_headline}"></p>
-					<span>매장PR내용</span>
-          <p><textarea name="cp_point_content">${companyDetail.cp_intro_content}</textarea>
-          <span>250자 내외</span></p> --%>
-          			<p><span>로고</span><input type="file" name="cf_logo"><a href="./img/arrow_down.svg" download></a></p>
-					<p><span>썸네일</span><input type="file" name="cf_thumbnail"><a href="./img/arrow_down.svg" download></a></p>
-          			<p><span>매장사진</span><input type="file" multiple name="cf_store_images"></p>
-			  </div>
+        		<p><span>로고</span><input type="file" name="cf_logo"><a href="./img/arrow_down.svg" download></a></p>
+				<p><span>썸네일</span><input type="file" name="cf_thumbnail"><a href="./img/arrow_down.svg" download></a></p>
+        		<p><span>매장사진</span><input type="file" multiple name="cf_store_images"></p>
+			</div>
 			  
-			  <div>
-		          <h3>리워드</h3><div class="checkBox"><input type="checkbox" id="reward"><label for="reward">선택</label></div>
-		          <p><span>메인타이틀</span><input type="text" readonly="true" name="cp_reward_main_title"></p>
-		          <p><span>서브타이틀</span><input type="text" readonly="true" name="cp_reward_sub_title"></p>
-		          <p><span>내용</span><textarea readonly="true" name="cp_reward_content"></textarea></p>
-		     </div>
+			<div>
+		       <h3>리워드</h3><div class="checkBox"><input type="checkbox" id="reward"><label for="reward">선택</label></div>
+		       <p><span>메인타이틀</span><input type="text" readonly="true" name="cp_reward_main_title"></p>
+		       <p><span>서브타이틀</span><input type="text" readonly="true" name="cp_reward_sub_title"></p>
+		       <p><span>내용</span><textarea readonly="true" name="cp_reward_content"></textarea></p>
+		    </div>
 		     
 		     <div>
 		     	<h3>기업소개</h3>
@@ -155,7 +149,7 @@
 			  	</table>
 			  </div>
 			  
-			  <div class="table2">
+			<div class="table2">
 			    <h3>월 평균 수익금(1구좌당)</h3>
 			    <table>
 			      <tr>
@@ -185,7 +179,7 @@
 			    </table>
 			  </div>
 			  
-			  <div class="table3">
+			<div class="table3">
 			    <h3>예상지급스케쥴</h3>
 			    <table>
 			    	<tbody id="company_pay_schedule">
@@ -225,9 +219,9 @@
 				 </div>
 				</div>
          	</div>
-
+         	
+			  </form>
 			  <input type="hidden" name="cp_idx" value="${companyDetail.cp_idx }">
-        	  </form>
         	  <button class="submit rec" id="modify">수정하기</button>
 			  <button class="submit save" id="submit" onclick = "save();">저장하기</button>
 			  <button class="submit cancel">취소</button>
