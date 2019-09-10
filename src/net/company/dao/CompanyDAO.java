@@ -19,6 +19,7 @@ import net.company.dto.Company;
 import net.company.dto.CompanyAdded;
 import net.company.dto.CompanyApplication;
 import net.company.dto.CompanyApplicationDetail;
+import net.company.dto.CompanyBean;
 import net.company.dto.CompanyDeadLine;
 import net.company.dto.CompanyDetail;
 import net.company.dto.CompanyInvested;
@@ -1362,5 +1363,177 @@ public class CompanyDAO {
 		return null;
 	}
 
+	// 투자하기 - 모든 기업 정보 불러오기
+	// 태훈 - 투자하기 필요한 정보 JOIN활용 불러오기
+	public CompanyBean getCompanyInfo2(int idx) throws Exception {
+		PreparedStatement pstm = null;
+		ResultSet rs = null;
+		CompanyBean company = null;
+
+		try {
+			// 쿼리
+			String sql = "SELECT *,(iv_current_amount/iv_goal_amount*100) AS iv_percent, CONCAT((SELECT file_path FROM file_path WHERE idx = 2),cf.cf_folder,(SELECT file_path FROM file_path WHERE idx = 4)) AS company_file_path ,CONCAT((SELECT file_path FROM file_path WHERE idx = 7),cf.cf_folder,(SELECT file_path FROM file_path WHERE idx = 3)) AS company_image_path ,(SELECT fees_percent FROM fees_setting WHERE fees_idx =1) AS fees_percent, DATEDIFF(cp_iv.iv_appl_stop_date_time,now()) AS by_end_date  FROM company cp JOIN company_invest cp_iv ON cp.cp_idx = cp_iv.cp_idx JOIN company_pay_schedule cp_pay ON cp.cp_idx = cp_pay.cp_idx JOIN company_file cf ON cp.cp_idx = cf.cp_idx JOIN company_content cp_ct ON cp.cp_idx = cp_ct.cp_idx WHERE cp.cp_idx = ? AND cp_iv.cp_idx = cp.cp_idx AND cp_pay.cp_idx = cp.cp_idx AND cf.cp_idx = cp.cp_idx AND cp.cp_idx = cp_ct.cp_idx";
+			pstm = conn.prepareStatement(sql);
+			pstm.setInt(1, idx);
+			rs = pstm.executeQuery();
+
+			if (rs.next()) { // 회원정보를 DTO에 담는다.
+
+				// CompanyVO
+				company = new CompanyBean();
+				company.setCp_idx(rs.getInt("cp_idx"));
+				company.setCp_name(rs.getString("cp_name"));
+				company.setCp_number(rs.getString("cp_number"));
+				company.setCp_manager(rs.getString("cp_manager"));
+				company.setCp_phone(rs.getString("cp_phone"));
+				company.setCp_sector(rs.getString("cp_sector"));
+				company.setCp_add_num(rs.getString("cp_add_num"));
+				company.setCp_add_ch(rs.getString("cp_add_ch"));
+				company.setCp_add_more(rs.getString("cp_add_more"));
+				company.setCp_branch(rs.getString("cp_branch"));
+				company.setCp_intro_headline(rs.getString("cp_intro_headline"));
+				company.setCp_lat(rs.getString("cp_lat"));
+				company.setCp_lng(rs.getString("cp_lng"));
+				company.setCp_add_extra(rs.getString("cp_add_extra"));
+				company.setCp_capital(rs.getString("cp_capital"));
+				company.setCp_open_datetime(rs.getDate("cp_open_datetime"));
+				company.setCp_avg_monthly_sales(rs.getString("cp_avg_monthly_sales"));
+				company.setCp_monthly_profit(rs.getString("cp_monthly_profit"));
+				company.setCp_reg_datetime(rs.getDate("cp_reg_datetime"));
+				company.setCp_exit_datetime(rs.getDate("cp_exit_datetime"));
+				company.setCp_intro_content(rs.getString("cp_intro_content"));
+				company.setCp_purpose(rs.getString("cp_purpose"));
+				//company.setCp_point_comment(rs.getString("cp_point_comment"));
+				company.setCp_update_datetime(rs.getDate("cp_update_datetime"));
+				company.setCp_business_risk(rs.getString("cp_business_risk"));
+				company.setCp_company_risk(rs.getString("cp_company_risk"));
+				company.setCp_other_risks(rs.getString("cp_other_risks"));
+				company.setCp_recommand(rs.getBoolean("cp_recommand"));
+				company.setCp_best(rs.getBoolean("cp_best"));
+
+				// InvestVO
+				// 태훈 추가 - 투자율
+				company.setIv_percent(rs.getString("iv_percent"));
+				company.setIv_goal_amount(rs.getString("iv_goal_amount"));
+				company.setIv_current_amount(rs.getString("iv_current_amount"));
+				company.setIv_min_amount(rs.getString("iv_min_amount"));
+				company.setIv_balance_stock(rs.getString("iv_balance_stock"));
+				company.setIv_appl_start_date_time(rs.getDate("iv_appl_start_date_time"));
+				company.setIv_appl_stop_date_time(rs.getDate("iv_appl_stop_date_time"));
+				company.setIv_contraction_during(rs.getString("iv_contraction_during"));
+				company.setIv_possible_amount(rs.getString("iv_possible_amount"));
+				company.setIv_current_participants(rs.getString("iv_current_participants"));
+
+				// Company_pay_scheduleVO
+				company.setCp_pay_count(rs.getString("cp_pay_count"));
+				company.setCp_pay_expected_payment_date(rs.getString("cp_pay_expected_payment_date"));
+				company.setCp_pay_principal(rs.getString("cp_pay_principal"));
+				company.setCp_pay_interest_paid(rs.getString("cp_pay_interest_paid"));
+				company.setCp_pay_fees(rs.getString("cp_pay_fees"));
+				company.setCp_pay_actual_payment_amout(rs.getString("cp_pay_actual_payment_amout"));
+				company.setCp_pay_actual_rate_return(rs.getString("cp_pay_actual_rate_return"));
+
+				// Company_revenueVO
+				/*company.setCp_pre_sales(rs.getInt("cp_pre_sales"));
+				company.setCp_pre_stuff(rs.getInt("cp_pre_stuff"));
+				company.setCp_pre_costs_person(rs.getInt("cp_pre_costs_person"));
+				company.setCp_pre_lease_expenses(rs.getInt("cp_pre_lease_expenses"));
+				company.setCp_pre_operating_expenses(rs.getInt("cp_pre_operating_expenses"));
+				company.setCp_pre_net_income(rs.getInt("cp_pre_net_income"));
+				company.setCp_pre_cash_dividend_ratio(rs.getInt("cp_pre_cash_dividend_ratio"));
+				company.setCp_pre_share(rs.getInt("cp_pre_share"));
+				company.setCp_pre_platform(rs.getInt("cp_pre_platform"));
+				company.setCp_pre_proceeds(rs.getInt("cp_pre_proceeds"));
+				company.setCp_pre_avg_monthly(rs.getInt("cp_pre_avg_monthly"));
+				company.setCp_pre_net_profit_ratio(rs.getInt("cp_pre_net_profit_ratio"));
+				company.setCp_pre_interest_rate(rs.getInt("cp_pre_interest_rate"));
+				*/
+				// CompanyFileVO
+				company.setCf_store_images(rs.getString("cf_store_images"));
+				company.setCf_alias_store_images(rs.getString("cf_alias_store_images"));
+				company.setCf_corporation_icon(rs.getString("cf_corporation_icon"));
+				company.setCf_alias_corporation_icon(rs.getString("cf_alias_corporation_icon"));
+				company.setCf_invest_image(rs.getString("cf_invest_image"));
+				company.setCf_alias_invest_image(rs.getString("cf_alias_invest_image"));
+				company.setCf_folder(rs.getString("cf_folder"));
+				company.setCf_business_plan_images(rs.getString("cf_business_plan_images"));
+				company.setCf_alias_business_plan_images(rs.getString("cf_alias_business_plan_images"));
+				company.setCf_etc_files(rs.getString("cf_etc_files"));
+				company.setCf_alias_etc_files(rs.getString("cf_alias_etc_files"));
+				company.setCf_thumbnail(rs.getString("cf_thumbnail"));
+				company.setCf_alias_thumbnail(rs.getString("cf_alias_thumbnail"));
+				company.setCf_pr_background(rs.getString("cf_pr_background"));
+				company.setCf_alias_pr_background(rs.getString("cf_alias_pr_background"));
+				company.setCf_funding_contract(rs.getString("cf_funding_contract"));
+				company.setCf_alias_funding_contract(rs.getString("cf_alias_funding_contract"));
+				company.setCf_business_plan(rs.getString("cf_business_plan"));
+				company.setCf_alias_business_plan(rs.getString("cf_alias_business_plan"));
+				
+				//파일 경로들
+				company.setCompany_file_path(rs.getString("company_file_path"));
+				company.setCompany_image_path(rs.getString("company_image_path"));
+
+				//CompanyBean
+				company.setCp_reward_main_title(rs.getString("cp_reward_main_title"));
+				company.setCp_reward_sub_title(rs.getString("cp_reward_sub_title"));
+				company.setCp_reward_content(rs.getString("cp_reward_content"));
+				company.setCp_intro_headline(rs.getString("cp_intro_headline"));
+				company.setCp_intro_content(rs.getString("cp_intro_content"));
+				
+				company.setPl_year(rs.getString("pl_year"));
+				company.setPl_month(rs.getString("pl_month"));
+				company.setPl_sales(rs.getString("pl_sales"));
+				company.setPl_material(rs.getString("pl_material"));
+				company.setPl_person_pay(rs.getString("pl_person_pay"));
+				company.setPl_rent_building(rs.getString("pl_rent_building"));
+				company.setPl_operating_pay(rs.getString("pl_operating_pay"));
+				company.setPl_net_revenue(rs.getString("pl_net_revenue"));
+				company.setCp_total_sum_pay_principal(rs.getString("cp_total_sum_pay_principal"));
+				company.setCp_total_sum_pay_interest_paid(rs.getString("cp_total_sum_pay_interest_paid"));
+				company.setCp_total_sum_pay_fees(rs.getString("cp_total_sum_pay_fees"));
+				company.setCp_total_sum_pay_actual_payment_amout(rs.getString("cp_total_sum_pay_actual_payment_amout"));
+				company.setCp_total_sum_actual_rate_return(rs.getString("cp_total_sum_actual_rate_return"));
+				
+				
+				//copanycontent
+				company.setCp_notice_title(rs.getString("cp_notice_title"));
+				company.setCp_notice_content(rs.getString("cp_notice_content"));
+				company.setCp_point_title(rs.getString("cp_point_title"));
+				company.setCp_point_content(rs.getString("cp_point_content"));
+				
+				//유정이 친해지고 싶다....
+				company.setMa_odds_percent(rs.getString("ma_odds_percent"));
+				company.setMa_odds_money(rs.getString("ma_odds_money"));
+				company.setMa_share_percent(rs.getString("ma_share_percent"));
+				company.setMa_share_money(rs.getString("ma_share_money"));
+				company.setMa_platform_pay(rs.getString("ma_platform_pay"));
+				company.setMa_estimated_revenue(rs.getString("ma_estimated_revenue"));
+				company.setMa_monthly_average(rs.getString("ma_monthly_average"));
+				
+				//fees setting
+				company.setFees_percent(rs.getString("fees_percent"));
+				
+				//투자 마감일까지 남은 일수
+				company.setBy_end_date(rs.getString("by_end_date"));
+			}
+			return company;
+
+		} catch (Exception ex) {
+			System.out.println("getCompanyInfo2 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstm != null)
+					pstm.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("연결 해제 실패: " + e.getMessage());
+			}
+		}
+
+		return null;
+	}
 }
 

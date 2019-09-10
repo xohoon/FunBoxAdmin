@@ -82,7 +82,7 @@
             </tr>
             <c:forEach var="companyInvested" items="${companyInvestedList }" >
             	<tr>
-            		<td onclick="window.open('./companyInvestedDetail.cp?cp_idx=${companyInvested.cp_idx}','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">${companyInvested.cp_name } 연결하심됩니다.</td>
+            		<td onclick="window.open('./companyInvestDetailFunded.cp?cp_idx=${companyInvested.cp_idx}','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">${companyInvested.cp_name } 연결하심됩니다.</td>
 					<td>${companyInvested.mb_id }</td>
 					<td>${companyInvested.cp_manager }</td>
 					<td>${companyInvested.cp_phone }</td>
@@ -125,7 +125,7 @@
           <a href="./companyInvestedList.cp?page=${current_page+1 }&funding_status=${funding_status}" class="next"><i class="fas fa-caret-right"></i></a>
         </div>
       		</c:when>
-      		<c:otherwise>
+      		<c:when test="${funding_status eq '12'}">
       				   
 		<div class="ingGroup">
           <table>
@@ -185,7 +185,7 @@
           </ul>
           <a href="./companyInvestedList.cp?page=${current_page+1 }&funding_status=${funding_status}" class="next"><i class="fas fa-caret-right"></i></a>
         </div>
-      		</c:otherwise>      		
+      		</c:when>
 	   </c:choose>
 
         <div class="doneGroup"></div>

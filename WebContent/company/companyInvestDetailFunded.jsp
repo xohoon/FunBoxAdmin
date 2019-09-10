@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page import="net.company.dto.CompanyBean"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +23,7 @@
             <li>
               <img src="img/ico_fin1.jpg" alt="투자현황">
               <p>기업명</p>
-              <span>바른생선횟집<span>해운대점</span></span>
+              <span>${companyBean.cp_name}<span>${companyBean.cp_branch}</span></span>
             </li>
             <li>
               <img src="img/ico_fin2.jpg" alt="투자현황">
@@ -50,19 +53,19 @@
               <table>
                 <tr>
                   <td>대표자</td>
-                  <td>땡땡땡</td>
+                  <td>${companyBean.cp_manager}</td>
                 </tr>
                 <tr>
                   <td>사업자 등록번호</td>
-                  <td>841-86-00000</td>
+                  <td>${companyBean.cp_number}</td>
                 </tr>
                 <tr>
                   <td>자본금</td>
-                  <td>3억</td>
+                  <td><fmt:formatNumber value="${companyBean.cp_capital}" pattern="#,###" /> 원</td>
                 </tr>
                 <tr>
                   <td>본사주소</td>
-                  <td>부산시 해운대구</td>
+                  <td>${companyBean.cp_add_ch} ${companyBean.cp_add_more}</td>
                 </tr>
               </table>
             </div>
