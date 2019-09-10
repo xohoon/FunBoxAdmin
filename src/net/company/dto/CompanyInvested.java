@@ -15,10 +15,7 @@ public class CompanyInvested {
 	private int d_day;
 	private String iv_balance_stock;
 	
-	
-	
-	
-	
+
 	public String getIv_min_amount() {
 		return iv_min_amount;
 	}

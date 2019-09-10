@@ -146,7 +146,7 @@ public class CompanyDAO {
 				companyInvested.setIv_current_amount(rs.getString("iv_current_amount"));
 				companyInvested.setMb_id(rs.getString("cp_manager"));
 				companyInvested.setMb_id(rs.getString("cp_phone"));
-				companyInvested.setMa_estimated_revenue(rs.getString("ma_estimated_revenue"));
+			//	companyInvested.setMa_estimated_revenue(rs.getString("ma_estimated_revenue"));
 				companyInvested.setD_day(rs.getInt("d_day"));
 				companyInvested.setMb_id(rs.getString("iv_balance_stock"));				
 				companyInvestedList.add(companyInvested);
