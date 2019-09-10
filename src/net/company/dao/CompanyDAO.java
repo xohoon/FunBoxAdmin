@@ -147,8 +147,10 @@ public class CompanyDAO {
 				companyInvested.setMb_id(rs.getString("cp_manager"));
 				companyInvested.setMb_id(rs.getString("cp_phone"));
 				companyInvested.setCp_funding_status(rs.getString("cp_funding_status"));
+				companyInvested.setCp_revenue_distribution_status(rs.getString("cp_revenue_distribution_status"));
+				companyInvested.setCp_overdue_status(rs.getString("cp_overdue_status"));
 				companyInvested.setD_day(rs.getInt("d_day"));
-				companyInvested.setIv_balance_stock(rs.getString("iv_balance_stock"));
+				companyInvested.setIv_balance_stock(rs.getString("iv_balance_stock"));				
 				companyInvested.setResult(rs.getString("result"));
 				companyInvestedList.add(companyInvested);
 			}
@@ -1361,6 +1363,32 @@ public class CompanyDAO {
 
 		return null;
 	}
+	
+	public boolean statesSave(String fund_state, String give_state, String arrears_state, String cp_idx) {
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement("UPDATE company SET cp_funding_status = ?, cp_revenue_distribution_status = ?, cp_overdue_status = ? WHERE cp_idx = ?");
+			pstmt.setString(1, fund_state);
+			pstmt.setString(2, give_state);
+			pstmt.setString(3, arrears_state);
+			pstmt.setString(4, cp_idx);
+			pstmt.executeUpdate();
+			return true;
+		} catch (Exception ex) {
+			System.out.println("statesSave error: " + ex);
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("���� ���� : " + e.getMessage());
+			}
+		}
+		return false;
+	}
+
 
 }
 

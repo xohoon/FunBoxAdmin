@@ -14,11 +14,30 @@ public class CompanyInvested {
 	private String ma_estimated_revenue;
 	private int d_day;
 	private String cp_funding_status;
+	private String cp_revenue_distribution_status;
+	private String cp_overdue_status;
 	private String iv_balance_stock;
 	private String result;
 	
 	
 	
+	
+	public String getCp_revenue_distribution_status() {
+		return cp_revenue_distribution_status;
+	}
+
+	public void setCp_revenue_distribution_status(String cp_revenue_distribution_status) {
+		this.cp_revenue_distribution_status = cp_revenue_distribution_status;
+	}
+
+	public String getCp_overdue_status() {
+		return cp_overdue_status;
+	}
+
+	public void setCp_overdue_status(String cp_overdue_status) {
+		this.cp_overdue_status = cp_overdue_status;
+	}
+
 	public String getCp_funding_status() {
 		return cp_funding_status;
 	}
@@ -146,7 +165,8 @@ public class CompanyInvested {
 				+ ", iv_min_amount=" + iv_min_amount + ", iv_goal_amount=" + iv_goal_amount + ", iv_current_amount="
 				+ iv_current_amount + ", cp_monthly_profit=" + cp_monthly_profit + ", ma_estimated_revenue="
 				+ ma_estimated_revenue + ", d_day=" + d_day + ", cp_funding_status=" + cp_funding_status
-				+ ", iv_balance_stock=" + iv_balance_stock + ", result=" + result + "]";
+				+ ", cp_revenue_distribution_status=" + cp_revenue_distribution_status + ", cp_overdue_status="
+				+ cp_overdue_status + ", iv_balance_stock=" + iv_balance_stock + ", result=" + result + "]";
 	}
 
 	

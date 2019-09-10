@@ -18,6 +18,7 @@ import net.company.action.CompanyDeadLineSaveAction;
 import net.company.action.CompanyInvestApplyDetailAction;
 import net.company.action.CompanyInvestApplyListAction;
 import net.company.action.CompanyInvestDetailFundedAction;
+import net.company.action.CompanyInvestDetailstatesAction;
 import net.company.action.CompanyInvestedDetailAction;
 import net.company.action.CompanyInvestedDoneListAction;
 import net.company.action.CompanyInvestedListAction;
@@ -134,6 +135,10 @@ public class CompanyController extends HttpServlet {
 				action = new CompanyInvestDetailFundedAction();
 				forward = action.execute(request, response);
 				break;
+			case "/companyInvestDetailstates.cp": // 윤식 추가 투자기업목록 수정 버튼
+				action = new CompanyInvestDetailstatesAction();
+				forward = action.execute(request, response);
+				break;	
 			default:
 				break;
 			}
