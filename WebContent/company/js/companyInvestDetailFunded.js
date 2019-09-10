@@ -20,13 +20,9 @@ function asd() {
     var jbSplit5 = jbString5.split('/**/');
     var jbSplit6 = jbString6.split('/**/');
     var a = jbSplit;
-    console.log(">>>1"+jbSplit);
-    console.log(">>>1"+a);
-    console.log(">>>1"+jbSplit[0]);
     for(var i = 0; i<jbSplit.length; i++) {
-    	console.log(">>0"+jbSplit[0]);
-    	testText.eq(0).text(jbSplit[0]);
-      testText.hide();
+//    	testText.eq(0).text(jbSplit[0]);
+//      testText.hide();
       var row = "<tr id='pre_pay_schedule'>";
       	row += "<td>"+jbSplit[i]+"</td>";
       	row += "<td>"+jbSplit1[i]+"</td>";
@@ -38,7 +34,7 @@ function asd() {
       	row += "</tr>";
       $("#body_id").append(row);
     }
-	
+    testText.parent().remove();
 }
 
 // 디자인/////////////////////
