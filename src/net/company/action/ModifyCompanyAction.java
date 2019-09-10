@@ -75,10 +75,10 @@ public class ModifyCompanyAction implements Action {
 		companyDetail.setIv_appl_day(iv_appl_day);
 		
 		String cp_point_title = request.getParameter("cp_point_title");
-		companyDetail.setPoint_title_string(cp_point_title);
+		companyDetail.setCp_point_title(cp_point_title);
 		
 		String cp_point_content = request.getParameter("cp_point_content");
-		companyDetail.setPoint_content_string(cp_point_content);
+		companyDetail.setCp_point_content(cp_point_content);
 		
 		String pl_year = request.getParameter("pl_year");
 		companyDetail.setPl_year(pl_year);

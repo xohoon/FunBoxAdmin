@@ -12,8 +12,8 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-//import com.mysql.jdbc.CallableStatement;
-import com.mysql.cj.jdbc.CallableStatement;
+import com.mysql.jdbc.CallableStatement;
+//import com.mysql.cj.jdbc.CallableStatement;
 
 import net.company.dto.Company;
 import net.company.dto.CompanyAdded;
@@ -143,7 +143,10 @@ public class CompanyDAO {
 				companyInvested.setCp_monthly_profit(rs.getString("cp_monthly_profit"));
 				companyInvested.setIv_min_amount(rs.getString("iv_min_amount"));
 				companyInvested.setIv_goal_amount(rs.getString("iv_goal_amount"));
-				companyInvested.setIv_current_amount(rs.getString("iv_current_amount"));				
+				companyInvested.setIv_current_amount(rs.getString("iv_current_amount"));
+				companyInvested.setMb_id(rs.getString("cp_manager"));
+				companyInvested.setMb_id(rs.getString("cp_phone"));
+				//companyInvested.setMa_estimated_revenue(rs.getString("ma_estimated_revenue"));
 				companyInvested.setD_day(rs.getInt("d_day"));
 				companyInvested.setIv_balance_stock(rs.getString("iv_balance_stock"));
 				companyInvested.setResult(rs.getString("result"));
@@ -962,7 +965,7 @@ public class CompanyDAO {
 	}
 	
 	public Boolean getCompanyDetail(CompanyDetail companyDetail,int cp_idx) {
-		String sql = "SELECT * FROM company cp JOIN company_invest cp_iv ON cp.cp_idx = cp_iv.cp_idx JOIN company_content cp_ct ON cp.cp_idx = cp_ct.cp_idx JOIN company_file cf ON cf.cp_idx JOIN company_pay_schedule cp_sh ON cp_sh.cp_idx WHERE cp.cp_idx = ? AND cp.cp_idx =  cp_iv.cp_idx AND cp_ct.cp_idx = cp.cp_idx AND cf.cp_idx = cp.cp_idx  AND cp_sh.cp_idx = cp.cp_idx";
+		String sql = "SELECT *,CONCAT((SELECT file_path FROM file_path WHERE idx = 2),cf.cf_folder,(SELECT file_path FROM file_path WHERE idx = 4)) AS company_file_path,CONCAT((SELECT file_path FROM file_path WHERE idx = 2),cf.cf_folder,(SELECT file_path FROM file_path WHERE idx = 3)) AS company_image_path FROM company cp JOIN company_invest cp_iv ON cp.cp_idx = cp_iv.cp_idx JOIN company_content cp_ct ON cp.cp_idx = cp_ct.cp_idx JOIN company_file cf ON cf.cp_idx JOIN company_pay_schedule cp_sh ON cp_sh.cp_idx WHERE cp.cp_idx = ? AND cp.cp_idx = cp_iv.cp_idx AND cp_ct.cp_idx = cp.cp_idx AND cf.cp_idx = cp.cp_idx AND cp_sh.cp_idx = cp.cp_idx";
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -984,6 +987,7 @@ public class CompanyDAO {
 				companyDetail.setCp_add_ch(rs.getString("cp_add_ch"));
 				companyDetail.setCp_add_more(rs.getString("cp_add_more"));
 				companyDetail.setCp_add_num(rs.getString("cp_add_num"));
+				companyDetail.setCp_add_extra(rs.getString("cp_add_extra"));
 				companyDetail.setCp_monthly_profit(rs.getString("cp_monthly_profit"));
 				companyDetail.setCp_reward_main_title(rs.getString("cp_reward_main_title"));
 				companyDetail.setCp_reward_sub_title(rs.getString("cp_reward_sub_title"));
@@ -1012,10 +1016,10 @@ public class CompanyDAO {
 				companyDetail.setMa_estimated_revenue(rs.getString("ma_estimated_revenue"));
 				companyDetail.setMa_monthly_average(rs.getString("ma_monthly_average"));
 				// company_content insert data
-				companyDetail.setPoint_title_string(rs.getString("cp_point_title"));
-				companyDetail.setPoint_content_string(rs.getString("cp_point_content"));
-				companyDetail.setNotice_title_string(rs.getString("cp_notice_title"));
-				companyDetail.setNotice_content_string(rs.getString("cp_notice_content"));
+				companyDetail.setCp_point_title(rs.getString("cp_point_title"));
+				companyDetail.setCp_point_content(rs.getString("cp_point_content"));
+				companyDetail.setCp_notice_title(rs.getString("cp_notice_title"));
+				companyDetail.setCp_notice_content(rs.getString("cp_notice_content"));
 				// company_scheduler insert data
 				companyDetail.setCp_pay_count(rs.getString("cp_pay_count"));
 				companyDetail.setCp_pay_expected_payment_date(rs.getString("cp_pay_expected_payment_date"));
@@ -1026,8 +1030,12 @@ public class CompanyDAO {
 				companyDetail.setCp_pay_actual_rate_return(rs.getString("cp_pay_actual_rate_return"));
 				companyDetail.setCf_store_images(rs.getString("cf_store_images"));
 				companyDetail.setCf_alias_store_images(rs.getString("cf_alias_store_images"));
-				companyDetail.setCf_info_banner(rs.getString("cf_corporation_icon"));
-				companyDetail.setCf_alias_info_banner(rs.getString("cf_alias_corporation_icon"));
+				
+				//상세페이지 로고//
+				companyDetail.setCf_corporation_icon(rs.getString("cf_corporation_icon"));
+				companyDetail.setCf_alias_corporation_icon(rs.getString("cf_alias_corporation_icon"));
+				//상세페이지 로고//
+				
 				companyDetail.setCf_folder(rs.getString("cf_folder"));
 				companyDetail.setCf_business_plan(rs.getString("cf_business_plan"));
 				companyDetail.setCf_alias_business_plan(rs.getString("cf_alias_business_plan"));
@@ -1039,8 +1047,18 @@ public class CompanyDAO {
 				companyDetail.setCf_alias_pr_background(rs.getString("cf_alias_pr_background"));
 				companyDetail.setCf_funding_contract(rs.getString("cf_funding_contract"));
 				companyDetail.setCf_alias_funding_contract(rs.getString("cf_alias_funding_contract"));
-				companyDetail.setCf_business_plan(rs.getString("cf_business_plan"));
+				companyDetail.setCf_business_plan_images(rs.getString("cf_business_plan_images"));
 				companyDetail.setCf_alias_business_plan_images(rs.getString("cf_alias_business_plan_images"));
+				
+				companyDetail.setCompany_file_path(rs.getString("company_file_path"));
+				companyDetail.setCompany_image_path(rs.getString("company_image_path"));
+				
+				companyDetail.setCp_open_datetime(rs.getDate("cp_open_datetime"));
+				companyDetail.setIv_appl_start_date_time(rs.getDate("iv_appl_start_date_time"));
+				companyDetail.setIv_appl_stop_date_time(rs.getDate("iv_appl_stop_date_time"));
+				
+				companyDetail.setMb_id(rs.getString("mb_id"));
+				
 				return true;
 			}
 		} catch (Exception ex) {
@@ -1232,10 +1250,10 @@ public class CompanyDAO {
 			cstmt.setString(41, detail.getCp_pay_fees());
 			cstmt.setString(42, detail.getCp_pay_actual_payment_amout());
 			cstmt.setString(43, detail.getCp_pay_actual_rate_return());
-			cstmt.setString(44, detail.getPoint_title_string());
-			cstmt.setString(45, detail.getPoint_content_string());
-			cstmt.setString(46, detail.getNotice_title_string());
-			cstmt.setString(47, detail.getNotice_content_string());
+			cstmt.setString(44, detail.getCp_point_title());
+			cstmt.setString(45, detail.getCp_point_content());
+			cstmt.setString(46, detail.getCp_notice_title());
+			cstmt.setString(47, detail.getCp_notice_content());
 			cstmt.setInt(48, detail.getCp_idx());
 			cstmt.registerOutParameter(49, java.sql.Types.INTEGER);
 			
