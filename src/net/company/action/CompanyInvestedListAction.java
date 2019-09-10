@@ -34,17 +34,34 @@ public class CompanyInvestedListAction implements Action {
 		}
 		
 		if (funding_status == null || (!funding_status.equals("11") && !funding_status.equals("12"))) {
-			funding_status = "12";//ÆİµùÁøÇà
+			funding_status = "12";//ï¿½İµï¿½ï¿½ï¿½ï¿½ï¿½
 		}
 		
 		List<CompanyInvested> companyInvestedList = new ArrayList<CompanyInvested>();
+		List transportresults = new ArrayList(); // êµ¬ì¢Œ ë¦¬ìŠ¤íŠ¸ ë³´ë‚´ê¸°
 		Paging paging = new Paging();
 		
 		
 		CompanyDAO companyDAO = new CompanyDAO();
 		companyDAO.getCompanyInvestedList(companyInvestedList, page, funding_status, paging);
-
-		// Àß ¸øµÈ Á¢±Ù
+	
+		int i =  0; // ìµœì†Œíˆ¬ìê¸ˆì•¡
+		int j =  0;// ëª©í‘œê¸ˆì•¡
+		int z =  0;// í˜„ì¬ê¸ˆì•¡	
+		double result = 0; // ë°°ì—´ë¡œ ë‹´ëŠ”ë‹¤.
+		
+		for(int a = 0
+				
+				; a < companyInvestedList.size(); a ++){
+			i = Integer.parseInt(companyInvestedList.get(a).getIv_min_amount());
+			j = Integer.parseInt(companyInvestedList.get(a).getIv_goal_amount());
+			z =  Integer.parseInt(companyInvestedList.get(a).getIv_current_amount());
+			result = (j-z)/i;
+			
+			transportresults.add(result);
+		}
+		System.out.println("transportresults : " + transportresults);
+		// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		if (companyInvestedList.size() < 1) {
 
 		}
@@ -58,6 +75,7 @@ public class CompanyInvestedListAction implements Action {
 		request.setAttribute("current_max_page", paging.getCurrent_max_page());
 		request.setAttribute("max_page", paging.getMax_page());
 		request.setAttribute("companyInvestedList", companyInvestedList);
+		request.setAttribute("transportresults", transportresults);
 		request.setAttribute("funding_status", funding_status);
 		
 		
