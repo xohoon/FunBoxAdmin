@@ -46,6 +46,7 @@ public class CompanyBean {
 	private String iv_current_amount; // 투자 - 현재투자된 금액
 	private String iv_min_amount; // 투자 - 최소금액(1구좌 금액)
 	private String iv_balance_stock; // 잔여구좌
+	private String iv_appl_stock;	// 모집 구좌
 	private Date iv_appl_start_date_time; // 기업투자 모집 start
 	private Date iv_appl_stop_date_time; // 기업 투자 모집 end
 	private String iv_contraction_during; // 투자계약기간
@@ -153,6 +154,14 @@ public class CompanyBean {
 
 	// 기업 투자 마감일까지 남은 일
 	private String by_end_date;
+
+	public String getIv_appl_stock() {
+		return iv_appl_stock;
+	}
+
+	public void setIv_appl_stock(String iv_appl_stock) {
+		this.iv_appl_stock = iv_appl_stock;
+	}
 
 	public String getBy_end_date() {
 		return by_end_date;

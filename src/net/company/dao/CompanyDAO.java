@@ -149,8 +149,10 @@ public class CompanyDAO {
 				companyInvested.setMb_id(rs.getString("cp_manager"));
 				companyInvested.setMb_id(rs.getString("cp_phone"));
 				companyInvested.setCp_funding_status(rs.getString("cp_funding_status"));
+				companyInvested.setCp_revenue_distribution_status(rs.getString("cp_revenue_distribution_status"));
+				companyInvested.setCp_overdue_status(rs.getString("cp_overdue_status"));
 				companyInvested.setD_day(rs.getInt("d_day"));
-				companyInvested.setIv_balance_stock(rs.getString("iv_balance_stock"));
+				companyInvested.setIv_balance_stock(rs.getString("iv_balance_stock"));				
 				companyInvested.setResult(rs.getString("result"));
 				companyInvestedList.add(companyInvested);
 			}
@@ -1415,6 +1417,32 @@ public class CompanyDAO {
 
 		return null;
 	}
+	
+	public boolean statesSave(String fund_state, String give_state, String arrears_state, String cp_idx) {
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement("UPDATE company SET cp_funding_status = ?, cp_revenue_distribution_status = ?, cp_overdue_status = ? WHERE cp_idx = ?");
+			pstmt.setString(1, fund_state);
+			pstmt.setString(2, give_state);
+			pstmt.setString(3, arrears_state);
+			pstmt.setString(4, cp_idx);
+			pstmt.executeUpdate();
+			return true;
+		} catch (Exception ex) {
+			System.out.println("statesSave error: " + ex);
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("���� ���� : " + e.getMessage());
+			}
+		}
+		return false;
+	}
+
 
 	// 투자하기 - 모든 기업 정보 불러오기
 	// 태훈 - 투자하기 필요한 정보 JOIN활용 불러오기
@@ -1471,6 +1499,7 @@ public class CompanyDAO {
 				company.setIv_current_amount(rs.getString("iv_current_amount"));
 				company.setIv_min_amount(rs.getString("iv_min_amount"));
 				company.setIv_balance_stock(rs.getString("iv_balance_stock"));
+				company.setIv_appl_stock(rs.getString("iv_appl_stock"));
 				company.setIv_appl_start_date_time(rs.getDate("iv_appl_start_date_time"));
 				company.setIv_appl_stop_date_time(rs.getDate("iv_appl_stop_date_time"));
 				company.setIv_contraction_during(rs.getString("iv_contraction_during"));
