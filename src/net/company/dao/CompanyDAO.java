@@ -1418,6 +1418,7 @@ public class CompanyDAO {
 				company.setIv_current_amount(rs.getString("iv_current_amount"));
 				company.setIv_min_amount(rs.getString("iv_min_amount"));
 				company.setIv_balance_stock(rs.getString("iv_balance_stock"));
+				company.setIv_appl_stock(rs.getString("iv_appl_stock"));
 				company.setIv_appl_start_date_time(rs.getDate("iv_appl_start_date_time"));
 				company.setIv_appl_stop_date_time(rs.getDate("iv_appl_stop_date_time"));
 				company.setIv_contraction_during(rs.getString("iv_contraction_during"));

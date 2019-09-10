@@ -10,12 +10,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>FUNBOX ADMIN</title>
-	<script type="text/javascript" src="company/js/companyInvestDetailFunded.js"></script>
 	<script src="js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="company/js/companyInvestDetailFunded.js"></script>
 	<link href="css/common.css" rel="stylesheet">
 	<link href="css/cor_info.css" rel="stylesheet">
 </head>
-
 <body>
 		<section>
 			<div class="con">
@@ -29,22 +28,22 @@
             <li>
               <img src="img/ico_fin2.jpg" alt="투자현황">
               <p>보유구좌</p>
-              <span>5구좌</span>
+              <span>${companyBean.iv_appl_stock }구좌</span>
             </li>
             <li>
               <img src="img/ico_fin3.jpg" alt="투자현황">
               <p>구좌가치</p>
-              <span>50,000P</span>
+              <span><fmt:formatNumber value="${accountValue }" pattern="#,###" />P</span>
             </li>
             <li>
               <img src="img/ico_fin4.jpg" alt="투자현황">
               <p>당월수익</p>
-              <span>30,000P</span>
+              <span><fmt:formatNumber value="${result }" pattern="#,###" />P</span>
             </li>
             <li>
               <img src="img/ico_fin5.png" alt="투자현황">
               <p>누적수익</p>
-              <span>30,000P</span>
+              <span>P</span>
             </li>
           </ul>
           <div class="cor_info">
