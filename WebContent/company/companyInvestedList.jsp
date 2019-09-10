@@ -11,6 +11,7 @@
 	<title>FUNBOX ADMIN</title>
 	<script src="./js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
+	<script type="text/javascript" src="company/js/companyInvestedList.js"></script>
 	<link href="./css/common.css" rel="stylesheet">
 	<link href="./css/admin.css" rel="stylesheet">
 	<script>
@@ -37,31 +38,27 @@
 	        		<li class="on">전체 </li>
 	        		<li>펀딩진행</li>
 	        		<li>펀딩완료</li>
-	        		<li>대기</li> 
+	        		<li>대기(심사중)</li> 
 	        	</c:when>
 	        	<c:when test="${funding_status eq '12'}">
 	        		<li>전체 </li>
 	        		<li class="on">펀딩진행</li>
 	        		<li>펀딩완료</li>
-	        		<li>대기</li> 
+	        		<li>대기(심사중)</li> 
 	        	</c:when>
 	        	<c:when test="${funding_status eq '11'}">
 	        		<li>전체 </li>
 	        		<li>펀딩진행</li>
 	        		<li class="on">펀딩완료</li>
-	        		<li>대기</li> 
+	        		<li>대기(심사중)</li> 
 	        	</c:when>
 	          	<c:otherwise>
 	          		<li>전체 </li>
 	        		<li>펀딩진행</li>
 	        		<li>펀딩완료</li>
-	        		<li class="on">대기</li>
+	        		<li class="on">대기(심사중)</li>
 	          	</c:otherwise>
 	        </c:choose>
-	          <!-- <li class="on">전체</li>
-	          <li>펀딩진행</li>
-	          <li>펀딩완료</li>
-	          <li>대기</li> -->
         </ul>
         <br>      				   
 		<div class="ingGroup">
@@ -76,16 +73,19 @@
               <th>잔여구좌</th>
               <th>펀딩상태</th>
               <th>지급상태</th>
+              <th>연채상태</th>
               <th></th>
             </tr>
-            <c:forEach var="companyInvested" items="${companyInvestedList }" >
+            <c:forEach var="companyInvested" items="${companyInvestedList }" varStatus="status">
             	<tr>
             	<c:choose>
          			<c:when test="${companyInvested.cp_funding_status == 11}">
-         				<td onclick="window.open('./companyInvestDetailFunded.cp?cp_idx=${companyInvested.cp_idx}','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">${companyInvested.cp_name } 여기 넣어 주세요.</td>
+         				<td onclick="window.open('./companyInvestDetailFunded.cp?cp_idx=${companyInvested.cp_idx}','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">${companyInvested.cp_name }</td>
+         				<input type="hidden" id="cp_${status.count}" value="${companyInvested.cp_idx}">         				
          			</c:when>
          			<c:otherwise>
          				<td onclick="window.open('./companyInvestedDetail.cp?cp_idx=${companyInvested.cp_idx}','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">${companyInvested.cp_name }</td>
+         				<input type="hidden" id="cp_${status.count}" value="${companyInvested.cp_idx}">
          			</c:otherwise>
          		</c:choose>
 					<td>${companyInvested.mb_id }</td>
@@ -93,24 +93,97 @@
 					<td>${companyInvested.cp_phone }</td>
 					<td>D-${companyInvested.d_day }</td>
 					<td>${companyInvested.cp_monthly_profit}%</td>
-					<td>${companyInvested.result}</td>
+					<td>${companyInvested.result}</td>				
+				<c:choose>
+					<c:when test="${companyInvested.cp_funding_status == 10}">
 					<td>
-	                <select>
-	                  <option>- 펀딩상태 -</option>
-	                  <option>대기중</option>
-	                  <option>펀딩중</option>
-	                  <option>펀딩완료</option>
+						<select id = "fund_state_${status.count}" >
+		                  <option value ="">- 펀딩상태 -</option>
+		                  <option value ="10" selected="selected">대기중</option>
+		                  <option value ="11">펀딩중</option>
+		                  <option value ="12">펀딩완료</option>
+	                	</select>
+	                </td>
+					</c:when>
+					<c:when test="${companyInvested.cp_funding_status == 11}">
+					<td>
+						<select id = "fund_state_${status.count}" >
+		                  <option value ="">- 펀딩상태 -</option>
+		                  <option value ="10">대기중</option>
+		                  <option value ="11" selected="selected">펀딩중</option>
+		                  <option value ="12">펀딩완료</option>
+	                	</select>
+	                </td>
+					</c:when>
+					<c:when test="${companyInvested.cp_funding_status == 12}">
+					<td>
+						<select id = "fund_state_${status.count}" >
+		                  <option value ="">- 펀딩상태 -</option>
+		                  <option value ="10">대기중</option>
+		                  <option value ="11">펀딩중</option>
+		                  <option value ="12" selected="selected">펀딩완료</option>
+	                	</select>
+	                </td>
+					</c:when>
+					<c:otherwise>
+					<td>
+						<select id = "fund_state_${status.count}" >
+		                  <option value =""  selected="selected">- 펀딩상태 -</option>
+		                  <option value ="10">대기중</option>
+		                  <option value ="11">펀딩중</option>
+		                  <option value ="12">펀딩완료</option>
+	                	</select>
+	                </td>	
+					</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${companyInvested.cp_revenue_distribution_status == 21}">
+					 <td>
+	                <select id = "give_state_${status.count}">
+	                  <option value ="">- 지급상태 - </option>
+	                  <option value ="21"  selected="selected">수익분배중</option>
+	                  <option value ="22">분배완료</option>	                  
 	                </select>
-	              </td>
-	              <td>
-	                <select>
-	                  <option>- 지급상태 - </option>
-	                  <option>수익분배중</option>
-	                  <option>분배완료</option>
-	                  <option>연체중</option>
+              	  	</td>
+					</c:when>
+					<c:when test="${companyInvested.cp_funding_status == 22}">
+					<td>
+	                <select id = "give_state_${status.count}">
+	                  <option value ="" >- 지급상태 - </option>
+	                  <option value ="21">수익분배중</option>
+	                  <option value ="22" selected="selected">분배완료</option>	                  
+	                </select>
+              	  	</td>
+					</c:when>
+					<c:otherwise>
+					<td>
+	                <select id = "give_state_${status.count}">
+	                  <option value ="" selected="selected">- 지급상태 - </option>
+	                  <option value ="21">수익분배중</option>
+	                  <option value ="22">분배완료</option>	                  
+	                </select>
+              	  	</td>
+					</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${companyInvested.cp_overdue_status == 30}">
+				   <td>
+	                <select id = "arrears_state_${status.count}">
+	                  <option value = "">- 연채상태 - </option>
+	                  <option value ="30" selected="selected">연채중</option>
 	                </select>
               	  </td>
-              	  <td class="selfix">수정</td>
+					</c:when>
+					<c:otherwise>
+					<td>
+	                <select id = "arrears_state_${status.count}">
+	                  <option value = "" selected="selected">- 연채상태 - </option>
+	                  <option value ="30">연채중</option>
+	                </select>
+              	  </td>
+					</c:otherwise>
+				</c:choose>              	  
+              	  <td class="selfix"><li value="${status.count}" onclick = "replybtn(this.value)">수정</td>
             	</tr>
             </c:forEach>
           </table>
@@ -135,7 +208,7 @@
 		<footer></footer>
 	</div>
 	<script>  
-    setTimeout(function () {
+/*     setTimeout(function () {
       jQuery('.nav3').trigger('click');
       jQuery('.nav34').addClass('on');
     }, 500);
@@ -177,7 +250,7 @@
 			});
     });
     
-
+ */
     
 	</script>
 </body>
