@@ -17,6 +17,7 @@ import net.company.action.CompanyDeadLineAction;
 import net.company.action.CompanyDeadLineSaveAction;
 import net.company.action.CompanyInvestApplyDetailAction;
 import net.company.action.CompanyInvestApplyListAction;
+import net.company.action.CompanyInvestDetailFundedAction;
 import net.company.action.CompanyInvestedDetailAction;
 import net.company.action.CompanyInvestedDoneListAction;
 import net.company.action.CompanyInvestedListAction;
@@ -127,6 +128,10 @@ public class CompanyController extends HttpServlet {
 				//태훈끝//
 			case "/modifyCompany.cp":
 				action = new ModifyCompanyAction();
+				forward = action.execute(request, response);
+				break;
+			case "/companyInvestDetailFunded.cp":
+				action = new CompanyInvestDetailFundedAction();
 				forward = action.execute(request, response);
 				break;
 			default:

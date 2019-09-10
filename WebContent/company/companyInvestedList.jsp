@@ -57,17 +57,29 @@
 			<div class="con">
         <ul class="tab">
 	      <c:choose>
+	      	    <c:when test="${funding_status eq '0'}">
+	        		<li class="on">전체 </li>
+	        		<li>펀딩진행</li>
+	        		<li>펀딩완료</li>
+	        		<li>대기</li> 
+	        	</c:when>
 	        	<c:when test="${funding_status eq '12'}">
 	        		<li>전체 </li>
 	        		<li class="on">펀딩진행</li>
 	        		<li>펀딩완료</li>
 	        		<li>대기</li> 
 	        	</c:when>
+	        	<c:when test="${funding_status eq '11'}">
+	        		<li>전체 </li>
+	        		<li>펀딩진행</li>
+	        		<li class="on">펀딩완료</li>
+	        		<li>대기</li> 
+	        	</c:when>
 	          	<c:otherwise>
 	          		<li>전체 </li>
 	        		<li>펀딩진행</li>
-	        		<li class="on">펀딩완료</li>
-	        		<li>대기</li>
+	        		<li>펀딩완료</li>
+	        		<li class="on">대기</li>
 	          	</c:otherwise>
 	        </c:choose>
 	          <!-- <li class="on">전체</li>
@@ -98,7 +110,6 @@
 					<td>${companyInvested.cp_phone }</td>
 					<td>D-${companyInvested.d_day }</td>
 					<td>${companyInvested.cp_monthly_profit}%</td>
-					
 					<td>${companyInvested.ma_estimated_revenue }</td>
 					<td>
 	                <select>
@@ -110,7 +121,7 @@
 	              </td>
 	              <td>
 	                <select>
-	                  <option>- 지급상태 - </option>
+	                  <option>- 지급상태 -</option>
 	                  <option>수익분배중</option>
 	                  <option>분배완료</option>
 	                  <option>연체중</option>
@@ -136,9 +147,9 @@
           <a href="./companyInvestedList.cp?page=${current_page+1 }&funding_status=${funding_status}" class="next"><i class="fas fa-caret-right"></i></a>
         </div>
         <div class="doneGroup"></div>
-			</div>
+		</div>
 		</section>
-		<footer></footer>
+	<footer></footer>	
 	</div>
 	<script>  
     setTimeout(function () {
@@ -147,44 +158,40 @@
     }, 500);
     
     $(function(){
-    	console.log("test");
       $('.tab li').click(function(){
-				$('.tab li').removeClass('on');
-				$(this).addClass('on');
-			});
+		$('.tab li').removeClass('on');
+		$(this).addClass('on');
+	  });
       
-      $('.tab li').eq(0).click(function(){
-    	  //window.location.href="./companyInvestedList.cp?page=1&funding_status=12";
+      $('.tab li').eq(0).click(function(){ //전체
+    	window.location.href="./companyInvestedList.cp?page=1&funding_status=0";
         //$('.ingGroup').show();
         //$('.doneGroup').hide();
       });
       
-      $('.tab li').eq(1).click(function(){
+      $('.tab li').eq(1).click(function(){ //펀딩진행
     	  window.location.href="./companyInvestedList.cp?page=1&funding_status=12";
         //$('.doneGroup').show();
         //$('.ingGroup').hide();
       });
       
-      $('.tab li').eq(2).click(function(){
+      $('.tab li').eq(2).click(function(){ //펀딩완료
     	  window.location.href="./companyInvestedList.cp?page=1&funding_status=11";
         //$('.doneGroup').show();
         //$('.ingGroup').hide();
       });
       
-      $('.tab li').eq(3).click(function(){
+      $('.tab li').eq(3).click(function(){ //대기
     	  //window.location.href="./companyInvestedList.cp?page=1&funding_status=11";
         //$('.doneGroup').show();
         //$('.ingGroup').hide();
       });
       
-      $('.pager li').click(function(){
-				$('.pager li').removeClass('on');
-				$(this).addClass('on');
-			});
+	  $('.pager li').click(function(){
+		$('.pager li').removeClass('on');
+		$(this).addClass('on');
+	  });
     });
-    
-
-    
 	</script>
 </body>
 </html>

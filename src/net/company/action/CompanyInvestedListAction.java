@@ -34,7 +34,7 @@ public class CompanyInvestedListAction implements Action {
 		}
 		
 		if (funding_status == null || (!funding_status.equals("11") && !funding_status.equals("12"))) {
-			funding_status = "12";//�ݵ�����
+			funding_status = "0";//�ݵ�����
 		}
 		
 		List<CompanyInvested> companyInvestedList = new ArrayList<CompanyInvested>();
