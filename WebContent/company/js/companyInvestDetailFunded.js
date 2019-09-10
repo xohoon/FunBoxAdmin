@@ -21,9 +21,8 @@ function asd() {
     var jbSplit6 = jbString6.split('/**/');
     var a = jbSplit;
     for(var i = 0; i<jbSplit.length; i++) {
-//    	testText.eq(0).text(jbSplit[0]);
-//      testText.hide();
-      var row = "<tr id='pre_pay_schedule'>";
+
+    	var row = "<tr id='pre_pay_schedule'>";
       	row += "<td>"+jbSplit[i]+"</td>";
       	row += "<td>"+jbSplit1[i]+"</td>";
       	row += "<td>"+jbSplit2[i]+"</td>";
