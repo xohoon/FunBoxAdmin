@@ -33,8 +33,12 @@ public class CompanyInvestedListAction implements Action {
 			page = 1;
 		}
 		
-		if (funding_status == null || (!funding_status.equals("11") && !funding_status.equals("12"))) {
-			funding_status = "12";//�ݵ�����
+		if (funding_status == null) {
+			funding_status = "0";
+		}else if(funding_status == "11"){
+			funding_status = "11";
+		}else if(funding_status == "12"){
+			funding_status = "12";
 		}
 		
 		List<CompanyInvested> companyInvestedList = new ArrayList<CompanyInvested>();
@@ -44,22 +48,10 @@ public class CompanyInvestedListAction implements Action {
 		
 		CompanyDAO companyDAO = new CompanyDAO();
 		companyDAO.getCompanyInvestedList(companyInvestedList, page, funding_status, paging);
-	
-		int i =  0; // 최소투자금액
-		int j =  0;// 목표금액
-		int z =  0;// 현재금액	
-		double result = 0; // 배열로 담는다.
 		
-		for(int a = 0; a < companyInvestedList.size(); a ++){
-			i = Integer.parseInt(companyInvestedList.get(a).getIv_min_amount());
-			j = Integer.parseInt(companyInvestedList.get(a).getIv_goal_amount());
-			z =  Integer.parseInt(companyInvestedList.get(a).getIv_current_amount());
-			result = (j-z)/i;
-			
-			transportresults.add(result);
-		}
-		System.out.println("transportresults : " + transportresults);
-		// �� ���� ����
+		System.out.println("CompanyInvested :" + companyInvestedList.toString());
+	
+		
 		if (companyInvestedList.size() < 1) {
 
 		}

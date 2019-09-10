@@ -1,31 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
-<%@page import="java.util.List"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@page import="net.company.dto.CompanyInvested"%>  
-<%
-	List<CompanyInvested> companyinvested = (List<CompanyInvested>)request.getAttribute("companyInvestedList");
-	
-	int i =  0; // 최소투자금액
-	int j =  0;// 목표금액
-	int z =  0;// 현재금액	
-	double[] result = new double[companyinvested.size()]; // 배열로 담는다.
-	
-	/* System.out.println(i);
-	System.out.println(j);
-	System.out.println(z); */
-	
-	/* for(int a = 1; a < companyinvested.size(); a ++){
-		i = Integer.parseInt(companyinvested.get(a).getIv_min_amount());
-		j = Integer.parseInt(companyinvested.get(a).getIv_goal_amount());
-		z =  Integer.parseInt(companyinvested.get(0).getIv_current_amount());
-		result[a] = (j-z)/i;
-		System.out.println(result[a]);
-	}
-	
-	 */
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,19 +31,31 @@
 		<section id="sec07">
 			<h2>투자기업목록</h2>
 			<div class="con">
-        <ul class="tab">
+        <ul class="tab">         
 	      <c:choose>
+	      		<c:when test="${funding_status eq '0'}">
+	        		<li class="on">전체 </li>
+	        		<li>펀딩진행</li>
+	        		<li>펀딩완료</li>
+	        		<li>대기</li> 
+	        	</c:when>
 	        	<c:when test="${funding_status eq '12'}">
 	        		<li>전체 </li>
 	        		<li class="on">펀딩진행</li>
 	        		<li>펀딩완료</li>
 	        		<li>대기</li> 
 	        	</c:when>
+	        	<c:when test="${funding_status eq '11'}">
+	        		<li>전체 </li>
+	        		<li>펀딩진행</li>
+	        		<li class="on">펀딩완료</li>
+	        		<li>대기</li> 
+	        	</c:when>
 	          	<c:otherwise>
 	          		<li>전체 </li>
 	        		<li>펀딩진행</li>
-	        		<li class="on">펀딩완료</li>
-	        		<li>대기</li>
+	        		<li>펀딩완료</li>
+	        		<li class="on">대기</li>
 	          	</c:otherwise>
 	        </c:choose>
 	          <!-- <li class="on">전체</li>
@@ -75,7 +63,7 @@
 	          <li>펀딩완료</li>
 	          <li>대기</li> -->
         </ul>
-        <br>
+        <br>      				   
 		<div class="ingGroup">
           <table>
               <tr>
@@ -92,14 +80,20 @@
             </tr>
             <c:forEach var="companyInvested" items="${companyInvestedList }" >
             	<tr>
-            		<td onclick="window.open('./companyInvestedDetail.cp?cp_idx=${companyInvested.cp_idx}','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">${companyInvested.cp_name }</td>
+            	<c:choose>
+         			<c:when test="${companyInvested.cp_funding_status == 11}">
+         				<td onclick="window.open('./companyInvestDetailFunded.cp?cp_idx=${companyInvested.cp_idx}','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">${companyInvested.cp_name } 여기 넣어 주세요.</td>
+         			</c:when>
+         			<c:otherwise>
+         				<td onclick="window.open('./companyInvestedDetail.cp?cp_idx=${companyInvested.cp_idx}','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">${companyInvested.cp_name }</td>
+         			</c:otherwise>
+         		</c:choose>
 					<td>${companyInvested.mb_id }</td>
 					<td>${companyInvested.cp_manager }</td>
 					<td>${companyInvested.cp_phone }</td>
 					<td>D-${companyInvested.d_day }</td>
 					<td>${companyInvested.cp_monthly_profit}%</td>
-					
-					<td>${companyInvested.ma_estimated_revenue }</td>
+					<td>${companyInvested.result}</td>
 					<td>
 	                <select>
 	                  <option>- 펀딩상태 -</option>
@@ -136,7 +130,7 @@
           <a href="./companyInvestedList.cp?page=${current_page+1 }&funding_status=${funding_status}" class="next"><i class="fas fa-caret-right"></i></a>
         </div>
         <div class="doneGroup"></div>
-			</div>
+	</div>
 		</section>
 		<footer></footer>
 	</div>
@@ -149,12 +143,12 @@
     $(function(){
     	console.log("test");
       $('.tab li').click(function(){
-				$('.tab li').removeClass('on');
+	 		$('.tab li').removeClass('on');
 				$(this).addClass('on');
-			});
+	  });
       
       $('.tab li').eq(0).click(function(){
-    	  //window.location.href="./companyInvestedList.cp?page=1&funding_status=12";
+    	 window.location.href="./companyInvestedList.cp?page=1&funding_status=0";
         //$('.ingGroup').show();
         //$('.doneGroup').hide();
       });
