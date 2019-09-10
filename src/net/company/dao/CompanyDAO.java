@@ -148,10 +148,10 @@ public class CompanyDAO {
 				companyInvested.setMb_id(rs.getString("cp_phone"));
 				//companyInvested.setMa_estimated_revenue(rs.getString("ma_estimated_revenue"));
 				companyInvested.setD_day(rs.getInt("d_day"));
-				companyInvested.setMb_id(rs.getString("iv_balance_stock"));				
+				companyInvested.setIv_balance_stock(rs.getString("iv_balance_stock"));
+				companyInvested.setResult(rs.getString("result"));
 				companyInvestedList.add(companyInvested);
 			}
-			System.out.println(companyInvestedList.toString());
 			return true;
 		} catch (Exception ex) {
 			System.out.println("getCompanyInvestedList 에러: " + ex);

@@ -14,7 +14,23 @@ public class CompanyInvested {
 	private String ma_estimated_revenue;
 	private int d_day;
 	private String iv_balance_stock;
+	private String result;
 	
+	public int getCp_pre_net_profit_ratio() {
+		return cp_pre_net_profit_ratio;
+	}
+
+	public void setCp_pre_net_profit_ratio(int cp_pre_net_profit_ratio) {
+		this.cp_pre_net_profit_ratio = cp_pre_net_profit_ratio;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
 
 	public String getIv_min_amount() {
 		return iv_min_amount;
@@ -117,8 +133,9 @@ public class CompanyInvested {
 		return "CompanyInvested [cp_idx=" + cp_idx + ", cp_name=" + cp_name + ", mb_id=" + mb_id + ", cp_manager="
 				+ cp_manager + ", cp_phone=" + cp_phone + ", cp_pre_net_profit_ratio=" + cp_pre_net_profit_ratio
 				+ ", iv_min_amount=" + iv_min_amount + ", iv_goal_amount=" + iv_goal_amount + ", iv_current_amount="
-				+ iv_current_amount + ", cp_monthly_profit=" + cp_monthly_profit + ", d_day=" + d_day
-				+ ", iv_balance_stock=" + iv_balance_stock + "]";
+				+ iv_current_amount + ", cp_monthly_profit=" + cp_monthly_profit + ", ma_estimated_revenue="
+				+ ma_estimated_revenue + ", d_day=" + d_day + ", iv_balance_stock=" + iv_balance_stock + ", result="
+				+ result + "]";
 	}
 
 	
