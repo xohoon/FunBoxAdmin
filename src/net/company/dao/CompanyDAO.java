@@ -113,7 +113,7 @@ public class CompanyDAO {
 		return false;
 	}
 
-	// ��� ���� ��� ����Ʈ
+	// 투자기업목록 List 20190909 윤식 수정
 	public boolean getCompanyInvestedList(List<CompanyInvested> companyInvestedList, int _page,
 			String _cp_funding_status, Paging paging) {
 		CallableStatement cstmt = null;
@@ -138,17 +138,23 @@ public class CompanyDAO {
 				companyInvested.setCp_idx(rs.getInt("cp_idx"));
 				companyInvested.setCp_name(rs.getString("cp_name"));
 				companyInvested.setMb_id(rs.getString("mb_id"));
+				companyInvested.setCp_manager(rs.getString("cp_manager"));                                                            
+				companyInvested.setCp_phone(rs.getString("cp_phone"));
+				companyInvested.setCp_monthly_profit(rs.getString("cp_monthly_profit"));
+				companyInvested.setIv_min_amount(rs.getString("iv_min_amount"));
+				companyInvested.setIv_goal_amount(rs.getString("iv_goal_amount"));
+				companyInvested.setIv_current_amount(rs.getString("iv_current_amount"));
 				companyInvested.setMb_id(rs.getString("cp_manager"));
 				companyInvested.setMb_id(rs.getString("cp_phone"));
 				//companyInvested.setMa_estimated_revenue(rs.getString("ma_estimated_revenue"));
-	
 				companyInvested.setD_day(rs.getInt("d_day"));
-				companyInvested.setMb_id(rs.getString("iv_balance_stock"));
+				companyInvested.setMb_id(rs.getString("iv_balance_stock"));				
 				companyInvestedList.add(companyInvested);
 			}
+			System.out.println(companyInvestedList.toString());
 			return true;
 		} catch (Exception ex) {
-			System.out.println("getCompanyInvestedList ����: " + ex);
+			System.out.println("getCompanyInvestedList 에러: " + ex);
 		} finally {
 			try {
 				if (rs != null)

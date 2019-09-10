@@ -1,6 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@page import="java.util.List"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@page import="net.company.dto.CompanyInvested"%>  
+<%
+	List<CompanyInvested> companyinvested = (List<CompanyInvested>)request.getAttribute("companyInvestedList");
+	
+	int i =  0; // 최소투자금액
+	int j =  0;// 목표금액
+	int z =  0;// 현재금액	
+	double[] result = new double[companyinvested.size()]; // 배열로 담는다.
+	
+	/* System.out.println(i);
+	System.out.println(j);
+	System.out.println(z); */
+	
+	/* for(int a = 1; a < companyinvested.size(); a ++){
+		i = Integer.parseInt(companyinvested.get(a).getIv_min_amount());
+		j = Integer.parseInt(companyinvested.get(a).getIv_goal_amount());
+		z =  Integer.parseInt(companyinvested.get(0).getIv_current_amount());
+		result[a] = (j-z)/i;
+		System.out.println(result[a]);
+	}
+	
+	 */
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,22 +83,23 @@
               <th>아이디</th>
               <th>담당자</th>
               <th>연락처</th>
-              <th>워 평균 예상 수익금</th>
               <th>마감</th>
+              <th>월수익률</th>
               <th>잔여구좌</th>
               <th>펀딩상태</th>
               <th>지급상태</th>
               <th></th>
             </tr>
-            <c:forEach var="companyInvested" items="${companyInvestedList }">
+            <c:forEach var="companyInvested" items="${companyInvestedList }" >
             	<tr>
             		<td onclick="window.open('./companyInvestedDetail.cp?cp_idx=${companyInvested.cp_idx}','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">${companyInvested.cp_name }</td>
 					<td>${companyInvested.mb_id }</td>
 					<td>${companyInvested.cp_manager }</td>
 					<td>${companyInvested.cp_phone }</td>
-					<td>${companyInvested.ma_estimated_revenue }</td>
 					<td>D-${companyInvested.d_day }</td>
-					<td>${companyInvested.iv_balance_stock }</td>
+					<td>${companyInvested.cp_monthly_profit}%</td>
+					
+					<td>${companyInvested.ma_estimated_revenue }</td>
 					<td>
 	                <select>
 	                  <option>- 펀딩상태 -</option>
