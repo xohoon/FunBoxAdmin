@@ -10,6 +10,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>FUNBOX ADMIN</title>
+	<script type="text/javascript" src="company/js/companyInvestDetailFunded.js"></script>
 	<script src="js/jquery-3.1.1.min.js"></script>
 	<link href="css/common.css" rel="stylesheet">
 	<link href="css/cor_info.css" rel="stylesheet">
@@ -76,7 +77,7 @@
             <div class="rep">
               <h6>예상 지급 스케쥴</h6>
               <div>
-                <table>
+                <table id="tableId">
                   <tr>
                     <th>지급회차</th>
                     <th>예상 지급일</th>
@@ -86,123 +87,28 @@
                     <th>실 지급금액</th>
                     <th>실 수익률</th>
                   </tr>
-                  <tr>
-                    <td>1 회차</td>
-                    <td>2019.09.01</td>
-                    <td>0원</td>
-                    <td>25,111원</td>
-                    <td>2,636원</td>
-                    <td>22,475원</td>
-                    <td>0.75%</td>
-                  </tr>
-                  <tr>
-                    <td>2 회차</td>
-                    <td>2019.10.01</td>
-                    <td>0원</td>
-                    <td>25,948원</td>
-                    <td>2,724원</td>
-                    <td>23,224원</td>
-                    <td>0.77%</td>
-                  </tr>
-                  <tr>
-                    <td>3 회차</td>
-                    <td>2019.11.01</td>
-                    <td>0원</td>
-                    <td>25,111원</td>
-                    <td>2,636원</td>
-                    <td>22,475원</td>
-                    <td>0.75%</td>
-                  </tr>
-                  <tr>
-                    <td>4 회차</td>
-                    <td>2019.12.01</td>
-                    <td>0원</td>
-                    <td>25,948원</td>
-                    <td>2,724원</td>
-                    <td>23,224원</td>
-                    <td>0.77%</td>
-                  </tr>
-                  <tr>
-                    <td>5 회차</td>
-                    <td>2020.01.01</td>
-                    <td>0원</td>
-                    <td>25,948원</td>
-                    <td>2,724원</td>
-                    <td>23,224원</td>
-                    <td>0.77%</td>
-                  </tr>
-                  <tr>
-                    <td>6 회차</td>
-                    <td>2020.02.01</td>
-                    <td>0원</td>
-                    <td>23,437원</td>
-                    <td>2,460원</td>
-                    <td>20,997원</td>
-                    <td>0.74%</td>
-                  </tr>
-                  <tr>
-                    <td>7 회차</td>
-                    <td>2020.03.01</td>
-                    <td>0원</td>
-                    <td>25,948원</td>
-                    <td>2,724원</td>
-                    <td>23,224원</td>
-                    <td>0.77%</td>
-                  </tr>
-                  <tr>
-                    <td>8 회차</td>
-                    <td>2020.04.01</td>
-                    <td>0원</td>
-                    <td>25,111원</td>
-                    <td>2,636원</td>
-                    <td>22,475원</td>
-                    <td>0.75%</td>
-                  </tr>
-                  <tr>
-                    <td>9 회차</td>
-                    <td>2020.05.01</td>
-                    <td>0원</td>
-                    <td>25,948원</td>
-                    <td>2,724원</td>
-                    <td>23,224원</td>
-                    <td>0.77%</td>
-                  </tr>
-                  <tr>
-                    <td>10 회차</td>
-                    <td>2020.06.01</td>
-                    <td>0원</td>
-                    <td>25,111원</td>
-                    <td>2,636원</td>
-                    <td>22,475원</td>
-                    <td>0.75%</td>
-                  </tr>
-                  <tr>
-                    <td>11 회차</td>
-                    <td>2020.07.01</td>
-                    <td>0원</td>
-                    <td>25,948원</td>
-                    <td>2,724원</td>
-                    <td>23,224원</td>
-                    <td>0.77%</td>
-                  </tr>
-                  <tr>
-                    <td>12 회차</td>
-                    <td>2020.08.01</td>
-                    <td>3,000,000원</td>
-                    <td>25,948원</td>
-                    <td>2,724원</td>
-                    <td>23,224원</td>
-                    <td>0.77%</td>
-                  </tr>
-                  <tr>
-                    <td>총 합계</td>
-                    <td>-</td>
-                    <td>3,000,000원</td>
-                    <td>305,520원</td>
-                    <td>32,080원</td>
-                    <td>273,470원</td>
-                    <td>9.13%</td>
-                  </tr>
+                <tbody id="body_id">
+	                <tr id="pre_pay_schedule">
+	                  <td>${companyBean.cp_pay_count}</td>
+	                  <td>${companyBean.cp_pay_expected_payment_date}</td>
+	                  <td>${companyBean.cp_pay_principal}</td>	                  
+	                  <td>${companyBean.cp_pay_interest_paid }</td>
+	                  <td>${companyBean.cp_pay_fees }</td>
+	                  <td>${companyBean.cp_pay_actual_payment_amout }</td>
+	                  <td>${companyBean.cp_pay_actual_rate_return }</td>
+	                </tr>
+	            </tbody>
+                <tfoot class="foot_id">
+		            <tr>
+	                  <th>총 합계</th>
+	                  <th>-</th>
+	                  <th>${companyBean.cp_total_sum_pay_principal}</th>	                  
+	                  <th>${companyBean.cp_total_sum_pay_interest_paid }</th>
+	                  <th>${companyBean.cp_total_sum_pay_fees }</th>
+	                  <th>${companyBean.cp_total_sum_pay_actual_payment_amout }</th>
+	                  <th>${companyBean.cp_total_sum_actual_rate_return }</th>
+	                </tr>
+                </tfoot>
                 </table>
               </div>
             </div>
