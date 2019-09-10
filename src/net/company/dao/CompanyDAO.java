@@ -22,6 +22,7 @@ import net.company.dto.CompanyApplicationDetail;
 import net.company.dto.CompanyBean;
 import net.company.dto.CompanyDeadLine;
 import net.company.dto.CompanyDetail;
+import net.company.dto.CompanyFile;
 import net.company.dto.CompanyInvested;
 import net.company.dto.CompanyPopularityList;
 import net.company.dto.CompanyRegister;
@@ -229,7 +230,7 @@ public class CompanyDAO {
 				companyApplicationDetail.setApp_cp_purpose(rs.getString("app_cp_purpose"));
 				companyApplicationDetail.setApp_cp_point(rs.getString("app_cp_point"));
 				// 파일
-				
+
 				companyApplicationDetail.setApp_cp_registrantion(rs.getString("app_cp_registrantion"));
 				companyApplicationDetail.setApp_cp_financial(rs.getString("app_cp_financial"));
 				companyApplicationDetail.setApp_cp_estate_contract(rs.getString("app_cp_estate_contract"));
@@ -312,35 +313,35 @@ public class CompanyDAO {
 	}
 
 	// 전체목록 들고오기
-	public boolean getCompanyAllList(List<Company> companyList,boolean _search_type, String _search_word, int _category) {
+	public boolean getCompanyAllList(List<Company> companyList, boolean _search_type, String _search_word,
+			int _category) {
 		String sql = "";
 		switch (_category) {
-			case 1:
-				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM popularityManagement_list)";
-				break;
-			case 2:
-				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM recommended_company)";
-				break;
-			case 3:
-				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM admin_deadLine)";
-				break;			
-	
-			case 4:
-				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM am_banner_1)";
-				break;			
-	
-			case 5:
-				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM am_banner_2)";
-				break;			
-	
-			default:
-				break;
+		case 1:
+			sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM popularityManagement_list)";
+			break;
+		case 2:
+			sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM recommended_company)";
+			break;
+		case 3:
+			sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM admin_deadLine)";
+			break;
+
+		case 4:
+			sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM am_banner_1)";
+			break;
+
+		case 5:
+			sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company WHERE cp_idx NOT IN(SELECT cp_idx FROM am_banner_2)";
+			break;
+
+		default:
+			break;
 		}
 		if (_search_type) {
 			sql += "AND cp_name LIKE  CONCAT('%',?,'%')";
 		}
-		
-		
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
@@ -360,7 +361,7 @@ public class CompanyDAO {
 				companyList.add(company);
 			}
 			return true;
-			
+
 		} catch (Exception ex) {
 			System.out.println("getCompanyAllList 에러: " + ex);
 		} finally {
@@ -378,32 +379,32 @@ public class CompanyDAO {
 
 		return false;
 	}
-	
-	//해당 페이지 수동 테이블 들고오기
-	public boolean getCompanyAddedList(List<CompanyAdded> companyAddedList,int _category) {
+
+	// 해당 페이지 수동 테이블 들고오기
+	public boolean getCompanyAddedList(List<CompanyAdded> companyAddedList, int _category) {
 		String sql = "";
 		switch (_category) {
-			case 1:
-				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM popularityManagement_list)";
-				break;
-			case 2:
-				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM recommended_company)";
-				break;
-			case 3:
-				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM admin_deadLine)";
-				break;			
-			case 4:
-				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM am_banner_1)";
-				break;			
-	
-			case 5:
-				sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM am_banner_2)";
-				break;			
-	
-			default:
-				break;
+		case 1:
+			sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM popularityManagement_list)";
+			break;
+		case 2:
+			sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM recommended_company)";
+			break;
+		case 3:
+			sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM admin_deadLine)";
+			break;
+		case 4:
+			sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM am_banner_1)";
+			break;
+
+		case 5:
+			sql = "SELECT cp_idx,cp_name,mb_id,cp_manager FROM company cp WHERE cp_idx IN(SELECT cp_idx FROM am_banner_2)";
+			break;
+
+		default:
+			break;
 		}
-		
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
@@ -419,9 +420,9 @@ public class CompanyDAO {
 				companyAdded.setCp_manager(rs.getString("cp_manager"));
 				companyAddedList.add(companyAdded);
 			}
-			
+
 			return true;
-			
+
 		} catch (Exception ex) {
 			System.out.println("getCompanyAddedList 에러: " + ex);
 		} finally {
@@ -439,8 +440,6 @@ public class CompanyDAO {
 
 		return false;
 	}
-	
-	
 
 	// 자동 수동 상태 들고오기 // 박신규 추가
 	public boolean getAutoStatus(int aas_idx) {
@@ -474,30 +473,83 @@ public class CompanyDAO {
 
 		return true;
 	}
-	
+
+	// 자동 수동 상태 들고오기 // 박신규 추가
+	public boolean getCompanyFile(int cp_idx, CompanyFile companyFile) {
+		String sql = "SELECT * FROM company_file WHERE cp_idx = ?";
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cp_idx);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				companyFile.setCp_idx(rs.getInt("cp_idx"));
+				companyFile.setCf_store_images(rs.getString("cf_store_images"));
+				companyFile.setCf_alias_store_images(rs.getString("cf_alias_store_images"));
+				companyFile.setCf_corporation_icon(rs.getString("cf_corporation_icon"));
+				companyFile.setCf_alias_corporation_icon(rs.getString("cf_alias_corporation_icon"));
+				companyFile.setCf_invest_image(rs.getString("cf_invest_image"));
+				companyFile.setCf_alias_invest_image(rs.getString("cf_alias_invest_image"));
+				companyFile.setCf_folder(rs.getString("cf_folder"));
+				companyFile.setCf_business_plan_images(rs.getString("cf_business_plan_images"));
+				companyFile.setCf_alias_business_plan_images(rs.getString("cf_alias_business_plan_images"));
+				companyFile.setCf_etc_files(rs.getString("cf_etc_files"));
+				companyFile.setCf_alias_etc_files(rs.getString("cf_alias_etc_files"));
+				companyFile.setCf_thumbnail(rs.getString("cf_thumbnail"));
+				companyFile.setCf_alias_thumbnail(rs.getString("cf_alias_thumbnail"));
+				companyFile.setCf_pr_background(rs.getString("cf_pr_background"));
+				companyFile.setCf_alias_pr_background(rs.getString("cf_alias_pr_background"));
+				companyFile.setCf_funding_contract(rs.getString("cf_funding_contract"));
+				companyFile.setCf_alias_funding_contract(rs.getString("cf_alias_funding_contract"));
+				companyFile.setCf_business_plan(rs.getString("cf_business_plan"));
+				companyFile.setCf_alias_business_plan(rs.getString("cf_alias_business_plan"));
+			}
+			return true;
+		} catch (Exception ex) {
+			System.out.println("getAutoStatus 에러: " + ex);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				System.out.println("해제 실패 : " + e.getMessage());
+			}
+		}
+
+		return true;
+	}
+
 	public boolean deleteManualTable(int aas_idx) {
 		String sql = "";
 		switch (aas_idx) {
-			case 1:
-				sql = "DELETE FROM popularityManagement_list";
-				break;
-			case 2:
-				sql = "DELETE FROM recommended_company";
-				break;
-			case 3:
-				sql = "DELETE FROM admin_deadLine";
-				break;			
-	
-			case 4:
-				sql = "DELETE FROM am_banner_1";
-				break;			
-	
-			case 5:
-				sql = "DELETE FROM am_banner_2";
-				break;			
-	
-			default:
-				break;
+		case 1:
+			sql = "DELETE FROM popularityManagement_list";
+			break;
+		case 2:
+			sql = "DELETE FROM recommended_company";
+			break;
+		case 3:
+			sql = "DELETE FROM admin_deadLine";
+			break;
+
+		case 4:
+			sql = "DELETE FROM am_banner_1";
+			break;
+
+		case 5:
+			sql = "DELETE FROM am_banner_2";
+			break;
+
+		default:
+			break;
 		}
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -505,10 +557,10 @@ public class CompanyDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.executeUpdate();
 			return true;
-			
+
 		} catch (Exception ex) {
 			System.out.println("deleteManualTable 에러: " + ex);
-			
+
 		} finally {
 			try {
 				if (rs != null)
@@ -523,35 +575,35 @@ public class CompanyDAO {
 		}
 		return false;
 	}
-	
-	public boolean insertManualTable(int aas_idx,Integer[] cp_idx_value_arr) {
+
+	public boolean insertManualTable(int aas_idx, Integer[] cp_idx_value_arr) {
 		String sql = "";
 		switch (aas_idx) {
-			case 1:
-				sql = "";
-				break;
-			case 2:
-				sql = "INSERT INTO recommended_company SELECT cp.cp_idx, cp.cp_name, cp.cp_sector, cp.cp_branch, cp.cp_monthly_profit, round((cp_iv.iv_current_amount/cp_iv.iv_goal_amount*100)) as percent, cp_iv.iv_goal_amount, cp_iv.iv_current_amount, cp_iv.iv_appl_stop_date_time, cp.cp_recommand_count FROM company as cp JOIN company_invest as cp_iv ON cp.cp_idx = cp_iv.cp_idx JOIN company_file as cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN (";
-				break;
-			case 3:
-				sql = "";
-				break;			
-	
-			case 4:
-				sql = "INSERT INTO am_banner_1 SELECT cp.cp_idx,cp.cp_name,cp.cp_branch,cp.cp_intro_content FROM company cp JOIN company_file cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN(";
-				break;			
-	
-			case 5:
-				sql = "INSERT INTO am_banner_2 SELECT cp.cp_idx,cp.cp_name,cp.cp_branch,cp.cp_intro_content,cp.cp_open_datetime FROM company cp JOIN company_file cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN(";
-				break;			
-	
-			default:
-				break;
+		case 1:
+			sql = "";
+			break;
+		case 2:
+			sql = "INSERT INTO recommended_company SELECT cp.cp_idx, cp.cp_name, cp.cp_sector, cp.cp_branch, cp.cp_monthly_profit, round((cp_iv.iv_current_amount/cp_iv.iv_goal_amount*100)) as percent, cp_iv.iv_goal_amount, cp_iv.iv_current_amount, cp_iv.iv_appl_stop_date_time, cp.cp_recommand_count FROM company as cp JOIN company_invest as cp_iv ON cp.cp_idx = cp_iv.cp_idx JOIN company_file as cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN (";
+			break;
+		case 3:
+			sql = "";
+			break;
+
+		case 4:
+			sql = "INSERT INTO am_banner_1 SELECT cp.cp_idx,cp.cp_name,cp.cp_branch,cp.cp_intro_content FROM company cp JOIN company_file cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN(";
+			break;
+
+		case 5:
+			sql = "INSERT INTO am_banner_2 SELECT cp.cp_idx,cp.cp_name,cp.cp_branch,cp.cp_intro_content,cp.cp_open_datetime FROM company cp JOIN company_file cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN(";
+			break;
+
+		default:
+			break;
 		}
 		for (int i = 0; i < cp_idx_value_arr.length; i++) {
 			if (i + 1 == cp_idx_value_arr.length) {
 				sql += "?)";
-			}else {
+			} else {
 				sql += "?,";
 			}
 		}
@@ -561,14 +613,14 @@ public class CompanyDAO {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			for (int i = 0; i < cp_idx_value_arr.length; i++) {
-				pstmt.setInt(i+1, cp_idx_value_arr[i]);
+				pstmt.setInt(i + 1, cp_idx_value_arr[i]);
 			}
 			pstmt.executeUpdate();
 			return true;
-			
+
 		} catch (Exception ex) {
 			System.out.println("insertManualTable 에러: " + ex);
-			
+
 		} finally {
 			try {
 				if (rs != null)
@@ -583,7 +635,6 @@ public class CompanyDAO {
 		}
 		return false;
 	}
-	
 
 	// 마감 임박 클라이언트 수동 List 값 가져 오기(수동) 윤식 추가
 	public ArrayList<CompanyDeadLine> getMan3List() {
@@ -630,25 +681,24 @@ public class CompanyDAO {
 		return null;
 	}
 
-	
 	// admin_am_setting update 자동 수동
 	public boolean setAutoStatus(int aas_idx, boolean auto_status) {
-		
-		String sql = "UPDATE admin_am_setting SET aas_auto_status ="+ auto_status +" WHERE aas_idx = "+aas_idx;  
-		
+
+		String sql = "UPDATE admin_am_setting SET aas_auto_status =" + auto_status + " WHERE aas_idx = " + aas_idx;
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		System.out.println(sql);
-		
+
 		try {
-			pstmt = conn.prepareStatement(sql);						
+			pstmt = conn.prepareStatement(sql);
 			pstmt.executeUpdate();
 
 			return true;
-			
+
 		} catch (Exception ex) {
 			System.out.println("setAutoStatus 에러: " + ex);
-			
+
 		} finally {
 			try {
 				if (rs != null)
@@ -664,21 +714,22 @@ public class CompanyDAO {
 
 		return false;
 	}
+
 	// 테이블 비우기
 	public boolean deletetalbe() {
 		String sql = "DELETE FROM admin_deadLine";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.execute();
 			System.out.println("테이블 비우기 성공");
 			return true;
-			
-		}catch (Exception ex) {
+
+		} catch (Exception ex) {
 			System.out.println("deletetalbe 에러: " + ex);
-		}finally {
+		} finally {
 			try {
 				if (rs != null)
 					rs.close();
@@ -690,32 +741,32 @@ public class CompanyDAO {
 				System.out.println("연결 해제 실패: " + e.getMessage());
 			}
 		}
-		
+
 		return false;
 	}
-	
-	//자동 수동 체크값 가져오기
+
+	// 자동 수동 체크값 가져오기
 	public int auto_mancheck() {
 		String sql = "SELECT aas_auto_status from admin_am_setting WHERE aas_idx = 3";
-		
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		int aas_auto_status = 0;
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				aas_auto_status = rs.getInt("aas_auto_status");
 			}
-						
+
 			return aas_auto_status;
-			
-		}catch (Exception ex) {
+
+		} catch (Exception ex) {
 			System.out.println("deletetalbe 에러: " + ex);
-		}finally {
+		} finally {
 			try {
 				if (rs != null)
 					rs.close();
@@ -727,61 +778,56 @@ public class CompanyDAO {
 				System.out.println("연결 해제 실패: " + e.getMessage());
 			}
 		}
-		
+
 		return aas_auto_status;
 	}
-	
+
 	// 마감임박 admin_deadLine 테이블에 insert
 	public boolean insertAutoManDeadLineList(String radioVal, String id) {
-		
+
 		String sql = "INSERT INTO admin_deadLine("
-					+ "cp_idx, mb_id, cp_manager, cp_monthly_profit, cp_sector, cp_name, cp_branch, "
-					+ "iv_current_amount, iv_goal_amount, appl_stop_date_time, persent) "
-					+ "select cp.cp_idx, mb.mb_id, cp.cp_manager, cp.cp_monthly_profit, cp.cp_sector, cp.cp_name, cp.cp_branch, cp_i.iv_current_amount, cp_i.iv_goal_amount, cp_i.iv_appl_stop_date_time, " 
-					+ "round((iv_current_amount/iv_goal_amount)*100) as persent "
-					+ "from company cp, company_file cp_f, company_invest cp_i, member mb " 
-					+ "where cp.cp_idx ='"+ id +"' " 
-					+ "AND cp_i.cp_idx ='"+ id +"' "  
-					+ "AND cp_f.cp_idx ='"+ id +"' "				
-					+ "AND cp.mb_id = mb.mb_id ";
-		
+				+ "cp_idx, mb_id, cp_manager, cp_monthly_profit, cp_sector, cp_name, cp_branch, "
+				+ "iv_current_amount, iv_goal_amount, appl_stop_date_time, persent) "
+				+ "select cp.cp_idx, mb.mb_id, cp.cp_manager, cp.cp_monthly_profit, cp.cp_sector, cp.cp_name, cp.cp_branch, cp_i.iv_current_amount, cp_i.iv_goal_amount, cp_i.iv_appl_stop_date_time, "
+				+ "round((iv_current_amount/iv_goal_amount)*100) as persent "
+				+ "from company cp, company_file cp_f, company_invest cp_i, member mb " + "where cp.cp_idx ='" + id
+				+ "' " + "AND cp_i.cp_idx ='" + id + "' " + "AND cp_f.cp_idx ='" + id + "' "
+				+ "AND cp.mb_id = mb.mb_id ";
+
 		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
-		System.out.println("radioVal: "+ radioVal );
-		System.out.println("id: "+ id );
-		
-		try {		
-			if(radioVal.equals("0")){
+
+		System.out.println("radioVal: " + radioVal);
+		System.out.println("id: " + id);
+
+		try {
+			if (radioVal.equals("0")) {
 				pstmt = conn.prepareStatement(sql);
 				result = pstmt.executeUpdate();
 
 				if (result != 0) {
 					return true;
 				}
-				
-			}else if(radioVal.equals("1")){ // 자동
+
+			} else if (radioVal.equals("1")) { // 자동
 				sql = "INSERT INTO admin_deadLine("
 						+ "cp_idx, mb_id, cp_manager, cp_monthly_profit, cp_sector, cp_name, cp_branch, "
 						+ "iv_current_amount, iv_goal_amount, appl_stop_date_time, persent) "
 						+ "select cp.cp_idx, mb.mb_id, cp.cp_manager, cp.cp_monthly_profit, cp.cp_sector, cp.cp_name, cp.cp_branch, cp_i.iv_current_amount, cp_i.iv_goal_amount, cp_i.iv_appl_stop_date_time, "
-						+ "round((iv_current_amount/iv_goal_amount)*100) as persent from company cp, company_file cp_f, company_invest cp_i, member mb " 
-						+ "where cp_i.iv_appl_stop_date_time > now() " 
-						+ "AND cp.cp_open_status = true " 
-						+ "AND cp.cp_idx = cp_i.cp_idx " 
-						+ "AND cp.cp_idx = cp_f.cp_idx " 
-						+ "AND cp.mb_id = mb.mb_id "
+						+ "round((iv_current_amount/iv_goal_amount)*100) as persent from company cp, company_file cp_f, company_invest cp_i, member mb "
+						+ "where cp_i.iv_appl_stop_date_time > now() " + "AND cp.cp_open_status = true "
+						+ "AND cp.cp_idx = cp_i.cp_idx " + "AND cp.cp_idx = cp_f.cp_idx " + "AND cp.mb_id = mb.mb_id "
 						+ "order by cp_i.iv_appl_stop_date_time asc limit 3";
-				
+
 				pstmt = conn.prepareStatement(sql);
 				result = pstmt.executeUpdate();
 
 				if (result != 0) {
 					return true;
-				}				
+				}
 			}
-						
+
 		} catch (Exception ex) {
 			System.out.println("insertAutoManDeadLineList 에러: " + ex);
 		} finally {
@@ -798,16 +844,14 @@ public class CompanyDAO {
 		}
 
 		return false;
-		
-	}	
 
+	}
 
 	///////////////////////////////// 태훈시작//////////////////////////////////////////////
 	// 실시간 수동 목록 가져오기 ajax 버전
 	@SuppressWarnings({ "unchecked", "unused" })
 	public JSONArray getCompanyPopularityList() {
-		String sql = "SELECT cp_idx, cp_name, manager_name, member_id "
-				+ "FROM popularityManagement_list ";
+		String sql = "SELECT cp_idx, cp_name, manager_name, member_id " + "FROM popularityManagement_list ";
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -847,8 +891,7 @@ public class CompanyDAO {
 
 	// 실시간 수동 데이터 가져오기 c태그
 	public List<CompanyPopularityList> getCompanyPopularityInfo() {
-		String sql = "SELECT cp_idx, cp_name, manager_name, member_id "
-				+ "FROM popularityManagement_list "
+		String sql = "SELECT cp_idx, cp_name, manager_name, member_id " + "FROM popularityManagement_list "
 				+ "ORDER BY popu_idx ASC";
 		List<CompanyPopularityList> popuList = new ArrayList<CompanyPopularityList>();
 		PreparedStatement pstmt = null;
@@ -863,7 +906,7 @@ public class CompanyDAO {
 				popuVO.setCp_name(rs.getString("cp_name"));
 				popuVO.setManager_name(rs.getString("manager_name"));
 				popuVO.setMember_id(rs.getString("member_id"));
-				
+
 				popuList.add(popuVO);
 			}
 			return popuList;
@@ -884,35 +927,35 @@ public class CompanyDAO {
 
 		return null;
 	}
-	
+
 	// 실시간 수동 데이터 넣기
 	public int insertPopularityManagement(List<Integer> cp_idx_list) {
 		int result = 0;
 		CallableStatement cstmt = null;
 		ResultSet rs = null;
 		try {
-			  cstmt = (CallableStatement) conn.prepareCall("call POPULARITY(?,?,?,?,?,?,?,?,?,?,?)");
-			  
-			  cstmt.setInt(1, cp_idx_list.get(0)); 
-			  cstmt.setInt(2, cp_idx_list.get(1)); 
-			  cstmt.setInt(3, cp_idx_list.get(2)); 
-			  cstmt.setInt(4, cp_idx_list.get(3)); 
-			  cstmt.setInt(5, cp_idx_list.get(4)); 
-			  cstmt.setInt(6, cp_idx_list.get(5)); 
-			  cstmt.setInt(7, cp_idx_list.get(6)); 
-			  cstmt.setInt(8, cp_idx_list.get(7)); 
-			  cstmt.setInt(9, cp_idx_list.get(8)); 
-			  cstmt.setInt(10, cp_idx_list.get(9)); 
-			  cstmt.registerOutParameter(11, java.sql.Types.INTEGER);
-			  
-			  cstmt.execute(); 
-			  result = cstmt.getInt("@RESULT"); 
-			  if(result == 1) {
-				  System.out.println("result:::"+result);
-				  return result;
-			  }else {
-				  result = -1;
-			  }
+			cstmt = (CallableStatement) conn.prepareCall("call POPULARITY(?,?,?,?,?,?,?,?,?,?,?)");
+
+			cstmt.setInt(1, cp_idx_list.get(0));
+			cstmt.setInt(2, cp_idx_list.get(1));
+			cstmt.setInt(3, cp_idx_list.get(2));
+			cstmt.setInt(4, cp_idx_list.get(3));
+			cstmt.setInt(5, cp_idx_list.get(4));
+			cstmt.setInt(6, cp_idx_list.get(5));
+			cstmt.setInt(7, cp_idx_list.get(6));
+			cstmt.setInt(8, cp_idx_list.get(7));
+			cstmt.setInt(9, cp_idx_list.get(8));
+			cstmt.setInt(10, cp_idx_list.get(9));
+			cstmt.registerOutParameter(11, java.sql.Types.INTEGER);
+
+			cstmt.execute();
+			result = cstmt.getInt("@RESULT");
+			if (result == 1) {
+				System.out.println("result:::" + result);
+				return result;
+			} else {
+				result = -1;
+			}
 		} catch (Exception ex) {
 			System.out.println("insertPopularityManagement 에러: " + ex);
 		} finally {
@@ -929,6 +972,7 @@ public class CompanyDAO {
 		}
 		return result;
 	}
+
 	// 저장될 경로 가져오기
 	public Boolean getUploadFilePath(CompanyFilePath companyApplicationFilePath, String companyFolder) {
 		String sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 2),? ,(SELECT file_path FROM file_path WHERE idx = 3)) AS app_cp_file_path,CONCAT((SELECT file_path FROM file_path WHERE idx = 2), ?,(SELECT file_path FROM file_path WHERE idx = 4)) AS app_cp_image_path";
@@ -964,8 +1008,8 @@ public class CompanyDAO {
 
 		return false;
 	}
-	
-	public Boolean getCompanyDetail(CompanyDetail companyDetail,int cp_idx) {
+
+	public Boolean getCompanyDetail(CompanyDetail companyDetail, int cp_idx) {
 		String sql = "SELECT *,CONCAT((SELECT file_path FROM file_path WHERE idx = 2),cf.cf_folder,(SELECT file_path FROM file_path WHERE idx = 4)) AS company_file_path,CONCAT((SELECT file_path FROM file_path WHERE idx = 2),cf.cf_folder,(SELECT file_path FROM file_path WHERE idx = 3)) AS company_image_path FROM company cp JOIN company_invest cp_iv ON cp.cp_idx = cp_iv.cp_idx JOIN company_content cp_ct ON cp.cp_idx = cp_ct.cp_idx JOIN company_file cf ON cf.cp_idx JOIN company_pay_schedule cp_sh ON cp_sh.cp_idx WHERE cp.cp_idx = ? AND cp.cp_idx = cp_iv.cp_idx AND cp_ct.cp_idx = cp.cp_idx AND cf.cp_idx = cp.cp_idx AND cp_sh.cp_idx = cp.cp_idx";
 
 		PreparedStatement pstmt = null;
@@ -1031,12 +1075,12 @@ public class CompanyDAO {
 				companyDetail.setCp_pay_actual_rate_return(rs.getString("cp_pay_actual_rate_return"));
 				companyDetail.setCf_store_images(rs.getString("cf_store_images"));
 				companyDetail.setCf_alias_store_images(rs.getString("cf_alias_store_images"));
-				
-				//상세페이지 로고//
+
+				// 상세페이지 로고//
 				companyDetail.setCf_corporation_icon(rs.getString("cf_corporation_icon"));
 				companyDetail.setCf_alias_corporation_icon(rs.getString("cf_alias_corporation_icon"));
-				//상세페이지 로고//
-				
+				// 상세페이지 로고//
+
 				companyDetail.setCf_folder(rs.getString("cf_folder"));
 				companyDetail.setCf_business_plan(rs.getString("cf_business_plan"));
 				companyDetail.setCf_alias_business_plan(rs.getString("cf_alias_business_plan"));
@@ -1050,16 +1094,16 @@ public class CompanyDAO {
 				companyDetail.setCf_alias_funding_contract(rs.getString("cf_alias_funding_contract"));
 				companyDetail.setCf_business_plan_images(rs.getString("cf_business_plan_images"));
 				companyDetail.setCf_alias_business_plan_images(rs.getString("cf_alias_business_plan_images"));
-				
+
 				companyDetail.setCompany_file_path(rs.getString("company_file_path"));
 				companyDetail.setCompany_image_path(rs.getString("company_image_path"));
-				
+
 				companyDetail.setCp_open_datetime(rs.getDate("cp_open_datetime"));
 				companyDetail.setIv_appl_start_date_time(rs.getDate("iv_appl_start_date_time"));
 				companyDetail.setIv_appl_stop_date_time(rs.getDate("iv_appl_stop_date_time"));
-				
+
 				companyDetail.setMb_id(rs.getString("mb_id"));
-				
+
 				return true;
 			}
 		} catch (Exception ex) {
@@ -1079,14 +1123,15 @@ public class CompanyDAO {
 
 		return false;
 	};
-	
+
 	// 태훈추가 - 관리자 페이지 기업등록
 	public int ComapnyRegister(CompanyRegister register) {
 		int result = 0;
 		CallableStatement cstmt = null;
 		ResultSet rs = null;
 		try {
-			cstmt = (CallableStatement)conn.prepareCall("call COMPANY_REGISTER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?    ,?,?,?,?,?)");
+			cstmt = (CallableStatement) conn.prepareCall(
+					"call COMPANY_REGISTER(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?    ,?,?,?,?,?)");
 			// company insert data
 			cstmt.setString(1, register.getCp_sector());
 			cstmt.setString(2, register.getCp_name());
@@ -1157,7 +1202,7 @@ public class CompanyDAO {
 			cstmt.setString(64, register.getCf_alias_funding_contract());
 			cstmt.setString(65, register.getCf_business_plan());
 			cstmt.setString(66, register.getCf_alias_business_plan());
-			
+
 			cstmt.registerOutParameter(67, java.sql.Types.INTEGER);
 			// 예상지급 스케줄 합계
 			cstmt.setString(68, register.getCp_total_sum_pay_principal());
@@ -1165,13 +1210,12 @@ public class CompanyDAO {
 			cstmt.setString(70, register.getCp_total_sum_pay_fees());
 			cstmt.setString(71, register.getCp_total_sum_pay_actual_payment_amout());
 			cstmt.setString(72, register.getCp_total_sum_actual_rate_return());
-			
-			//2019-09-09
+
+			// 2019-09-09
 			cstmt.setDate(73, (Date) register.getCp_open_datetime());
 			cstmt.setDate(74, (Date) register.getIv_appl_start_date_time());
 			cstmt.setDate(75, (Date) register.getIv_appl_stop_date_time());
-			
-			
+
 			cstmt.execute();
 			result = cstmt.getInt("@RESULT");
 			if (result == 1) {
@@ -1196,15 +1240,14 @@ public class CompanyDAO {
 		}
 		return result;
 	}
-	
+
 	// 태훈추가 - 관리자 페이지 기업 수정
 	public int CompanyUpdate(CompanyDetail detail) {
 		int result = 0;
 		CallableStatement cstmt = null;
 		ResultSet rs = null;
 		try {
-			cstmt = (CallableStatement) conn.prepareCall(
-					"call COMPANY_UPDATE(?,?,?,?,?,?,?,?,?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			cstmt = (CallableStatement) conn.prepareCall("call COMPANY_UPDATE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			// company insert data
 			cstmt.setString(1, detail.getCp_sector());
 			cstmt.setString(2, detail.getCp_name());
@@ -1227,7 +1270,10 @@ public class CompanyDAO {
 			cstmt.setString(18, detail.getIv_min_amount());
 			cstmt.setString(19, detail.getIv_appl_stock());
 			cstmt.setString(20, detail.getIv_goal_amount());
-			cstmt.setString(21, detail.getIv_appl_day());
+
+			// 수정해야함
+			cstmt.setString(21, "수정해야해");
+
 			cstmt.setString(22, detail.getPl_year());
 			cstmt.setString(23, detail.getPl_month());
 			cstmt.setString(24, detail.getPl_sales());
@@ -1257,20 +1303,27 @@ public class CompanyDAO {
 			cstmt.setString(47, detail.getCp_notice_content());
 			cstmt.setInt(48, detail.getCp_idx());
 			cstmt.registerOutParameter(49, java.sql.Types.INTEGER);
-			
-			//파일
+
+			// 파일
 			cstmt.setString(50, detail.getCf_thumbnail());
 			cstmt.setString(51, detail.getCf_pr_background());
 			cstmt.setString(52, detail.getCf_store_images());
 			cstmt.setString(53, detail.getCf_business_plan_images());
-			cstmt.setString(54, detail.getCf_etc_files ());
-			cstmt.setString(55, detail.getCf_alias_store_images ());
+			cstmt.setString(54, detail.getCf_etc_files());
+			cstmt.setString(55, detail.getCf_alias_store_images());
 			cstmt.setString(56, detail.getCf_alias_business_plan_images());
-			cstmt.setString(57, detail.getCf_alias_etc_files ());
+			cstmt.setString(57, detail.getCf_alias_etc_files());
 			cstmt.setString(58, detail.getCf_business_plan());
 			cstmt.setString(59, detail.getCf_alias_business_plan());
-			
 
+			cstmt.setDate(60, detail.getCp_open_datetime());
+			cstmt.setDate(61, detail.getIv_appl_start_date_time());
+			cstmt.setDate(62, detail.getIv_appl_stop_date_time());
+			
+			cstmt.setString(63, detail.getCp_add_extra());
+			
+			
+			
 			cstmt.execute();
 			result = cstmt.getInt("@RESULT");
 			if (result == 1) {
@@ -1295,33 +1348,33 @@ public class CompanyDAO {
 		}
 		return result;
 	}
-	
+
 	///////////////////////////////// 태훈끝//////////////////////////////////////////////
 
-	public String getFileDirectory(int cp_idx,int kindOfFile) {
+	public String getFileDirectory(int cp_idx, int kindOfFile) {
 		String sql = "";
-		
+
 		switch (kindOfFile) {
 		case 1:
-			//Client Company File File
+			// Client Company File File
 			sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 2), (SELECT cf_folder FROM company_file WHERE cp_idx = ?),(SELECT file_path FROM file_path WHERE idx = 4)) AS company_file_folder";
 			break;
 		case 2:
-			//Client Company File Image
+			// Client Company File Image
 			sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 2), (SELECT cf_folder FROM company_file WHERE cp_idx = ?),(SELECT file_path FROM file_path WHERE idx = 3)) AS company_image_folder";
 			break;
 		case 3:
-			//Client Company application File
+			// Client Company application File
 			sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 1), (SELECT app_cp_folder FROM company_application WHERE app_cp_idx = ?),(SELECT file_path FROM file_path WHERE idx = 4)) AS company_file_folder";
 			break;
 		case 4:
-			//Client Company application Image
+			// Client Company application Image
 			sql = "SELECT CONCAT((SELECT file_path FROM file_path WHERE idx = 1), (SELECT app_cp_folder FROM company_application WHERE app_cp_idx = ?),(SELECT file_path FROM file_path WHERE idx = 3)) AS company_image_folder";
 			break;
 		default:
 			break;
 		}
-		
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
@@ -1343,7 +1396,7 @@ public class CompanyDAO {
 				default:
 					break;
 				}
-				
+
 			}
 		} catch (Exception ex) {
 			System.out.println("getUploadFilePath 에러: " + ex);
@@ -1537,4 +1590,3 @@ public class CompanyDAO {
 		return null;
 	}
 }
-
