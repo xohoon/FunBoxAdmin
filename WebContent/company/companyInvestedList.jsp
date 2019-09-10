@@ -82,10 +82,6 @@
 	        		<li class="on">대기</li>
 	          	</c:otherwise>
 	        </c:choose>
-	          <!-- <li class="on">전체</li>
-	          <li>펀딩진행</li>
-	          <li>펀딩완료</li>
-	          <li>대기</li> -->
         </ul>
         <br>
 		<div class="ingGroup">
@@ -104,7 +100,7 @@
             </tr>
             <c:forEach var="companyInvested" items="${companyInvestedList }" >
             	<tr>
-            		<td onclick="window.open('./companyInvestedDetail.cp?cp_idx=${companyInvested.cp_idx}','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">${companyInvested.cp_name }</td>
+            		<td onclick="window.open('./companyInvestDetailFunded.cp','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">${companyInvested.cp_name }</td>
 					<td>${companyInvested.mb_id }</td>
 					<td>${companyInvested.cp_manager }</td>
 					<td>${companyInvested.cp_phone }</td>
