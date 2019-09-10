@@ -11,6 +11,7 @@ public class CompanyInvested {
 	private String iv_goal_amount;
 	private String iv_current_amount;
 	private String cp_monthly_profit;
+	private String ma_estimated_revenue;
 	private int d_day;
 	private String iv_balance_stock;
 	
@@ -90,12 +91,12 @@ public class CompanyInvested {
 		this.cp_phone = cp_phone;
 	}
 
-	public int getCp_pre_net_profit_ratio() {
-		return cp_pre_net_profit_ratio;
+	public String getMa_estimated_revenue() {
+		return ma_estimated_revenue;
 	}
 
-	public void setCp_pre_net_profit_ratio(int cp_pre_net_profit_ratio) {
-		this.cp_pre_net_profit_ratio = cp_pre_net_profit_ratio;
+	public void setMa_estimated_revenue(String ma_estimated_revenue) {
+		this.ma_estimated_revenue = ma_estimated_revenue;
 	}
 
 	public int getD_day() {

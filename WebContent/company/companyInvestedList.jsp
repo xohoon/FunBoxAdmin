@@ -83,7 +83,7 @@
               <th>아이디</th>
               <th>담당자</th>
               <th>연락처</th>
-              <th>수익률</th>
+              <th>워 평균 예상 수익금</th>
               <th>마감</th>
               <th>잔여구좌</th>
               <th>펀딩상태</th>
@@ -96,7 +96,11 @@
 					<td>${companyInvested.mb_id }</td>
 					<td>${companyInvested.cp_manager }</td>
 					<td>${companyInvested.cp_phone }</td>
+<<<<<<< HEAD
 					<td>${companyInvested.cp_monthly_profit}%</td>
+=======
+					<td>${companyInvested.ma_estimated_revenue }</td>
+>>>>>>> branch 'master' of https://github.com/xohoon/FunBoxAdmin.git
 					<td>D-${companyInvested.d_day }</td>
 					<c:set var="result" value="${transportresults}" />
 					<td><c:out value="${result}"/></td>
