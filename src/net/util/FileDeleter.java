@@ -1,20 +1,9 @@
-package net.test;
+package net.util;
 
 import java.io.File;
 
-public class Main {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		/*
-		 * CompanyDAO companyDAO = new CompanyDAO(); CompanyDetail companyDetail = new
-		 * CompanyDetail();
-		 * 
-		 * 
-		 * System.out.println(companyDAO.getFileDirectory(37,3));
-		 */
-		
-		String path = "C:\\FunBox";
+public class FileDeleter {
+	public static boolean deleteDirectoryFile(String path) {
 		File deleteFolder = new File(path);
 		
 		if(deleteFolder.exists()){
@@ -28,6 +17,6 @@ public class Main {
 				deleteFolder.delete();
 			}
 		}
+		return true;
 	}
-
 }

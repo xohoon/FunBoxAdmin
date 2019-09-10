@@ -50,9 +50,7 @@ public class CompanyInvestedListAction implements Action {
 		int z =  0;// 현재금액	
 		double result = 0; // 배열로 담는다.
 		
-		for(int a = 0
-				
-				; a < companyInvestedList.size(); a ++){
+		for(int a = 0; a < companyInvestedList.size(); a ++){
 			i = Integer.parseInt(companyInvestedList.get(a).getIv_min_amount());
 			j = Integer.parseInt(companyInvestedList.get(a).getIv_goal_amount());
 			z =  Integer.parseInt(companyInvestedList.get(a).getIv_current_amount());
