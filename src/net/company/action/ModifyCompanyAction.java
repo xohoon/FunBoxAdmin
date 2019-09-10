@@ -42,8 +42,7 @@ public class ModifyCompanyAction implements Action {
 		String iv_appl_stop_date_time = request.getParameter("iv_appl_stop_date_time");
 
 		companyDetail.setCp_open_datetime(new java.sql.Date(transFormat.parse(cp_open_datetime).getTime()));
-		companyDetail
-				.setIv_appl_start_date_time(new java.sql.Date(transFormat.parse(iv_appl_start_date_time).getTime()));
+		companyDetail.setIv_appl_start_date_time(new java.sql.Date(transFormat.parse(iv_appl_start_date_time).getTime()));
 		companyDetail.setIv_appl_stop_date_time(new java.sql.Date(transFormat.parse(iv_appl_stop_date_time).getTime()));
 
 		// 리워드
@@ -87,24 +86,35 @@ public class ModifyCompanyAction implements Action {
 		String cp_notice_title_array[] = request.getParameterValues("cp_notice_title");
 		String cp_notice_content_array[] = request.getParameterValues("cp_notice_content");
 		
-		String cp_notice_title = "";
-		String cp_notice_content = "";
+		String cp_notice_title = makeStringPattern(cp_notice_title_array,"/**/");
+		String cp_notice_content = makeStringPattern(cp_notice_content_array,"/**/");
 		
-		for (int i = 0; i < cp_notice_title_array.length; i++) {
-			if (i == cp_notice_title_array.length -1) {
-				cp_notice_title += cp_notice_title_array[i];
-			}else {
-				cp_notice_title += cp_notice_title_array[i] +"/**/";
-			}
-		}
+		// 예상지급 스케줄
+		String cp_pay_count_array[] = request.getParameterValues("sum1");					//지급회차
+		String cp_pay_expected_payment_date_array[] = request.getParameterValues("sum2"); //예상지급일
+		String cp_pay_principal_array[] = request.getParameterValues("sum3");				//월급
+		String cp_pay_interest_paid_array[] = request.getParameterValues("sum4");			//지급이자
+		String cp_pay_fees_array[] = request.getParameterValues("sum5");					//플랫폼 이용료
+		String cp_pay_actual_payment_amout_array[] = request.getParameterValues("sum6");	//실 지급금액
+		String cp_pay_actual_rate_return_array[] = request.getParameterValues("sum7");
 		
-		for (int i = 0; i < cp_notice_content_array.length; i++) {
-			if (i == cp_notice_content_array.length -1) {
-				cp_notice_content += cp_notice_content_array[i];
-			}else {
-				cp_notice_content += cp_notice_content_array[i] +"/**/";
-			}
-		}
+		String cp_pay_count = makeStringPattern(cp_pay_count_array,"/**/");				//지급회차
+		String cp_pay_expected_payment_date= makeStringPattern(cp_pay_expected_payment_date_array,"/**/");
+		String cp_pay_principal= makeStringPattern(cp_pay_principal_array,"/**/");
+		String cp_pay_interest_paid= makeStringPattern(cp_pay_interest_paid_array,"/**/");
+		String cp_pay_fees= makeStringPattern(cp_pay_fees_array,"/**/");
+		String cp_pay_actual_payment_amout= makeStringPattern(cp_pay_actual_payment_amout_array,"/**/");
+		String cp_pay_actual_rate_return= makeStringPattern(cp_pay_actual_rate_return_array,"/**/");
+		
+		companyDetail.setCp_pay_count(cp_pay_count);
+		companyDetail.setCp_pay_expected_payment_date(cp_pay_expected_payment_date);
+		companyDetail.setCp_pay_principal(cp_pay_principal);
+		companyDetail.setCp_pay_interest_paid(cp_pay_interest_paid);
+		companyDetail.setCp_pay_fees(cp_pay_fees);
+		companyDetail.setCp_pay_actual_payment_amout(cp_pay_actual_payment_amout);
+		companyDetail.setCp_pay_actual_rate_return(cp_pay_actual_rate_return);
+		
+		
 		
 		companyDetail.setCp_notice_title(cp_notice_title);
 		companyDetail.setCp_notice_content(cp_notice_content);
@@ -435,5 +445,16 @@ public class ModifyCompanyAction implements Action {
 		}
 		return "";
 	}
-
+	
+	private String makeStringPattern(String[] array,String pattern) {
+		String string = "";
+		for (int i = 0; i < array.length; i++) {
+			if (i == array.length -1) {
+				string += array[i];
+			}else {
+				string += array[i] +pattern;
+			}
+		}
+		return string;
+	}
 }

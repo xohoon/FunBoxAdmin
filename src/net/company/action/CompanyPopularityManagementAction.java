@@ -23,7 +23,7 @@ public class CompanyPopularityManagementAction implements Action {
 		int aas_idx = 1;
 		CompanyDAO companyDAO = new CompanyDAO();
 		boolean aas_auto_status = companyDAO.getAutoStatus(aas_idx);
-		System.out.println("boolean 반환::"+aas_auto_status);
+
 		companyDAO = new CompanyDAO();
 		List<CompanyPopularityList> popuInfo = companyDAO.getCompanyPopularityInfo();
 		int auto_status = 0;
