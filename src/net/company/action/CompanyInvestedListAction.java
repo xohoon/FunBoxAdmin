@@ -42,15 +42,15 @@ public class CompanyInvestedListAction implements Action {
 		}
 		
 		List<CompanyInvested> companyInvestedList = new ArrayList<CompanyInvested>();
-		
+		List transportresults = new ArrayList(); // 구좌 리스트 보내기
 		Paging paging = new Paging();
 		
 		
 		CompanyDAO companyDAO = new CompanyDAO();
 		companyDAO.getCompanyInvestedList(companyInvestedList, page, funding_status, paging);
 		
-		 System.out.println("CompanyInvested :" + companyInvestedList.toString());
-		 
+		System.out.println("CompanyInvested :" + companyInvestedList.toString());
+	
 		
 		if (companyInvestedList.size() < 1) {
 
@@ -65,8 +65,8 @@ public class CompanyInvestedListAction implements Action {
 		request.setAttribute("current_max_page", paging.getCurrent_max_page());
 		request.setAttribute("max_page", paging.getMax_page());
 		request.setAttribute("companyInvestedList", companyInvestedList);
+		request.setAttribute("transportresults", transportresults);
 		request.setAttribute("funding_status", funding_status);
-		System.out.println("funding_status :" + funding_status);
 		
 		
 		forward.setRedirect(false);

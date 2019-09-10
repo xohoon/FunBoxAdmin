@@ -80,7 +80,7 @@
             	<tr>
             	<c:choose>
          			<c:when test="${companyInvested.cp_funding_status == 11}">
-         				<td onclick="window.open('./companyInvestedDetail.cp?cp_idx=${companyInvested.cp_idx}','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">${companyInvested.cp_name } 여기 넣어 주세요.</td>
+         				<td onclick="window.open('./companyInvestDetailFunded.cp?cp_idx=${companyInvested.cp_idx}','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">${companyInvested.cp_name }</td>
          				<input type="hidden" id="cp_${status.count}" value="${companyInvested.cp_idx}">         				
          			</c:when>
          			<c:otherwise>
