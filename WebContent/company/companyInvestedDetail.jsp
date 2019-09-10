@@ -45,7 +45,7 @@
             		<p><span>ID</span>
             			<input type="text" value="${companyDetail.mb_id }" name="mb_id" id="mb_id"></p>  
             		<p><span>오픈(예정) 날짜</span>
-            			<input type="date" style="width:calc((100% - 264px)/6 + 27px)" name="cp_open_datetime" id="cp_open_datetime">
+            			<input type="date" style="width:calc((100% - 264px)/6 + 27px)" name="cp_open_datetime" id="cp_open_datetime" value="${companyDetail.cp_open_datetime }">
 					<p><span>자본금</span>
             			<input type="text" name="cp_capital" value="${companyDetail.cp_capital }"></p>
 					<p><span>본사주소</span>
@@ -61,11 +61,11 @@
 			  </div>
 			<div>
 				<h3>투자정보</h3>
-	            <p><span>월수익률</span><input type="text" name="cp_monthly_profit" value="${companyDetail.cp_monthly_profit } %"></p>
-	            <p><span>투자계약기간</span><input type="text" name="iv_contraction_during" value="${companyDetail.iv_contraction_during } 개월"></p>
-	            <p><span>최소투자금액</span><input type="text" name="iv_min_amount" value="${companyDetail.iv_min_amount } Point"></p>
-	            <p><span>모집구좌</span><input type="text" name="iv_appl_stock" value="${companyDetail.iv_appl_stock } 구좌"></p>
-	            <p><span>총모집금액</span><input type="text" name="iv_goal_amount" value="${companyDetail.iv_goal_amount } Point"></p>
+	            <p><span>월수익률</span><input type="text" name="cp_monthly_profit" value="${companyDetail.cp_monthly_profit }"><span>%</span></p>
+	            <p><span>투자계약기간</span><input type="text" name="iv_contraction_during" value="${companyDetail.iv_contraction_during }"><span>개월</span></p>
+	            <p><span>최소투자금액</span><input type="text" name="iv_min_amount" value="${companyDetail.iv_min_amount }"><span>Point</span></p>
+	            <p><span>모집구좌</span><input type="text" name="iv_appl_stock" value="${companyDetail.iv_appl_stock }"><span>구좌</span></p>
+	            <p><span>총모집금액</span><input type="text" name="iv_goal_amount" value="${companyDetail.iv_goal_amount }"><span>Point</span></p>
 	            <%-- <p><span>모집기간</span><input type="text" name="iv_appl_day" value="${companyDetail.iv_appl_day } 일"></p> --%>
 	            <p><span>모집기간</span><input type="date" style="width:calc((100% - 264px)/6 + 27px)" value="${companyDetail.iv_appl_start_date_time }" name="iv_appl_start_date_time" id="iv_appl_start_date_time"> ~ <input type="date" style="width:calc((100% - 264px)/6 + 27px)" value="${companyDetail.iv_appl_stop_date_time }" name="iv_appl_stop_date_time" id="iv_appl_stop_date_time"></p>
 			</div>
@@ -222,9 +222,9 @@
 				   </div> -->
 				   <!-- 여기에 넣어줘야해 -->
 			   </div>
-         	</div>			
+         	</div>	
+         	  <input type="hidden" name="cp_idx" value="${companyDetail.cp_idx }">		
 			  </form>
-			  <input type="hidden" name="cp_idx" value="${companyDetail.cp_idx }">
         	  <button class="submit rec" id="modify">수정하기</button>
 			  <button class="submit save" id="submit" onclick = "save();">저장하기</button>
 			  <button class="submit cancel">취소</button>
@@ -444,7 +444,7 @@
                       extraAddr = ' (' + extraAddr + ')';
                   }
                   // 조합된 참고항목을 해당 필드에 넣는다.
-                  document.getElementById("app4_3").value = extraAddr;
+                  document.getElementById("cp_add_extra").value = extraAddr;
               
               } else {
                   document.getElementById("cp_add_more").value = '';

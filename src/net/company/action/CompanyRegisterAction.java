@@ -40,6 +40,7 @@ public class CompanyRegisterAction implements Action {
 		// 기본 정보
 		String cp_manager = request.getParameter("cp_manager");
 		String cp_number = request.getParameter("cp_number");
+		
 		//2019-09-09 추가
 		String cp_open_datetime = request.getParameter("cp_open_datetime");
 		register.setCp_open_datetime(new java.sql.Date(transFormat.parse(cp_open_datetime).getTime()));
