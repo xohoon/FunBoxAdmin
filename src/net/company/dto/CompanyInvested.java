@@ -13,9 +13,20 @@ public class CompanyInvested {
 	private String cp_monthly_profit;
 	private String ma_estimated_revenue;
 	private int d_day;
+	private String cp_funding_status;
 	private String iv_balance_stock;
 	private String result;
 	
+	
+	
+	public String getCp_funding_status() {
+		return cp_funding_status;
+	}
+
+	public void setCp_funding_status(String cp_funding_status) {
+		this.cp_funding_status = cp_funding_status;
+	}
+
 	public int getCp_pre_net_profit_ratio() {
 		return cp_pre_net_profit_ratio;
 	}
@@ -134,9 +145,11 @@ public class CompanyInvested {
 				+ cp_manager + ", cp_phone=" + cp_phone + ", cp_pre_net_profit_ratio=" + cp_pre_net_profit_ratio
 				+ ", iv_min_amount=" + iv_min_amount + ", iv_goal_amount=" + iv_goal_amount + ", iv_current_amount="
 				+ iv_current_amount + ", cp_monthly_profit=" + cp_monthly_profit + ", ma_estimated_revenue="
-				+ ma_estimated_revenue + ", d_day=" + d_day + ", iv_balance_stock=" + iv_balance_stock + ", result="
-				+ result + "]";
+				+ ma_estimated_revenue + ", d_day=" + d_day + ", cp_funding_status=" + cp_funding_status
+				+ ", iv_balance_stock=" + iv_balance_stock + ", result=" + result + "]";
 	}
+
+	
 
 	
 

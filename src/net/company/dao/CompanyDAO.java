@@ -12,8 +12,8 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.mysql.jdbc.CallableStatement;
-//import com.mysql.cj.jdbc.CallableStatement;
+//import com.mysql.jdbc.CallableStatement;
+import com.mysql.cj.jdbc.CallableStatement;
 
 import net.company.dto.Company;
 import net.company.dto.CompanyAdded;
@@ -147,7 +147,7 @@ public class CompanyDAO {
 				companyInvested.setIv_current_amount(rs.getString("iv_current_amount"));
 				companyInvested.setMb_id(rs.getString("cp_manager"));
 				companyInvested.setMb_id(rs.getString("cp_phone"));
-				//companyInvested.setMa_estimated_revenue(rs.getString("ma_estimated_revenue"));
+				companyInvested.setCp_funding_status(rs.getString("cp_funding_status"));
 				companyInvested.setD_day(rs.getInt("d_day"));
 				companyInvested.setIv_balance_stock(rs.getString("iv_balance_stock"));
 				companyInvested.setResult(rs.getString("result"));
