@@ -31,7 +31,7 @@
 		<section id="sec07">
 			<h2>투자기업목록</h2>
 			<div class="con">
-        <ul class="tab">
+        <ul class="tab">         
 	      <c:choose>
 	      		<c:when test="${funding_status eq '0'}">
 	        		<li class="on">전체 </li>
@@ -63,70 +63,7 @@
 	          <li>펀딩완료</li>
 	          <li>대기</li> -->
         </ul>
-        <br>
-        <c:choose>
-      		<c:when test="${funding_status eq '11'}">
-      		<div class="ingGroup">
-          <table>
-              <tr>
-              <th>상호명</th>
-              <th>아이디</th>
-              <th>담당자</th>
-              <th>연락처</th>
-              <th>마감</th>
-              <th>월수익률</th>
-              <th>잔여구좌</th>
-              <th>펀딩상태</th>
-              <th>지급상태</th>
-              <th></th>
-            </tr>
-            <c:forEach var="companyInvested" items="${companyInvestedList }" >
-            	<tr>
-            		<td onclick="window.open('./companyInvestedDetail.cp?cp_idx=${companyInvested.cp_idx}','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">${companyInvested.cp_name } 연결하심됩니다.</td>
-					<td>${companyInvested.mb_id }</td>
-					<td>${companyInvested.cp_manager }</td>
-					<td>${companyInvested.cp_phone }</td>
-					<td>D-${companyInvested.d_day }</td>
-					<td>${companyInvested.cp_monthly_profit}%</td>
-					<td>${companyInvested.result}</td>
-					<td>
-	                <select>
-	                  <option>- 펀딩상태 -</option>
-	                  <option>대기중</option>
-	                  <option>펀딩중</option>
-	                  <option>펀딩완료</option>
-	                </select>
-	              </td>
-	              <td>
-	                <select>
-	                  <option>- 지급상태 - </option>
-	                  <option>수익분배중</option>
-	                  <option>분배완료</option>
-	                  <option>연체중</option>
-	                </select>
-              	  </td>
-              	  <td class="selfix">수정</td>
-            	</tr>
-            </c:forEach>
-          </table>
-          <a href="./companyInvestedList.cp?page=${current_page-1 }&funding_status=${funding_status}" class="prev"><i class="fas fa-caret-left"></i></a>
-          <ul class="pager">
-            <c:forEach var="i" begin="${current_min_page }" end="${current_max_page }">
-            	<c:choose>
-           			<c:when test="${ i eq current_page}">
-						<li class="on"><a href="./companyInvestedList.cp?page=${i }&funding_status=${funding_status}">${i}</a></li>
-					</c:when>
-					<c:otherwise>
-						<li><a href="./companyInvestedList.cp?page=${i }&funding_status=${funding_status}">${i }</a></li>
-					</c:otherwise>
-            	</c:choose>
-			</c:forEach>
-          </ul>
-          <a href="./companyInvestedList.cp?page=${current_page+1 }&funding_status=${funding_status}" class="next"><i class="fas fa-caret-right"></i></a>
-        </div>
-      		</c:when>
-      		<c:otherwise>
-      				   
+        <br>      				   
 		<div class="ingGroup">
           <table>
               <tr>
@@ -143,7 +80,14 @@
             </tr>
             <c:forEach var="companyInvested" items="${companyInvestedList }" >
             	<tr>
-            		<td onclick="window.open('./companyInvestedDetail.cp?cp_idx=${companyInvested.cp_idx}','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">${companyInvested.cp_name }</td>
+            	<c:choose>
+         			<c:when test="${companyInvested.cp_funding_status == 11}">
+         				<td onclick="window.open('./companyInvestedDetail.cp?cp_idx=${companyInvested.cp_idx}','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">${companyInvested.cp_name } 여기 넣어 주세요.</td>
+         			</c:when>
+         			<c:otherwise>
+         				<td onclick="window.open('./companyInvestedDetail.cp?cp_idx=${companyInvested.cp_idx}','dkdlel','width=1600,height=720,top=0,left=0,scrollbars=yes');">${companyInvested.cp_name }</td>
+         			</c:otherwise>
+         		</c:choose>
 					<td>${companyInvested.mb_id }</td>
 					<td>${companyInvested.cp_manager }</td>
 					<td>${companyInvested.cp_phone }</td>
@@ -185,9 +129,6 @@
           </ul>
           <a href="./companyInvestedList.cp?page=${current_page+1 }&funding_status=${funding_status}" class="next"><i class="fas fa-caret-right"></i></a>
         </div>
-      		</c:otherwise>      		
-	   </c:choose>
-
         <div class="doneGroup"></div>
 	</div>
 		</section>
