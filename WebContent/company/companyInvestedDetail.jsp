@@ -10,6 +10,7 @@
 	<title>FUNBOX ADMIN</title>
 	<script src="./js/jquery-3.1.1.min.js"></script>
 	<script src="https://kit.fontawesome.com/947fdcffe2.js"></script>
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<link href="./css/common.css" rel="stylesheet">
 	<link href="./css/admin.css" rel="stylesheet">
 	<script>
@@ -42,23 +43,20 @@
 					<p><span>대표자</span>
             			<input type="text" name="cp_manager" value="${companyDetail.cp_manager }"></p>
             		<p><span>ID</span>
-            			<input type="text" value="" name="mb_id" id="mb_id"></p>  
-           				<input type="text" name="cp_manager" value="${companyDetail.cp_manager }"></p>
-           			<p><span>ID</span>
-            			<input type="text" value="수정 해야 됨(추가)"></p>  
+            			<input type="text" value="${companyDetail.mb_id }" name="mb_id" id="mb_id"></p>  
             		<p><span>오픈(예정) 날짜</span>
             			<input type="date" style="width:calc((100% - 264px)/6 + 27px)" name="cp_open_datetime" id="cp_open_datetime">
 					<p><span>자본금</span>
             			<input type="text" name="cp_capital" value="${companyDetail.cp_capital }"></p>
 					<p><span>본사주소</span>
-						<input type="text" name="cp_address" placeholder="시 /지점  (예시 :부산 동래점)"></p>
+						<input type="text" name="cp_address" placeholder="시 /지점  (예시 :부산 동래점)" value="${companyDetail.cp_address }"></p>
 					<p class="api">
 					  <span>위치</span>
-					  <input type="text" id="cp_add_num" name="cp_add_num" placeholder="우편번호" readonly="true">
+					  <input type="text" id="cp_add_num" name="cp_add_num" placeholder="우편번호" readonly="true" value="${companyDetail.cp_add_num }">
 					  <input type="button" value="주소검색" onclick="address_search();">
-					  <input type="text" id="cp_add_ch" name="cp_add_ch" placeholder="주소" readonly="true">
-					  <input type="text" id="cp_add_more" name="cp_add_more" placeholder="상세주소">
-					  <input type="text" id="app4_3" name="app4_3" placeholder="참조">
+					  <input type="text" id="cp_add_ch" name="cp_add_ch" placeholder="주소" readonly="true" value="${companyDetail.cp_add_ch }">
+					  <input type="text" id="cp_add_more" name="cp_add_more" placeholder="상세주소" value="${companyDetail.cp_add_more }">
+					  <input type="text" id="cp_add_extra" name="cp_add_extra" placeholder="참조" value="${companyDetail.cp_add_extra }">
 					</p>
 			  </div>
 			<div>
@@ -69,28 +67,28 @@
 	            <p><span>모집구좌</span><input type="text" name="iv_appl_stock" value="${companyDetail.iv_appl_stock } 구좌"></p>
 	            <p><span>총모집금액</span><input type="text" name="iv_goal_amount" value="${companyDetail.iv_goal_amount } Point"></p>
 	            <%-- <p><span>모집기간</span><input type="text" name="iv_appl_day" value="${companyDetail.iv_appl_day } 일"></p> --%>
-	            <p><span>모집기간</span><input type="date" style="width:calc((100% - 264px)/6 + 27px)" value="2019-09-05"> ~ <input type="date" style="width:calc((100% - 264px)/6 + 27px)" value="2019-10-05"></p>
+	            <p><span>모집기간</span><input type="date" style="width:calc((100% - 264px)/6 + 27px)" value="${companyDetail.iv_appl_start_date_time }" name="iv_appl_start_date_time" id="iv_appl_start_date_time"> ~ <input type="date" style="width:calc((100% - 264px)/6 + 27px)" value="${companyDetail.iv_appl_stop_date_time }" name="iv_appl_stop_date_time" id="iv_appl_stop_date_time"></p>
 			</div>
 			<div>
 				<h3>사진등록</h3>
-        		<p><span>로고</span><input type="file" name="cf_logo"><a href="./img/arrow_down.svg" download></a></p>
-				<p><span>썸네일</span><input type="file" name="cf_thumbnail"><a href="./img/arrow_down.svg" download></a></p>
-        		<p><span>매장사진</span><input type="file" multiple name="cf_store_images"></p>
+        		<p><span>로고</span><input type="file" name="cf_corporation_icon"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx }&kindOfFile=2&fileName=${companyDetail.cf_alias_corporation_icon }" download>${companyDetail.cf_corporation_icon }</a></p>
+				<p><span>썸네일</span><input type="file" name="cf_thumbnail"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx }&kindOfFile=2&fileName=${companyDetail.cf_alias_thumbnail }" download>${companyDetail.cf_thumbnail }</a></p>
+        		<p id="store_images"><span>매장사진</span><input type="file" multiple name="cf_store_images"></p>
 			</div>
 			  
 			<div>
 		       <h3>리워드</h3><div class="checkBox"><input type="checkbox" id="reward"><label for="reward">선택</label></div>
-		       <p><span>메인타이틀</span><input type="text" readonly="true" name="cp_reward_main_title"></p>
-		       <p><span>서브타이틀</span><input type="text" readonly="true" name="cp_reward_sub_title"></p>
-		       <p><span>내용</span><textarea readonly="true" name="cp_reward_content"></textarea></p>
+		       <p><span>메인타이틀</span><input type="text" readonly="true" name="cp_reward_main_title" value="${companyDetail.cp_reward_main_title }"></p>
+		       <p><span>서브타이틀</span><input type="text" readonly="true" name="cp_reward_sub_title" value="${companyDetail.cp_reward_sub_title }"></p>
+		       <p><span>내용</span><textarea readonly="true" name="cp_reward_content" >${companyDetail.cp_reward_content }</textarea></p>
 		    </div>
 		     
 		     <div>
 		     	<h3>기업소개</h3>
-				  <p><span>기업PR배경</span><input type="file" name="cf_pr_background"><span>930px * 780px</span></p>
-			      <p><span>매장PR타이틀</span><input type="text" name="cp_intro_headline"></p>
+				  <p><span>기업PR배경</span><input type="file" name="cf_pr_background" ><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx }&kindOfFile=2&fileName=${companyDetail.cf_alias_pr_background }" download>${companyDetail.cf_pr_background}</a><span>930px * 780px</span></p>
+			      <p><span>매장PR타이틀</span><input type="text" name="cp_intro_headline" value="${companyDetail.cp_intro_headline }"></p>
 			      <p><span style="width:auto; margin-right:0;">매장PR내용</span><span style="width:auto;color:#999; margin-right:0; margin-left:8px;">(200자 내외)</span>
-			    <textarea name="cp_intro_content"></textarea></p>
+			    <textarea name="cp_intro_content">${companyDetail.cp_intro_content }</textarea></p>
 			</div>
 			
 			<div class="fundingNote">
@@ -98,20 +96,23 @@
 				<span>투자 핵심</span>
 				<button type="button" class="add"><i></i></button>
 				<button type="button" class="del"><i></i></button>
-				<div class="fundingPoint">
-				  <h4>1.</h4>
-				  <div>
-				  <input type="text" name="cp_point_title">
-				  <textarea name="cp_point_content"></textarea>
-				  </div>
+				<div id="fundingPoint">
+					<!-- <div class="fundingPoint">
+					  <h4>1.</h4>
+					  <div>
+					  <input type="text" name="cp_point_title">
+					  <textarea name="cp_point_content"></textarea>
+					  </div>
+					</div> -->
+					<!-- 투자노트 만들어 -->
 				</div>
-				<p id="planImg"><span>사업계획서</span><input type="file" multiple name="cf_business_plan_images"><span>사업계획서 이미지파일</span></p>
+				<p id="planImg"><span>사업계획서(이미지)</span><input type="file" multiple name="cf_business_plan_images"><br></p>
 			</div>
 				
 			<div>
 		      <h3>참고자료</h3>
-		      <p><span>사업계획서</span><input type="file" name="cf_business_plan"></p>
-		      <p><span>펀딩계약서</span><input type="file" name="cf_funding_contract"></p>
+		      <p><span>사업계획서</span><input type="file" name="cf_business_plan"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx }&kindOfFile=1&fileName=${companyDetail.cf_alias_business_plan }" download>${companyDetail.cf_business_plan}</a></p>
+		      <p><span>펀딩계약서</span><input type="file" name="cf_funding_contract"><a href="./CompanyFileDownload?cp_idx=${companyDetail.cp_idx }&kindOfFile=1&fileName=${companyDetail.cf_alias_funding_contract }" download>${companyDetail.cf_funding_contract}</a></p>
 		      <p id="colFile"><span>기타자료</span><input type="file" multiple name="cf_etc_files"></p>
 			</div>
 			
@@ -192,7 +193,7 @@
 			                <th>실 지급금액</th>
 			                <th>실 수익률</th>
 			           </tr>
-			              <tr class="sum" id="sum">
+			           <tr class="sum" id="sum">
 			                <td>총 합계</td>
 			                <td>-</td>
 			                <td><input type="text" size="13"name="tot1"> 원</td>
@@ -200,7 +201,7 @@
 			                <td><input type="text" size="13" name="tot3"> 원</td>
 			                <td><input type="text" size="13" name="tot4"> 원</td>
 			                <td><input type="text" size="2" name="tot5" class="per"> %</td>
-			              </tr>
+			          </tr>
 			    	</tbody>              
             	</table>
             <input type="button" class="add add2" value="+">
@@ -211,15 +212,17 @@
 	           <h3>투자 시 유의사항</h3>
 	           <button type="button" class="add"><i></i></button>
 			   <button type="button" class="del"><i></i></button>
-			   <div class="warn">
-				 <h4>1.</h4>
-				 <div>
-				 <input type="text" name="notice_title">
-				 <textarea name="notice_content"></textarea>
-				 </div>
-				</div>
-         	</div>
-         	
+			   <div id="warn">
+			   	   <!-- <div class="warn">
+					 <h4>1.</h4>
+					 <div>
+					 <input type="text" name="notice_title">
+					 <textarea name="notice_content"></textarea>
+					 </div>
+				   </div> -->
+				   <!-- 여기에 넣어줘야해 -->
+			   </div>
+         	</div>			
 			  </form>
 			  <input type="hidden" name="cp_idx" value="${companyDetail.cp_idx }">
         	  <button class="submit rec" id="modify">수정하기</button>
@@ -228,6 +231,98 @@
 			</div>
 		</section>
 </body>
+<script type="text/javascript">
+	var company_image_path = '${companyDetail.company_image_path}';
+	var test = '${companyDetail.cf_alias_business_plan_images }'.split(',');
+</script>
+<script type="text/javascript">
+	// 매장 사진 만들기//
+	var cf_store_images = '${companyDetail.cf_store_images }'.split(',');
+	var cf_alias_store_images = '${companyDetail.cf_alias_store_images }'.split(',');
+	
+	var store_images = document.getElementById('store_images');
+	
+	for (var i = 0; i < cf_alias_store_images.length; i++) {
+		var aTag = document.createElement('a');
+		var brTag = document.createElement('br');
+		aTag.href = './CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName=' + cf_alias_store_images[i];
+		aTag.download = '다운로드';
+		aTag.innerHTML = '<i></i>' + cf_store_images[i];
+		
+		store_images.append(aTag);
+		store_images.append(brTag);
+	}
+	
+	// 매장 사진 만들기//
+	
+	// 투자 노트 만들기 //
+	var cp_point_title = '${companyDetail.cp_point_title}'.split('/**/');
+	var cp_point_content = '${companyDetail.cp_point_content}'.split('/**/');
+	
+	var fundingPoint = document.getElementById('fundingPoint');
+	
+	for (var i = 0; i < cp_point_title.length; i++) {
+		var fundingPoint_div = document.createElement('div');
+		fundingPoint_div.className='fundingPoint';
+		
+		var h1Tag = document.createElement('h4');
+		h1Tag.innerText = (i+1)+'.';
+		
+		var divTag = document.createElement('div');
+		
+		var inputTag = document.createElement('input');
+		inputTag.type = 'text';
+		inputTag.name = 'cp_point_title';
+		inputTag.value = cp_point_title[i];
+		
+		var textareaTag = document.createElement('textarea');
+		textareaTag.name='cp_point_content';
+		textareaTag.innerText = cp_point_content[i];
+		
+		divTag.append(inputTag);
+		divTag.append(textareaTag);
+		
+		fundingPoint_div.append(h1Tag);
+		fundingPoint_div.append(divTag);
+		
+		fundingPoint.append(fundingPoint_div);
+	}
+	// 투자 노트 만들기 //
+	
+	// 투자 시 유의사항 만들기 //
+	var cp_notice_title = '${companyDetail.cp_notice_title}'.split('/**/');
+	var cp_notice_content = '${companyDetail.cp_notice_content}'.split('/**/');
+	
+	var warn = document.getElementById('warn');
+	
+	for (var i = 0; i < cp_notice_title.length; i++) {
+		var warn_div = document.createElement('div');
+		warn_div.className='warn';
+		
+		var h3Tag = document.createElement('h3');
+		h3Tag.innerText = (i+1)+'.';
+		
+		var divTag = document.createElement('div');
+		
+		var inputTag = document.createElement('input');
+		inputTag.type = 'text';
+		inputTag.name = 'cp_notice_title';
+		inputTag.value = cp_notice_title[i];
+		
+		var textareaTag = document.createElement('textarea');
+		textareaTag.name='cp_notice_content';
+		textareaTag.innerText = cp_notice_content[i];
+		
+		divTag.append(inputTag);
+		divTag.append(textareaTag);
+		
+		warn_div.append(h3Tag);
+		warn_div.append(divTag);
+		
+		warn.append(warn_div);
+	}
+	// 투자 시 유의사항 만들기 //
+</script>
 <script type="text/javascript">
 	$(function(){
 		$('input[type=file]').hide();
@@ -262,22 +357,25 @@
 <script>
     //사업계획서
     $(function(){
+      planRealImgArr = '${companyDetail.cf_business_plan_images }'.split(',');
       var planImg,
-          planImgArr = ['data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EC%82%AC%EC%97%85%EA%B3%84%ED%9A%8D%EC%84%9C.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%ED%8E%80%EB%94%A9%EA%B3%84%EC%95%BD%EC%84%9C.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EC%82%AC%EC%97%85%EC%9E%90%EB%93%B1%EB%A1%9D%EC%A6%9D.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EC%9E%84%EB%8C%80%EC%B0%A8%EA%B3%84%EC%95%BD%EC%84%9C.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EA%B0%80%EB%A7%B9%ED%97%88%EA%B0%80%EC%9E%90%EB%A3%8C.txt'],
+          //planImgArr = ['data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EC%82%AC%EC%97%85%EA%B3%84%ED%9A%8D%EC%84%9C.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%ED%8E%80%EB%94%A9%EA%B3%84%EC%95%BD%EC%84%9C.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EC%82%AC%EC%97%85%EC%9E%90%EB%93%B1%EB%A1%9D%EC%A6%9D.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EC%9E%84%EB%8C%80%EC%B0%A8%EA%B3%84%EC%95%BD%EC%84%9C.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EA%B0%80%EB%A7%B9%ED%97%88%EA%B0%80%EC%9E%90%EB%A3%8C.txt'],
+          planImgArr = '${companyDetail.cf_alias_business_plan_images }'.split(','),
           planL = planImgArr.length,
           $planImg = $('#planImg');
       for(planImg=0;planImg<planL;planImg++){
         var addImg = document.createElement('a'),
             br = document.createElement('br');
-        addImg.setAttribute('href',planImgArr[planImg]);
+        addImg.setAttribute('href','./CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName=' + planImgArr[planImg] );
         addImg.className = 'plani';
         $planImg.append(addImg).append(br);
 
       var fileUrl = planImgArr[planImg].split('/'),
           fileUrlLeng =fileUrl.length,
           fileNameFull = fileUrl[fileUrlLeng-1],
-          fileNameDec = decodeURI(fileNameFull);
-        addImg.setAttribute('download',fileNameDec);
+          //fileNameDec = decodeURI(fileNameFull);
+          fileNameDec = planRealImgArr[planImg];
+        addImg.setAttribute('download','다운로드');
         addImg.innerHTML = '<i></i>' + fileNameDec;
       }
 
@@ -286,14 +384,15 @@
 	<script>
     //참고자료
     $(function(){
+      var real_file_name_array= '${companyDetail.cf_etc_files}'.split(',');
       var corFile,
-          corFileArr = ['data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EC%82%AC%EC%97%85%EA%B3%84%ED%9A%8D%EC%84%9C.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%ED%8E%80%EB%94%A9%EA%B3%84%EC%95%BD%EC%84%9C.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EC%82%AC%EC%97%85%EC%9E%90%EB%93%B1%EB%A1%9D%EC%A6%9D.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EC%9E%84%EB%8C%80%EC%B0%A8%EA%B3%84%EC%95%BD%EC%84%9C.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EA%B0%80%EB%A7%B9%ED%97%88%EA%B0%80%EC%9E%90%EB%A3%8C.txt'],
+      	  corFileArr = '${companyDetail.cf_alias_etc_files}'.split(','),
           corL = corFileArr.length,
           $colFile = $('#colFile');
       for(corFile=0;corFile<corL;corFile++){
         var addFile = document.createElement('a'),
             br = document.createElement('br');
-        addFile.setAttribute('href',corFileArr[corFile]);
+        addFile.setAttribute('href','./CompanyFileDownload?cp_idx=${companyDetail.cp_idx}&kindOfFile=2&fileName='+corFileArr[corFile]);
         addFile.className = 'corFile';
         $colFile.append(addFile).append(br);
 
@@ -307,6 +406,60 @@
       }
 
     });
+    
+  </script>
+  <script type="text/javascript">
+/////////// Daum Address API ///////////
+  function address_search() {
+  	
+  	new daum.Postcode({
+          oncomplete: function(data) {
+              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+              // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+              // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+              var addr = ''; // 주소 변수
+              var extraAddr = ''; // 참고항목 변수
+
+              //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+              if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                  addr = data.roadAddress;
+              } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                  addr = data.jibunAddress;
+              }
+
+              // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+              if(data.userSelectedType === 'R'){
+                  // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                  // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                  if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                      extraAddr += data.bname;
+                  }
+                  // 건물명이 있고, 공동주택일 경우 추가한다.
+                  if(data.buildingName !== '' && data.apartment === 'Y'){
+                      extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                  }
+                  // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                  if(extraAddr !== ''){
+                      extraAddr = ' (' + extraAddr + ')';
+                  }
+                  // 조합된 참고항목을 해당 필드에 넣는다.
+                  document.getElementById("app4_3").value = extraAddr;
+              
+              } else {
+                  document.getElementById("cp_add_more").value = '';
+              }
+
+              // 우편번호와 주소 정보를 해당 필드에 넣는다.
+              document.getElementById('cp_add_num').value = data.zonecode;
+              document.getElementById("cp_add_ch").value = addr;
+              // 커서를 상세주소 필드로 이동한다.
+              document.getElementById("cp_add_more").focus();
+          }
+      }).open();
+
+  }
+  
   </script>
   <script type="text/javascript">
 	//예상지급스케쥴

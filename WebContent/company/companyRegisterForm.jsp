@@ -60,7 +60,7 @@
 					  <input type="button" value="주소검색" onclick="address_search();">
 					  <input type="text" id="cp_add_ch" name="cp_add_ch" placeholder="주소" readonly="true">
 					  <input type="text" id="cp_add_more" name="cp_add_more" placeholder="상세주소">
-					  <input type="text" id="app4_3" name="app4_3" placeholder="참조">
+					  <input type="text" id="cp_add_extra" name="cp_add_extra" placeholder="참조">
 					</p>
 			  </div>
 			  <div>
