@@ -56,9 +56,9 @@
 						<input type="text" name="cp_address" placeholder="시 /지점  (예시 :부산 동래점)"></p>
 					<p class="api">
 					  <span>위치</span>
-					  <input type="text" id="cp_add_num" name="cp_add_num" placeholder="우편번호" readonly="true">
+					  <input type="text" id="cp_add_num" name="cp_add_num" placeholder="우편번호" readonly="readonly">
 					  <input type="button" value="주소검색" onclick="address_search();">
-					  <input type="text" id="cp_add_ch" name="cp_add_ch" placeholder="주소" readonly="true">
+					  <input type="text" id="cp_add_ch" name="cp_add_ch" placeholder="주소" readonly="readonly">
 					  <input type="text" id="cp_add_more" name="cp_add_more" placeholder="상세주소">
 					  <input type="text" id="cp_add_extra" name="cp_add_extra" placeholder="참조">
 					</p>
