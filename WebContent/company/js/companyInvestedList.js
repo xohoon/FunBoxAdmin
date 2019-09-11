@@ -46,15 +46,9 @@
     	var give_state = document.getElementById("give_state_"+count).value;
     	var arrears_state = document.getElementById("arrears_state_"+count).value;
     	var cp_idx = document.getElementById("cp_"+count).value;
-    	
-    	console.log("fund_state :" + fund_state);
-    	console.log("give_state :" + give_state);
-    	console.log("arrears_state :" + arrears_state);
-    	console.log("cp_idx :" + cp_idx);
-    	
+    	   	
     	// 1row씩 수정 가능
     	if (confirm("수정 하시겠습니까??") == true){
-    		// 일단 0    		
         	location.href="./companyInvestDetailstates.cp?page=1&funding_status=0&cp_idx="+cp_idx+"&fund_state="+fund_state+"&give_state="+give_state+"&arrears_state="+arrears_state;
     	
     	}else{
