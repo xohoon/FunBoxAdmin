@@ -53,7 +53,7 @@ function address_search() {
                     extraAddr = ' (' + extraAddr + ')';
                 }
                 // 조합된 참고항목을 해당 필드에 넣는다.
-                document.getElementById("app4_3").value = extraAddr;
+                document.getElementById("cp_add_extra").value = extraAddr;
             
             } else {
                 document.getElementById("cp_add_more").value = '';
