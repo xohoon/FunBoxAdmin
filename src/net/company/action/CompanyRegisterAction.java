@@ -51,6 +51,8 @@ public class CompanyRegisterAction implements Action {
 		String cp_add_ch = request.getParameter("cp_add_ch");
 		String cp_add_more = request.getParameter("cp_add_more");
 		String cp_add_num = request.getParameter("cp_add_num");
+		String cp_add_extra = request.getParameter("cp_add_extra");
+		register.setCp_add_extra(cp_add_extra);
 		register.setCp_manager(cp_manager);
 		register.setCp_number(cp_number);
 		register.setCp_capital(cp_capital);
@@ -382,42 +384,42 @@ public class CompanyRegisterAction implements Action {
 				case "cf_thumbnail":
 					register.setCf_thumbnail(fileName);
 					register.setCf_alias_thumbnail(alias + "cf_thumbnail" + fileFormat);
-					part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_thumbnail" + fileFormat);
+//					part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_thumbnail" + fileFormat);
 					break;
 				case "cf_info_banner":
 					register.setCf_info_banner(fileName);
 					register.setCf_alias_info_banner(alias + "cf_info_banner" + fileFormat);
-					part.write(companyFilePath.getApp_cp_image_path() +  alias + "cf_info_banner" + fileFormat);
+//					part.write(companyFilePath.getApp_cp_image_path() +  alias + "cf_info_banner" + fileFormat);
 					break;
 				case "cf_store_images":
 					store_images += fileName + ",";
 					alias_store_images += alias + "cf_store_images" + fileFormat + ",";
-					part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_store_images" + fileFormat);
+//					part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_store_images" + fileFormat);
 					break;
 				case "cf_pr_background":
 					register.setCf_pr_background(fileName);
 					register.setCf_alias_pr_background(alias + "cf_pr_background" + fileFormat);
-					part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_pr_background" + fileFormat);
+//					part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_pr_background" + fileFormat);
 					break;
 				case "cf_business_plan_images":
 					business_plan += fileName + ",";
 					alias_business_plan += alias + "cf_business_plan_images" + fileFormat + ",";
-					part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_business_plan_images" + fileFormat);
+//					part.write(companyFilePath.getApp_cp_image_path() + alias + "cf_business_plan_images" + fileFormat);
 					break;
 				case "cf_business_plan":
 					register.setCf_business_plan(fileName);
 					register.setCf_alias_business_plan(alias + "cf_business_plan" + fileFormat);
-					part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_business_plan" + fileFormat);
+//					part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_business_plan" + fileFormat);
 					break;
 				case "cf_funding_contract":
 					register.setCf_funding_contract(fileName);
 					register.setCf_alias_funding_contract(alias + "cf_funding_contract" + fileFormat);
-					part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_funding_contract" + fileFormat);
+//					part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_funding_contract" + fileFormat);
 					break;
 				case "cf_etc_files":
 					etc_files += fileName + ",";
 					alias_etc_files += alias + "cf_etc_files" + fileFormat + ",";
-					part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_etc_files" + fileFormat);
+//					part.write(companyFilePath.getApp_cp_file_path() + alias + "cf_etc_files" + fileFormat);
 					break;
 				default:
 					break;

@@ -42,6 +42,7 @@ public class CompanyRegister {
 	private String ma_estimated_revenue;
 	private String ma_monthly_average;
 	private String cf_folder;
+	private String cp_add_extra;
 	
 	// String /**/ 구분 데이터
 	private String point_title_string;
@@ -89,6 +90,12 @@ public class CompanyRegister {
 	
 	
 	
+	public String getCp_add_extra() {
+		return cp_add_extra;
+	}
+	public void setCp_add_extra(String cp_add_extra) {
+		this.cp_add_extra = cp_add_extra;
+	}
 	public Date getCp_open_datetime() {
 		return cp_open_datetime;
 	}
