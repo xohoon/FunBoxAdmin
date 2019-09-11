@@ -473,6 +473,14 @@
 	var cp_pay_actual_payment_amout = '${companyDetail.cp_pay_actual_payment_amout}'.split('/**/');
 	var cp_pay_actual_rate_return = '${companyDetail.cp_pay_actual_rate_return}'.split('/**/');
 	
+	console.log(cp_pay_count);
+	console.log(cp_pay_expected_payment_date);
+	console.log(cp_pay_principal);
+	console.log(cp_pay_interest_paid);
+	console.log(cp_pay_fees);
+	console.log(cp_pay_actual_payment_amout);
+	console.log(cp_pay_actual_rate_return);
+	
 	for (var i = 0; i < cp_pay_count.length; i++) {
 		var trTag = document.createElement('tr');
 		var tdTag = document.createElement('td');
@@ -480,6 +488,7 @@
 		
 		inputTag.type ="text";
 		inputTag.size = "1";
+		inputTag.name='sum1';
 		inputTag.defaultValue = cp_pay_count[i];
 		inputTag.innerText = '회차';
 		
@@ -491,6 +500,7 @@
 		
 		inputTag.type ="text";
 		inputTag.size='13';
+		inputTag.name='sum2';
 		inputTag.className='date';
 		inputTag.defaultValue = cp_pay_expected_payment_date[i];
 		
@@ -502,7 +512,7 @@
 		
 		inputTag.type ="text";
 		inputTag.size='13';
-		inputTag.name='sum1';
+		inputTag.name='sum3';
 		inputTag.defaultValue = cp_pay_principal[i];
 		inputTag.innerText = '원';
 		
@@ -514,7 +524,7 @@
 		
 		inputTag.type ="text";
 		inputTag.size='13';
-		inputTag.name='sum2';
+		inputTag.name='sum4';
 		inputTag.defaultValue = cp_pay_interest_paid[i];
 		inputTag.innerText = '원';
 		
@@ -526,7 +536,7 @@
 		
 		inputTag.type ="text";
 		inputTag.size='13';
-		inputTag.name='sum3';
+		inputTag.name='sum5';
 		inputTag.defaultValue = cp_pay_actual_payment_amout[i];
 		inputTag.innerText = '원';
 		
@@ -538,7 +548,7 @@
 		
 		inputTag.type ="text";
 		inputTag.size='13';
-		inputTag.name='sum4';
+		inputTag.name='sum6';
 		inputTag.innerText = '원';
 		
 		tdTag.append(inputTag);
@@ -549,7 +559,7 @@
 		
 		inputTag.type ="text";
 		inputTag.size='2';
-		inputTag.name='sum5';
+		inputTag.name='sum7';
 		inputTag.className= 'per';
 		inputTag.innerText = '%';
 		
@@ -559,6 +569,8 @@
 		div_company_pay_schedule.append(trTag);
 	}
 	$('#company_pay_schedule').append($('#sum'));
+	
+	/*
 	 var trTag = document.createElement('tr');
 	var tdTag = document.createElement('td');
 	var inputTag = document.createElement('input');
@@ -599,6 +611,7 @@
 	tdTag.append(inputTag);
 	trTag.append(tdTag);
 	div_company_pay_schedule.append(trTag);
+	*/
   </script>
   <script>
       $(function(){

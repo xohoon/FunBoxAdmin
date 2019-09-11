@@ -12,8 +12,8 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-//import com.mysql.jdbc.CallableStatement;
-import com.mysql.cj.jdbc.CallableStatement;
+import com.mysql.jdbc.CallableStatement;
+//import com.mysql.cj.jdbc.CallableStatement;
 
 import net.company.dto.Company;
 import net.company.dto.CompanyAdded;
@@ -585,7 +585,7 @@ public class CompanyDAO {
 			sql = "";
 			break;
 		case 2:
-			sql = "INSERT INTO recommended_company SELECT cp.cp_idx, cp.cp_name, cp.cp_sector, cp.cp_branch, cp.cp_monthly_profit, round((cp_iv.iv_current_amount/cp_iv.iv_goal_amount*100)) as percent, cp_iv.iv_goal_amount, cp_iv.iv_current_amount, cp_iv.iv_appl_stop_date_time, cp.cp_recommand_count FROM company as cp JOIN company_invest as cp_iv ON cp.cp_idx = cp_iv.cp_idx JOIN company_file as cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN (";
+			sql = "INSERT INTO recommended_company SELECT cp.cp_idx, cp.cp_name, cp.cp_sector, cp.cp_branch, cp.cp_monthly_profit, round((cp_iv.iv_current_amount/cp_iv.iv_goal_amount*100)) as percent, cp_iv.iv_goal_amount, cp_iv.iv_appl_stop_date_time, cp.cp_recommand_count FROM company as cp JOIN company_invest as cp_iv ON cp.cp_idx = cp_iv.cp_idx JOIN company_file as cp_f ON cp.cp_idx = cp_f.cp_idx WHERE cp.cp_idx IN (";
 			break;
 		case 3:
 			sql = "";

@@ -12,6 +12,8 @@
 	<title>FUNBOX ADMIN</title>
 	<script src="js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="company/js/companyInvestDetailFunded.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3fd911319378df3f4ed86e94c8737483&libraries=services,clusterer,drawing"></script>
+  	<script type="text/javascript" src="company/js/map.js"></script>
 	<link href="css/common.css" rel="stylesheet">
 	<link href="css/cor_info.css" rel="stylesheet">
 </head>
@@ -71,7 +73,8 @@
             </div>
             <div>
               <h6>위치보기</h6>
-              <div id="daumRoughmapContainer1567051096650" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+              <!-- <div id="daumRoughmapContainer1567051096650" class="root_daum_roughmap root_daum_roughmap_landing"></div> -->
+              <div id="map" style="width:400px;height:190px;" ></div>
             </div>
             <div class="rep">
               <h6>예상 지급 스케쥴</h6>
@@ -209,7 +212,10 @@
 			  <button class="submit save">저장하기</button>
 			  <button class="submit cancel">취소</button>
       </div>
+      
 	</section>
+	<input type="hidden" value="${companyBean.cp_add_ch }" name="cp_add_ch" id="cp_add_ch">
+	<input type="hidden" value="${companyBean.cp_name }" name="cp_name" id="cp_name">
 	<script>      
         $(function(){
         //수정하기
@@ -292,15 +298,17 @@
 
 	</script>
 	<script>
+	
     //참고자료
     $(function(){
+    	var real_file_name_array= '${companyBean.cf_etc_files}'.split(',');
       var corFile,
-          corFileArr = ['data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EC%82%AC%EC%97%85%EA%B3%84%ED%9A%8D%EC%84%9C.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%ED%8E%80%EB%94%A9%EA%B3%84%EC%95%BD%EC%84%9C.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EC%82%AC%EC%97%85%EC%9E%90%EB%93%B1%EB%A1%9D%EC%A6%9D.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EC%9E%84%EB%8C%80%EC%B0%A8%EA%B3%84%EC%95%BD%EC%84%9C.txt','data/%EB%B0%94%EB%A5%B8%EC%83%9D%EC%84%A0%ED%9A%8C_%EA%B0%80%EB%A7%B9%ED%97%88%EA%B0%80%EC%9E%90%EB%A3%8C.txt'],
+      corFileArr = '${companyBean.cf_alias_etc_files}'.split(','),
           corL = corFileArr.length,
           $fileWrap = $('.file');
       for(corFile=0;corFile<corL;corFile++){
         var addFile = document.createElement('a');
-        addFile.setAttribute('href',corFileArr[corFile]);
+        addFile.setAttribute('href','./CompanyFileDownload?kindOfFile=2&filename='+corFileArr[corFile]+'&cp_idx='+${companyBean.cp_idx});
         addFile.className = 'corFile';
         $fileWrap.append(addFile);
         
@@ -308,12 +316,12 @@
           fileUrlLeng =fileUrl.length,
           fileNameFull = fileUrl[fileUrlLeng-1],
           fileNameDec = decodeURI(fileNameFull);
-        addFile.setAttribute('download',fileNameDec);
-        addFile.innerHTML = '<i></i>' + fileNameDec + '<i></i>';
-        
+      addFile.setAttribute('download',real_file_name_array[corFile]);
+      addFile.innerHTML = '<i></i>' + real_file_name_array[corFile] + '<i></i>';
       }
-      
     });
+    
+ 
   </script>
 </body>
 </html>

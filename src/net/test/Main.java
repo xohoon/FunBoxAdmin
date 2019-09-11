@@ -1,7 +1,5 @@
 package net.test;
 
-import java.io.File;
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -14,20 +12,23 @@ public class Main {
 		 * System.out.println(companyDAO.getFileDirectory(37,3));
 		 */
 		
-		String path = "C:\\FunBox";
-		File deleteFolder = new File(path);
+		String[] array = {"1321321","232132","321321321","321321321"};
+		String string = "";
+		string = setStringPattern(array,"/**/");
 		
-		if(deleteFolder.exists()){
-			File[] deleteFolderList = deleteFolder.listFiles();
-			
-			for (int j = 0; j < deleteFolderList.length; j++) {
-				deleteFolderList[j].delete(); 
-			}
-			
-			if(deleteFolderList.length == 0 && deleteFolder.isDirectory()){
-				deleteFolder.delete();
+		System.out.println(string);
+	}
+	
+	private static String setStringPattern(String[] array,String pattern) {
+		String string = "";
+		for (int i = 0; i < array.length; i++) {
+			if (i == array.length -1) {
+				string += array[i];
+			}else {
+				string += array[i] +pattern;
 			}
 		}
+		return string;
 	}
 
 }
