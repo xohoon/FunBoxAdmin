@@ -40,10 +40,8 @@ td{
 	color:#555;
 	line-height:1.6em;
 }
-tr:first-child{
+thead{
 	background:#f9f9f9;
-}
-tr:first-child td{
 	font-weight:600;
 }
 .con{
@@ -143,7 +141,7 @@ table{
 tr{
 	height:32px;
 }
-tr:last-child td{
+tfoot td{
 	background:#ff9124;
 	color:#fff;
 }

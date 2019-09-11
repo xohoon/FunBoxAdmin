@@ -2,6 +2,7 @@ var testText;
 $(document).ready(function() {
 	asd();
 });
+
 function asd() {
 	var testText = $("#pre_pay_schedule").children();
     var jbString = testText.eq(0).text();
@@ -35,7 +36,3 @@ function asd() {
     }
     testText.parent().remove();
 }
-
-
-
-

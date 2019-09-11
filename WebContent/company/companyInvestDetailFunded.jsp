@@ -80,6 +80,7 @@
               <h6>예상 지급 스케쥴</h6>
               <div>
                 <table id="tableId">
+                <thead>
                   <tr>
                     <th>지급회차</th>
                     <th>예상 지급일</th>
@@ -89,6 +90,7 @@
                     <th>실 지급금액</th>
                     <th>실 수익률</th>
                   </tr>
+                </thead>
                 <tbody id="body_id">
 	                <tr id="pre_pay_schedule">
 	                  <td>${companyBean.cp_pay_count}</td>
@@ -102,13 +104,13 @@
 	            </tbody>
                 <tfoot class="foot_id">
 		            <tr>
-	                  <th>총 합계</th>
-	                  <th>-</th>
-	                  <th>${companyBean.cp_total_sum_pay_principal}</th>	                  
-	                  <th>${companyBean.cp_total_sum_pay_interest_paid }</th>
-	                  <th>${companyBean.cp_total_sum_pay_fees }</th>
-	                  <th>${companyBean.cp_total_sum_pay_actual_payment_amout }</th>
-	                  <th>${companyBean.cp_total_sum_actual_rate_return }</th>
+	                  <td>총 합계</td>
+	                  <td>-</td>
+	                  <td>${companyBean.cp_total_sum_pay_principal}</td>	                  
+	                  <td>${companyBean.cp_total_sum_pay_interest_paid }</td>
+	                  <td>${companyBean.cp_total_sum_pay_fees }</td>
+	                  <td>${companyBean.cp_total_sum_pay_actual_payment_amout }</td>
+	                  <td>${companyBean.cp_total_sum_actual_rate_return }</td>
 	                </tr>
                 </tfoot>
                 </table>
@@ -118,6 +120,7 @@
           <div class="pay">
         <h5>지급내역</h5>
          <table>
+         		  <thead>
                   <tr>
                     <th>지급회차</th>
                     <th>예상 지급일</th>
@@ -127,6 +130,8 @@
                     <th>실 지급금액</th>
                     <th>실 수익률</th>
                   </tr>
+                  </thead>
+                  <tbody>
                   <tr>
                     <td>1 회차</td>
                     <td>2019.09.01</td>
@@ -163,6 +168,8 @@
                     <td>23,224원</td>
                     <td>0.77%</td>
                   </tr>
+                  </tbody>
+                  <tfoot>
                   <tr>
                     <td>총 합계</td>
                     <td>-</td>
@@ -172,6 +179,7 @@
                     <td>273,470원</td>
                     <td>9.13%</td>
                   </tr>
+                  </tfoot>
                 </table>
       </div>
           <div class="file">
