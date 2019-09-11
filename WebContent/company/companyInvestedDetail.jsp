@@ -96,16 +96,16 @@
 				<span>투자 핵심</span>
 				<button type="button" class="add"><i></i></button>
 				<button type="button" class="del"><i></i></button>
-				<div id="fundingPoint">
-					<!-- <div class="fundingPoint">
+<!-- 				<div id="fundingPoint"> -->
+					<div class="fundingPoint">
 					  <h4>1.</h4>
 					  <div>
 					  <input type="text" name="cp_point_title">
 					  <textarea name="cp_point_content"></textarea>
 					  </div>
-					</div> -->
+					</div>
 					<!-- 투자노트 만들어 -->
-				</div>
+				<!-- </div> -->
 				<p id="planImg"><span>사업계획서(이미지)</span><input type="file" multiple name="cf_business_plan_images"><br></p>
 			</div>
 				
@@ -212,16 +212,16 @@
 	           <h3>투자 시 유의사항</h3>
 	           <button type="button" class="add"><i></i></button>
 			   <button type="button" class="del"><i></i></button>
-			   <div id="warn">
-			   	   <!-- <div class="warn">
+			   <!-- <div id="warn"> -->
+			   	   <div class="warn">
 					 <h4>1.</h4>
 					 <div>
 					 <input type="text" name="notice_title">
 					 <textarea name="notice_content"></textarea>
 					 </div>
-				   </div> -->
+				   </div>
 				   <!-- 여기에 넣어줘야해 -->
-			   </div>
+			   <!-- </div> -->
          	</div>	
          	  <input type="hidden" name="cp_idx" value="${companyDetail.cp_idx }">		
 			  </form>
@@ -256,76 +256,18 @@
 	// 매장 사진 만들기//
 	
 	// 투자 노트 만들기 //
-	var cp_point_title = '${companyDetail.cp_point_title}'.split('/**/');
-	var cp_point_content = '${companyDetail.cp_point_content}'.split('/**/');
+	/*
 	
-	var fundingPoint = document.getElementById('fundingPoint');
-	
-	for (var i = 0; i < cp_point_title.length; i++) {
-		var fundingPoint_div = document.createElement('div');
-		fundingPoint_div.className='fundingPoint';
-		
-		var h1Tag = document.createElement('h4');
-		h1Tag.innerText = (i+1)+'.';
-		
-		var divTag = document.createElement('div');
-		
-		var inputTag = document.createElement('input');
-		inputTag.type = 'text';
-		inputTag.name = 'cp_point_title';
-		inputTag.value = cp_point_title[i];
-		
-		var textareaTag = document.createElement('textarea');
-		textareaTag.name='cp_point_content';
-		textareaTag.innerText = cp_point_content[i];
-		
-		divTag.append(inputTag);
-		divTag.append(textareaTag);
-		
-		fundingPoint_div.append(h1Tag);
-		fundingPoint_div.append(divTag);
-		
-		fundingPoint.append(fundingPoint_div);
-	}
+	*/
 	// 투자 노트 만들기 //
 	
 	// 투자 시 유의사항 만들기 //
-	var cp_notice_title = '${companyDetail.cp_notice_title}'.split('/**/');
-	var cp_notice_content = '${companyDetail.cp_notice_content}'.split('/**/');
 	
-	var warn = document.getElementById('warn');
-	
-	for (var i = 0; i < cp_notice_title.length; i++) {
-		var warn_div = document.createElement('div');
-		warn_div.className='warn';
-		
-		var h3Tag = document.createElement('h3');
-		h3Tag.innerText = (i+1)+'.';
-		
-		var divTag = document.createElement('div');
-		
-		var inputTag = document.createElement('input');
-		inputTag.type = 'text';
-		inputTag.name = 'cp_notice_title';
-		inputTag.value = cp_notice_title[i];
-		
-		var textareaTag = document.createElement('textarea');
-		textareaTag.name='cp_notice_content';
-		textareaTag.innerText = cp_notice_content[i];
-		
-		divTag.append(inputTag);
-		divTag.append(textareaTag);
-		
-		warn_div.append(h3Tag);
-		warn_div.append(divTag);
-		
-		warn.append(warn_div);
-	}
 	// 투자 시 유의사항 만들기 //
 </script>
 <script type="text/javascript">
 	$(function(){
-		$('input[type=file]').hide();
+		//$('input[type=file]').hide();
 	});
 	function save(){
 		if ($('#cp_open_datetime').val().length <= 0) {
@@ -641,24 +583,24 @@
         });
         
         //수정하기
-        $('input').prop('readonly',true);
+       $('input').prop('readonly',true);
         $('textarea').prop('readonly',true);
+        $('input[type=file]').hide();
         $('.save').hide();
         $('.cancel').hide();
+        $('.api').find('input[type=button]').hide();
         
         $('.rec').on('click', function(rectify){
           $('input').css('border','1px solid #ddd');
           $('input').prop('readonly',false);
           $('textarea').prop('readonly',false);
           $('input[type=file]').show();
-          
-          
-          
           $(this).hide();
           $('.save').show();
           $('.cancel').show();
+          $('.api').find('input[type=button]').show();
+          $('.sec07_1').addClass('on');
         });
-        
         $('.cancel').on('click', function(){
             location.reload();
         });
@@ -680,6 +622,94 @@
             }
             return false;
     });
+      //지급스케쥴 행추가
+        $('.add2').click(function(){
+          var cln = $('.sum').prev('tr').clone();
+              cln.find('input').val('');
+          cln.addClass('addTr');
+          $('.sum').before(cln);
+        });
+      //지급스케쥴 행삭제
+       $('.del2').click(function(){
+          $('.sum').prev('.addTr').remove();
+        });
+      
+      //투자포인트추가삭제
+      var h4 = $('.addNote').last().index() + 3;
+      $('.fundingNote').find('.add').on('click', function(){
+        var noteCln = $('.fundingPoint').clone();
+        noteCln.find('input').val('');
+        noteCln.find('textarea').val('');
+        noteCln.addClass('addNote');
+        noteCln.removeClass('fundingPoint');
+        noteCln.find('h4').text(h4++ + '.');
+        $('.fundingNote > p').before(noteCln);
+      });
+      $('.fundingNote').find('.del').on('click',function(){
+        $('.fundingNote > p').prev('.addNote').remove();
+        h4--;
+        if(h4 = 2){
+          return false;
+        }
+      });
+      
+      // 박신규  투자포인트 초기화 //
+      $(function(){		
+  		var cp_point_title = '${companyDetail.cp_point_title}'.split('/**/');
+  		var cp_point_content = '${companyDetail.cp_point_content}'.split('/**/');
+  		console.log(cp_point_title);
+  		for (var i = 0; i < cp_point_title.length; i++) {
+  			if (i > 0) {
+  				$('.fundingNote').find('.add').click();
+  				var div = $('.addNote').last().children().last()[0];
+  				div.children[0].value = cp_point_title[i];
+  				div.children[1].value = cp_point_content[i];
+			}else{
+				var fundingPointDiv = document.getElementsByClassName('fundingPoint')[0].children[1];
+				fundingPointDiv.children[0].value = cp_point_title[i];
+				fundingPointDiv.children[1].innerText = cp_point_content[i];
+			}
+  		}
+  	 })
+  	 // 박신규  투자포인트 초기화 //
+    
+  	 //투자유의사항
+      var H4 = $('.addWarn').last().index() + 3;
+      $('.warning').find('.add').on('click', function(){
+        var noteCln = $('.warn').clone();
+        noteCln.find('input').val('');
+        noteCln.find('textarea').val('');
+        noteCln.addClass('addWarn');
+        noteCln.removeClass('warn');
+        noteCln.find('h4').text(H4++ + '.');
+        $('.warning').append(noteCln);
+      });
+      $('.warning').find('.del').on('click',function(){
+        $('.warning').find('.addWarn').last().remove();
+        H4--;
+        if(H4 = 2){
+          return false;
+        }
+      });
+      
+      //투자유의사항 초기화 박신규//
+      $(function(){
+    	  var cp_notice_title = '${companyDetail.cp_notice_title}'.split('/**/');
+    	  var cp_notice_content = '${companyDetail.cp_notice_content}'.split('/**/');
+    	  for (var i = 0; i < cp_notice_title.length; i++) {
+    		  if (i > 0) {
+    			  	$('.warning').find('.add').click();
+    				var addWarndiv = $('.addWarn').last().children().last()[0];
+    				addWarndiv.children[0].value = cp_notice_title[i];
+    				addWarndiv.children[1].value = cp_notice_content[i];
+  			}else{
+  				var warnDiv = document.getElementsByClassName('warn')[0].children[1];
+  				warnDiv.children[0].value = cp_notice_title[i];
+  				warnDiv.children[1].innerText = cp_notice_content[i];
+  			}
+		}
+      })
+      //투자유의사항 초기화//
         
         $('table').focusout(function(){
           $('table input').trigger('change');
