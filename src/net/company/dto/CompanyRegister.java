@@ -88,8 +88,17 @@ public class CompanyRegister {
 	private Date iv_appl_start_date_time;
 	private Date iv_appl_stop_date_time;
 	
+	private String mb_id;
 	
 	
+	
+	
+	public String getMb_id() {
+		return mb_id;
+	}
+	public void setMb_id(String mb_id) {
+		this.mb_id = mb_id;
+	}
 	public String getCp_add_extra() {
 		return cp_add_extra;
 	}

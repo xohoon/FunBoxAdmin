@@ -46,6 +46,8 @@
 					<h3>기본정보</h3>
 					<p><span >대표자</span>
             			<input type="text" name="cp_manager" placeholder="(예시 : 홍길동)"></p>
+            		<p><span>ID</span>
+            			<input type="text" name="mb_id" id="mb_id" placeholder="ID"></p> 
 					<p><span>사업자등록번호</span>
           			  	<input type="text" name="cp_number" placeholder="(예시 : 000-00-00000)"></p>
           			<p><span>오픈(예정) 날짜</span>
