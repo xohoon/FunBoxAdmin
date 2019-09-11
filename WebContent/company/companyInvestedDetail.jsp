@@ -216,8 +216,8 @@
 			   	   <div class="warn">
 					 <h4>1.</h4>
 					 <div>
-					 <input type="text" name="notice_title">
-					 <textarea name="notice_content"></textarea>
+					 <input type="text" name="cp_notice_title">
+					 <textarea name="cp_notice_content"></textarea>
 					 </div>
 				   </div>
 				   <!-- 여기에 넣어줘야해 -->
@@ -417,14 +417,6 @@
 	var cp_pay_actual_payment_amout = '${companyDetail.cp_pay_actual_payment_amout}'.split('/**/');
 	var cp_pay_actual_rate_return = '${companyDetail.cp_pay_actual_rate_return}'.split('/**/');
 	
-	console.log(cp_pay_count);
-	console.log(cp_pay_expected_payment_date);
-	console.log(cp_pay_principal);
-	console.log(cp_pay_interest_paid);
-	console.log(cp_pay_fees);
-	console.log(cp_pay_actual_payment_amout);
-	console.log(cp_pay_actual_rate_return);
-	
 	for (var i = 0; i < cp_pay_count.length; i++) {
 		var trTag = document.createElement('tr');
 		var tdTag = document.createElement('td');
@@ -469,8 +461,8 @@
 		inputTag.type ="text";
 		inputTag.size='13';
 		inputTag.name='sum4';
-		inputTag.defaultValue = cp_pay_interest_paid[i];
-		inputTag.innerText = '원';
+		//inputTag.defaultValue = cp_pay_interest_paid[i];
+		//inputTag.innerText = '원';
 		
 		tdTag.append(inputTag);
 		trTag.append(tdTag);
@@ -481,8 +473,8 @@
 		inputTag.type ="text";
 		inputTag.size='13';
 		inputTag.name='sum5';
-		inputTag.defaultValue = cp_pay_actual_payment_amout[i];
-		inputTag.innerText = '원';
+		//inputTag.defaultValue = cp_pay_actual_payment_amout[i];
+		//inputTag.innerText = '원';
 		
 		tdTag.append(inputTag);
 		trTag.append(tdTag);
@@ -493,7 +485,7 @@
 		inputTag.type ="text";
 		inputTag.size='13';
 		inputTag.name='sum6';
-		inputTag.innerText = '원';
+		//inputTag.innerText = '원';
 		
 		tdTag.append(inputTag);
 		trTag.append(tdTag);
@@ -505,7 +497,7 @@
 		inputTag.size='2';
 		inputTag.name='sum7';
 		inputTag.className= 'per';
-		inputTag.innerText = '%';
+		//inputTag.innerText = '%';
 		
 		tdTag.append(inputTag);
 		trTag.append(tdTag);
