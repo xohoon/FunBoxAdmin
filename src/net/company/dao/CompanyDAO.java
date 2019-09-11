@@ -789,8 +789,8 @@ public class CompanyDAO {
 
 		String sql = "INSERT INTO admin_deadLine("
 				+ "cp_idx, mb_id, cp_manager, cp_monthly_profit, cp_sector, cp_name, cp_branch, "
-				+ "iv_current_amount, iv_goal_amount, appl_stop_date_time, persent) "
-				+ "select cp.cp_idx, mb.mb_id, cp.cp_manager, cp.cp_monthly_profit, cp.cp_sector, cp.cp_name, cp.cp_branch, cp_i.iv_current_amount, cp_i.iv_goal_amount, cp_i.iv_appl_stop_date_time, "
+				+ "iv_goal_amount, appl_stop_date_time, persent) "
+				+ "select cp.cp_idx, mb.mb_id, cp.cp_manager, cp.cp_monthly_profit, cp.cp_sector, cp.cp_name, cp.cp_branch, cp_i.iv_goal_amount, cp_i.iv_appl_stop_date_time, "
 				+ "round((iv_current_amount/iv_goal_amount)*100) as persent "
 				+ "from company cp, company_file cp_f, company_invest cp_i, member mb " + "where cp.cp_idx ='" + id
 				+ "' " + "AND cp_i.cp_idx ='" + id + "' " + "AND cp_f.cp_idx ='" + id + "' "
