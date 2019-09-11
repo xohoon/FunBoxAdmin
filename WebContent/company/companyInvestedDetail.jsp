@@ -328,12 +328,14 @@
 		$('input[type=file]').hide();
 	});
 	function save(){
+		if ($('#cp_open_datetime').val().length <= 0) {
+			alert('오픈(예정) 날짜를 입력해주세요.');
+			return;
+		}
 		var form = document.corForm;
 		
 		if(confirm("해당 내용을 수정하시겠습니까?") == true){
 			form.submit();
-		}else{
-			alert("답변을 취소 하였습니다.");
 		}
 	}
 	

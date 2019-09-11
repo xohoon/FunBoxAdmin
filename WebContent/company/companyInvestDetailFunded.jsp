@@ -308,7 +308,7 @@
           $fileWrap = $('.file');
       for(corFile=0;corFile<corL;corFile++){
         var addFile = document.createElement('a');
-        addFile.setAttribute('href','./CompanyFileDownload?kindOfFile=2&filename='+corFileArr[corFile]+'&cp_idx='+${companyBean.cp_idx});
+        addFile.setAttribute('href','./CompanyFileDownload?cp_idx=${companyBean.cp_idx}&kindOfFile=2&fileName='+corFileArr[corFile]);
         addFile.className = 'corFile';
         $fileWrap.append(addFile);
         
