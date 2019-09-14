@@ -1,8 +1,21 @@
 // 태훈 추가 - 기업등록 javascript
 function company_register() {
 	var f = document.corForm;
+	var cp_sector = $('#cp_sector').val();
 	
-	f.submit();
+	if(cp_sector == '0'){
+		alert("기업 구분을 체크 해주세요.");
+	}else{
+		if (confirm("기업등록 하시겠습니까?") == true){
+			f.submit();
+		}
+	}
+		
+}
+function inNumber(){
+    if(event.keyCode<48 || event.keyCode>57){
+       event.returnValue=false;
+    }
 }
 
 /////////// Daum Address API ///////////
@@ -40,7 +53,7 @@ function address_search() {
                     extraAddr = ' (' + extraAddr + ')';
                 }
                 // 조합된 참고항목을 해당 필드에 넣는다.
-                document.getElementById("app4_3").value = extraAddr;
+                document.getElementById("cp_add_extra").value = extraAddr;
             
             } else {
                 document.getElementById("cp_add_more").value = '';

@@ -23,17 +23,14 @@ public class companyPopularityManagementUpdateAction implements Action {
 		
 		List<Integer> cp_idx_list = new ArrayList<Integer>();
 		int ass_idx = Integer.parseInt(request.getParameter("ass_idx"));
-		System.out.println(">>>autovalue1"+ass_idx);
 		String auto_status_value = (String)request.getParameter("auto_status");
-		System.out.println(">>>autovalue2"+auto_status_value);
+		
 		boolean auto_status = false;
 		if(auto_status_value.equals("1")) {
 			auto_status = true;
 		}else {
 			auto_status = false;
 		}
-		System.out.println("ass_idx ::: "+ass_idx);
-		System.out.println("auto_status ::: "+auto_status);
 		
 		int cp_idx_1 = Integer.parseInt(request.getParameter("cp_idx_1"));
 		int cp_idx_2 = Integer.parseInt(request.getParameter("cp_idx_2"));

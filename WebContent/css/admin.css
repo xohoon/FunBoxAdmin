@@ -500,6 +500,10 @@ button.out{
 	letter-spacing:1px;
 	float:right;
 }
+.submit:hover{
+  border:0;
+  color:#fff;
+}
 
 /*sec03*/
 #sec03 th:nth-child(n+1):nth-child(-n+3){
@@ -668,6 +672,9 @@ button.out{
   margin-left:8px;
   margin-right:0;
 }
+#sec06 .con div:nth-child(3) p{
+  font-size:14px;
+}
 #sec06 .con div:nth-child(3) input[type="text"]{
   text-align:right;
   text-indent:0;
@@ -707,6 +714,10 @@ button.out{
   line-height:24px;
   padding:0;
   position:absolute;
+}
+#sec06 input.add:hover, .add:hover{
+  border:1px solid #73a6d6;
+  color:#fff;
 }
 #sec06 input.del, .del{
   width:24px;
@@ -854,14 +865,14 @@ textarea{
   border:0;
 }
 .sec07_1 h2{
-  width:1296px;
+  width:1248px;
   margin:0 auto 16px;
 }
 .sec07_1 .con{
- width:1296px;
+ width:1248px;
   margin:0 auto;
 }
-.sec07_1 input[type=text]{
+.sec07_1 input[type=text], .sec07_1 input[type=date]{
   border:0;
 }
 .sec07_1 input[type=file]{
@@ -889,7 +900,7 @@ textarea{
 }
 button.cancel{
   background:#fff;
-  border:1px solid #ff9124;
+  border:1px solid #ff9124; 
   color:#ff9124;
   margin-right:8px;
 }
@@ -1006,6 +1017,9 @@ button.cancel:hover{
 #sec08 td:nth-child(2):hover{
   color:#73a6d6;
 }
+#sec08 table, #sec09 table, #sec10 table, #sec11 table, #sec12 table{
+  margin:0;
+} 
 
 /*sec12*/
 .addBan, .subBan{
@@ -1221,3 +1235,35 @@ button.cancel:hover{
   color:#fff;
   vertical-align:top;
 }
+
+#modityBtn{
+  background:#fff;
+  border:1px solid #73a6d6;
+  color:#73a6d6;
+  width:70px;
+  padding-right:7px;
+  margin-left:-77px;
+  margin-top:50px;
+}
+#modityBtn:hover{
+  background:#73a6d6;
+  color:#fff;
+  margin-left:-77px;
+  margin-top:50px;
+}
+
+#saveBtn{
+  background:#fff;
+  border:1px solid #ff9124;
+  color:#ff9124;
+  width:70px;
+  padding-right:7px;
+  margin-left:10px;
+  margin-top:50px;
+}
+#saveBtn:hover{
+  background:#ff9124;
+  color:#fff;
+  margin-left:10px;
+  margin-top:50px;
+} 

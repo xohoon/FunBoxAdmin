@@ -1,5 +1,7 @@
 package net.company.dto;
 
+import java.sql.Date;
+
 // 태훈 추가 - 기업등록
 public class CompanyDetail {
 	private int cp_idx;
@@ -13,6 +15,7 @@ public class CompanyDetail {
 	private String cp_add_ch;
 	private String cp_add_more;
 	private String cp_add_num;
+	private String cp_add_extra;
 	private String cp_monthly_profit;
 	private String cp_reward_main_title;
 	private String cp_reward_sub_title;
@@ -49,10 +52,10 @@ public class CompanyDetail {
 	private String cp_pay_fees;
 	private String cp_pay_actual_payment_amout;
 	private String cp_pay_actual_rate_return;
-	private String point_title_string;
-	private String point_content_string;
-	private String notice_title_string;
-	private String notice_content_string;
+	private String cp_point_title;
+	private String cp_point_content;
+	private String cp_notice_title;
+	private String cp_notice_content;
 	
 	
 	// file
@@ -62,8 +65,8 @@ public class CompanyDetail {
 	private String cf_alias_pr_background;
 	private String cf_funding_contract;
 	private String cf_alias_funding_contract;
-	private String cf_info_banner;
-	private String cf_alias_info_banner;
+	private String cf_corporation_icon;
+	private String cf_alias_corporation_icon;
 	private String cf_folder;
 	private String cf_business_plan_images;
 	private String cf_alias_business_plan_images;
@@ -75,6 +78,24 @@ public class CompanyDetail {
 	private String cf_alias_business_plan;
 	private String cf_etc_files;
 	private String cf_alias_etc_files;
+	
+	private String company_file_path;
+	private String company_image_path;
+	
+	//2019-09-09 추가
+	private Date cp_open_datetime;
+	private Date iv_appl_start_date_time;
+	private Date iv_appl_stop_date_time;
+	private String mb_id;
+	
+	
+	
+	public String getCompany_image_path() {
+		return company_image_path;
+	}
+	public void setCompany_image_path(String company_image_path) {
+		this.company_image_path = company_image_path;
+	}
 	public int getCp_idx() {
 		return cp_idx;
 	}
@@ -140,6 +161,12 @@ public class CompanyDetail {
 	}
 	public void setCp_add_num(String cp_add_num) {
 		this.cp_add_num = cp_add_num;
+	}
+	public String getCp_add_extra() {
+		return cp_add_extra;
+	}
+	public void setCp_add_extra(String cp_add_extra) {
+		this.cp_add_extra = cp_add_extra;
 	}
 	public String getCp_monthly_profit() {
 		return cp_monthly_profit;
@@ -339,29 +366,29 @@ public class CompanyDetail {
 	public void setCp_pay_actual_rate_return(String cp_pay_actual_rate_return) {
 		this.cp_pay_actual_rate_return = cp_pay_actual_rate_return;
 	}
-	public String getPoint_title_string() {
-		return point_title_string;
+	public String getCp_point_title() {
+		return cp_point_title;
 	}
-	public void setPoint_title_string(String point_title_string) {
-		this.point_title_string = point_title_string;
+	public void setCp_point_title(String cp_point_title) {
+		this.cp_point_title = cp_point_title;
 	}
-	public String getPoint_content_string() {
-		return point_content_string;
+	public String getCp_point_content() {
+		return cp_point_content;
 	}
-	public void setPoint_content_string(String point_content_string) {
-		this.point_content_string = point_content_string;
+	public void setCp_point_content(String cp_point_content) {
+		this.cp_point_content = cp_point_content;
 	}
-	public String getNotice_title_string() {
-		return notice_title_string;
+	public String getCp_notice_title() {
+		return cp_notice_title;
 	}
-	public void setNotice_title_string(String notice_title_string) {
-		this.notice_title_string = notice_title_string;
+	public void setCp_notice_title(String cp_notice_title) {
+		this.cp_notice_title = cp_notice_title;
 	}
-	public String getNotice_content_string() {
-		return notice_content_string;
+	public String getCp_notice_content() {
+		return cp_notice_content;
 	}
-	public void setNotice_content_string(String notice_content_string) {
-		this.notice_content_string = notice_content_string;
+	public void setCp_notice_content(String cp_notice_content) {
+		this.cp_notice_content = cp_notice_content;
 	}
 	public String getCf_thumbnail() {
 		return cf_thumbnail;
@@ -399,17 +426,17 @@ public class CompanyDetail {
 	public void setCf_alias_funding_contract(String cf_alias_funding_contract) {
 		this.cf_alias_funding_contract = cf_alias_funding_contract;
 	}
-	public String getCf_info_banner() {
-		return cf_info_banner;
+	public String getCf_corporation_icon() {
+		return cf_corporation_icon;
 	}
-	public void setCf_info_banner(String cf_info_banner) {
-		this.cf_info_banner = cf_info_banner;
+	public void setCf_corporation_icon(String cf_corporation_icon) {
+		this.cf_corporation_icon = cf_corporation_icon;
 	}
-	public String getCf_alias_info_banner() {
-		return cf_alias_info_banner;
+	public String getCf_alias_corporation_icon() {
+		return cf_alias_corporation_icon;
 	}
-	public void setCf_alias_info_banner(String cf_alias_info_banner) {
-		this.cf_alias_info_banner = cf_alias_info_banner;
+	public void setCf_alias_corporation_icon(String cf_alias_corporation_icon) {
+		this.cf_alias_corporation_icon = cf_alias_corporation_icon;
 	}
 	public String getCf_folder() {
 		return cf_folder;
@@ -465,7 +492,40 @@ public class CompanyDetail {
 	public void setCf_alias_etc_files(String cf_alias_etc_files) {
 		this.cf_alias_etc_files = cf_alias_etc_files;
 	}
+	public String getCompany_file_path() {
+		return company_file_path;
+	}
+	public void setCompany_file_path(String company_file_path) {
+		this.company_file_path = company_file_path;
+	}
+	public Date getCp_open_datetime() {
+		return cp_open_datetime;
+	}
+	public void setCp_open_datetime(Date cp_open_datetime) {
+		this.cp_open_datetime = cp_open_datetime;
+	}
+	public Date getIv_appl_start_date_time() {
+		return iv_appl_start_date_time;
+	}
+	public void setIv_appl_start_date_time(Date iv_appl_start_date_time) {
+		this.iv_appl_start_date_time = iv_appl_start_date_time;
+	}
+	public Date getIv_appl_stop_date_time() {
+		return iv_appl_stop_date_time;
+	}
+	public void setIv_appl_stop_date_time(Date iv_appl_stop_date_time) {
+		this.iv_appl_stop_date_time = iv_appl_stop_date_time;
+	}
+	public String getMb_id() {
+		return mb_id;
+	}
+	public void setMb_id(String mb_id) {
+		this.mb_id = mb_id;
+	}
+	
+	
 	
 	
 	
 }
+

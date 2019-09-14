@@ -33,18 +33,25 @@ public class CompanyInvestedListAction implements Action {
 			page = 1;
 		}
 		
-		if (funding_status == null || (!funding_status.equals("11") && !funding_status.equals("12"))) {
-			funding_status = "12";//ÆÝµùÁøÇà
+		if (funding_status == null) {
+			funding_status = "0";
+		}else if(funding_status == "11"){
+			funding_status = "11";
+		}else if(funding_status == "12"){
+			funding_status = "12";
 		}
 		
 		List<CompanyInvested> companyInvestedList = new ArrayList<CompanyInvested>();
+		List transportresults = new ArrayList(); // êµ¬ì¢Œ ë¦¬ìŠ¤íŠ¸ ë³´ë‚´ê¸°
 		Paging paging = new Paging();
 		
 		
 		CompanyDAO companyDAO = new CompanyDAO();
 		companyDAO.getCompanyInvestedList(companyInvestedList, page, funding_status, paging);
-
-		// Àß ¸øµÈ Á¢±Ù
+		
+		System.out.println("CompanyInvested :" + companyInvestedList.toString());
+	
+		
 		if (companyInvestedList.size() < 1) {
 
 		}
@@ -58,6 +65,7 @@ public class CompanyInvestedListAction implements Action {
 		request.setAttribute("current_max_page", paging.getCurrent_max_page());
 		request.setAttribute("max_page", paging.getMax_page());
 		request.setAttribute("companyInvestedList", companyInvestedList);
+		request.setAttribute("transportresults", transportresults);
 		request.setAttribute("funding_status", funding_status);
 		
 		

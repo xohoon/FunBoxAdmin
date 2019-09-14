@@ -199,7 +199,6 @@ function setAutoManual(){
 	Array.from(document.getElementsByClassName("cp_idx")).forEach(function(item) {		
 		cp_idx_value_arr.push(item.value);
 	});
-	console.log(cp_idx_value_arr);
 	$.ajax({
 		url : './setAutoOrManual.cp',
 		method : "POST",
