@@ -416,11 +416,11 @@
 	        tot1 = Number(corForm.tot1.value.replace(/\,/g, "") || 0);
 	        
 
-	        corForm.cal2.value = (calT*cal1)/100;
-	        corForm.cal4.value = (cal2*cal3)/100;
-	        corForm.cal5.value = cal4*0.105;
-	        corForm.cal6.value = cal4 - cal5;
-	        corForm.cal7.value = cal6/12;
+	        corForm.cal2.value = Math.floor((calT*cal1)/100);
+	        corForm.cal4.value = Math.floor((cal2*cal3)/100);
+	        corForm.cal5.value = Math.floor(cal4*0.105);
+	        corForm.cal6.value = Math.floor(cal4 - cal5);
+	        corForm.cal7.value = Math.floor(cal6/12);
 	        
 	        
 	        sum1 = $('input[name=sum3]');
@@ -540,8 +540,8 @@
 			
 			for (var i = 0; i < dayArray.length; i++) {
 				var monthlyPaymentInterest = calTValue*cal1Value*cal3Value/totalDay*dayArray[i];
-				$('input[name=sum4]').eq(i).val(numberWithCommas(Math.floor(monthlyPaymentInterest)));
-				$('input[name=sum5]').eq(i).val(numberWithCommas(Math.floor(monthlyPaymentInterest*0.105)));
+				$('input[name=sum4]').eq(i).val(Math.floor(monthlyPaymentInterest));
+				$('input[name=sum5]').eq(i).val(Math.floor(monthlyPaymentInterest*0.105));
 			}
 			
 			corCalculate();
