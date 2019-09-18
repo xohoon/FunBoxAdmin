@@ -316,6 +316,7 @@
             }else{
               $(this).val(numPar);
             }
+            setInterestAndPee();
             return false;
     });
         
@@ -330,10 +331,14 @@
                 cln.find('input').val('');
             cln.addClass('addTr');
             $('.sum').before(cln);
+            //원금 계산 박신규//
+            setPrincipal();
+            //원금 계산 박신규//
           });
         //지급스케쥴 행삭제
          $('.del2').click(function(){
             $('.sum').prev('.addTr').remove();
+            setPrincipal();
           });
         
        //투자포인트추가삭제
@@ -375,94 +380,120 @@
 	            return false;
 	          }
 	        });
+	        
+	        $('#reward').on('click',function(){
+	            var $reward = $('#reward').is(":checked");
+	          if($reward == true){
+	            $('.checkBox').siblings('p').find('input').attr('readonly',false);
+	            $('.checkBox').siblings('p').find('textarea').attr('readonly',false);
+	            $('.checkBox').parent('div').addClass('on');
+	          }else{
+	            $('.checkBox').siblings('p').find('input').attr('readonly',true);
+	            $('.checkBox').siblings('p').find('textarea').attr('readonly',true);
+	            $('.checkBox').parent('div').removeClass('on');
+	          }
+	          });
 
 		});
 
 		function corCalculate() {
 			calA = Number(corForm.calA.value.replace(/\,/g, "") || 0);
-			calB = Number(corForm.calB.value.replace(/\,/g, "") || 0);
-			calC = Number(corForm.calC.value.replace(/\,/g, "") || 0);
-			calD = Number(corForm.calD.value.replace(/\,/g, "") || 0);
-			calE = Number(corForm.calE.value.replace(/\,/g, "") || 0);
-			calT = Number(corForm.calT.value.replace(/\,/g, "") || 0);
+	        calB = Number(corForm.calB.value.replace(/\,/g, "") || 0);
+	        calC = Number(corForm.calC.value.replace(/\,/g, "") || 0);
+	        calD = Number(corForm.calD.value.replace(/\,/g, "") || 0);
+	        calE = Number(corForm.calE.value.replace(/\,/g, "") || 0);
+	        calT = Number(corForm.calT.value.replace(/\,/g, "") || 0);
 
-			corForm.calT.value = calA - (calB + calC + calD + calE);
+	        corForm.calT.value = calA - (calB+calC+calD+calE);
 
-			cal1 = Number(corForm.cal1.value.replace(/\,/g, "") || 0);
-			cal2 = Number(corForm.cal2.value.replace(/\,/g, "") || 0);
-			cal3 = Number(corForm.cal3.value.replace(/\,/g, "") || 0);
-			cal4 = Number(corForm.cal4.value.replace(/\,/g, "") || 0);
-			cal5 = Number(corForm.cal5.value.replace(/\,/g, "") || 0);
-			cal6 = Number(corForm.cal6.value.replace(/\,/g, "") || 0);
-			cal7 = Number(corForm.cal7.value.replace(/\,/g, "") || 0);
-			tot1 = Number(corForm.tot1.value.replace(/\,/g, "") || 0);
+	        cal1 = Number(corForm.cal1.value.replace(/\,/g, "") || 0);
+	        cal2 = Number(corForm.cal2.value.replace(/\,/g, "") || 0);
+	        cal3 = Number(corForm.cal3.value.replace(/\,/g, "") || 0);
+	        cal4 = Number(corForm.cal4.value.replace(/\,/g, "") || 0);
+	        cal5 = Number(corForm.cal5.value.replace(/\,/g, "") || 0);
+	        cal6 = Number(corForm.cal6.value.replace(/\,/g, "") || 0);
+	        cal7 = Number(corForm.cal7.value.replace(/\,/g, "") || 0);
+	        tot1 = Number(corForm.tot1.value.replace(/\,/g, "") || 0);
+	        
 
-			corForm.cal2.value = (calT * cal1) / 100;
-			corForm.cal4.value = (cal2 * cal3) / 100;
-			corForm.cal5.value = cal4 * 0.105;
-			corForm.cal6.value = cal4 - cal5;
-			corForm.cal7.value = cal6 / 12;
+	        corForm.cal2.value = (calT*cal1)/100;
+	        corForm.cal4.value = (cal2*cal3)/100;
+	        corForm.cal5.value = cal4*0.105;
+	        corForm.cal6.value = cal4 - cal5;
+	        corForm.cal7.value = cal6/12;
+	        
+	        
+	        sum1 = $('input[name=sum3]');
+	        sum2 = $('input[name=sum4]');
+	        sum3 = $('input[name=sum5]');
+	        sum4 = $('input[name=sum6]');
+	        sum5 = $('input[name=sum7]');
+	        res1 = 0;
+	        res2 = 0;
+	        res3 = 0;
+	        res4 = 0;
+	        res5 = 0;
 
-			sum1 = $('input[name=sum1]');
-			sum2 = $('input[name=sum2]');
-			sum3 = $('input[name=sum3]');
-			sum4 = $('input[name=sum4]');
-			sum5 = $('input[name=sum5]');
-			res1 = 0;
-			res2 = 0;
-			res3 = 0;
-			res4 = 0;
-			res5 = 0;
-
-			var i;
-
-			for (i = 0; i < sum1.length; i++) {
-				var val = sum1.eq(i).val();
-				val = Number(val.replace(/\,/g, "") || 0);
-				res1 += val;
-			}
-			corForm.tot1.value = res1;
-			for (i = 0; i < sum2.length; i++) {
-				var val2 = sum2.eq(i).val();
-				val2 = Number(val2.replace(/\,/g, "") || 0);
-				res2 += val2;
-			}
-			corForm.tot2.value = res2;
-			for (i = 0; i < sum3.length; i++) {
-				var val3 = sum3.eq(i).val();
-				val3 = Number(val3.replace(/\,/g, "") || 0);
-				res3 += val3;
-			}
-			corForm.tot3.value = res3;
-			for (i = 0; i < sum4.length; i++) {
-				var val2 = sum2.eq(i).val();
-				val2 = Number(val2.replace(/\,/g, "") || 0);
-				var val3 = sum3.eq(i).val();
-				val3 = Number(val3.replace(/\,/g, "") || 0);
-				var val4 = sum4.eq(i).val();
-				val4 = Number(val4.replace(/\,/g, "") || 0);
-				res4 += val4;
-				sum4.eq(i).val(val2 - val3);
-			}
-			corForm.tot4.value = res4;
-			for (i = 0; i < sum5.length; i++) {
-				var val4 = sum4.eq(i).val();
-				val4 = Number(val4.replace(/\,/g, "") || 0);
-				var val5 = sum5.eq(i).val();
-				val5 = Number(val5.replace(/\,/g, "") || 0);
-				res5 += val5;
-				sum5.eq(i).val(val4 / tot1 * 100);
-			}
-			corForm.tot5.value = res5;
+			// 박신규 추가 원금 계산
+			setPrincipal();
+			//월 지급 이자 계산
+	        // 박신규 추가
+	        
+	        
+	        var i;
+	        
+	         for(i=0; i<sum1.length; i++) {
+	          var val = sum1.eq(i).val();
+	              val = Number(val.replace(/\,/g, "") || 0);
+	          res1 += val;
+	        }
+	        corForm.tot1.value = res1;
+	        for(i=0; i<sum2.length; i++) {
+	          var val2 = sum2.eq(i).val();
+	              val2 = Number(val2.replace(/\,/g, "") || 0);
+	          res2 += val2;
+	        }
+	        corForm.tot2.value = res2;
+	        for(i=0; i<sum3.length; i++) {
+	          var val3 = sum3.eq(i).val();
+	              val3 = Number(val3.replace(/\,/g, "") || 0);
+	          res3 += val3;
+	        }
+	        corForm.tot3.value = res3;
+	        for(i=0; i<sum4.length; i++) {
+	          var val2 = sum2.eq(i).val();
+	              val2 = Number(val2.replace(/\,/g, "") || 0);
+	          var val3 = sum3.eq(i).val();
+	              val3 = Number(val3.replace(/\,/g, "") || 0);
+	          var val4 = sum4.eq(i).val();
+	              val4 = Number(val4.replace(/\,/g, "") || 0);
+	          res4 += val4;
+	          sum4.eq(i).val(val2-val3);
+	        }
+	        corForm.tot4.value = res4;
+	        for(i=0; i<sum5.length; i++) {
+	          var val4 = sum4.eq(i).val();
+	              val4 = Number(val4.replace(/\,/g, "") || 0);
+	          var val5 = sum5.eq(i).val();
+	              val5 = Number(val5.replace(/\,/g, "") || 0);
+	          res5 += val5;
+	          sum5.eq(i).val(val4/tot1*100);
+	        }
+	        corForm.tot5.value = res5;
 
 		}
 
-		function editTitle() {
-			var sel = window.getSelection(), str = sel.getRangeAt(0), span = document
-					.createElement('span');
-			str.surroundContents(span);
-		}
-
+		function numberWithCommas(x) {
+	        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	    }
+	    
+	    function editTitle(){
+	      var sel = window.getSelection(),
+	          str = sel.getRangeAt(0),
+	          span = document.createElement('span');
+	      str.surroundContents(span);
+	    }
+	    
 		$('#reward').on('click',function(){
 	          var $reward = $('#reward').is(":checked");
 	        if($reward == true){
@@ -475,7 +506,46 @@
 	          $('.checkBox').parent('div').removeClass('on');
 	        }
 	        });
-
+	</script>
+	<script type="text/javascript">
+		var datePattern = /[0-9]{4}-[0-9]{2}-[0-9]{2}/;
+		function setPrincipal(){
+			$('input[name=sum3]').val(0);
+			$('input[name=sum3]').last().val(corForm.cal4.value);
+		}
+		function getLastDay(year,moth){
+			var lastDay = ( new Date( year, moth, 0) ).getDate();
+			return lastDay;
+		}
+		function setInterestAndPee(){
+			var dayArray = new Array();
+			var totalDay = 0;
+			for (var i = 0; i < $('input[name=sum2]').length; i++) {
+				var date = $('input[name=sum2]').eq(i).val();
+				if (!datePattern.test(date)) {
+					break;
+				}
+				var yearMothDay = date.split('-');
+				lastDay = getLastDay(yearMothDay[0],yearMothDay[1]);
+				totalDay += lastDay;
+				dayArray.push(lastDay);
+			}
+			
+			//순수익(년)
+			var calTValue = Number(corForm.calT.value.replace(/\,/g, "") || 0);
+			//현금 배당률
+			var cal1Value = Number(corForm.cal1.value);
+			//지분
+			var cal3Value = Number(corForm.cal3.value);
+			
+			for (var i = 0; i < dayArray.length; i++) {
+				var monthlyPaymentInterest = calTValue*cal1Value*cal3Value/totalDay*dayArray[i];
+				$('input[name=sum4]').eq(i).val(numberWithCommas(Math.floor(monthlyPaymentInterest)));
+				$('input[name=sum5]').eq(i).val(numberWithCommas(Math.floor(monthlyPaymentInterest*0.105)));
+			}
+			
+			corCalculate();
+		}
 	</script>
 </body>
 </html>
