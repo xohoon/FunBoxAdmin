@@ -160,12 +160,12 @@
 			    <table>
 			      <tr>
 			  	    <td>현금배당률</td>
-			  	    <td>순수익의 <input type="text" size="1" name = "cal1" class="per" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> %</td>
+			  	    <td>순수익의 <input type="text" size="1" name = "cal1" class="per" onkeypress="return isNumberKey(event)" onkeyup="return delHangle(event)"> %</td>
 			  	     <td><input type="text" size="13" name = "cal2" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
 			  	  </tr>
 			  	  <tr>
 			  	    <td>지분</td>
-			  	    <td><input type="text" size="1" name = "cal3" class="per" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> %</td>
+			  	    <td><input type="text" size="1" name = "cal3" class="per" onkeypress="return isNumberKey(event)" onkeyup="return delHangle(event)"> %</td>
 			  	    <td><input type="text" size="13" name = "cal4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
 			  	  </tr>
 			  	  <tr>
