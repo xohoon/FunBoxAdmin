@@ -338,7 +338,9 @@
         //지급스케쥴 행삭제
          $('.del2').click(function(){
             $('.sum').prev('.addTr').remove();
+          //원금 계산 박신규//
             setPrincipal();
+            //원금 계산 박신규//
           });
         
        //투자포인트추가삭제
@@ -436,9 +438,7 @@
 
 			// 박신규 추가 원금 계산
 			setPrincipal();
-			//월 지급 이자 계산
 	        // 박신규 추가
-	        
 	        
 	        var i;
 	        
@@ -477,7 +477,7 @@
 	          var val5 = sum5.eq(i).val();
 	              val5 = Number(val5.replace(/\,/g, "") || 0);
 	          res5 += val5;
-	          sum5.eq(i).val(val4/tot1*100);
+	          sum5.eq(i).val(Math.round(val4/tot1*100)/100);
 	        }
 	        corForm.tot5.value = res5;
 
@@ -534,9 +534,9 @@
 			//순수익(년)
 			var calTValue = Number(corForm.calT.value.replace(/\,/g, "") || 0);
 			//현금 배당률
-			var cal1Value = Number(corForm.cal1.value);
+			var cal1Value = Number(corForm.cal1.value)/100;
 			//지분
-			var cal3Value = Number(corForm.cal3.value);
+			var cal3Value = Number(corForm.cal3.value)/100;
 			
 			for (var i = 0; i < dayArray.length; i++) {
 				var monthlyPaymentInterest = calTValue*cal1Value*cal3Value/totalDay*dayArray[i];
