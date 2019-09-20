@@ -56,6 +56,12 @@ function company_register() {
 	if (cp_sector == '0') {
 		alert("기업 구분을 체크 해주세요.");
 	} else {
+		if (!checkInputBlank()) {
+			return false;
+		}
+		if (!checkApplyDate()) {
+			return false;
+		}
 		if (confirm("기업등록 하시겠습니까?") == true) {
 			f.submit();
 		}
@@ -119,3 +125,61 @@ function address_search() {
 	}).open();
 
 }
+
+	//박신규//
+	//input tag 빈칸 체크
+	function checkInputBlank(){
+		var inputTagCollection = document.getElementsByTagName('input');
+		for (var i = 0; i < inputTagCollection.length; i++) {
+			
+			if (inputTagCollection[i].type == "text" || inputTagCollection[i].type == "number" || inputTagCollection[i].type == "date") {
+				//예외//
+				if (inputTagCollection[i].name = "cp_add_extra") {
+					continue;
+				}
+				
+				
+				if (inputTagCollection[i].value.length <= 0) {
+					alert(inputTag[i].placeholder+'이 빈칸일 수 없습니다.');
+					inputTagCollection[i].focus();
+					return false;
+				}
+			}
+		}
+		return true;
+	};
+	
+	function checkApplyDate(){
+		var iv_appl_start_date_time = document.getElementById('iv_appl_start_date_time');
+		var iv_appl_stop_date_time = document.getElementById('iv_appl_stop_date_time');
+		
+		if(iv_appl_start_date_time.value>iv_appl_stop_date_time.value){
+			alert('모집 일자를 변경해주세요.');
+			return false;
+		} 
+	}
+	
+	function calculateGoalAmount(){
+		corForm.iv_goal_amount.value = corForm.iv_min_amount.value * corForm.iv_appl_stock.value;
+	}
+	
+	function checkProfitPersent(){
+		if (corForm.cp_monthly_profit.value > 100) {
+			corForm.cp_monthly_profit.value = 100;
+		} 
+	}
+	
+	$(function(){
+		corForm.iv_min_amount.addEventListener('keyup',function(){
+			calculateGoalAmount();
+		});
+		corForm.iv_appl_stock.addEventListener('keyup',function(){
+			calculateGoalAmount();
+		});
+		corForm.cp_monthly_profit.addEventListener('keyup',function(){
+			checkProfitPersent();
+		});
+	});
+	
+	//박신규//
+
