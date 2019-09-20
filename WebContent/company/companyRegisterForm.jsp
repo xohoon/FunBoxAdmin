@@ -69,7 +69,7 @@
 					<h3>투자정보</h3>
             <p><span>월수익률</span><input type="text" name="cp_monthly_profit" placeholder="(예시 : 10)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span>%</span></p>
             <p><span>투자계약기간</span><input type="text" name="iv_contraction_during" placeholder="(예시 : 12)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span>개월</span></p>
-            <p><span>최소투자금액</span><input type="text" name="iv_min_amount" placeholder="(예시 : 10000000)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span>Point</span></p>
+            <p><span>최소투자금액</span><input type="text" name="iv_min_amount" placeholder="(예시 : 10000000)" onKeyup="this.value=this.value.replace(/[^0-9]/g,''); "><span>Point</span></p>
             <p><span>모집구좌</span><input type="text" name="iv_appl_stock" placeholder="(예시 : 12)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span>구좌</span></p>
             <p><span>총모집금액</span><input type="text" name="iv_goal_amount" placeholder="(예시 : 10000000)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span>Point</span></p>
             <!-- <p><span>모집기간</span><input type="text" name="iv_appl_day" placeholder="(예시 : 30)" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><span>일</span></p> -->
