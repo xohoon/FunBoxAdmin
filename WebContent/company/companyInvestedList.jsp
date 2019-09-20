@@ -36,26 +36,26 @@
 	      <c:choose>
 	      		<c:when test="${funding_status eq '0'}">
 	        		<li class="on">전체 </li>
-	        		<li>펀딩진행</li>
 	        		<li>펀딩완료</li>
+	        		<li>펀딩진행</li>
 	        		<li>대기(심사중)</li> 
 	        	</c:when>
 	        	<c:when test="${funding_status eq '12'}">
 	        		<li>전체 </li>
-	        		<li class="on">펀딩진행</li>
-	        		<li>펀딩완료</li>
+	        		<li class="on">펀딩완료</li>
+	        		<li>펀딩진행</li>
 	        		<li>대기(심사중)</li> 
 	        	</c:when>
 	        	<c:when test="${funding_status eq '11'}">
 	        		<li>전체 </li>
-	        		<li>펀딩진행</li>
-	        		<li class="on">펀딩완료</li>
+	        		<li>펀딩완료</li>
+	        		<li class="on">펀딩진행</li>
 	        		<li>대기(심사중)</li> 
 	        	</c:when>
 	          	<c:otherwise>
 	          		<li>전체 </li>
-	        		<li>펀딩진행</li>
 	        		<li>펀딩완료</li>
+	        		<li>펀딩진행</li>
 	        		<li class="on">대기(심사중)</li>
 	          	</c:otherwise>
 	        </c:choose>
