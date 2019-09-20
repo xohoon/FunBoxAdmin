@@ -815,12 +815,13 @@ public class CompanyDAO {
 			} else if (radioVal.equals("1")) { // 자동
 				sql = "INSERT INTO admin_deadLine("
 						+ "cp_idx, mb_id, cp_manager, cp_monthly_profit, cp_sector, cp_name, cp_branch, "
-						+ "iv_current_amount, iv_goal_amount, appl_stop_date_time, persent) "
-						+ "select cp.cp_idx, mb.mb_id, cp.cp_manager, cp.cp_monthly_profit, cp.cp_sector, cp.cp_name, cp.cp_branch, cp_i.iv_current_amount, cp_i.iv_goal_amount, cp_i.iv_appl_stop_date_time, "
-						+ "round((iv_current_amount/iv_goal_amount)*100) as persent from company cp, company_file cp_f, company_invest cp_i, member mb "
-						+ "where cp_i.iv_appl_stop_date_time > now() " + "AND cp.cp_open_status = true "
-						+ "AND cp.cp_idx = cp_i.cp_idx " + "AND cp.cp_idx = cp_f.cp_idx " + "AND cp.mb_id = mb.mb_id "
-						+ "order by cp_i.iv_appl_stop_date_time asc limit 3";
+						+ "iv_goal_amount, appl_stop_date_time, persent) "
+						+ "SELECT cp.cp_idx, mb.mb_id, cp.cp_manager, cp.cp_monthly_profit,  cp.cp_sector,  cp.cp_name,  cp.cp_branch,  cp_iv.iv_goal_amount, cp_iv.iv_appl_stop_date_time, " 
+						+ "round((cp_iv.iv_current_amount/cp_iv.iv_goal_amount*100)) as persent " 
+						+ "FROM company cp JOIN company_file cf ON cp.cp_idx = cf.cp_idx " 
+						+ "JOIN company_invest cp_iv ON cp.cp_idx = cp_iv.cp_idx " 
+						+ "JOIN member mb ON cp.mb_id = mb.mb_id "   
+						+ "ORDER BY cp_iv.iv_appl_stop_date_time LIMIT 3 ";
 
 				pstmt = conn.prepareStatement(sql);
 				result = pstmt.executeUpdate();
