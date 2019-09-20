@@ -193,6 +193,15 @@
 			                <th>실 지급금액</th>
 			                <th>실 수익률</th>
 			           </tr>
+			           <tr>
+		                <td><input type="text" size="1" name="sum1" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 회차</td>
+		                <td><input type="text" size="13" class="date" name="sum2" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
+		                <td><input type="text" size="13" name="sum3" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+		                <td><input type="text" size="13" name="sum4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+		                <td><input type="text" size="13" name="sum5" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+		                <td><input type="text" size="13" name="sum6" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원</td>
+		                <td><input type="text" size="2" name="sum7" class="per" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> %</td>
+		              </tr>
 			           <tr class="sum" id="sum">
 			                <td>총 합계</td>
 			                <td>-</td>
@@ -266,9 +275,6 @@
 	// 투자 시 유의사항 만들기 //
 </script>
 <script type="text/javascript">
-	$(function(){
-		//$('input[type=file]').hide();
-	});
 	function save(){
 		if ($('#cp_open_datetime').val().length <= 0) {
 			alert('오픈(예정) 날짜를 입력해주세요.');
@@ -417,6 +423,7 @@
 	var cp_pay_actual_payment_amout = '${companyDetail.cp_pay_actual_payment_amout}'.split('/**/');
 	var cp_pay_actual_rate_return = '${companyDetail.cp_pay_actual_rate_return}'.split('/**/');
 	
+	/*
 	for (var i = 0; i < cp_pay_count.length; i++) {
 		var trTag = document.createElement('tr');
 		var tdTag = document.createElement('td');
@@ -461,8 +468,6 @@
 		inputTag.type ="text";
 		inputTag.size='13';
 		inputTag.name='sum4';
-		//inputTag.defaultValue = cp_pay_interest_paid[i];
-		//inputTag.innerText = '원';
 		
 		tdTag.append(inputTag);
 		trTag.append(tdTag);
@@ -473,9 +478,7 @@
 		inputTag.type ="text";
 		inputTag.size='13';
 		inputTag.name='sum5';
-		//inputTag.defaultValue = cp_pay_actual_payment_amout[i];
-		//inputTag.innerText = '원';
-		
+
 		tdTag.append(inputTag);
 		trTag.append(tdTag);
 		
@@ -485,8 +488,7 @@
 		inputTag.type ="text";
 		inputTag.size='13';
 		inputTag.name='sum6';
-		//inputTag.innerText = '원';
-		
+
 		tdTag.append(inputTag);
 		trTag.append(tdTag);
 		
@@ -497,7 +499,6 @@
 		inputTag.size='2';
 		inputTag.name='sum7';
 		inputTag.className= 'per';
-		//inputTag.innerText = '%';
 		
 		tdTag.append(inputTag);
 		trTag.append(tdTag);
@@ -505,49 +506,8 @@
 		div_company_pay_schedule.append(trTag);
 	}
 	$('#company_pay_schedule').append($('#sum'));
-	
-	/*
-	 var trTag = document.createElement('tr');
-	var tdTag = document.createElement('td');
-	var inputTag = document.createElement('input');
-	
-	trTag.className = 'sum';
-	tdTag.innerText= '총 합계';
-	
-	trTag.append(tdTag);
-	
-	tdTag = document.createElement('td');
-	inputTag = document.createElement('input');
-	
-	tdTag.innerText='-';
-	trTag.append(tdTag);	
-	
-	for (var i = 1; i <= 4; i++) {
-		tdTag = document.createElement('td');
-		inputTag = document.createElement('input');
-		
-		inputTag.type ="text";
-		inputTag.size='13';
-		inputTag.name='tot'+i;
-		inputTag.innerText = '원';
-		
-		tdTag.append(inputTag);
-		trTag.append(tdTag);
-	}
-	
-	tdTag = document.createElement('td');
-	inputTag = document.createElement('input');
-	
-	inputTag.type ="text";
-	inputTag.size='2';
-	inputTag.name='tot5';
-	inputTag.className = 'per';
-	inputTag.innerText = '%';	
-	
-	tdTag.append(inputTag);
-	trTag.append(tdTag);
-	div_company_pay_schedule.append(trTag);
 	*/
+	
   </script>
   <script>
       $(function(){
@@ -557,22 +517,25 @@
         
         $('input').keyup();
         
-        $('table input').each(function(){
-          var num = $(this).val();
-            var numPar = Number(num.replace(/\,/g, "") || 0);
-                numPar = numPar.toFixed();
-                numPar = numberWithCommas(numPar);
-            var numFix = Number(num.replace(/\,/g, "") || 0);
-                numFix = numFix.toFixed(2);
-            var numDate = num.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
-            if($(this).hasClass('per')){
-              $(this).val(numFix)
-            }else if($(this).hasClass('date')){
-              $(this).val(numDate);
-            }else{
-              $(this).val(numPar);
-            }
-        });
+        $('table input').on('change', function(){
+            var num = $(this).val();
+             var numPar = Number(num.replace(/\,/g, "") || 0);
+                 numPar = numPar.toFixed();
+                 numPar = numberWithCommas(numPar);
+           var numDate = num.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
+             var numFix = Number(num.replace(/\,/g, "") || 0);
+                 numFix = numFix.toFixed(2);
+
+             if($(this).hasClass('per')){
+               $(this).val(numFix)
+             }else if($(this).hasClass('date')){
+               $(this).val(numDate);
+             }else{
+               $(this).val(numPar);
+             }
+             setInterestAndPee();
+             return false;
+     });
         
         //수정하기
        $('input').prop('readonly',true);
@@ -614,17 +577,37 @@
             }
             return false;
     });
+        
+       $('table').focusout(function(){
+    	   $('table input').trigger('change');
+       })
+       
       //지급스케쥴 행추가
         $('.add2').click(function(){
           var cln = $('.sum').prev('tr').clone();
               cln.find('input').val('');
           cln.addClass('addTr');
           $('.sum').before(cln);
+        //원금 계산 박신규//
+          setPrincipal();
+          //원금 계산 박신규//
         });
       //지급스케쥴 행삭제
        $('.del2').click(function(){
           $('.sum').prev('.addTr').remove();
+        //원금 계산 박신규//
+          setPrincipal();
+          //원금 계산 박신규//
         });
+      //지급스케줄 초기화
+      
+      for (var i = 0; i < cp_pay_count.length; i++) {
+  		if (i > 0) {
+  			$('.add2').click();	
+		}
+  		$('input[name=sum1]').eq(i).val(cp_pay_count[i]);
+  		$('input[name=sum2]').eq(i).val(cp_pay_expected_payment_date[i]);
+  	  }
       
       //투자포인트추가삭제
       var h4 = $('.addNote').last().index() + 3;
@@ -649,7 +632,6 @@
       $(function(){		
   		var cp_point_title = '${companyDetail.cp_point_title}'.split('/**/');
   		var cp_point_content = '${companyDetail.cp_point_content}'.split('/**/');
-  		console.log(cp_point_title);
   		for (var i = 0; i < cp_point_title.length; i++) {
   			if (i > 0) {
   				$('.fundingNote').find('.add').click();
@@ -684,6 +666,19 @@
         }
       });
       
+      $('#reward').on('click',function(){
+          var $reward = $('#reward').is(":checked");
+	        if($reward == true){
+	          $('.checkBox').siblings('p').find('input').attr('readonly',false);
+	          $('.checkBox').siblings('p').find('textarea').attr('readonly',false);
+	          $('.checkBox').parent('div').addClass('on');
+	        }else{
+	          $('.checkBox').siblings('p').find('input').attr('readonly',true);
+	          $('.checkBox').siblings('p').find('textarea').attr('readonly',true);
+	          $('.checkBox').parent('div').removeClass('on');
+	        }
+        });
+      
       //투자유의사항 초기화 박신규//
       $(function(){
     	  var cp_notice_title = '${companyDetail.cp_notice_title}'.split('/**/');
@@ -701,33 +696,16 @@
   			}
 		}
       })
-      //투자유의사항 초기화//
-        
-        $('table').focusout(function(){
-          $('table input').trigger('change');
-        })
-      
-        
         //사업계획서추가
           $('.add1').click(function(){
             $(".plan").append("<p><input type='file'><button>-</button></p>");
             $(this).parent().siblings('p').find('button').addClass('del del1');
           });
-        //지급스케쥴 행추가
-          $('.add2').click(function(){
-            var cln = $('.sum').prev('tr').clone();
-                cln.find('input').val('');
-            $('.sum').before(cln);
-          });
-        //지급스케쥴 행삭제
-         $('.del2').click(function(){
-            $('.sum').prev('tr').remove();
-          });
-      });
       
-      //사업계획서삭제
-      $(document).on('click', '.rmv1', function(){
-        $(this).parent('p').remove();
+	    //사업계획서삭제
+	      $(document).on('click', '.rmv1', function(){
+	        $(this).parent('p').remove();
+	      });	
       });
       
       function corCalculate(){
@@ -747,23 +725,27 @@
         cal7 = Number(corForm.cal7.value.replace(/\,/g, "") || 0);
         tot1 = Number(corForm.tot1.value.replace(/\,/g, "") || 0);
         
-        corForm.cal2.value = (calT*cal1)/100;
-        corForm.cal4.value = (cal2*cal3)/100;
-        corForm.cal5.value = cal4*0.105;
-        corForm.cal6.value = cal4 - cal5;
-        corForm.cal7.value = cal6/12;
+        corForm.cal2.value = Math.floor((calT*cal1)/100);
+        corForm.cal4.value = Math.floor((cal2*cal3)/100);
+        corForm.cal5.value = Math.floor(cal4*0.105);
+        corForm.cal6.value = Math.floor(cal4 - cal5);
+        corForm.cal7.value = Math.floor(cal6/12);
         
         
-        sum1 = $('input[name=sum1]');
-        sum2 = $('input[name=sum2]');
-        sum3 = $('input[name=sum3]');
-        sum4 = $('input[name=sum4]');
-        sum5 = $('input[name=sum5]');
+        sum1 = $('input[name=sum3]');
+        sum2 = $('input[name=sum4]');
+        sum3 = $('input[name=sum5]');
+        sum4 = $('input[name=sum6]');
+        sum5 = $('input[name=sum7]');
         res1 = 0;
         res2 = 0;
         res3 = 0;
         res4 = 0;
         res5 = 0;
+        
+    	 // 박신규 추가 원금 계산
+		setPrincipal();
+        // 박신규 추가
         
         var i;
         
@@ -795,6 +777,7 @@
           res4 += val4;
           sum4.eq(i).val(val2-val3);
         }
+        console.log(res4);
         corForm.tot4.value = res4;
         for(i=0; i<sum5.length; i++) {
           var val4 = sum4.eq(i).val();
@@ -802,14 +785,68 @@
           var val5 = sum5.eq(i).val();
               val5 = Number(val5.replace(/\,/g, "") || 0);
           res5 += val5;
-          sum5.eq(i).val(val4/tot1*100);
+          sum5.eq(i).val(Math.round(val4/tot1*100)/100);
         }
         corForm.tot5.value = res5;       
         
           
    }
-    function numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+      function numberWithCommas(x) {
+          return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+      
+      function editTitle(){
+        var sel = window.getSelection(),
+            str = sel.getRangeAt(0),
+            span = document.createElement('span');
+        str.surroundContents(span);
+      }
+	</script>
+	<script type="text/javascript">
+		var datePattern = /[0-9]{4}-[0-9]{2}-[0-9]{2}/;
+		function setPrincipal(){
+			$('input[name=sum3]').val(0);
+			$('input[name=sum3]').last().val(corForm.cal4.value);
+		}
+		function getLastDay(year,moth){
+			var lastDay = ( new Date( year, moth, 0) ).getDate();
+			return lastDay;
+		}
+		function setInterestAndPee(){
+			var dayArray = new Array();
+			var totalDay = 0;
+			for (var i = 0; i < $('input[name=sum2]').length; i++) {
+				var date = $('input[name=sum2]').eq(i).val();
+				if (!datePattern.test(date)) {
+					break;
+				}
+				var yearMothDay = date.split('-');
+				lastDay = getLastDay(yearMothDay[0],yearMothDay[1]);
+				totalDay += lastDay;
+				dayArray.push(lastDay);
+			}
+			
+			//순수익(년)
+			var calTValue = Number(corForm.calT.value.replace(/\,/g, "") || 0);
+			//현금 배당률
+			var cal1Value = Number(corForm.cal1.value)/100;
+			//지분
+			var cal3Value = Number(corForm.cal3.value)/100;
+			
+			for (var i = 0; i < dayArray.length; i++) {
+				var monthlyPaymentInterest = calTValue*cal1Value*cal3Value/totalDay*dayArray[i];
+				$('input[name=sum4]').eq(i).val(Math.floor(monthlyPaymentInterest));
+				$('input[name=sum5]').eq(i).val(Math.floor(monthlyPaymentInterest*0.105));
+			}
+			
+			corCalculate();
+		}
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			setInterestAndPee();
+			corCalculate();
+		});
+		corCalculate();
 	</script>
 </html>
